@@ -14,7 +14,7 @@ import {NavigationContainer} from '@react-navigation/native';
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = props => {
-  const [username, setUsername] = useState('Rommel Hipos');
+  const [username, setUsername] = useState('Guest');
   // const username = '';
   const initials = username
     .split(' ')
@@ -42,11 +42,11 @@ function App() {
         drawerContent={props => <CustomDrawerContent {...props} />}>
         <Drawer.Screen
           name="Login"
-          options={{drawerLabel: 'Home', title: 'WoW'}}
+          options={{drawerLabel: 'Login', title: 'WoW'}}
           component={Login}
         />
-        <Drawer.Screen name="Zombie Report" component={Page1} />
-        <Drawer.Screen name="Zombie Locations" component={Page2} />
+        <Drawer.Screen name="Zombie Locations" component={Page1} />
+        <Drawer.Screen name="Zombie Report" component={Page2} />
         <Drawer.Screen name="Zombie Tsunami" component={Page2} />
       </Drawer.Navigator>
     </NavigationContainer>
