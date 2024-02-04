@@ -1,0 +1,230 @@
+[
+  {
+    "sector": "NORTHWEST",
+    "community_name": "ARBOUR LAKE",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "10619",
+    "date": "2022-04-01T00:00:00.000",
+    "year": "2022",
+    "month": "APR",
+    "id": "2022-APR-ARBOUR LAKE-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.20767498075155, 51.1325947114686]
+    },
+    ":@computed_region_kxmf_bzkv": "244",
+    ":@computed_region_p8tp_5dkv": "10",
+    ":@computed_region_4b54_tmc4": "3",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "CENTRE",
+    "community_name": "BANFF TRAIL",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "4153",
+    "date": "2023-10-01T00:00:00.000",
+    "year": "2023",
+    "month": "OCT",
+    "id": "2023-OCT-BANFF TRAIL-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.11512839716917, 51.07421633024228]
+    },
+    ":@computed_region_kxmf_bzkv": "153",
+    ":@computed_region_p8tp_5dkv": "7",
+    ":@computed_region_4b54_tmc4": "7",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "EAST",
+    "community_name": "DOVER",
+    "category": "Theft OF Vehicle",
+    "crime_count": "5",
+    "resident_count": "10351",
+    "date": "2022-12-01T00:00:00.000",
+    "year": "2022",
+    "month": "DEC",
+    "id": "2022-DEC-DOVER-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.99305400906283, 51.02256772250409]
+    },
+    ":@computed_region_kxmf_bzkv": "196",
+    ":@computed_region_p8tp_5dkv": "11",
+    ":@computed_region_4b54_tmc4": "10",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "CENTRE",
+    "community_name": "GREENVIEW",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "2",
+    "resident_count": "1906",
+    "date": "2020-12-01T00:00:00.000",
+    "year": "2020",
+    "month": "DEC",
+    "id": "2020-DEC-GREENVIEW-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.05746990262463, 51.09485613506574]
+    },
+    ":@computed_region_kxmf_bzkv": "241",
+    ":@computed_region_p8tp_5dkv": "4",
+    ":@computed_region_4b54_tmc4": "2",
+    ":@computed_region_4a3i_ccfj": "4"
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "HAMPTONS",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "3",
+    "resident_count": "7382",
+    "date": "2019-08-01T00:00:00.000",
+    "year": "2019",
+    "month": "AUG",
+    "id": "2019-AUG-HAMPTONS-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.14668419231347, 51.14509283969437]
+    },
+    ":@computed_region_kxmf_bzkv": "286",
+    ":@computed_region_p8tp_5dkv": "10",
+    ":@computed_region_4b54_tmc4": "3",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "SOUTH",
+    "community_name": "LAKE BONAVISTA",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "10293",
+    "date": "2022-08-01T00:00:00.000",
+    "year": "2022",
+    "month": "AUG",
+    "id": "2022-AUG-LAKE BONAVISTA-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.05133665127042, 50.939803390308995]
+    },
+    ":@computed_region_kxmf_bzkv": "267",
+    ":@computed_region_p8tp_5dkv": "13",
+    ":@computed_region_4b54_tmc4": "6",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "CENTRE",
+    "community_name": "MISSION",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "2",
+    "resident_count": "4598",
+    "date": "2021-03-01T00:00:00.000",
+    "year": "2021",
+    "month": "MAR",
+    "id": "2021-MAR-MISSION-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.06808259035802, 51.03315775861924]
+    },
+    ":@computed_region_kxmf_bzkv": "297",
+    ":@computed_region_p8tp_5dkv": "5",
+    ":@computed_region_4b54_tmc4": "14",
+    ":@computed_region_4a3i_ccfj": "1"
+  },
+  {
+    "sector": "SOUTH",
+    "community_name": "PALLISER",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "1",
+    "resident_count": "3672",
+    "date": "2022-12-01T00:00:00.000",
+    "year": "2022",
+    "month": "DEC",
+    "id": "2022-DEC-PALLISER-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.11215889038719, 50.96676703111173]
+    },
+    ":@computed_region_kxmf_bzkv": "66",
+    ":@computed_region_p8tp_5dkv": "5",
+    ":@computed_region_4b54_tmc4": "8",
+    ":@computed_region_4a3i_ccfj": "1"
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "REDSTONE",
+    "category": "Break & Enter - Dwelling",
+    "crime_count": "1",
+    "resident_count": "5848",
+    "date": "2021-09-01T00:00:00.000",
+    "year": "2021",
+    "month": "SEP",
+    "id": "2021-SEP-REDSTONE-Break & Enter - Dwelling",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.95750282716884, 51.170446168252354]
+    },
+    ":@computed_region_kxmf_bzkv": "3",
+    ":@computed_region_p8tp_5dkv": "1",
+    ":@computed_region_4b54_tmc4": "11",
+    ":@computed_region_4a3i_ccfj": "4"
+  },
+  {
+    "sector": "CENTRE",
+    "community_name": "RIDEAU PARK",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "3",
+    "resident_count": "594",
+    "date": "2019-07-01T00:00:00.000",
+    "year": "2019",
+    "month": "JUL",
+    "id": "2019-JUL-RIDEAU PARK-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.07416183074736, 51.02487576913786]
+    },
+    ":@computed_region_kxmf_bzkv": "277",
+    ":@computed_region_p8tp_5dkv": "5",
+    ":@computed_region_4b54_tmc4": "10",
+    ":@computed_region_4a3i_ccfj": "1"
+  },
+  {
+    "sector": "CENTRE",
+    "community_name": "ROSEDALE",
+    "category": "Break & Enter - Dwelling",
+    "crime_count": "1",
+    "resident_count": "1560",
+    "date": "2023-04-01T00:00:00.000",
+    "year": "2023",
+    "month": "APR",
+    "id": "2023-APR-ROSEDALE-Break & Enter - Dwelling",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.07820713414625, 51.062686663226856]
+    },
+    ":@computed_region_kxmf_bzkv": "219",
+    ":@computed_region_p8tp_5dkv": "7",
+    ":@computed_region_4b54_tmc4": "7",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "NORTH",
+    "community_name": "SAGE HILL",
+    "category": "Theft OF Vehicle",
+    "crime_count": "1",
+    "resident_count": "7924",
+    "date": "2022-07-01T00:00:00.000",
+    "year": "2022",
+    "month": "JUL",
+    "id": "2022-JUL-SAGE HILL-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.14068609335015, 51.175616972779984]
+    },
+    ":@computed_region_kxmf_bzkv": "265",
+    ":@computed_region_p8tp_5dkv": "10",
+    ":@computed_region_4b54_tmc4": "3",
+    ":@computed_region_4a3i_ccfj": "2"
+  }
+]
