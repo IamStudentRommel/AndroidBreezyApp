@@ -1,4 +1,5 @@
 import {Button, View} from 'react-native';
+
 function Page2({navigation}) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
