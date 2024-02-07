@@ -38,15 +38,15 @@ function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Login"
+        initialRouteName="Zombie Test2"
         drawerContent={props => <CustomDrawerContent {...props} />}>
         <Drawer.Screen
           name="Login"
           options={{drawerLabel: 'Login', title: 'WoW'}}
           component={Login}
         />
-        <Drawer.Screen name="Zombie Locations" component={Page1} />
-        <Drawer.Screen name="Zombie Report" component={Page2} />
+        <Drawer.Screen name="Zombie Test" component={Page1} />
+        <Drawer.Screen name="Zombie Test2" component={Page2} />
         <Drawer.Screen name="Zombie Tsunami" component={Page2} />
       </Drawer.Navigator>
     </NavigationContainer>
