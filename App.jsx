@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import Login from './components/Login';
 import Page1 from './components/Page1';
 import Page2 from './components/Page2';
+import About from './components/About';
 
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -42,12 +43,54 @@ function App() {
         drawerContent={props => <CustomDrawerContent {...props} />}>
         <Drawer.Screen
           name="Login"
-          options={{drawerLabel: 'Login', title: 'WoW'}}
+          options={{
+            drawerLabel: 'Login',
+            title: 'WoW',
+            drawerIcon: ({tintColor}) => (
+              <Image
+                source={require('./assets/user.png')}
+                style={{width: 24, height: 24, tintColor: tintColor}}
+              />
+            ),
+          }}
           component={Login}
         />
-        <Drawer.Screen name="Zombie Test" component={Page1} />
-        <Drawer.Screen name="Zombie Test2" component={Page2} />
-        <Drawer.Screen name="Zombie Tsunami" component={Page2} />
+        <Drawer.Screen
+          name="Zombie Test"
+          component={Page1}
+          options={{
+            drawerIcon: ({tintColor}) => (
+              <Image
+                source={require('./assets/map.png')}
+                style={{width: 24, height: 24, tintColor: tintColor}}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Zombie Test2"
+          component={Page2}
+          options={{
+            drawerIcon: ({tintColor}) => (
+              <Image
+                source={require('./assets/map.png')}
+                style={{width: 24, height: 24, tintColor: tintColor}}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="About"
+          component={About}
+          options={{
+            drawerIcon: ({tintColor}) => (
+              <Image
+                source={require('./assets/information.png')}
+                style={{width: 24, height: 24, tintColor: tintColor}}
+              />
+            ),
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
