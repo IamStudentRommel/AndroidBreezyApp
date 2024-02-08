@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text, Image} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import testdata from '../data/test.json';
 import mapCustomStyle from '../data/mapCustomStyle.json';
+import * as Location from 'expo-location';
 
 const Page2 = () => {
   const [incidents, setIncidents] = useState([]);
@@ -12,6 +13,37 @@ const Page2 = () => {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
+
+  const requestLocationPermission = async () => {
+    try {
+      const {status} = await Location.requestForegroundPermissionsAsync();
+      return status === 'granted';
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  };
+
+  const getLocation = async () => {
+    const hasPermission = await requestLocationPermission();
+    if (hasPermission) {
+      try {
+        const {coords} = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.High,
+        });
+        console.log('coords');
+        setInitialLocation({
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        });
+      } catch (error) {
+        console.error('Error getting location:', error);
+        console.log(null);
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +57,7 @@ const Page2 = () => {
         console.error('Error fetching data:', error);
       }
     };
-
+    getLocation();
     fetchData();
   }, []);
 
@@ -36,7 +68,13 @@ const Page2 = () => {
         provider={PROVIDER_GOOGLE}
         region={initialLocation}
         customMapStyle={mapCustomStyle}>
-        {/* Markers */}
+        <Marker coordinate={initialLocation} title="Your Initial Location">
+          <Image
+            source={require('../assets/angel.png')}
+            style={{width: 32, height: 32}}
+          />
+        </Marker>
+
         {testdata.map(marker => {
           if (marker.year === '2023') {
             try {
@@ -50,6 +88,7 @@ const Page2 = () => {
                   key={marker.id}
                   coordinate={coordinates}
                   title={marker.category}
+                  x
                   description={marker.id}>
                   <Image
                     source={require('../assets/zombie.png')}

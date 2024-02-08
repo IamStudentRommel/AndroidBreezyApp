@@ -6,8 +6,8 @@ import testdata from '../data/test.json';
 const Page1 = () => {
   const [incidents, setIncidents] = useState([]);
   const [initialLocation, setInitialLocation] = useState({
-    latitude: 51.05011,
-    longitude: -114.08529,
+    latitude: 51.1826393,
+    longitude: -114.1692393,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });

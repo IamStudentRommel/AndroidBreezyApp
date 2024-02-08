@@ -3,7 +3,7 @@ import Login from './components/Login';
 import Page1 from './components/Page1';
 import Page2 from './components/Page2';
 import About from './components/About';
-
+import TestPage from './components/TestPage';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {
   createDrawerNavigator,
@@ -39,7 +39,7 @@ function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Zombie Test2"
+        initialRouteName="Test Page"
         drawerContent={props => <CustomDrawerContent {...props} />}>
         <Drawer.Screen
           name="Login"
@@ -91,6 +91,7 @@ function App() {
             ),
           }}
         />
+        <Drawer.Screen name="Test Page" component={TestPage} options={{}} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

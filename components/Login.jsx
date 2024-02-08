@@ -28,18 +28,22 @@ const Login = () => {
         <View style={styles.inner}>
           <Image source={require('../assets/logo.png')} style={styles.logo} />
           <Text style={styles.appName}>Str8Watch</Text>
-          <Text style={styles.subAppName}>"All is Well"</Text>
+          {/* <Text style={styles.subAppName}>"All is Well"</Text> */}
           <TextInput placeholder="Username" style={styles.textInput} />
           <TextInput
             placeholder="Password"
             style={styles.textInput}
             secureTextEntry
           />
-          <Button title="Forgot Password?" onPress={test} color="#3333ff" />
+          <Text style={styles.textLink} onPress={test}>
+            Forgot Password?
+          </Text>
           <View style={styles.btnContainer}>
-            <Button title="Login" onPress={test} color="#ffffff" />
+            <Button title="Login" onPress={test} />
           </View>
-          <Button title="Signup" onPress={test} color="#3333ff" />
+          <Text style={styles.textLink} onPress={test}>
+            Signup
+          </Text>
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 300,
-    height: 250,
+    height: 240,
   },
   appName: {
     fontWeight: 'bold',
