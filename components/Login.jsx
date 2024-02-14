@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -13,13 +13,55 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import {db, collection, addDoc, getDocs, query, where} from '../firebase/conf';
 
-const Login = () => {
+const Login = ({updateUsername}) => {
+  // console.log(typeof updateUsername); // Should output "function"
+
+  const [inputEmail, setInputEmail] = useState('');
+  const [inputPwd, setInputPwd] = useState('');
+
   const test = () => {
-    // Handle the click for "Forgot Password?"
     Alert.alert('feature not yet implemented');
-    // You can implement the logic for handling the forgot password functionality here
   };
+
+  const validateUser = async (email, pwd) => {
+    try {
+      const q = query(collection(db, 'users'), where('email', '==', email));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        const userData = userDoc.data();
+        if (userData.pwd === pwd) {
+          updateUsername(`${userData.fname} ${userData.lname}`);
+          alert(`Welcome, ${userData.fname} ${userData.lname}`);
+        } else {
+          updateUsername(`Guest`);
+          alert(`User not found`);
+        }
+      } else {
+        updateUsername(`Guest`);
+        alert(`User not found`);
+      }
+    } catch (e) {
+      console.error('Error validating user: ', e);
+    }
+  };
+
+  const handleValidateUser = () => {
+    // validateUser('qweqwe.xyz', 'abc');
+    validateUser(inputEmail, inputPwd);
+    // console.log(inputEmail, inputPwd);
+  };
+
+  const handleEmailChange = newText => {
+    setInputEmail(newText);
+  };
+  const handlePwdChange = newText => {
+    setInputPwd(newText);
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -27,23 +69,30 @@ const Login = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
           <Image source={require('../assets/logo.png')} style={styles.logo} />
-          <Text style={styles.appName}>Str8Watch</Text>
+          <Text style={styles.appName}>CrimeH8rs</Text>
           {/* <Text style={styles.subAppName}>"All is Well"</Text> */}
-          <TextInput placeholder="Username" style={styles.textInput} />
+          <TextInput
+            placeholder="Email"
+            style={styles.textInput}
+            onChangeText={handleEmailChange}
+          />
           <TextInput
             placeholder="Password"
             style={styles.textInput}
             secureTextEntry
+            onChangeText={handlePwdChange}
           />
           <Text style={styles.textLink} onPress={test}>
             Forgot Password?
           </Text>
           <View style={styles.btnContainer}>
-            <Button title="Login" onPress={test} />
+            <Button title="Login" onPress={handleValidateUser} />
           </View>
-          <Text style={styles.textLink} onPress={test}>
-            Signup
-          </Text>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.textLink} onPress={test}>
+              Signup
+            </Text>
+          </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -90,3 +139,19 @@ const styles = StyleSheet.create({
 });
 
 export default Login;
+
+// OtherComponent.js
+// import React from 'react';
+// import { Button } from 'react-native';
+
+// const OtherComponent = ({ updateUsername }) => {
+//   const handleUpdateUsername = () => {
+//     updateUsername('New Username');
+//   };
+
+//   return (
+//     <Button title="Update Username" onPress={handleUpdateUsername} />
+//   );
+// };
+
+// export default OtherComponent;
