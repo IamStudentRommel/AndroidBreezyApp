@@ -103,7 +103,7 @@ const Page2 = () => {
           })}
         </MapView>
       </View>
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         <View style={styles.button}>
           <Button
             title="Button 1"
@@ -122,7 +122,7 @@ const Page2 = () => {
             onPress={() => console.log('Button 3 pressed')}
           />
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };

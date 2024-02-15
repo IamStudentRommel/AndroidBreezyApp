@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import Login from './components/Login';
-import Page1 from './components/Page1';
-import Page2 from './components/Page2';
+import Report from './components/Report';
+import LandingMap from './components/LandingMap';
 import About from './components/About';
 import TestPage from './components/TestPage';
-import DBConTest from './components/DBConTest';
 import CustomDrawerContent from './components/CustomDrawerContent';
 
 import {Image, StyleSheet} from 'react-native';
@@ -23,7 +22,7 @@ function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Login"
+        initialRouteName="Live Crime Monitoring"
         drawerContent={props => (
           <CustomDrawerContent
             {...props}
@@ -46,20 +45,20 @@ function App() {
           {props => <Login {...props} updateUsername={updateUsername} />}
         </Drawer.Screen>
         <Drawer.Screen
-          name="Zombie Test"
-          component={Page1}
+          name="Report"
+          component={Report}
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/map.png')}
+                source={require('./assets/report.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
           }}
         />
         <Drawer.Screen
-          name="Zombie Test2"
-          component={Page2}
+          name="Live Crime Monitoring"
+          component={LandingMap}
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
@@ -81,8 +80,7 @@ function App() {
             ),
           }}
         />
-        <Drawer.Screen name="Test Page" component={TestPage} options={{}} />
-        <Drawer.Screen name="DBConTest" component={DBConTest} options={{}} />
+        {/* <Drawer.Screen name="Test Page" component={TestPage} options={{}} /> */}
       </Drawer.Navigator>
     </NavigationContainer>
   );

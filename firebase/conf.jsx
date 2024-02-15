@@ -7,10 +7,7 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-// Import the functions you need from the SDKs you need
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: 'AIzaSyCZxmQxvDZ5Ug3LDXYjSO6UcZ080PsJbcA',
   authDomain: 'crime-justice-dir.firebaseapp.com',
