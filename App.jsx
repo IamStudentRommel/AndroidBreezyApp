@@ -3,7 +3,6 @@ import Login from './components/Login';
 import Report from './components/Report';
 import LandingMap from './components/LandingMap';
 import About from './components/About';
-import TestPage from './components/TestPage';
 import CustomDrawerContent from './components/CustomDrawerContent';
 
 import {Image, StyleSheet} from 'react-native';

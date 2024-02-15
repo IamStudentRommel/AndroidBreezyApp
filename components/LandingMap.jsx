@@ -1,12 +1,30 @@
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Image, Button, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState, useRef} from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Button,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import * as Location from 'expo-location';
-// import {Ionicons} from '@expo/vector-icons';
+import BottomDrawer from 'react-native-animated-bottom-drawer';
 import testdata from '../data/test.json';
 import mapCustomStyle from '../data/mapCustomStyle.json';
 
-const Page2 = () => {
+const LandingMap = () => {
+  //Drawer part start
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const bottomDrawerRef = useRef(null);
+
+  const handleOpenDrawer = () => {
+    setIsDrawerOpen(true);
+    bottomDrawerRef.current?.open();
+  };
+  //Drawer part end
+
   const [incidents, setIncidents] = useState([]);
   const [initialLocation, setInitialLocation] = useState({
     latitude: 51.05011,
@@ -62,6 +80,11 @@ const Page2 = () => {
     fetchData();
   }, []);
 
+  const handleCrime = () => {
+    // Do something when FAB is pressed
+    console.log('Crime pressed');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.mapContainer}>
@@ -102,27 +125,39 @@ const Page2 = () => {
             }
           })}
         </MapView>
+        <TouchableOpacity
+          style={styles.fab}
+          onPress={handleOpenDrawer}
+          activeOpacity={0.7}>
+          <Image
+            source={require('../assets/plus.png')}
+            style={styles.fabIcon}
+          />
+        </TouchableOpacity>
       </View>
-      {/* <View style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <Button
-            title="Button 1"
-            onPress={() => console.log('Button 1 pressed')}
+      <BottomDrawer
+        ref={bottomDrawerRef}
+        openOnMount={false}
+        startUp={false}
+        onChangeVisibility={visible => setIsDrawerOpen(visible)}>
+        <View style={styles.contentContainer}>
+          <Text style={{marginBottom: 30, fontWeight: 'bold'}}>
+            Report Crime
+          </Text>
+          <TextInput
+            style={styles.drawerInput}
+            placeholder="This will be your exact location"
+            value={''}
           />
-        </View>
-        <View style={styles.button}>
-          <Button
-            title="Button 2"
-            onPress={() => console.log('Button 2 pressed')}
+          <TextInput
+            style={[styles.drawerInput, {height: 200}]}
+            placeholder="Enter description"
+            multiline={true}
+            numberOfLines={4} // Adjust as needed
           />
+          <Button title="Submit" />
         </View>
-        <View style={styles.button}>
-          <Button
-            title="Button 3"
-            onPress={() => console.log('Button 3 pressed')}
-          />
-        </View>
-      </View> */}
+      </BottomDrawer>
     </View>
   );
 };
@@ -138,21 +173,35 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
-  buttonContainer: {
+
+  fab: {
     position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: '#e60000',
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
-    backgroundColor: 'lightgray',
+    alignSelf: 'center',
+    bottom: 26,
+    elevation: 8,
   },
-  button: {
-    flex: 1,
-    marginHorizontal: 5,
+  fabIcon: {
+    width: 24,
+    height: 24,
+  },
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  drawerInput: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+    width: '100%',
   },
 });
 
-export default Page2;
+export default LandingMap;
