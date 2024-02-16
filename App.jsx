@@ -13,6 +13,11 @@ const Drawer = createDrawerNavigator();
 
 function App() {
   const [username, setUsername] = useState('Guest');
+  const [logDisplay, setLogDisplay] = useState('Login');
+
+  const updateLogDisplay = newLogDisplay => {
+    setLogDisplay(newLogDisplay);
+  };
 
   const updateUsername = newUsername => {
     setUsername(newUsername);
@@ -32,8 +37,8 @@ function App() {
         <Drawer.Screen
           name="Login"
           options={{
-            drawerLabel: 'Login',
-            title: 'WoW',
+            drawerLabel: logDisplay,
+            title: logDisplay,
             drawerIcon: ({tintColor}) => (
               <Image
                 source={require('./assets/user.png')}
@@ -41,7 +46,13 @@ function App() {
               />
             ),
           }}>
-          {props => <Login {...props} updateUsername={updateUsername} />}
+          {props => (
+            <Login
+              {...props}
+              updateUsername={updateUsername}
+              updateLogDisplay={updateLogDisplay}
+            />
+          )}
         </Drawer.Screen>
         <Drawer.Screen
           name="Report"

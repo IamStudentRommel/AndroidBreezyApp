@@ -15,11 +15,15 @@ import {
 } from 'react-native';
 import {db, collection, addDoc, getDocs, query, where} from '../firebase/conf';
 
-const Login = ({updateUsername}) => {
+const Login = ({updateUsername, updateLogDisplay}) => {
   // console.log(typeof updateUsername); // Should output "function"
 
   const [inputEmail, setInputEmail] = useState('');
   const [inputPwd, setInputPwd] = useState('');
+  const [user, setUser] = useState('Guest');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [firebaseFname, setFirebaseFname] = useState('');
+  const [firebaseLname, setFirebaseLname] = useState('');
 
   const test = () => {
     Alert.alert('feature not yet implemented');
@@ -35,13 +39,19 @@ const Login = ({updateUsername}) => {
         const userData = userDoc.data();
         if (userData.pwd === pwd) {
           updateUsername(`${userData.fname} ${userData.lname}`);
+          updateLogDisplay('Me');
+          setFirebaseFname(userData.fname);
+          setFirebaseLname(userData.lname);
+          setIsLoggedIn(true);
           alert(`Welcome, ${userData.fname} ${userData.lname}`);
         } else {
-          updateUsername(`Guest`);
+          updateUsername(user);
+          updateLogDisplay('Login');
           alert(`User not found`);
         }
       } else {
-        updateUsername(`Guest`);
+        updateUsername(user);
+        updateLogDisplay('Login');
         alert(`User not found`);
       }
     } catch (e) {
@@ -62,6 +72,24 @@ const Login = ({updateUsername}) => {
     setInputPwd(newText);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    updateUsername(user);
+    updateLogDisplay('Login');
+  };
+
+  if (isLoggedIn) {
+    return (
+      <View style={[styles.logOutContainer, styles.centered]}>
+        <Text style={styles.userInfo}>
+          {firebaseFname}, {firebaseLname}
+        </Text>
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <Text style={styles.logoutText}>Logout</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -135,6 +163,35 @@ const styles = StyleSheet.create({
     color: '#000099',
     fontSize: 15,
     textAlign: 'center',
+  },
+  logoutButton: {
+    marginTop: 20,
+    backgroundColor: '#FF5733',
+    padding: 10,
+    borderRadius: 5,
+  },
+
+  logOutContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  userInfo: {
+    marginBottom: 20,
+    fontSize: 18,
+  },
+  logoutButton: {
+    backgroundColor: '#FF5733',
+    padding: 10,
+    borderRadius: 5,
+  },
+  logoutText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
 
