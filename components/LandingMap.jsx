@@ -7,6 +7,7 @@ import {
   Button,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import * as Location from 'expo-location';
@@ -15,6 +16,7 @@ import testdata from '../data/test.json';
 import mapCustomStyle from '../data/mapCustomStyle.json';
 
 const LandingMap = () => {
+  const [isLoading, setIsLoading] = useState(true);
   //Drawer part start
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const bottomDrawerRef = useRef(null);
@@ -57,7 +59,9 @@ const LandingMap = () => {
           longitudeDelta: 0.0421,
         });
         // console.log(initialLocation);
+        setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         console.error('Error getting location:', error);
         console.log(null);
       }
@@ -82,9 +86,16 @@ const LandingMap = () => {
   };
 
   useEffect(() => {
-    getLocation();
     fetchData();
-  }, [initialLocation]);
+    getLocation();
+  }, []);
+
+  const renderLoadingIndicator = () => (
+    <View style={[StyleSheet.absoluteFill, styles.loadingIndicator]}>
+      <ActivityIndicator size="large" color="#0000ff" />
+      <Text style={styles.loadingText}>Checking your location</Text>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -127,6 +138,7 @@ const LandingMap = () => {
             }
           })}
         </MapView>
+
         <TouchableOpacity
           style={styles.fab}
           onPress={handleOpenDrawer}
@@ -145,6 +157,7 @@ const LandingMap = () => {
             style={styles.fabIcon}
           />
         </TouchableOpacity>
+        {isLoading && renderLoadingIndicator()}
       </View>
       <BottomDrawer
         ref={bottomDrawerRef}
@@ -224,6 +237,16 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     width: '100%',
+  },
+  loadingIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white background
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

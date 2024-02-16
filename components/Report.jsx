@@ -6,6 +6,7 @@ import {db, collection, getDocs} from '../firebase/conf';
 export default function MyLineChart() {
   const [sector, setSector] = useState([]);
   const [sectorCount, setSectorCount] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getSectorVal = async e => {
     try {
@@ -16,7 +17,7 @@ export default function MyLineChart() {
       const uniqueSectorsCount = [...new Set(newSecCountData)];
       setSector(uniqueSectors);
       setSectorCount(uniqueSectorsCount);
-
+      setLoading(false);
       console.log(sector);
       console.log(sectorCount);
     } catch (e) {
@@ -36,6 +37,10 @@ export default function MyLineChart() {
       },
     ],
   };
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
 
   const piedata = [
     {
