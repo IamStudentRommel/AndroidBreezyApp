@@ -139,19 +139,3 @@ const styles = StyleSheet.create({
 });
 
 export default Login;
-
-// OtherComponent.js
-// import React from 'react';
-// import { Button } from 'react-native';
-
-// const OtherComponent = ({ updateUsername }) => {
-//   const handleUpdateUsername = () => {
-//     updateUsername('New Username');
-//   };
-
-//   return (
-//     <Button title="Update Username" onPress={handleUpdateUsername} />
-//   );
-// };
-
-// export default OtherComponent;

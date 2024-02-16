@@ -1,8 +1,42 @@
-import React from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, Dimensions, ScrollView} from 'react-native';
 import {LineChart, BarChart, PieChart} from 'react-native-chart-kit';
+import {db, collection, getDocs} from '../firebase/conf';
 
 export default function MyLineChart() {
+  const [sector, setSector] = useState([]);
+  const [sectorCount, setSectorCount] = useState([]);
+
+  const getSectorVal = async e => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'sector_tbl'));
+      const newSecData = querySnapshot.docs.map(doc => doc.data().Sector);
+      const newSecCountData = querySnapshot.docs.map(doc => doc.data().Count);
+      const uniqueSectors = [...new Set(newSecData)]; // Filter out duplicate sector values and update the state
+      const uniqueSectorsCount = [...new Set(newSecCountData)];
+      setSector(uniqueSectors);
+      setSectorCount(uniqueSectorsCount);
+
+      console.log(sector);
+      console.log(sectorCount);
+    } catch (e) {
+      console.error('Error pulling data: ', e);
+    }
+  };
+
+  useEffect(() => {
+    getSectorVal();
+  }, []);
+
+  const data = {
+    labels: sector,
+    datasets: [
+      {
+        data: sectorCount,
+      },
+    ],
+  };
+
   const piedata = [
     {
       name: 'Calgary',
@@ -20,17 +54,40 @@ export default function MyLineChart() {
     },
   ];
 
-  const data = {
-    labels: ['', 'Calgary', 'Edmonton'],
-    datasets: [
-      {
-        data: [0, 90, 100],
-      },
-    ],
-  };
-
   return (
     <View>
+      <Text>My Line Chart</Text>
+      <ScrollView horizontal>
+        <LineChart
+          data={data}
+          width={(Dimensions.get('window').width * sector.length) / 5} // Adjust the width as needed
+          height={250}
+          //yAxisLabel={'$'}
+          chartConfig={{
+            backgroundGradientFrom: 'darkblue',
+            backgroundGradientTo: 'blue',
+            color: (opacity = 3) => `rgba(255, 255, 255, ${opacity})`,
+            formatYLabel: label => parseInt(label, 10).toString(),
+          }}
+        />
+      </ScrollView>
+
+      <Text>My Bar Chart</Text>
+      <ScrollView horizontal>
+        <BarChart
+          data={data}
+          width={(Dimensions.get('window').width * sector.length) / 5} // Adjust the width as needed
+          height={250}
+          //yAxisLabel={'$'}
+          chartConfig={{
+            backgroundGradientFrom: 'darkblue',
+            backgroundGradientTo: 'blue',
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            formatYLabel: label => parseInt(label, 10).toString(),
+          }}
+        />
+      </ScrollView>
+
       <Text>My Pie Chart</Text>
       <PieChart
         data={piedata}
@@ -45,34 +102,6 @@ export default function MyLineChart() {
         backgroundColor="transparent"
         paddingLeft="15"
         absolute
-      />
-
-      <Text>My Line Chart</Text>
-      <LineChart
-        data={data}
-        width={Dimensions.get('window').width}
-        height={200}
-        //yAxisLabel={'$'}
-        chartConfig={{
-          backgroundGradientFrom: 'darkblue',
-          backgroundGradientTo: 'blue',
-          color: (opacity = 3) => `rgba(255, 255, 255, ${opacity})`,
-          formatYLabel: label => parseInt(label, 10).toString(),
-        }}
-      />
-
-      <Text>My Bar Chart</Text>
-      <BarChart
-        data={data}
-        width={Dimensions.get('window').width}
-        height={200}
-        //yAxisLabel={'$'}
-        chartConfig={{
-          backgroundGradientFrom: 'darkblue',
-          backgroundGradientTo: 'blue',
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          formatYLabel: label => parseInt(label, 10).toString(),
-        }}
       />
     </View>
   );

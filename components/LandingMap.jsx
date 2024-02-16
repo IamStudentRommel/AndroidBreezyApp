@@ -50,13 +50,13 @@ const LandingMap = () => {
         const {coords} = await Location.getCurrentPositionAsync({
           accuracy: Location.Accuracy.High,
         });
-        // console.log('coords');
         setInitialLocation({
           latitude: coords.latitude,
           longitude: coords.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         });
+        // console.log(initialLocation);
       } catch (error) {
         console.error('Error getting location:', error);
         console.log(null);
@@ -64,31 +64,33 @@ const LandingMap = () => {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        'https://data.calgary.ca/resource/78gh-n26t.json',
+      );
+      const data = await response.json();
+      setIncidents(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  const mapRef = useRef(null);
+  const reCenter = () => {
+    getLocation();
+    mapRef.current?.animateToRegion(initialLocation, 1000);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          'https://data.calgary.ca/resource/78gh-n26t.json',
-        );
-        const data = await response.json();
-        setIncidents(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
     getLocation();
     fetchData();
-  }, []);
-
-  const handleCrime = () => {
-    // Do something when FAB is pressed
-    console.log('Crime pressed');
-  };
+  }, [initialLocation]);
 
   return (
     <View style={styles.container}>
       <View style={styles.mapContainer}>
         <MapView
+          ref={mapRef}
           style={styles.map}
           provider={PROVIDER_GOOGLE}
           region={initialLocation}
@@ -131,6 +133,15 @@ const LandingMap = () => {
           activeOpacity={0.7}>
           <Image
             source={require('../assets/plus.png')}
+            style={styles.fabIcon}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.fab2}
+          onPress={reCenter}
+          activeOpacity={0.7}>
+          <Image
+            source={require('../assets/navigation.png')}
             style={styles.fabIcon}
           />
         </TouchableOpacity>
@@ -184,6 +195,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     bottom: 26,
+    elevation: 8,
+  },
+  fab2: {
+    position: 'absolute',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: '#ffffff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 96, // adjust the bottom position as needed
+    right: 20, // adjust the right position as needed
     elevation: 8,
   },
   fabIcon: {
