@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import * as Location from 'expo-location';
@@ -16,11 +17,18 @@ import BottomDrawer from 'react-native-animated-bottom-drawer';
 import AppConfig from '../app.json';
 import testdata from '../data/test.json';
 import mapCustomStyle from '../data/mapCustomStyle.json';
+import {blue} from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
 
 const LandingMap = () => {
   const {myMapKey} = AppConfig;
   const [isLoading, setIsLoading] = useState(true);
   //Drawer part start
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Accident', value: 'accident'},
+    {label: 'Murder', value: 'murder'},
+  ]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const bottomDrawerRef = useRef(null);
 
@@ -232,16 +240,25 @@ const LandingMap = () => {
         startUp={false}
         onChangeVisibility={visible => setIsDrawerOpen(visible)}>
         <View style={styles.contentContainer}>
-          <Text style={{marginBottom: 30, fontWeight: 'bold'}}>
-            Report Crime
+          <Text style={{marginBottom: 30, fontSize: 20, fontWeight: 'bold'}}>
+            - Report Crime -
           </Text>
           <TextInput
-            style={styles.drawerInput}
+            style={[styles.drawerInput, {backgroundColor: '#f2f2f2'}]}
             placeholder="This will be your exact location"
             editable={false}
             value={address}
           />
-
+          <DropDownPicker
+            style={styles.drawerInput}
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            placeholder="Crime Category" // Set your desired initial value here
+          />
           <TextInput
             style={[styles.drawerInput, {height: 100}]}
             placeholder="Enter description"
