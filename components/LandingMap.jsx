@@ -10,12 +10,15 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import * as Location from 'expo-location';
 import BottomDrawer from 'react-native-animated-bottom-drawer';
+import AppConfig from '../app.json';
 import testdata from '../data/test.json';
 import mapCustomStyle from '../data/mapCustomStyle.json';
 
 const LandingMap = () => {
+  const {myMapKey} = AppConfig;
   const [isLoading, setIsLoading] = useState(true);
   //Drawer part start
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -124,7 +127,6 @@ const LandingMap = () => {
                     key={marker.id}
                     coordinate={coordinates}
                     title={marker.category}
-                    x
                     description={marker.id}>
                     <Image
                       source={require('../assets/zombie.png')}
@@ -157,6 +159,53 @@ const LandingMap = () => {
             style={styles.fabIcon}
           />
         </TouchableOpacity>
+
+        {/* SearchBar */}
+        <View style={styles.searchBarContainer}>
+          <GooglePlacesAutocomplete
+            placeholder="Search"
+            onPress={(data, details = null) => {
+              if (details) {
+                const placeId = details.place_id;
+                fetch(
+                  `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${myMapKey}`,
+                )
+                  .then(response => response.json())
+                  .then(data => {
+                    if (
+                      data &&
+                      data.result &&
+                      data.result.geometry &&
+                      data.result.geometry.location
+                    ) {
+                      const {lat, lng} = data.result.geometry.location;
+                      console.log('Latitude:', lat);
+                      console.log('Longitude:', lng);
+
+                      setInitialLocation({
+                        latitude: lat,
+                        longitude: lng,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                      });
+                    } else {
+                      console.log(
+                        'Latitude and longitude not available for this place.',
+                      );
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error fetching place details:', error);
+                  });
+              }
+            }}
+            query={{
+              key: myMapKey,
+              language: 'en',
+            }}
+          />
+        </View>
+
         {isLoading && renderLoadingIndicator()}
       </View>
       <BottomDrawer
@@ -247,6 +296,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  searchBarContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginTop: 10,
   },
 });
 

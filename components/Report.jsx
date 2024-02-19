@@ -8,7 +8,7 @@ export default function MyLineChart() {
   const [sectorCount, setSectorCount] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getSectorVal = async e => {
+  const getSectorVal = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, 'sector_tbl'));
       const newSecData = querySnapshot.docs.map(doc => doc.data().Sector);
