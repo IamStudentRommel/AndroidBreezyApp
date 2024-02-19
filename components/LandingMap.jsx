@@ -29,7 +29,7 @@ const LandingMap = () => {
     bottomDrawerRef.current?.open();
   };
   //Drawer part end
-
+  const [address, setAddress] = useState(null);
   const [incidents, setIncidents] = useState([]);
   const [initialLocation, setInitialLocation] = useState({
     latitude: 51.05011,
@@ -63,12 +63,30 @@ const LandingMap = () => {
         });
         // console.log(initialLocation);
         setIsLoading(false);
+
+        // Perform reverse geocoding to get the address
+        const addressResult = await Location.reverseGeocodeAsync({
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+        });
+
+        if (addressResult && addressResult.length > 0) {
+          setAddress(formatAddress(addressResult[0]));
+        } else {
+          setAddress(null);
+        }
+        console.log(address);
       } catch (error) {
         setIsLoading(false);
         console.error('Error getting location:', error);
         console.log(null);
       }
     }
+  };
+
+  const formatAddress = addressObj => {
+    const {street, city, region, country} = addressObj;
+    return `${street}, ${city}, ${region}, ${country}`;
   };
 
   const fetchData = async () => {
@@ -220,13 +238,15 @@ const LandingMap = () => {
           <TextInput
             style={styles.drawerInput}
             placeholder="This will be your exact location"
-            value={''}
+            editable={false}
+            value={address}
           />
+
           <TextInput
-            style={[styles.drawerInput, {height: 200}]}
+            style={[styles.drawerInput, {height: 100}]}
             placeholder="Enter description"
             multiline={true}
-            numberOfLines={4} // Adjust as needed
+            numberOfLines={2} // Adjust as needed
           />
           <Button title="Submit" />
         </View>
