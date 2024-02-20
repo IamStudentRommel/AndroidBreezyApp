@@ -13,7 +13,8 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {db, collection, getDocs, query, where} from '../firebase/conf';
+import {db, collection, getDocs, query, where} from '../../firebase/conf';
+import LoginSuccess from './LoginSuccess';
 
 const Login = ({updateUsername, updateLogDisplay}) => {
   // console.log(typeof updateUsername); // Should output "function"
@@ -39,7 +40,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
         const userData = userDoc.data();
         if (userData.pwd === pwd) {
           updateUsername(`${userData.fname} ${userData.lname}`);
-          updateLogDisplay('Me');
+          updateLogDisplay('Home');
           setFirebaseFname(userData.fname);
           setFirebaseLname(userData.lname);
           setIsLoggedIn(true);
@@ -81,15 +82,11 @@ const Login = ({updateUsername, updateLogDisplay}) => {
 
   if (isLoggedIn) {
     return (
-      <View style={[styles.logOutContainer, styles.centered]}>
-        <Text style={styles.userInfo}>Welcome</Text>
-        <Text style={styles.userInfo}>
-          {firebaseFname}, {firebaseLname}
-        </Text>
-        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-          <Text style={styles.logoutText}>Logout</Text>
-        </TouchableOpacity>
-      </View>
+      <LoginSuccess
+        firebaseFname={firebaseFname}
+        firebaseLname={firebaseLname}
+        handleLogout={handleLogout}
+      />
     );
   }
   return (
@@ -98,7 +95,10 @@ const Login = ({updateUsername, updateLogDisplay}) => {
       style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <Image source={require('../assets/logo.png')} style={styles.logo} />
+          <Image
+            source={require('../../assets/logo.png')}
+            style={styles.logo}
+          />
           <Text style={styles.appName}>CrimeH8rs</Text>
           {/* <Text style={styles.subAppName}>"All is Well"</Text> */}
           <TextInput
@@ -172,28 +172,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
-
-  logOutContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   centered: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  userInfo: {
-    marginBottom: 20,
-    fontSize: 18,
-  },
-  logoutButton: {
-    backgroundColor: '#FF5733',
-    padding: 10,
-    borderRadius: 5,
-  },
-  logoutText: {
-    color: '#fff',
-    fontWeight: 'bold',
   },
 });
 

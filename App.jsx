@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import Login from './components/Login';
+import Login from './components/Login/Login';
 import Report from './components/Report';
 import LandingMap from './components/Landing/LandingMap';
 import About from './components/About';
 import CustomDrawerContent from './components/AppRoot/CustomDrawerContent';
 
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -90,23 +90,11 @@ function App() {
             ),
           }}
         />
-        {/* <Drawer.Screen name="Test Page" component={TestPage} options={{}} /> */}
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  logoutContainer: {
-    borderTopWidth: 1,
-    borderTopColor: 'gray',
-    padding: 16,
-    marginTop: 'auto', // Push the logout button to the bottom
-  },
-  logoutText: {
-    color: 'red',
-    fontSize: 16,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default App;

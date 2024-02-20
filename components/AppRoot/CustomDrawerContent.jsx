@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -18,12 +18,16 @@ const CustomDrawerContent = ({username, updateUsername, ...props}) => {
         </View>
         <Text style={{fontSize: 18, marginBottom: 8}}>{username}</Text>
       </View>
+
       <DrawerItemList {...props} />
     </DrawerContentScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   headerContainer: {
     padding: 16,
     borderBottomWidth: 1,
