@@ -14,9 +14,9 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import * as Location from 'expo-location';
 import BottomDrawer from 'react-native-animated-bottom-drawer';
-import AppConfig from '../app.json';
-import testdata from '../data/test.json';
-import mapCustomStyle from '../data/mapCustomStyle.json';
+import AppConfig from '../../app.json';
+import testdata from '../../data/test.json';
+import mapCustomStyle from '../../data/mapCustomStyle.json';
 import {blue} from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
 
 const LandingMap = () => {
@@ -83,11 +83,11 @@ const LandingMap = () => {
         } else {
           setAddress(null);
         }
-        console.log(address);
+        // console.log(address);
       } catch (error) {
         setIsLoading(false);
         console.error('Error getting location:', error);
-        console.log(null);
+        // console.log(null);
       }
     }
   };
@@ -137,7 +137,7 @@ const LandingMap = () => {
           customMapStyle={mapCustomStyle}>
           <Marker coordinate={initialLocation} title="Your Initial Location">
             <Image
-              source={require('../assets/angel.png')}
+              source={require('../../assets/angel.png')}
               style={{width: 32, height: 32}}
             />
           </Marker>
@@ -155,7 +155,7 @@ const LandingMap = () => {
                     title={marker.category}
                     description={marker.id}>
                     <Image
-                      source={require('../assets/zombie.png')}
+                      source={require('../../assets/zombie.png')}
                       style={{width: 32, height: 32}}
                     />
                   </Marker>
@@ -172,7 +172,7 @@ const LandingMap = () => {
           onPress={handleOpenDrawer}
           activeOpacity={0.7}>
           <Image
-            source={require('../assets/plus.png')}
+            source={require('../../assets/plus.png')}
             style={styles.fabIcon}
           />
         </TouchableOpacity>
@@ -181,7 +181,7 @@ const LandingMap = () => {
           onPress={reCenter}
           activeOpacity={0.7}>
           <Image
-            source={require('../assets/navigation.png')}
+            source={require('../../assets/navigation.png')}
             style={styles.fabIcon}
           />
         </TouchableOpacity>
@@ -338,8 +338,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 10,
-    marginTop: 10,
+    paddingHorizontal: 30,
+    marginTop: 15,
+    backgroundColor: '#ffffff',
+    elevation: 5,
+    borderRadius: 25,
   },
 });
 

@@ -13,7 +13,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {db, collection, addDoc, getDocs, query, where} from '../firebase/conf';
+import {db, collection, getDocs, query, where} from '../firebase/conf';
 
 const Login = ({updateUsername, updateLogDisplay}) => {
   // console.log(typeof updateUsername); // Should output "function"
@@ -43,16 +43,16 @@ const Login = ({updateUsername, updateLogDisplay}) => {
           setFirebaseFname(userData.fname);
           setFirebaseLname(userData.lname);
           setIsLoggedIn(true);
-          alert(`Welcome, ${userData.fname} ${userData.lname}`);
+          Alert.alert(`Welcome, ${userData.fname} ${userData.lname}`);
         } else {
           updateUsername(user);
           updateLogDisplay('Login');
-          alert(`User not found`);
+          Alert.alert(`User not found`);
         }
       } else {
         updateUsername(user);
         updateLogDisplay('Login');
-        alert(`User not found`);
+        Alert.alert(`User not found`);
       }
     } catch (e) {
       console.error('Error validating user: ', e);
@@ -76,11 +76,13 @@ const Login = ({updateUsername, updateLogDisplay}) => {
     setIsLoggedIn(false);
     updateUsername(user);
     updateLogDisplay('Login');
+    Alert.alert('You have successfully logout.');
   };
 
   if (isLoggedIn) {
     return (
       <View style={[styles.logOutContainer, styles.centered]}>
+        <Text style={styles.userInfo}>Welcome</Text>
         <Text style={styles.userInfo}>
           {firebaseFname}, {firebaseLname}
         </Text>

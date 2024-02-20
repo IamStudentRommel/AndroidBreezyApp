@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import Login from './components/Login';
 import Report from './components/Report';
-import LandingMap from './components/LandingMap';
+import LandingMap from './components/Landing/LandingMap';
 import About from './components/About';
-import CustomDrawerContent from './components/CustomDrawerContent';
+import CustomDrawerContent from './components/AppRoot/CustomDrawerContent';
 
 import {Image, StyleSheet} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
