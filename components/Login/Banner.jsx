@@ -46,7 +46,7 @@ const Banner = ({text, images}) => {
           />
         ))}
       </View>
-      <View style={styles.textContainer}>
+      <View>
         <Text style={styles.text}>{text}</Text>
       </View>
     </View>
@@ -55,15 +55,13 @@ const Banner = ({text, images}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#ff0000',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '50%',
-    width: '100%',
-    marginTop: 0,
-  },
-  textContainer: {
-    marginBottom: 10,
+    height: '45%',
+    width: '96%',
+    marginLeft: '2%', // 3% margin from the left
+    marginRight: '3%', // 3% margin from the right
   },
   text: {
     fontSize: 16,
@@ -75,13 +73,13 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   image: {
-    flex: 1,
+    marginTop: 30,
     width: '100%',
     height: '100%',
   },
   dotsContainer: {
     flexDirection: 'row',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   dot: {
     width: 20,

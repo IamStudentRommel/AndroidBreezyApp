@@ -15,6 +15,10 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
 
+  const capitalizeFirstLetter = str => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
   const validateUser = async email => {
     const q = query(collection(db, 'users'), where('email', '==', email));
     const querySnapshot = await getDocs(q);
@@ -43,8 +47,8 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
           await addDoc(collection(db, 'users'), {
             email: email,
             pwd: password,
-            fname: fname,
-            lname: lname,
+            fname: capitalizeFirstLetter(fname),
+            lname: capitalizeFirstLetter(lname),
             role: 1,
             status: true,
           });
@@ -135,6 +139,7 @@ const styles = StyleSheet.create({
 
   button: {
     margin: 20,
+    backgroundColor: '#99ddff',
   },
 });
 

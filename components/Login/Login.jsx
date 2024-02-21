@@ -103,7 +103,6 @@ const Login = ({updateUsername, updateLogDisplay}) => {
         updateLogDisplay={updateLogDisplay}
       />
     );
-    // Show RegistrationForm component if showRegistrationForm state is true
   }
   return (
     <KeyboardAvoidingView
@@ -175,7 +174,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   btnContainer: {
-    backgroundColor: '#0000b3',
+    backgroundColor: '#99ddff',
   },
   textLink: {
     color: '#000099',

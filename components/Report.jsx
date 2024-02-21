@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Dimensions, ScrollView} from 'react-native';
+import {View, Text, Dimensions, ScrollView, StyleSheet} from 'react-native';
 import {LineChart, BarChart, PieChart} from 'react-native-chart-kit';
 import {db, collection, getDocs} from '../firebase/conf';
 
-export default function MyLineChart() {
+const Report = () => {
   const [sector, setSector] = useState([]);
   const [sectorCount, setSectorCount] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,8 +18,8 @@ export default function MyLineChart() {
       setSector(uniqueSectors);
       setSectorCount(uniqueSectorsCount);
       setLoading(false);
-      console.log(sector);
-      console.log(sectorCount);
+      // console.log(sector);
+      // console.log(sectorCount);
     } catch (e) {
       console.error('Error pulling data: ', e);
     }
@@ -46,22 +46,42 @@ export default function MyLineChart() {
     {
       name: 'Calgary',
       crimes: 90,
-      color: 'rgba(131, 167, 234, 1)',
+      color: '#ff0000',
       legendFontColor: '#7F7F7F',
       legendFontSize: 15,
     },
     {
       name: 'Edmonton',
       crimes: 100,
-      color: '#F00',
+      color: '#0000b3',
       legendFontColor: '#7F7F7F',
       legendFontSize: 15,
     },
   ];
 
   return (
-    <View>
-      <Text>My Line Chart</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Overall Crime Rates</Text>
+      <PieChart
+        onDataPointClick={() => {
+          console.log('masoud');
+        }}
+        data={piedata}
+        width={Dimensions.get('window').width}
+        height={220}
+        chartConfig={{
+          backgroundGradientFrom: 'darkblue',
+          backgroundGradientTo: 'blue',
+          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          formatLabel: (value, name) => `${name}: ${(value * 100).toFixed(2)}%`,
+        }}
+        accessor="crimes"
+        backgroundColor="transparent"
+        paddingLeft="15"
+        absolute
+      />
+
+      {/* <Text>My Line Chart</Text> */}
       <ScrollView horizontal>
         <LineChart
           data={data}
@@ -69,15 +89,24 @@ export default function MyLineChart() {
           height={250}
           //yAxisLabel={'$'}
           chartConfig={{
-            backgroundGradientFrom: 'darkblue',
-            backgroundGradientTo: 'blue',
-            color: (opacity = 3) => `rgba(255, 255, 255, ${opacity})`,
+            backgroundColor: '#333333',
+            backgroundGradientFrom: '#333333',
+            backgroundGradientTo: '#003300',
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             formatYLabel: label => parseInt(label, 10).toString(),
+            propsForDots: {
+              r: '6',
+              strokeWidth: '2',
+              stroke: '#ffa726',
+            },
+          }}
+          style={{
+            borderRadius: 10,
           }}
         />
       </ScrollView>
 
-      <Text>My Bar Chart</Text>
+      {/* <Text>My Bar Chart</Text>
       <ScrollView horizontal>
         <BarChart
           data={data}
@@ -91,23 +120,28 @@ export default function MyLineChart() {
             formatYLabel: label => parseInt(label, 10).toString(),
           }}
         />
-      </ScrollView>
-
-      <Text>My Pie Chart</Text>
-      <PieChart
-        data={piedata}
-        width={Dimensions.get('window').width}
-        height={220}
-        chartConfig={{
-          backgroundGradientFrom: 'darkblue',
-          backgroundGradientTo: 'blue',
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        }}
-        accessor="crimes"
-        backgroundColor="transparent"
-        paddingLeft="15"
-        absolute
-      />
+      </ScrollView> */}
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // justifyContent: 'center',
+    marginTop: 50,
+    paddingHorizontal: 2,
+  },
+  title: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
+    marginBottom: 30,
+    backgroundColor: '#595959',
+    color: '#ffffff',
+    borderRadius: 10,
+  },
+});
+
+export default Report;

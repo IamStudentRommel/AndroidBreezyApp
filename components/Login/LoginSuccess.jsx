@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 30,
     paddingHorizontal: 20, // Adjust spacing
+    // backgroundColor: 'red',
   },
   userInfo: {
     fontSize: 19,
