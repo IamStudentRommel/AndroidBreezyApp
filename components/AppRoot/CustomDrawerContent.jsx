@@ -7,8 +7,15 @@ import {
 const CustomDrawerContent = ({username, updateUsername, ...props}) => {
   const initials = username
     .split(' ')
-    .map(name => name.charAt(0))
+    .map(name => name.charAt(0).toUpperCase())
     .join('');
+
+  const capitalizeFirstLetter = str => {
+    return str
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  };
 
   return (
     <DrawerContentScrollView {...props}>
@@ -16,7 +23,9 @@ const CustomDrawerContent = ({username, updateUsername, ...props}) => {
         <View style={styles.avatarContainer}>
           <Text style={styles.avatarText}>{initials}</Text>
         </View>
-        <Text style={{fontSize: 18, marginBottom: 8}}>{username}</Text>
+        <Text style={{fontSize: 18, marginBottom: 8}}>
+          {capitalizeFirstLetter(username)}
+        </Text>
       </View>
 
       <DrawerItemList {...props} />

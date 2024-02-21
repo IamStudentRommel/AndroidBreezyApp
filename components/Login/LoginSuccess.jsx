@@ -8,13 +8,17 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
     require('../../assets/angel.png'),
     require('../../assets/angel.png'),
   ];
+  const capitalizeFirstLetter = str => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
 
   return (
     <>
       <View style={styles.container}>
         <View style={styles.inlineContainer}>
           <Text style={styles.userInfo}>
-            Welcome, {firebaseFname}, {firebaseLname}
+            Welcome, {capitalizeFirstLetter(firebaseFname)},{' '}
+            {capitalizeFirstLetter(firebaseLname)}
           </Text>
           <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
             <Text style={styles.logoutText}>Logout</Text>

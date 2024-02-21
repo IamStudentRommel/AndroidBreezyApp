@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import {db, collection, getDocs, query, where} from '../../firebase/conf';
 import LoginSuccess from './LoginSuccess';
+import RegistrationForm from './RegistrationForm';
 
 const Login = ({updateUsername, updateLogDisplay}) => {
   // console.log(typeof updateUsername); // Should output "function"
@@ -25,10 +26,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [firebaseFname, setFirebaseFname] = useState('');
   const [firebaseLname, setFirebaseLname] = useState('');
-
-  const test = () => {
-    Alert.alert('feature not yet implemented');
-  };
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
 
   const validateUser = async (email, pwd) => {
     try {
@@ -80,6 +78,15 @@ const Login = ({updateUsername, updateLogDisplay}) => {
     Alert.alert('You have successfully logout.');
   };
 
+  const test = () => {
+    Alert.alert('feature not yet implemented');
+  };
+
+  const redirectReg = () => {
+    updateLogDisplay('');
+    setShowRegistrationForm(true);
+  };
+
   if (isLoggedIn) {
     return (
       <LoginSuccess
@@ -88,6 +95,15 @@ const Login = ({updateUsername, updateLogDisplay}) => {
         handleLogout={handleLogout}
       />
     );
+  }
+  if (showRegistrationForm) {
+    return (
+      <RegistrationForm
+        setShowRegistrationForm={setShowRegistrationForm}
+        updateLogDisplay={updateLogDisplay}
+      />
+    );
+    // Show RegistrationForm component if showRegistrationForm state is true
   }
   return (
     <KeyboardAvoidingView
@@ -119,7 +135,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
             <Button title="Login" onPress={handleValidateUser} />
           </View>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.textLink} onPress={test}>
+            <Text style={styles.textLink} onPress={redirectReg}>
               Signup
             </Text>
           </TouchableOpacity>
