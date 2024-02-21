@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   Button,
+  KeyboardAvoidingView,
   StyleSheet,
 } from 'react-native';
 
@@ -17,40 +18,44 @@ const About = () => {
     alert('Thank you for your feedback!');
   };
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Amazing Crime App</Text>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Overview</Text>
-        <Text>
-          This app is all about crime monitoring using map functionality. The
-          app allows users to view and report crimes in their area, as well as
-          provide relevant information about crime statistics and safety
-          measures.
-        </Text>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Developers</Text>
-        <Text>Aivee Mae Madrelejos</Text>
-        <Text>Ko Kawaguchi</Text>
-        <Text>Romeo Costillas</Text>
-        <Text>SyntaxMel Sakalam</Text>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>App Version</Text>
-        <Text>1.6.9</Text>
-      </View>
-      <View style={styles.feedbackSection}>
-        <Text style={styles.sectionTitle}>Contact Us for Feedback</Text>
-        <TextInput
-          style={styles.feedbackInput}
-          placeholder="Enter your feedback"
-          multiline
-          value={feedback}
-          onChangeText={text => setFeedback(text)}
-        />
-        <Button title="Submit Feedback" onPress={handleFeedbackSubmit} />
-      </View>
-    </ScrollView>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>Amazing Crime App</Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Overview</Text>
+          <Text>
+            This app is all about crime monitoring using map functionality. The
+            app allows users to view and report crimes in their area, as well as
+            provide relevant information about crime statistics and safety
+            measures.
+          </Text>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Developers</Text>
+          <Text>Aivee Mae Madrelejos</Text>
+          <Text>Ko Kawaguchi</Text>
+          <Text>Romeo Costillas</Text>
+          <Text>SyntaxMel Sakalam</Text>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>App Version</Text>
+          <Text>1.6.9</Text>
+        </View>
+        <View style={styles.feedbackSection}>
+          <Text style={styles.sectionTitle}>Contact Us for Feedback</Text>
+          <TextInput
+            style={styles.feedbackInput}
+            placeholder="Enter your feedback"
+            multiline
+            value={feedback}
+            onChangeText={text => setFeedback(text)}
+          />
+          <Button title="Submit Feedback" onPress={handleFeedbackSubmit} />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -30,6 +30,7 @@
     "react-native-chart-kit": "^6.12.0",
     "react-native-charts-wrapper": "^0.6.0",
     "react-native-dropdown-picker": "^5.4.6",
+    "react-native-flash-message": "^0.4.2",
     "react-native-geolocation-service": "^5.3.1",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-google-places-autocomplete": "^2.5.6",

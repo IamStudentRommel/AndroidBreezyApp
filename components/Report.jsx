@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Dimensions, ScrollView, StyleSheet} from 'react-native';
-import {LineChart, BarChart, PieChart} from 'react-native-chart-kit';
+import FlashMessage, {showMessage} from 'react-native-flash-message';
+import {LineChart, PieChart} from 'react-native-chart-kit';
 import {db, collection, getDocs} from '../firebase/conf';
 
 const Report = () => {
@@ -63,9 +64,6 @@ const Report = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Overall Crime Rates</Text>
       <PieChart
-        onDataPointClick={() => {
-          console.log('masoud');
-        }}
         data={piedata}
         width={Dimensions.get('window').width}
         height={220}
@@ -103,24 +101,22 @@ const Report = () => {
           style={{
             borderRadius: 10,
           }}
+          onDataPointClick={({value, getColor}) =>
+            showMessage({
+              message: 'Total no. of crime',
+              description: `${value}`,
+              backgroundColor: getColor(0.9),
+            })
+          }
         />
       </ScrollView>
-
-      {/* <Text>My Bar Chart</Text>
-      <ScrollView horizontal>
-        <BarChart
-          data={data}
-          width={(Dimensions.get('window').width * sector.length) / 5} // Adjust the width as needed
-          height={250}
-          //yAxisLabel={'$'}
-          chartConfig={{
-            backgroundGradientFrom: 'darkblue',
-            backgroundGradientTo: 'blue',
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            formatYLabel: label => parseInt(label, 10).toString(),
-          }}
+      {/* FlashMessage component */}
+      <View style={styles.flashMessageContainer}>
+        <FlashMessage
+          duration={5000}
+          style={{backgroundColor: '#ffa726'}} // Change background color to orange
         />
-      </ScrollView> */}
+      </View>
     </View>
   );
 };
@@ -141,6 +137,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#595959',
     color: '#ffffff',
     borderRadius: 10,
+  },
+  flashMessageContainer: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 295,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });
 
