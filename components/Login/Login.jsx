@@ -111,7 +111,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
           <Image
-            source={require('../../assets/logo.png')}
+            source={require('../../assets/bird.png')}
             style={styles.logo}
           />
           <Text style={styles.appName}>CrimeH8rs</Text>
@@ -154,8 +154,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   logo: {
-    width: 300,
-    height: 240,
+    width: '100%',
+    height: '40%',
   },
   appName: {
     fontWeight: 'bold',

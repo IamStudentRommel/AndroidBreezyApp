@@ -3,7 +3,16 @@
   "displayName": "BreezyApp",
   "expo": {
     "android": {
-      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "ios": {
+      "permissions": ["CAMERA", "PHOTO_LIBRARY_ADD_ONLY"]
     }
   },
   "myMapKey": "AIzaSyBT5TojBqi632zBlXjXrcxhS1xoMXXjZRU"

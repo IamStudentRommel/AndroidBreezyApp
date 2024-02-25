@@ -106,6 +106,7 @@ android {
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
+    classpath 'com.android.tools.build:gradle:8.2.2'
     implementation("com.facebook.react:react-android")
     implementation("com.facebook.react:flipper-integration")
 

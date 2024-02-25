@@ -3,6 +3,7 @@ import Login from './components/Login/Login';
 import Report from './components/Report';
 import LandingMap from './components/Landing/LandingMap';
 import About from './components/About';
+import Test from './components/Test';
 import CustomDrawerContent from './components/AppRoot/CustomDrawerContent';
 
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
@@ -26,7 +27,8 @@ function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Live Crime Monitoring"
+        // initialRouteName="Live Crime Monitoring"
+        initialRouteName="Test"
         drawerContent={props => (
           <CustomDrawerContent
             {...props}
@@ -90,6 +92,7 @@ function App() {
             ),
           }}
         />
+        <Drawer.Screen name="Test" component={Test} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

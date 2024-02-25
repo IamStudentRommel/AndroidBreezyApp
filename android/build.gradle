@@ -6,18 +6,16 @@ buildscript {
         targetSdkVersion = 34
         ndkVersion = "25.1.8937393"
         kotlinVersion = "1.8.0"
-        supportLibVersion = "27.1.1"
-        googlePlayServicesVersion = "15.0.1"
-        androidMapsUtilsVersion = "0.5+"
     }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle")
-        classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        // Use assignment operator (=) instead of method call (classpath())
+        classpath "com.android.tools.build:gradle"
+        classpath "com.facebook.react:react-native-gradle-plugin"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin"
     }
 }
 

@@ -4,37 +4,28 @@ import {
   View,
   StyleSheet,
   Image,
-  Button,
-  TextInput,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import * as Location from 'expo-location';
-import BottomDrawer from 'react-native-animated-bottom-drawer';
-import AppConfig from '../../app.json';
 import testdata from '../../data/test.json';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
-import {blue} from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
+import CustomDrawerButtom from './CrimeReportDrawer';
+import SearchMap from './SearchMap';
 
 const LandingMap = () => {
-  const {myMapKey} = AppConfig;
   const [isLoading, setIsLoading] = useState(true);
-  //Drawer part start
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'Accident', value: 'accident'},
-    {label: 'Murder', value: 'murder'},
-  ]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const bottomDrawerRef = useRef(null);
 
   const handleOpenDrawer = () => {
     setIsDrawerOpen(true);
     bottomDrawerRef.current?.open();
+  };
+
+  const clearSearchText = () => {
+    setClearSearch(prevState => !prevState);
   };
   //Drawer part end
   const [address, setAddress] = useState(null);
@@ -69,7 +60,6 @@ const LandingMap = () => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         });
-        // console.log(initialLocation);
         setIsLoading(false);
 
         // Perform reverse geocoding to get the address
@@ -187,87 +177,14 @@ const LandingMap = () => {
         </TouchableOpacity>
 
         {/* SearchBar */}
-        <View style={styles.searchBarContainer}>
-          <GooglePlacesAutocomplete
-            placeholder="Search"
-            onPress={(data, details = null) => {
-              if (details) {
-                const placeId = details.place_id;
-                fetch(
-                  `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${myMapKey}`,
-                )
-                  .then(response => response.json())
-                  .then(data => {
-                    if (
-                      data &&
-                      data.result &&
-                      data.result.geometry &&
-                      data.result.geometry.location
-                    ) {
-                      const {lat, lng} = data.result.geometry.location;
-                      console.log('Latitude:', lat);
-                      console.log('Longitude:', lng);
-
-                      setInitialLocation({
-                        latitude: lat,
-                        longitude: lng,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                      });
-                    } else {
-                      console.log(
-                        'Latitude and longitude not available for this place.',
-                      );
-                    }
-                  })
-                  .catch(error => {
-                    console.error('Error fetching place details:', error);
-                  });
-              }
-            }}
-            query={{
-              key: myMapKey,
-              language: 'en',
-            }}
-          />
-        </View>
-
-        {isLoading && renderLoadingIndicator()}
+        <SearchMap setInitialLocation={setInitialLocation} />
       </View>
-      <BottomDrawer
-        ref={bottomDrawerRef}
-        openOnMount={false}
-        startUp={false}
-        onChangeVisibility={visible => setIsDrawerOpen(visible)}>
-        <View style={styles.contentContainer}>
-          <Text style={{marginBottom: 30, fontSize: 20, fontWeight: 'bold'}}>
-            - Report Crime -
-          </Text>
-          <TextInput
-            style={[styles.drawerInput, {backgroundColor: '#f2f2f2'}]}
-            placeholder="This will be your exact location"
-            editable={false}
-            value={address}
-          />
-          <DropDownPicker
-            style={styles.drawerInput}
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
-            placeholder="Crime Category" // Set your desired initial value here
-          />
-          <TextInput
-            style={[styles.drawerInput, {height: 100}]}
-            placeholder="Enter description"
-            multiline={true}
-            numberOfLines={2} // Adjust as needed
-          />
-          <Button title="Submit" />
-        </View>
-      </BottomDrawer>
+      {isLoading && renderLoadingIndicator()}
+      <CustomDrawerButtom
+        bottomDrawerRef={bottomDrawerRef}
+        setIsDrawerOpen={setIsDrawerOpen}
+        address={address}
+      />
     </View>
   );
 };
@@ -304,45 +221,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 96, // adjust the bottom position as needed
-    right: 20, // adjust the right position as needed
+    bottom: 96,
+    right: 20,
     elevation: 8,
   },
   fabIcon: {
     width: 24,
     height: 24,
   },
-  contentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  drawerInput: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-    width: '100%',
-  },
   loadingIndicator: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white background
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
   },
   loadingText: {
     marginTop: 10,
     fontSize: 16,
     fontWeight: 'bold',
-  },
-  searchBarContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 30,
-    marginTop: 15,
-    backgroundColor: '#ffffff',
-    elevation: 5,
-    borderRadius: 25,
   },
 });
 

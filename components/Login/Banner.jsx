@@ -55,13 +55,23 @@ const Banner = ({text, images}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ff0000',
     alignItems: 'center',
     justifyContent: 'center',
     height: '45%',
     width: '96%',
-    marginLeft: '2%', // 3% margin from the left
-    marginRight: '3%', // 3% margin from the right
+    marginLeft: '2%',
+    marginRight: '3%',
+    marginBottom: '2%',
+    backgroundColor: '#ffffff',
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
   },
   text: {
     fontSize: 16,
