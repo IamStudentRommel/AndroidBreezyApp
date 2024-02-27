@@ -23,7 +23,7 @@ const CustomDrawerContent = ({username, updateUsername, ...props}) => {
         <View style={styles.avatarContainer}>
           <Text style={styles.avatarText}>{initials}</Text>
         </View>
-        <Text style={{fontSize: 18, marginBottom: 8}}>
+        <Text style={{fontSize: 18, marginBottom: 8, color: '#ffffff'}}>
           {capitalizeFirstLetter(username)}
         </Text>
       </View>
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
+    backgroundColor: '#3333ff',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
@@ -48,15 +49,15 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20, // Make it circular
-    backgroundColor: '#0000e6', // Set background color
+    backgroundColor: '#000000', // Set background color
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
   },
   avatarText: {
-    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#ffffff',
   },
 });
 

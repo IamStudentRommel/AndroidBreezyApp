@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Login from './components/Login/Login';
-import Report from './components/Report';
+import Report from './components/Dashboard';
 import LandingMap from './components/Landing/LandingMap';
 import About from './components/About';
 import Test from './components/Test';
@@ -23,6 +23,15 @@ function App() {
   const updateUsername = newUsername => {
     setUsername(newUsername);
   };
+
+  // const testTheme = {
+  //   colors: {
+  //     ...DefaultTheme.colors,
+  //     primary: '#ff0000',
+  //     background: '#000000',
+  //     text: '#ffffff',
+  //   },
+  // };
 
   return (
     <NavigationContainer>
@@ -57,7 +66,7 @@ function App() {
           )}
         </Drawer.Screen>
         <Drawer.Screen
-          name="Report"
+          name="Dashboard"
           component={Report}
           options={{
             drawerIcon: ({tintColor}) => (
@@ -98,6 +107,10 @@ function App() {
   );
 }
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({
+//   container: {
+
+//   }
+// });
 
 export default App;

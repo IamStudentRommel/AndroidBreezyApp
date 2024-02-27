@@ -16,6 +16,7 @@ import {
 import {db, collection, getDocs, query, where} from '../../firebase/conf';
 import LoginSuccess from './LoginSuccess';
 import RegistrationForm from './RegistrationForm';
+import {green} from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
 
 const Login = ({updateUsername, updateLogDisplay}) => {
   // console.log(typeof updateUsername); // Should output "function"
@@ -118,11 +119,13 @@ const Login = ({updateUsername, updateLogDisplay}) => {
           {/* <Text style={styles.subAppName}>"All is Well"</Text> */}
           <TextInput
             placeholder="Email"
+            placeholderTextColor={'#ffffff'}
             style={styles.textInput}
             onChangeText={handleEmailChange}
           />
           <TextInput
             placeholder="Password"
+            placeholderTextColor={'#ffffff'}
             style={styles.textInput}
             secureTextEntry
             onChangeText={handlePwdChange}
@@ -131,7 +134,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
             Forgot Password?
           </Text>
           <View style={styles.btnContainer}>
-            <Button title="Login" onPress={handleValidateUser} />
+            <Button title="Login" onPress={handleValidateUser} color="blue" />
           </View>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.textLink} onPress={redirectReg}>
@@ -147,6 +150,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0d0d0d',
   },
   inner: {
     padding: 24,
@@ -161,6 +165,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 40,
+    color: '#ffffff',
   },
   subAppName: {
     fontSize: 10,
@@ -170,14 +175,15 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    borderColor: '#000000',
+    borderColor: '#ffffff',
     borderBottomWidth: 1,
+    color: '#ffffff',
   },
-  btnContainer: {
-    backgroundColor: '#99ddff',
-  },
+  // btnContainer: {
+  //   backgroundColor: '#3333ff',
+  // },
   textLink: {
-    color: '#000099',
+    color: '#3333ff',
     fontSize: 15,
     textAlign: 'center',
   },

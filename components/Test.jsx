@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     position: 'center',
     height: 80,
     bottom: 20,
-    left: 10,
+    left: 15,
     right: 0,
   },
   captureButton: {

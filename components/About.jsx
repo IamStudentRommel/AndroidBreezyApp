@@ -25,7 +25,7 @@ const About = () => {
         <Text style={styles.title}>Amazing Crime App</Text>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Overview</Text>
-          <Text>
+          <Text style={styles.textContent}>
             This app is all about crime monitoring using map functionality. The
             app allows users to view and report crimes in their area, as well as
             provide relevant information about crime statistics and safety
@@ -34,14 +34,14 @@ const About = () => {
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Developers</Text>
-          <Text>Aivee Mae Madrelejos</Text>
-          <Text>Ko Kawaguchi</Text>
-          <Text>Romeo Costillas</Text>
-          <Text>SyntaxMel Sakalam</Text>
+          <Text style={styles.textContent}>Aivee Mae Madrelejos</Text>
+          <Text style={styles.textContent}>Ko Kawaguchi</Text>
+          <Text style={styles.textContent}>Romeo Costillas</Text>
+          <Text style={styles.textContent}>SyntaxMel Sakalam</Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>App Version</Text>
-          <Text>1.6.9</Text>
+          <Text style={styles.textContent}>1.6.9</Text>
         </View>
         <View style={styles.feedbackSection}>
           <Text style={styles.sectionTitle}>Contact Us for Feedback</Text>
@@ -63,20 +63,26 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
+    backgroundColor: '#000000',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
+    color: '#ffffff',
   },
   section: {
     marginBottom: 20,
+  },
+  textContent: {
+    color: '#ffffff',
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#ffffff',
   },
   feedbackSection: {
     width: '100%',
@@ -85,6 +91,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     marginTop: 10,
+    color: '#ffffff',
   },
   feedbackInput: {
     height: 100,
@@ -93,6 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    color: '#ffffff',
   },
 });
 
