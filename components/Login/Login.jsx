@@ -16,7 +16,7 @@ import {
 import {db, collection, getDocs, query, where} from '../../firebase/conf';
 import LoginSuccess from './LoginSuccess';
 import RegistrationForm from './RegistrationForm';
-import {green} from 'react-native-reanimated/lib/typescript/reanimated2/Colors';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Login = ({updateUsername, updateLogDisplay}) => {
   // console.log(typeof updateUsername); // Should output "function"
@@ -130,12 +130,15 @@ const Login = ({updateUsername, updateLogDisplay}) => {
             secureTextEntry
             onChangeText={handlePwdChange}
           />
-          <Text style={styles.textLink} onPress={test}>
-            Forgot Password?
-          </Text>
+
           <View style={styles.btnContainer}>
             <Button title="Login" onPress={handleValidateUser} color="blue" />
           </View>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.textLink} onPress={test}>
+              Forgot Password?
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.textLink} onPress={redirectReg}>
               Signup
@@ -150,7 +153,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0d0d0d',
+    backgroundColor: '#00001a',
   },
   inner: {
     padding: 24,
@@ -160,6 +163,7 @@ const styles = StyleSheet.create({
   logo: {
     width: '100%',
     height: '40%',
+    marginTop: -30,
   },
   appName: {
     fontWeight: 'bold',

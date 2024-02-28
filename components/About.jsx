@@ -52,7 +52,11 @@ const About = () => {
             value={feedback}
             onChangeText={text => setFeedback(text)}
           />
-          <Button title="Submit Feedback" onPress={handleFeedbackSubmit} />
+          <Button
+            title="Submit Feedback"
+            onPress={handleFeedbackSubmit}
+            color="blue"
+          />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: '#000000',
+    backgroundColor: '#00001a',
   },
   title: {
     fontSize: 24,

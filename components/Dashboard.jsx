@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 2,
-    backgroundColor: '#000000',
+    backgroundColor: '#00001a',
   },
   title: {
     marginTop: 30,

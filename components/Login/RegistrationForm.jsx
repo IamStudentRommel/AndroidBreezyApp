@@ -106,10 +106,10 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
       />
 
       <View style={styles.button}>
-        <Button title="Register" onPress={handleRegister} />
+        <Button title="Register" onPress={handleRegister} color="blue" />
       </View>
       <View style={styles.button}>
-        <Button title="Cancel" onPress={handleCancel} />
+        <Button title="Cancel" onPress={handleCancel} color="blue" />
       </View>
     </View>
   );
@@ -119,17 +119,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: 'center',
-    marginTop: 50,
     paddingHorizontal: 16,
+    backgroundColor: '#00001a',
   },
   title: {
+    marginTop: 50,
     fontSize: 34,
     fontWeight: 'bold',
     marginBottom: 16,
     textAlign: 'center',
     marginBottom: 30,
+    color: '#ffffff',
   },
   input: {
+    color: '#ffffff',
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
@@ -139,7 +142,6 @@ const styles = StyleSheet.create({
 
   button: {
     margin: 20,
-    backgroundColor: '#99ddff',
   },
 });
 

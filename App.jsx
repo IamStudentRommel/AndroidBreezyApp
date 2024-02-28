@@ -8,7 +8,7 @@ import CustomDrawerContent from './components/AppRoot/CustomDrawerContent';
 
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 
@@ -24,14 +24,14 @@ function App() {
     setUsername(newUsername);
   };
 
-  // const testTheme = {
-  //   colors: {
-  //     ...DefaultTheme.colors,
-  //     primary: '#ff0000',
-  //     background: '#000000',
-  //     text: '#ffffff',
-  //   },
-  // };
+  const testTheme = {
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#ff0000',
+      card: '#00001a',
+      text: '#ffffff',
+    },
+  };
 
   return (
     <NavigationContainer>
@@ -50,6 +50,7 @@ function App() {
           options={{
             drawerLabel: logDisplay,
             title: logDisplay,
+
             drawerIcon: ({tintColor}) => (
               <Image
                 source={require('./assets/user.png')}
