@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    backgroundColor: '#3333ff',
+    // backgroundColor: '#3333ff',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20, // Make it circular
-    backgroundColor: '#000000', // Set background color
+    backgroundColor: '#ffffff', // Set background color
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   avatarText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#000000',
   },
 });
 

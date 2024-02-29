@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Login from './components/Login/Login';
-import Report from './components/Dashboard';
+import Report from './components/Dashboard/Dashboard';
 import LandingMap from './components/Landing/LandingMap';
 import About from './components/About';
 import Test from './components/Test';
@@ -34,10 +34,22 @@ function App() {
   };
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={testTheme}
+      drawerContentOptions={{
+        activeTintColor: '#ff0000', // Change the color when the item is active
+        itemStyle: {marginVertical: 5},
+        inactiveTintColor: '#ffffff', // Change the color when the item is inactive
+      }}>
       <Drawer.Navigator
         // initialRouteName="Live Crime Monitoring"
         initialRouteName="Test"
+        screenOptions={{
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#00001a',
+          },
+        }}
         drawerContent={props => (
           <CustomDrawerContent
             {...props}
@@ -53,7 +65,7 @@ function App() {
 
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/user.png')}
+                source={require('./assets/password.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
@@ -72,7 +84,7 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/report.png')}
+                source={require('./assets/dashboard.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
@@ -84,7 +96,7 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/map.png')}
+                source={require('./assets/map2.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
@@ -96,7 +108,7 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/information.png')}
+                source={require('./assets/about.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),

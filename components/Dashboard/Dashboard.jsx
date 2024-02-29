@@ -1,13 +1,30 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Dimensions, ScrollView, StyleSheet} from 'react-native';
+import Filter from './Filter';
+import {
+  View,
+  Text,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import FlashMessage, {showMessage} from 'react-native-flash-message';
 import {LineChart, PieChart} from 'react-native-chart-kit';
-import {db, collection, getDocs} from '../firebase/conf';
+import {db, collection, getDocs} from '../../firebase/conf';
 
 const Report = () => {
   const [sector, setSector] = useState([]);
   const [sectorCount, setSectorCount] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [incidents, setIncidents] = useState([]);
+  const [sec, setSec] = useState({});
+
+  const options = ['2020', '2021', '2022', '2023'];
+  const [selectedYear, setSelectedYear] = useState('2023');
+
+  const handleOptionSelect = option => {
+    setSelectedYear(option);
+  };
 
   const getSectorVal = async () => {
     try {
@@ -26,9 +43,44 @@ const Report = () => {
     }
   };
 
+  const fetchData = async selectedYear => {
+    try {
+      const response = await fetch(
+        'https://data.calgary.ca/resource/78gh-n26t.json',
+      );
+      const jdata = await response.json();
+      console.log(selectedYear);
+      const data = jdata.filter(entry => entry.year === selectedYear);
+      setIncidents(data);
+
+      const sectorsSet = new Set(data.map(incident => incident.sector));
+      const distinctSectors = Array.from(sectorsSet);
+
+      const sectorData = {};
+      distinctSectors.forEach(sector => {
+        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        const paddedRandomColor = '#' + randomColor.padStart(6, '0');
+        sectorData[sector] = [0, paddedRandomColor];
+      });
+
+      data.forEach(incident => {
+        sectorData[incident.sector][0]++;
+      });
+
+      // console.log(sectorData);
+      setSec(sectorData);
+    } catch (error) {
+      console.error('Error fetching API data:', error);
+    }
+  };
+
   useEffect(() => {
     getSectorVal();
   }, []);
+
+  useEffect(() => {
+    fetchData(selectedYear);
+  }, [selectedYear]);
 
   const data = {
     labels: sector,
@@ -39,30 +91,29 @@ const Report = () => {
     ],
   };
 
+  const piedata = [];
+  for (const sector in sec) {
+    if (sec.hasOwnProperty(sector)) {
+      const [crimes, color] = sec[sector];
+      piedata.push({
+        name: sector,
+        crimes: crimes,
+        color: color,
+        legendFontColor: '#7F7F7F',
+        legendFontSize: 15,
+      });
+    }
+  }
+  piedata.sort((a, b) => a.name.localeCompare(b.name));
+
   if (loading) {
     return <Text>Loading...</Text>;
   }
 
-  const piedata = [
-    {
-      name: 'Calgary',
-      crimes: 90,
-      color: '#ff0000',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
-    },
-    {
-      name: 'Edmonton',
-      crimes: 100,
-      color: '#0000b3',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
-    },
-  ];
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Overall Crime Rates</Text>
+      <Text style={styles.title}>Overall Crime Count</Text>
+      <Filter options={options} onSelect={handleOptionSelect} />
       <PieChart
         data={piedata}
         width={Dimensions.get('window').width}
