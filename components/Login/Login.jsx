@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -12,14 +12,40 @@ import {
   Text,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import {db, collection, getDocs, query, where} from '../../firebase/conf';
 import LoginSuccess from './LoginSuccess';
 import RegistrationForm from './RegistrationForm';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+const LoadingComponent = () => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#00001a',
+      }}>
+      <Image
+        source={require('../../assets/crimehate.png')}
+        style={{
+          width: '80%',
+          height: '80%',
+          resizeMode: 'contain',
+          backgroundColor: '#00001a',
+        }}
+      />
+      <ActivityIndicator size="large" color="#ffffff" />
+      <Text style={{color: '#ffffff', marginTop: 10}}>Loading...</Text>
+    </View>
+  );
+};
+
 const Login = ({updateUsername, updateLogDisplay}) => {
   // console.log(typeof updateUsername); // Should output "function"
+  const [isLoading, setIsLoading] = useState(true);
 
   const [inputEmail, setInputEmail] = useState('');
   const [inputPwd, setInputPwd] = useState('');
@@ -60,10 +86,18 @@ const Login = ({updateUsername, updateLogDisplay}) => {
   };
 
   const handleValidateUser = () => {
-    // validateUser('qweqwe.xyz', 'abc');
+    // validateUser('asshole', 'freak');
     validateUser(inputEmail, inputPwd);
     // console.log(inputEmail, inputPwd);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleEmailChange = newText => {
     setInputEmail(newText);
@@ -105,48 +139,59 @@ const Login = ({updateUsername, updateLogDisplay}) => {
       />
     );
   }
-  return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
-          <Image
-            source={require('../../assets/bird.png')}
-            style={styles.logo}
-          />
-          <Text style={styles.appName}>CrimeH8rs</Text>
-          {/* <Text style={styles.subAppName}>"All is Well"</Text> */}
-          <TextInput
-            placeholder="Email"
-            placeholderTextColor={'#ffffff'}
-            style={styles.textInput}
-            onChangeText={handleEmailChange}
-          />
-          <TextInput
-            placeholder="Password"
-            placeholderTextColor={'#ffffff'}
-            style={styles.textInput}
-            secureTextEntry
-            onChangeText={handlePwdChange}
-          />
 
-          <View style={styles.btnContainer}>
-            <Button title="Login" onPress={handleValidateUser} color="blue" />
-          </View>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.textLink} onPress={test}>
-              Forgot Password?
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.textLink} onPress={redirectReg}>
-              Signup
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+  return (
+    <>
+      {isLoading ? (
+        <LoadingComponent />
+      ) : (
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.container}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.inner}>
+              <Image
+                source={require('../../assets/crimehate.png')}
+                style={styles.logo}
+              />
+              {/* <Text style={styles.appName}>CrimeH8rs</Text> */}
+              {/* <Text style={styles.subAppName}>"All is Well"</Text> */}
+              <TextInput
+                placeholder="Email"
+                placeholderTextColor={'#ffffff'}
+                style={styles.textInput}
+                onChangeText={handleEmailChange}
+              />
+              <TextInput
+                placeholder="Password"
+                placeholderTextColor={'#ffffff'}
+                style={styles.textInput}
+                secureTextEntry
+                onChangeText={handlePwdChange}
+              />
+
+              <View style={styles.btnContainer}>
+                <Button
+                  title="Login"
+                  onPress={handleValidateUser}
+                  color="blue"
+                />
+              </View>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.textLink} onPress={test}>
+                  Forgot Password?
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.textLink} onPress={redirectReg}>
+                  Signup
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      )}
+    </>
   );
 };
 
@@ -162,8 +207,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: '100%',
-    height: '40%',
-    marginTop: -30,
+    height: '50%',
+    marginTop: -50,
   },
   appName: {
     fontWeight: 'bold',

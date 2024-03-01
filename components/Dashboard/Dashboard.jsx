@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Filter from './Filter';
 import {
   View,
@@ -7,41 +7,54 @@ import {
   ScrollView,
   StyleSheet,
   Alert,
+  Image,
+  ActivityIndicator,
 } from 'react-native';
 import FlashMessage, {showMessage} from 'react-native-flash-message';
 import {LineChart, PieChart} from 'react-native-chart-kit';
 import {db, collection, getDocs} from '../../firebase/conf';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import mapCustomStyle from '../../data/mapCustomStyle.json';
 
 const Report = () => {
   const [sector, setSector] = useState([]);
   const [sectorCount, setSectorCount] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [initLoading, setInitLoading] = useState(true);
   const [incidents, setIncidents] = useState([]);
   const [sec, setSec] = useState({});
 
   const options = ['2020', '2021', '2022', '2023'];
   const [selectedYear, setSelectedYear] = useState('2023');
 
+  const [initialLocation, setInitialLocation] = useState({
+    latitude: 51.05011,
+    longitude: -114.08529,
+    latitudeDelta: 0.3,
+    longitudeDelta: 0.3,
+  });
+  const [loading, setLoading] = useState(true);
+  const mapRef = useRef(null);
+
   const handleOptionSelect = option => {
     setSelectedYear(option);
   };
 
-  const getSectorVal = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, 'sector_tbl'));
-      const newSecData = querySnapshot.docs.map(doc => doc.data().Sector);
-      const newSecCountData = querySnapshot.docs.map(doc => doc.data().Count);
-      const uniqueSectors = [...new Set(newSecData)]; // Filter out duplicate sector values and update the state
-      const uniqueSectorsCount = [...new Set(newSecCountData)];
-      setSector(uniqueSectors);
-      setSectorCount(uniqueSectorsCount);
-      setLoading(false);
-      // console.log(sector);
-      // console.log(sectorCount);
-    } catch (e) {
-      console.error('Error pulling data: ', e);
-    }
-  };
+  // const getSectorVal = async () => {
+  //   try {
+  //     const querySnapshot = await getDocs(collection(db, 'sector_tbl'));
+  //     const newSecData = querySnapshot.docs.map(doc => doc.data().Sector);
+  //     const newSecCountData = querySnapshot.docs.map(doc => doc.data().Count);
+  //     const uniqueSectors = [...new Set(newSecData)]; // Filter out duplicate sector values and update the state
+  //     const uniqueSectorsCount = [...new Set(newSecCountData)];
+  //     setSector(uniqueSectors);
+  //     setSectorCount(uniqueSectorsCount);
+  //     setInitLoading(false);
+  //     // console.log(sector);
+  //     // console.log(sectorCount);
+  //   } catch (e) {
+  //     console.error('Error pulling data: ', e);
+  //   }
+  // };
 
   const fetchData = async selectedYear => {
     try {
@@ -74,13 +87,19 @@ const Report = () => {
     }
   };
 
-  useEffect(() => {
-    getSectorVal();
-  }, []);
+  // useEffect(() => {
+  //   getSectorVal();
+  // }, []);
 
   useEffect(() => {
     fetchData(selectedYear);
   }, [selectedYear]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   const data = {
     labels: sector,
@@ -106,9 +125,9 @@ const Report = () => {
   }
   piedata.sort((a, b) => a.name.localeCompare(b.name));
 
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
+  // if (initLoading) {
+  //   return <Text>Loading...</Text>;
+  // }
 
   return (
     <View style={styles.container}>
@@ -129,9 +148,51 @@ const Report = () => {
         paddingLeft="15"
         absolute
       />
+      <View style={styles.container}>
+        {loading ? (
+          <ActivityIndicator
+            style={styles.loadingIndicator}
+            size="large"
+            color="#0000ff"
+          />
+        ) : (
+          <View style={styles.mapContainer}>
+            <MapView
+              ref={mapRef}
+              style={styles.map}
+              provider={PROVIDER_GOOGLE}
+              region={initialLocation}
+              customMapStyle={mapCustomStyle}>
+              {incidents.map(marker => {
+                if (marker.year === selectedYear) {
+                  try {
+                    const coordinates = {
+                      latitude: marker.community_center_point.coordinates[1],
+                      longitude: marker.community_center_point.coordinates[0],
+                    };
+                    return (
+                      <Marker
+                        key={marker.id}
+                        coordinate={coordinates}
+                        title={marker.category}
+                        description={marker.id}>
+                        <Image
+                          source={require('../../assets/zombie.png')}
+                          style={{width: 32, height: 32}}
+                        />
+                      </Marker>
+                    );
+                  } catch (error) {
+                    return null;
+                  }
+                }
+              })}
+            </MapView>
+          </View>
+        )}
+      </View>
 
-      {/* <Text>My Line Chart</Text> */}
-      <ScrollView horizontal>
+      {/* <ScrollView horizontal>
         <LineChart
           data={data}
           width={(Dimensions.get('window').width * sector.length) / 5} // Adjust the width as needed
@@ -161,13 +222,13 @@ const Report = () => {
           }
         />
       </ScrollView>
-      {/* FlashMessage component */}
+
       <View style={styles.flashMessageContainer}>
         <FlashMessage
           duration={5000}
           style={{backgroundColor: '#ffa726'}} // Change background color to orange
         />
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -178,20 +239,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: 2,
     backgroundColor: '#00001a',
   },
+  mapContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: Dimensions.get('window').height / 2,
+    flex: 1,
+    borderColor: '#ffffff',
+    borderWidth: 3,
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
   title: {
-    marginTop: 30,
+    marginTop: 5,
     fontSize: 34,
     fontWeight: 'bold',
     marginBottom: 16,
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 10,
     color: '#ffffff',
   },
   flashMessageContainer: {
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    top: 295,
+    top: 290,
     bottom: 0,
     left: 0,
     right: 0,

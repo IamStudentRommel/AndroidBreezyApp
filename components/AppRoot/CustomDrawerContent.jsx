@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    // backgroundColor: '#3333ff',
+    backgroundColor: '#000033',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: 'gray',

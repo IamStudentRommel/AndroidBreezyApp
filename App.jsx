@@ -43,11 +43,11 @@ function App() {
       }}>
       <Drawer.Navigator
         // initialRouteName="Live Crime Monitoring"
-        initialRouteName="Test"
+        initialRouteName="Login"
         screenOptions={{
-          headerTintColor: 'white',
+          headerTintColor: '#ffffff',
           headerStyle: {
-            backgroundColor: '#00001a',
+            backgroundColor: '#000033',
           },
         }}
         drawerContent={props => (
