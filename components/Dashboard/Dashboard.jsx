@@ -10,11 +10,12 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import FlashMessage, {showMessage} from 'react-native-flash-message';
+// import FlashMessage, {showMessage} from 'react-native-flash-message';
 import {LineChart, PieChart} from 'react-native-chart-kit';
-import {db, collection, getDocs} from '../../firebase/conf';
+// import {db, collection, getDocs} from '../../firebase/conf';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
+import ClusteredMapView from 'react-native-map-clustering';
 
 const Report = () => {
   const [sector, setSector] = useState([]);
@@ -33,10 +34,15 @@ const Report = () => {
     longitudeDelta: 0.3,
   });
   const [loading, setLoading] = useState(true);
+
   const mapRef = useRef(null);
+  const reCenter = () => {
+    mapRef.current?.animateToRegion(initialLocation, 1000);
+  };
 
   const handleOptionSelect = option => {
     setSelectedYear(option);
+    reCenter();
   };
 
   // const getSectorVal = async () => {
@@ -99,6 +105,7 @@ const Report = () => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
+    // refreshLocation();
   }, []);
 
   const data = {
@@ -157,7 +164,7 @@ const Report = () => {
           />
         ) : (
           <View style={styles.mapContainer}>
-            <MapView
+            <ClusteredMapView
               ref={mapRef}
               style={styles.map}
               provider={PROVIDER_GOOGLE}
@@ -178,7 +185,7 @@ const Report = () => {
                         description={marker.id}>
                         <Image
                           source={require('../../assets/zombie.png')}
-                          style={{width: 32, height: 32}}
+                          style={{width: 30, height: 30}}
                         />
                       </Marker>
                     );
@@ -187,7 +194,7 @@ const Report = () => {
                   }
                 }
               })}
-            </MapView>
+            </ClusteredMapView>
           </View>
         )}
       </View>

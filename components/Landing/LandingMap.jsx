@@ -107,6 +107,10 @@ const LandingMap = () => {
   useEffect(() => {
     fetchData();
     getLocation();
+    // const timer = setTimeout(() => {
+    //   getLocation();
+    // }, 2000);
+    // return () => clearTimeout(timer);
   }, []);
 
   const renderLoadingIndicator = () => (
@@ -128,7 +132,7 @@ const LandingMap = () => {
           <Marker coordinate={initialLocation} title="Your Initial Location">
             <Image
               source={require('../../assets/angel.png')}
-              style={{width: 32, height: 32}}
+              style={{width: 30, height: 30}}
             />
           </Marker>
           {testdata.map(marker => {
@@ -146,7 +150,7 @@ const LandingMap = () => {
                     description={marker.id}>
                     <Image
                       source={require('../../assets/zombie.png')}
-                      style={{width: 32, height: 32}}
+                      style={{width: 30, height: 30}}
                     />
                   </Marker>
                 );
