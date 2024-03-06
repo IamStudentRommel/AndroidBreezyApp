@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Login from './components/Login/Login';
+import Login from './components/LoginV2/Login';
 import Report from './components/Dashboard/Dashboard';
 import LandingMap from './components/Landing/LandingMap';
 import About from './components/About';
