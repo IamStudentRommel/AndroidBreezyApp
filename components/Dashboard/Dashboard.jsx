@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 // import FlashMessage, {showMessage} from 'react-native-flash-message';
-import {LineChart, PieChart} from 'react-native-chart-kit';
+import {PieChart} from 'react-native-chart-kit';
 // import {db, collection, getDocs} from '../../firebase/conf';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import mapCustomStyle from '../../data/mapCustomStyle.json';

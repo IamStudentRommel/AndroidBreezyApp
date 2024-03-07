@@ -13,8 +13,8 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
   };
 
   return (
-    <>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View>
         <View style={styles.inlineContainer}>
           <Text style={styles.userInfo}>
             Welcome, {capitalizeFirstLetter(firebaseFname)},{' '}
@@ -41,19 +41,21 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
         vel id mi. Nulla facilisi. Sed sed interdum velit. Duis tristique libero
         sed eros viverra, euismod auctor dui tincidunt.
       </Text>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    // backgroundColor: '#00001a',
+  },
   inlineContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 15,
     marginBottom: 30,
-    paddingHorizontal: 20, // Adjust spacing
-    // backgroundColor: 'red',
+    paddingHorizontal: 20,
   },
   userInfo: {
     fontSize: 19,

@@ -81,6 +81,7 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor={'#ffffff'}
         value={email}
         onChangeText={text => setEmail(text)}
         keyboardType="email-address"
@@ -88,6 +89,7 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor={'#ffffff'}
         value={password}
         onChangeText={text => setPassword(text)}
         secureTextEntry
@@ -95,12 +97,14 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
       <TextInput
         style={styles.input}
         placeholder="First Name"
+        placeholderTextColor={'#ffffff'}
         value={fname}
         onChangeText={text => setFname(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Last Name"
+        placeholderTextColor={'#ffffff'}
         value={lname}
         onChangeText={text => setLname(text)}
       />

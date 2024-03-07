@@ -72,11 +72,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.27,
     shadowRadius: 4.65,
     elevation: 6,
+    // backgroundColor: '#000033',
   },
   text: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'black',
+    color: '#ffffff',
   },
   imageContainer: {
     width: Dimensions.get('window').width,

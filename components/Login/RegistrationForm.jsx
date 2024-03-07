@@ -81,6 +81,7 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor="white"
         value={email}
         onChangeText={text => setEmail(text)}
         keyboardType="email-address"

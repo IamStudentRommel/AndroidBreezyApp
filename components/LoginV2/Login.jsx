@@ -15,9 +15,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {db, collection, getDocs, query, where} from '../../firebase/conf';
-import LoginSuccess from './LoginSuccess';
+import LoginSuccess from '../Home/LoginSuccess';
 import RegistrationForm from './RegistrationForm';
-import {FontAwesome5} from '@expo/vector-icons';
+import SignOptions from './SignOptions';
 
 const LoadingComponent = () => {
   return (
@@ -154,8 +154,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
                 source={require('../../assets/crimehate.png')}
                 style={styles.logo}
               />
-              {/* <Text style={styles.appName}>CrimeH8rs</Text> */}
-              {/* <Text style={styles.subAppName}>"All is Well"</Text> */}
+
               <TextInput
                 placeholder="Email"
                 placeholderTextColor={'#ffffff'}
@@ -169,14 +168,13 @@ const Login = ({updateUsername, updateLogDisplay}) => {
                 secureTextEntry
                 onChangeText={handlePwdChange}
               />
-
-              <View style={styles.btnContainer}>
-                <Button
-                  title="Login"
-                  onPress={handleValidateUser}
-                  color="blue"
-                />
-              </View>
+              <TouchableOpacity
+                style={styles.loginBtn}
+                onPress={handleValidateUser}>
+                <View style={styles.loginBtnContent}>
+                  <Text style={styles.loginBtnTitle}>LOGIN</Text>
+                </View>
+              </TouchableOpacity>
               <TouchableOpacity style={styles.button}>
                 <Text style={styles.textLink} onPress={test}>
                   Forgot Password?
@@ -187,32 +185,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
                   Signup
                 </Text>
               </TouchableOpacity>
-              <View style={styles.signInContainer}>
-                <View style={styles.line}></View>
-                <Text style={styles.signInText}>Or connect with</Text>
-                <View style={styles.line}></View>
-
-                <View style={styles.signInOptions}>
-                  <TouchableOpacity style={styles.signInButton}>
-                    <Image
-                      source={require('../../assets/crimehate.png')}
-                      style={styles.icon}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.signInButton}>
-                    <Image
-                      source={require('../../assets/crimehate.png')}
-                      style={styles.icon}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.signInButton}>
-                    <Image
-                      source={require('../../assets/crimehate.png')}
-                      style={styles.icon}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </View>
+              <SignOptions />
             </View>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -236,60 +209,36 @@ const styles = StyleSheet.create({
     height: '50%',
     marginTop: -50,
   },
-  appName: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 40,
-    color: '#ffffff',
-  },
-  subAppName: {
-    fontSize: 10,
-    fontSize: 15,
-    textAlign: 'center',
-    fontStyle: 'italic',
-  },
+
   textInput: {
     height: 40,
     borderColor: '#ffffff',
     borderBottomWidth: 1,
     color: '#ffffff',
   },
-  // btnContainer: {
-  //   backgroundColor: '#3333ff',
-  // },
+  loginBtnTitle: {
+    color: '#ffffff',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginHorizontal: 20,
+  },
+  loginBtn: {
+    backgroundColor: 'blue',
+    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    width: '100%',
+    alignSelf: 'center',
+  },
+  loginBtnContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   textLink: {
     color: '#3333ff',
     fontSize: 15,
     textAlign: 'center',
-  },
-  logoutButton: {
-    marginTop: 20,
-    backgroundColor: '#FF5733',
-    padding: 10,
-    borderRadius: 5,
-  },
-  centered: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  signInContainer: {
-    padding: 5,
-  },
-  signInText: {
-    color: '#ffffff',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  signInOptions: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  signInButton: {
-    marginVertical: 10,
-  },
-  icon: {
-    width: 50,
-    height: 50,
   },
 });
 
