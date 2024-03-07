@@ -109,6 +109,7 @@ dependencies {
     // classpath 'com.android.tools.build:gradle:8.2.2'
     implementation("com.facebook.react:react-android")
     implementation("com.facebook.react:flipper-integration")
+    // implementation ("com.facebook.react:react-native-nested-scroll-view")
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

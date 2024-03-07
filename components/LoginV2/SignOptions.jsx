@@ -1,5 +1,6 @@
 import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import React, {useState, useEffect} from 'react';
+import 'expo-dev-client';
 // import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const SignOptions = () => {

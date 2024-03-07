@@ -18,9 +18,7 @@ const About = () => {
     alert('Thank you for your feedback!');
   };
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Amazing Crime App</Text>
         <View style={styles.section}>

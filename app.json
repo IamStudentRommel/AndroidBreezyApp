@@ -9,10 +9,16 @@
         "CAMERA",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
-      ]
+      ],
+      "package": "com.ommel0622.breezyapp"
     },
     "ios": {
       "permissions": ["CAMERA", "PHOTO_LIBRARY_ADD_ONLY"]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5eb2ceae-eaa5-45b7-b2fe-2910480c6518"
+      }
     }
   },
   "myMapKey": "AIzaSyBT5TojBqi632zBlXjXrcxhS1xoMXXjZRU"
