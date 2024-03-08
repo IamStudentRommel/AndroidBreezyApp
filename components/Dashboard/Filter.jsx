@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const Filter = ({options, onSelect}) => {
-  const [selectedOption, setSelectedOption] = useState(options[2]);
+  const [selectedOption, setSelectedOption] = useState(options[3]);
 
   const handleOptionSelect = option => {
     setSelectedOption(option);

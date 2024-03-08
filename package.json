@@ -23,6 +23,7 @@
     "@react-navigation/stack": "^6.3.21",
     "expo": "~50.0.11",
     "expo-camera": "~14.0.6",
+    "expo-dev-client": "~3.3.9",
     "expo-font": "^11.10.2",
     "expo-font-loader": "^1.1.0",
     "expo-location": "~16.5.5",
@@ -47,8 +48,7 @@
     "react-native-svg": "^14.1.0",
     "react-native-vector-icons": "^10.0.3",
     "react-navigation": "^5.0.0",
-    "rn-bottom-drawer": "^1.4.3",
-    "expo-dev-client": "~3.3.9"
+    "rn-bottom-drawer": "^1.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

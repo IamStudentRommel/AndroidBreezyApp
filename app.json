@@ -2,7 +2,27 @@
   "name": "main",
   "displayName": "BreezyApp",
   "expo": {
+    "name": "BreezyApp",
+    "slug": "breezyapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "permissions": ["CAMERA", "PHOTO_LIBRARY_ADD_ONLY"]
+    },
     "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION",
@@ -12,14 +32,14 @@
       ],
       "package": "com.ommel0622.breezyapp"
     },
-    "ios": {
-      "permissions": ["CAMERA", "PHOTO_LIBRARY_ADD_ONLY"]
+    "web": {
+      "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
         "projectId": "5eb2ceae-eaa5-45b7-b2fe-2910480c6518"
       }
-    }
-  },
-  "myMapKey": "AIzaSyBT5TojBqi632zBlXjXrcxhS1xoMXXjZRU"
+    },
+    "myMapKey": "AIzaSyBT5TojBqi632zBlXjXrcxhS1xoMXXjZRU"
+  }
 }
