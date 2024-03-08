@@ -19,6 +19,11 @@
        android:insetTop="@dimen/abc_edit_text_inset_top_material"
        android:insetBottom="@dimen/abc_edit_text_inset_bottom_material">
 
+     <shape android:shape="rectangle">
+        <!-- Set the background color to the color defined in colors.xml -->
+        <solid android:color="@color/splashscreen_background"/>
+    </shape>
+
     <selector>
         <!--
           This file is a copy of abc_edit_text_material (https://bit.ly/3k8fX7I).
