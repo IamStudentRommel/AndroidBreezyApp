@@ -4,6 +4,7 @@
   "expo": {
     "name": "BreezyApp",
     "slug": "breezyapp",
+    "plugins": ["@react-native-google-signin/google-signin"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -30,6 +31,7 @@
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ],
+      "googleServicesFile": "./google-services.json",
       "package": "com.ommel0622.breezyapp"
     },
     "web": {

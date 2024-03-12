@@ -104,7 +104,9 @@ function App() {
         />
         <Drawer.Screen
           name="About"
-          component={About}
+          component={React.memo(() => (
+            <About username={username} />
+          ))}
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
@@ -114,6 +116,7 @@ function App() {
             ),
           }}
         />
+
         <Drawer.Screen name="Test" component={Test} />
       </Drawer.Navigator>
     </NavigationContainer>

@@ -1,14 +1,13 @@
 import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import 'expo-dev-client';
+import auth from '@react-native-firebase/auth';
 // import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const SignOptions = () => {
-  // useEffect(() => {
-  //   GoogleSignin.configure({
-  //     webClientId:
-  //       '651067344773-stidiurnlcpfndbki5mqhol4oflrmfbo.apps.googleusercontent.com',
-  //   });
+  // GoogleSignin.configure({
+  //   webClientId:
+  //     '651067344773-stidiurnlcpfndbki5mqhol4oflrmfbo.apps.googleusercontent.com',
   // });
 
   async function onGoogleButtonPress() {
@@ -26,27 +25,6 @@ const SignOptions = () => {
 
   const test = async () => {
     console.log('hey');
-    // try {
-    //   await GoogleSignin.hasPlayServices();
-    //   const userInfo = await GoogleSignin.signIn();
-    //   const googleCredential = auth.GoogleAuthProvider.credential(
-    //     userInfo.idToken,
-    //   );
-    //   await auth().signInWithCredential(googleCredential);
-    // } catch (error) {
-    //   if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-    //     console.log('User cancelled the sign-in process');
-    //   } else if (error.code === statusCodes.IN_PROGRESS) {
-    //     console.log('Sign-in is already in progress');
-    //   } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-    //     console.log('Play services not available or outdated');
-    //   } else {
-    //     console.error(
-    //       'Error occurred while trying to sign in with Google',
-    //       error,
-    //     );
-    //   }
-    // }
   };
   return (
     <View style={styles.signInContainer}>
@@ -57,7 +35,14 @@ const SignOptions = () => {
       </View>
 
       <View style={styles.signInOptions}>
-        <TouchableOpacity style={styles.button} onPress={test}>
+        <TouchableOpacity
+          style={styles.button}
+          // onPress={() =>
+          //   onGoogleButtonPress().then(() =>
+          //     console.log('Signed in with Google!'),
+          //   )
+          // }
+          onPress={test}>
           <View style={styles.buttonContent}>
             <Image
               source={require('../../assets/google.png')}

@@ -135,3 +135,40 @@ const styles = StyleSheet.create({
     right: 15,
   },
 });
+
+// import React from 'react';
+// import {Button, Platform} from 'react-native';
+// import * as AuthSession from 'expo-auth-session';
+// import {makeRedirectUri} from 'expo-auth-session';
+// import * as Google from 'expo-auth-session/providers/google';
+
+// // Endpoint
+// const discovery = {
+//   authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
+//   tokenEndpoint: 'https://accounts.google.com/o/oauth2/token',
+//   revocationEndpoint: 'https://accounts.google.com/o/oauth2/revoke',
+// };
+
+// export default function App() {
+//   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+//     clientId:
+//       '651067344773-stidiurnlcpfndbki5mqhol4oflrmfbo.apps.googleusercontent.com',
+//   });
+
+//   React.useEffect(() => {
+//     if (response?.type === 'success') {
+//       const {authentication} = response;
+//       console.log(authentication);
+//     }
+//   }, [response]);
+
+//   return (
+//     <Button
+//       disabled={!request}
+//       title="Login with Google"
+//       onPress={() => {
+//         promptAsync();
+//       }}
+//     />
+//   );
+// }

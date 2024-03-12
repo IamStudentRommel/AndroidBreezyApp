@@ -14,6 +14,7 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
+// import 'expo-dev-client';
 import {db, collection, getDocs, query, where} from '../../firebase/conf';
 import LoginSuccess from '../Home/LoginSuccess';
 import RegistrationForm from './RegistrationForm';

@@ -7,15 +7,57 @@ import {
   Button,
   KeyboardAvoidingView,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 
-const About = () => {
+const About = ({username}) => {
   const [feedback, setFeedback] = useState('');
+  const [sending, setSending] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
 
-  const handleFeedbackSubmit = () => {
-    console.log('Feedback submitted:', feedback);
-    setFeedback('');
-    alert('Thank you for your feedback!');
+  const capitalizeFirstLetter = str => {
+    return str
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  };
+
+  // console.log(capitalizeFirstLetter(username));
+  const handleFeedbackSubmit = async () => {
+    const subject = encodeURIComponent(
+      'Amazing Crime App User Feedback - ' + capitalizeFirstLetter(username),
+    );
+    const text = encodeURIComponent(feedback);
+
+    try {
+      if (username === 'Guest') {
+        alert('Please login first to make some feedback to the developers');
+        return;
+      }
+      if (text.length < 10) {
+        alert('Please input a valid feedback (at least 10 characters)');
+        return;
+      }
+      setShowAnimation(true);
+      setSending(true);
+      const response = await fetch(
+        `https://breezy-app-be.vercel.app/util/send-email?subject=${subject}&text=${text}`,
+      );
+
+      if (response.ok) {
+        alert('Your feedback was successfully sent!');
+      } else {
+        alert('Failed to send feedback');
+      }
+      setFeedback('');
+      setSending(false);
+      setShowAnimation(false);
+    } catch (error) {
+      alert('Error sending feedback:', error);
+    } finally {
+      setSending(false);
+      setShowAnimation(false);
+    }
   };
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -50,11 +92,16 @@ const About = () => {
             value={feedback}
             onChangeText={text => setFeedback(text)}
           />
-          <Button
-            title="Submit Feedback"
-            onPress={handleFeedbackSubmit}
-            color="blue"
-          />
+          {showAnimation ? (
+            <ActivityIndicator size="large" color="blue" />
+          ) : (
+            <Button
+              title="Submit Feedback"
+              onPress={handleFeedbackSubmit}
+              color="blue"
+              disabled={sending || showAnimation}
+            />
+          )}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
