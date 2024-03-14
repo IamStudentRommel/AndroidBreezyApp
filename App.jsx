@@ -117,7 +117,7 @@ function App() {
           }}
         />
 
-        <Drawer.Screen name="Test" component={Test} />
+        {/* <Drawer.Screen name="Test" component={Test} /> */}
       </Drawer.Navigator>
     </NavigationContainer>
   );

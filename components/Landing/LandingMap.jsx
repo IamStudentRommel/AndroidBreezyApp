@@ -87,17 +87,19 @@ const LandingMap = () => {
     return `${street}, ${city}, ${region}, ${country}`;
   };
 
-  const fetchData = async () => {
+  const fetchRecentIncidents = async () => {
     try {
       const response = await fetch(
-        'https://data.calgary.ca/resource/78gh-n26t.json',
+        'https://breezy-app-be.vercel.app/api/recentcrimes',
       );
       const data = await response.json();
       setIncidents(data);
+      // console.log(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+
   const mapRef = useRef(null);
   const reCenter = () => {
     getLocation();
@@ -105,13 +107,9 @@ const LandingMap = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchRecentIncidents();
     getLocation();
-    // const timer = setTimeout(() => {
-    //   getLocation();
-    // }, 2000);
-    // return () => clearTimeout(timer);
-  }, []);
+  }, [incidents]);
 
   const renderLoadingIndicator = () => (
     <View style={[StyleSheet.absoluteFill, styles.loadingIndicator]}>
@@ -135,29 +133,30 @@ const LandingMap = () => {
               style={{width: 30, height: 30}}
             />
           </Marker>
-          {testdata.map(marker => {
-            if (marker.year === '2023') {
-              try {
-                const coordinates = {
-                  latitude: marker.community_center_point.coordinates[1],
-                  longitude: marker.community_center_point.coordinates[0],
-                };
-                return (
-                  <Marker
-                    key={marker.id}
-                    coordinate={coordinates}
-                    title={marker.category}
-                    description={marker.id}>
-                    <Image
-                      source={require('../../assets/zombie.png')}
-                      style={{width: 30, height: 30}}
-                    />
-                  </Marker>
-                );
-              } catch (error) {
-                return null;
-              }
+
+          {incidents.map(marker => {
+            // if (marker.year === '2023') {
+            try {
+              const coordinates = {
+                latitude: marker.community_center_point.coordinates[1],
+                longitude: marker.community_center_point.coordinates[0],
+              };
+              return (
+                <Marker
+                  key={marker.id}
+                  coordinate={coordinates}
+                  title={marker.category}
+                  description={marker.id}>
+                  <Image
+                    source={require('../../assets/zombie.png')}
+                    style={{width: 30, height: 30}}
+                  />
+                </Marker>
+              );
+            } catch (error) {
+              return null;
             }
+            // }
           })}
         </MapView>
 

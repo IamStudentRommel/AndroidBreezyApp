@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import BottomDrawer from 'react-native-animated-bottom-drawer';
@@ -6,10 +6,29 @@ import BottomDrawer from 'react-native-animated-bottom-drawer';
 const CrimeReportDrawer = ({bottomDrawerRef, setIsDrawerOpen, address}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'Accident', value: 'accident'},
-    {label: 'Murder', value: 'murder'},
-  ]);
+  const [items, setItems] = useState([]);
+
+  const fetchCrimeCategory = async () => {
+    try {
+      const response = await fetch(
+        'https://breezy-app-be.vercel.app/api/crimecategories',
+      );
+      const data = await response.json();
+      const newDataArray = Object.entries(data).map(([label, value]) => ({
+        label,
+        value,
+      }));
+      newDataArray.sort((a, b) => a.label.localeCompare(b.label));
+      setItems(newDataArray);
+      // console.log(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCrimeCategory();
+  }, []);
 
   return (
     <BottomDrawer
@@ -43,7 +62,7 @@ const CrimeReportDrawer = ({bottomDrawerRef, setIsDrawerOpen, address}) => {
           multiline={true}
           numberOfLines={2}
         />
-        <Button title="Submit" />
+        <Button title="Submit" color="blue" />
       </View>
     </BottomDrawer>
   );

@@ -41,7 +41,7 @@ const About = ({username}) => {
       setShowAnimation(true);
       setSending(true);
       const response = await fetch(
-        `https://breezy-app-be.vercel.app/util/send-email?subject=${subject}&text=${text}`,
+        `https://breezy-app-be.vercel.app/api/send-email?subject=${subject}&text=${text}`,
       );
 
       if (response.ok) {
@@ -77,7 +77,7 @@ const About = ({username}) => {
           <Text style={styles.textContent}>Aivee Mae Madrelejos</Text>
           <Text style={styles.textContent}>Ko Kawaguchi</Text>
           <Text style={styles.textContent}>Romeo Costillas</Text>
-          <Text style={styles.textContent}>SyntaxMel Sakalam</Text>
+          <Text style={styles.textContent}>SyntaxMel</Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>App Version</Text>
