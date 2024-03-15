@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import Login from './components/LoginV2/Login';
 import Report from './components/Dashboard/Dashboard';
 import LandingMap from './components/Landing/LandingMap';
 import About from './components/About';
-import Test from './components/Test';
+// import Test from './components/Test';
 import CustomDrawerContent from './components/AppRoot/CustomDrawerContent';
 
-import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {Image} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
@@ -15,6 +15,7 @@ const Drawer = createDrawerNavigator();
 function App() {
   const [username, setUsername] = useState('Guest');
   const [logDisplay, setLogDisplay] = useState('Login');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const updateLogDisplay = newLogDisplay => {
     setLogDisplay(newLogDisplay);
@@ -22,6 +23,10 @@ function App() {
 
   const updateUsername = newUsername => {
     setUsername(newUsername);
+  };
+
+  const updateLogFlag = newLogFlag => {
+    setIsLoggedIn(newLogFlag);
   };
 
   const testTheme = {
@@ -55,6 +60,8 @@ function App() {
             {...props}
             username={username}
             updateUsername={updateUsername}
+            updateLogDisplay={updateLogDisplay}
+            updateLogFlag={updateLogFlag}
           />
         )}>
         <Drawer.Screen
@@ -75,6 +82,8 @@ function App() {
               {...props}
               updateUsername={updateUsername}
               updateLogDisplay={updateLogDisplay}
+              updateLogFlag={updateLogFlag}
+              isLoggedIn={isLoggedIn}
             />
           )}
         </Drawer.Screen>

@@ -3,10 +3,16 @@ import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import BottomDrawer from 'react-native-animated-bottom-drawer';
 
-const CrimeReportDrawer = ({bottomDrawerRef, setIsDrawerOpen, address}) => {
+const CrimeReportDrawer = ({
+  bottomDrawerRef,
+  setIsDrawerOpen,
+  address,
+  handleCloseDrawer,
+}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([]);
+  const [description, setDescription] = useState('');
 
   const fetchCrimeCategory = async () => {
     try {
@@ -30,6 +36,18 @@ const CrimeReportDrawer = ({bottomDrawerRef, setIsDrawerOpen, address}) => {
     fetchCrimeCategory();
   }, []);
 
+  const handleCancelPress = () => {
+    handleCloseDrawer();
+    clearFields();
+  };
+
+  const clearFields = () => {
+    setOpen(false);
+    setValue(null);
+    setItems([]);
+    setDescription('');
+  };
+
   return (
     <BottomDrawer
       ref={bottomDrawerRef}
@@ -37,8 +55,8 @@ const CrimeReportDrawer = ({bottomDrawerRef, setIsDrawerOpen, address}) => {
       startUp={false}
       onChangeVisibility={visible => setIsDrawerOpen(visible)}>
       <View style={styles.contentContainer}>
-        <Text style={{marginBottom: 30, fontSize: 20, fontWeight: 'bold'}}>
-          - Report Crime -
+        <Text style={{marginBottom: 20, fontSize: 22, fontWeight: 'bold'}}>
+          Report Crime
         </Text>
         <TextInput
           style={[styles.drawerInput, {backgroundColor: '#f2f2f2'}]}
@@ -54,7 +72,7 @@ const CrimeReportDrawer = ({bottomDrawerRef, setIsDrawerOpen, address}) => {
           setOpen={setOpen}
           setValue={setValue}
           setItems={setItems}
-          placeholder="Crime Category" // Set your desired initial value here
+          placeholder="Crime Category"
         />
         <TextInput
           style={[styles.drawerInput, {height: 100}]}
@@ -62,7 +80,12 @@ const CrimeReportDrawer = ({bottomDrawerRef, setIsDrawerOpen, address}) => {
           multiline={true}
           numberOfLines={2}
         />
-        <Button title="Submit" color="blue" />
+        <View style={styles.drawerBtn}>
+          <Button title="Submit" color="blue" />
+        </View>
+        <View style={styles.drawerBtn}>
+          <Button title="Cancel" onPress={handleCancelPress} color="#e60000" />
+        </View>
       </View>
     </BottomDrawer>
   );
@@ -75,11 +98,17 @@ const styles = StyleSheet.create({
   },
   drawerInput: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#333333',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
     width: '100%',
+  },
+  drawerBtn: {
+    width: '80%',
+    borderRadius: 100,
+    overflow: 'hidden',
+    marginBottom: 10,
   },
 });
 

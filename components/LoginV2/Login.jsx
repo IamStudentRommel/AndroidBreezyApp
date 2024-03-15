@@ -44,14 +44,19 @@ const LoadingComponent = () => {
   );
 };
 
-const Login = ({updateUsername, updateLogDisplay}) => {
+const Login = ({
+  updateUsername,
+  updateLogDisplay,
+  updateLogFlag,
+  isLoggedIn,
+}) => {
   // console.log(typeof updateUsername); // Should output "function"
   const [isLoading, setIsLoading] = useState(true);
 
   const [inputEmail, setInputEmail] = useState('');
   const [inputPwd, setInputPwd] = useState('');
   const [user, setUser] = useState('Guest');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [firebaseFname, setFirebaseFname] = useState('');
   const [firebaseLname, setFirebaseLname] = useState('');
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
@@ -69,7 +74,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
           updateLogDisplay('Home');
           setFirebaseFname(userData.fname);
           setFirebaseLname(userData.lname);
-          setIsLoggedIn(true);
+          updateLogFlag(true);
           Alert.alert(`Welcome, ${userData.fname} ${userData.lname}`);
         } else {
           updateUsername(user);
@@ -108,7 +113,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    updateLogFlag(false);
     updateUsername(user);
     updateLogDisplay('Login');
     Alert.alert('You have successfully logout.');
@@ -123,6 +128,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
     setShowRegistrationForm(true);
   };
 
+  // console.log(isLoggedIn);
   if (isLoggedIn) {
     return (
       <LoginSuccess
@@ -132,6 +138,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
       />
     );
   }
+
   if (showRegistrationForm) {
     return (
       <RegistrationForm

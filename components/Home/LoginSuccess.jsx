@@ -20,9 +20,9 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
             Welcome, {capitalizeFirstLetter(firebaseFname)},{' '}
             {capitalizeFirstLetter(firebaseLname)}
           </Text>
-          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          {/* <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
             <Text style={styles.logoutText}>Logout</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <Banner text="Recent Crime Footages" images={images} />

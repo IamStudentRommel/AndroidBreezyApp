@@ -1,10 +1,18 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
+import {useNavigation} from '@react-navigation/native';
 
-const CustomDrawerContent = ({username, updateUsername, ...props}) => {
+const CustomDrawerContent = ({
+  username,
+  updateUsername,
+  updateLogDisplay,
+  updateLogFlag,
+  ...props
+}) => {
   const initials = username
     .split(' ')
     .map(name => name.charAt(0).toUpperCase())
@@ -17,19 +25,37 @@ const CustomDrawerContent = ({username, updateUsername, ...props}) => {
       .join(' ');
   };
 
+  const navigation = useNavigation();
+  const handleLogout = () => {
+    updateLogFlag(false);
+    updateUsername('Guest');
+    updateLogDisplay('Login');
+    Alert.alert('You have successfully logout.');
+    navigation.navigate('Login');
+  };
   return (
-    <DrawerContentScrollView {...props}>
-      <View style={styles.headerContainer}>
-        <View style={styles.avatarContainer}>
-          <Text style={styles.avatarText}>{initials}</Text>
+    <View style={styles.container}>
+      <DrawerContentScrollView {...props}>
+        <View style={styles.headerContainer}>
+          <View style={styles.avatarContainer}>
+            <Text style={styles.avatarText}>{initials}</Text>
+          </View>
+          <Text style={{fontSize: 18, marginBottom: 8, color: '#ffffff'}}>
+            {capitalizeFirstLetter(username)}
+          </Text>
         </View>
-        <Text style={{fontSize: 18, marginBottom: 8, color: '#ffffff'}}>
-          {capitalizeFirstLetter(username)}
-        </Text>
-      </View>
 
-      <DrawerItemList {...props} />
-    </DrawerContentScrollView>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+
+      {/* Logout Button */}
+
+      {username !== 'Guest' && (
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <Text style={styles.logoutText}>Logout</Text>
+        </TouchableOpacity>
+      )}
+    </View>
   );
 };
 
@@ -58,6 +84,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#000000',
+  },
+  logoutButton: {
+    backgroundColor: '#ff0000',
+    paddingVertical: 8,
+    margin: 20,
+    alignItems: 'center',
+  },
+  logoutText: {
+    fontSize: 18,
+    color: '#ffffff',
+    fontWeight: 'bold',
   },
 });
 

@@ -24,6 +24,11 @@ const LandingMap = () => {
     bottomDrawerRef.current?.open();
   };
 
+  const handleCloseDrawer = () => {
+    setIsDrawerOpen(false);
+    bottomDrawerRef.current?.close();
+  };
+
   const clearSearchText = () => {
     setClearSearch(prevState => !prevState);
   };
@@ -187,6 +192,7 @@ const LandingMap = () => {
         bottomDrawerRef={bottomDrawerRef}
         setIsDrawerOpen={setIsDrawerOpen}
         address={address}
+        handleCloseDrawer={handleCloseDrawer}
       />
     </View>
   );

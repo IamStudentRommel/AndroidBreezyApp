@@ -14,10 +14,11 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
+// import 'expo-dev-client';
 import {db, collection, getDocs, query, where} from '../../firebase/conf';
-import LoginSuccess from './LoginSuccess';
+import LoginSuccess from '../Home/LoginSuccess';
 import RegistrationForm from './RegistrationForm';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import SignOptions from './SignOptions';
 
 const LoadingComponent = () => {
   return (
@@ -43,14 +44,14 @@ const LoadingComponent = () => {
   );
 };
 
-const Login = ({updateUsername, updateLogDisplay}) => {
+const Login = ({updateUsername, updateLogDisplay, updateLogFlag}) => {
   // console.log(typeof updateUsername); // Should output "function"
   const [isLoading, setIsLoading] = useState(true);
 
   const [inputEmail, setInputEmail] = useState('');
   const [inputPwd, setInputPwd] = useState('');
   const [user, setUser] = useState('Guest');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [firebaseFname, setFirebaseFname] = useState('');
   const [firebaseLname, setFirebaseLname] = useState('');
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
@@ -68,7 +69,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
           updateLogDisplay('Home');
           setFirebaseFname(userData.fname);
           setFirebaseLname(userData.lname);
-          setIsLoggedIn(true);
+          updateLogFlag(true);
           Alert.alert(`Welcome, ${userData.fname} ${userData.lname}`);
         } else {
           updateUsername(user);
@@ -107,7 +108,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    updateLogFlag(false);
     updateUsername(user);
     updateLogDisplay('Login');
     Alert.alert('You have successfully logout.');
@@ -122,6 +123,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
     setShowRegistrationForm(true);
   };
 
+  // console.log(isLoggedIn);
   if (isLoggedIn) {
     return (
       <LoginSuccess
@@ -131,6 +133,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
       />
     );
   }
+
   if (showRegistrationForm) {
     return (
       <RegistrationForm
@@ -154,8 +157,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
                 source={require('../../assets/crimehate.png')}
                 style={styles.logo}
               />
-              {/* <Text style={styles.appName}>CrimeH8rs</Text> */}
-              {/* <Text style={styles.subAppName}>"All is Well"</Text> */}
+
               <TextInput
                 placeholder="Email"
                 placeholderTextColor={'#ffffff'}
@@ -169,14 +171,13 @@ const Login = ({updateUsername, updateLogDisplay}) => {
                 secureTextEntry
                 onChangeText={handlePwdChange}
               />
-
-              <View style={styles.btnContainer}>
-                <Button
-                  title="Login"
-                  onPress={handleValidateUser}
-                  color="blue"
-                />
-              </View>
+              <TouchableOpacity
+                style={styles.loginBtn}
+                onPress={handleValidateUser}>
+                <View style={styles.loginBtnContent}>
+                  <Text style={styles.loginBtnTitle}>LOGIN</Text>
+                </View>
+              </TouchableOpacity>
               <TouchableOpacity style={styles.button}>
                 <Text style={styles.textLink} onPress={test}>
                   Forgot Password?
@@ -187,6 +188,7 @@ const Login = ({updateUsername, updateLogDisplay}) => {
                   Signup
                 </Text>
               </TouchableOpacity>
+              <SignOptions />
             </View>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -210,41 +212,36 @@ const styles = StyleSheet.create({
     height: '50%',
     marginTop: -50,
   },
-  appName: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 40,
-    color: '#ffffff',
-  },
-  subAppName: {
-    fontSize: 10,
-    fontSize: 15,
-    textAlign: 'center',
-    fontStyle: 'italic',
-  },
+
   textInput: {
     height: 40,
     borderColor: '#ffffff',
     borderBottomWidth: 1,
     color: '#ffffff',
   },
-  // btnContainer: {
-  //   backgroundColor: '#3333ff',
-  // },
+  loginBtnTitle: {
+    color: '#ffffff',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginHorizontal: 20,
+  },
+  loginBtn: {
+    backgroundColor: 'blue',
+    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    width: '100%',
+    alignSelf: 'center',
+  },
+  loginBtnContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   textLink: {
     color: '#3333ff',
     fontSize: 15,
     textAlign: 'center',
-  },
-  logoutButton: {
-    marginTop: 20,
-    backgroundColor: '#FF5733',
-    padding: 10,
-    borderRadius: 5,
-  },
-  centered: {
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
