@@ -16,6 +16,7 @@ import {PieChart} from 'react-native-chart-kit';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import ClusteredMapView from 'react-native-map-clustering';
+import Test from '../../data/test.json';
 
 const Report = () => {
   const [sector, setSector] = useState([]);
@@ -67,7 +68,8 @@ const Report = () => {
       const response = await fetch(
         'https://data.calgary.ca/resource/78gh-n26t.json',
       );
-      const jdata = await response.json();
+      // const jdata = await response.json();
+      const jdata = Test;
       console.log(selectedYear);
       const data = jdata.filter(entry => entry.year === selectedYear);
       setIncidents(data);
@@ -253,7 +255,7 @@ const styles = StyleSheet.create({
     right: 0,
     height: Dimensions.get('window').height / 2,
     flex: 1,
-    borderColor: '#ffffff',
+    // borderColor: '#ffffff',
     borderWidth: 3,
     borderRadius: 20,
     overflow: 'hidden',

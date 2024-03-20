@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-const About = ({username}) => {
+const About = ({username, email}) => {
   const [feedback, setFeedback] = useState('');
   const [sending, setSending] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
@@ -22,8 +22,8 @@ const About = ({username}) => {
       .join(' ');
   };
 
-  // console.log(capitalizeFirstLetter(username));
   const handleFeedbackSubmit = async () => {
+    // console.log(email);
     const subject = encodeURIComponent(
       'Amazing Crime App User Feedback - ' + capitalizeFirstLetter(username),
     );
@@ -41,11 +41,14 @@ const About = ({username}) => {
       setShowAnimation(true);
       setSending(true);
       const response = await fetch(
-        `https://breezy-app-be.vercel.app/api/send-email?subject=${subject}&text=${text}`,
+        `https://breezy-app-be.vercel.app/api/send-email?from=${email}&subject=${subject}&text=${text}`,
       );
+      // console.log(response);
 
       if (response.ok) {
-        alert('Your feedback was successfully sent!');
+        alert(
+          'Thank you for reaching us, your feedback was successfully sent!',
+        );
       } else {
         alert('Failed to send feedback');
       }

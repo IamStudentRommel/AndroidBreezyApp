@@ -16,6 +16,11 @@ function App() {
   const [username, setUsername] = useState('Guest');
   const [logDisplay, setLogDisplay] = useState('Login');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [email, setEmail] = useState('test@gmail.com');
+
+  const updateLogEmail = newLogEmail => {
+    setEmail(newLogEmail);
+  };
 
   const updateLogDisplay = newLogDisplay => {
     setLogDisplay(newLogDisplay);
@@ -80,6 +85,7 @@ function App() {
           {props => (
             <Login
               {...props}
+              updateLogEmail={updateLogEmail}
               updateUsername={updateUsername}
               updateLogDisplay={updateLogDisplay}
               updateLogFlag={updateLogFlag}
@@ -114,7 +120,7 @@ function App() {
         <Drawer.Screen
           name="About"
           component={React.memo(() => (
-            <About username={username} />
+            <About username={username} email={email} />
           ))}
           options={{
             drawerIcon: ({tintColor}) => (

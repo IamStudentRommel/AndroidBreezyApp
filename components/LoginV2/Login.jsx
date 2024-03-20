@@ -45,6 +45,7 @@ const LoadingComponent = () => {
 };
 
 const Login = ({
+  updateLogEmail,
   updateUsername,
   updateLogDisplay,
   updateLogFlag,
@@ -70,12 +71,15 @@ const Login = ({
         const userDoc = querySnapshot.docs[0];
         const userData = userDoc.data();
         if (userData.pwd === pwd) {
+          // console.log(userData.email);
+          updateLogEmail(userData.email);
           updateUsername(`${userData.fname} ${userData.lname}`);
           updateLogDisplay('Home');
           setFirebaseFname(userData.fname);
           setFirebaseLname(userData.lname);
           updateLogFlag(true);
           Alert.alert(`Welcome, ${userData.fname} ${userData.lname}`);
+          setInputEmail('');
         } else {
           updateUsername(user);
           updateLogDisplay('Login');

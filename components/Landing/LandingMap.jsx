@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import * as Location from 'expo-location';
-import testdata from '../../data/test.json';
+import Test from '../../data/test.json';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import CustomDrawerButtom from './CrimeReportDrawer';
 import SearchMap from './SearchMap';
@@ -97,7 +97,8 @@ const LandingMap = () => {
       const response = await fetch(
         'https://breezy-app-be.vercel.app/api/recentcrimes',
       );
-      const data = await response.json();
+      // const data = await response.json();
+      const data = Test;
       setIncidents(data);
       // console.log(data);
     } catch (error) {
@@ -140,28 +141,28 @@ const LandingMap = () => {
           </Marker>
 
           {incidents.map(marker => {
-            // if (marker.year === '2023') {
-            try {
-              const coordinates = {
-                latitude: marker.community_center_point.coordinates[1],
-                longitude: marker.community_center_point.coordinates[0],
-              };
-              return (
-                <Marker
-                  key={marker.id}
-                  coordinate={coordinates}
-                  title={marker.category}
-                  description={marker.id}>
-                  <Image
-                    source={require('../../assets/zombie.png')}
-                    style={{width: 30, height: 30}}
-                  />
-                </Marker>
-              );
-            } catch (error) {
-              return null;
+            if (marker.year === '2024') {
+              try {
+                const coordinates = {
+                  latitude: marker.community_center_point.coordinates[1],
+                  longitude: marker.community_center_point.coordinates[0],
+                };
+                return (
+                  <Marker
+                    key={marker.id}
+                    coordinate={coordinates}
+                    title={marker.category}
+                    description={marker.id}>
+                    <Image
+                      source={require('../../assets/zombie.png')}
+                      style={{width: 30, height: 30}}
+                    />
+                  </Marker>
+                );
+              } catch (error) {
+                return null;
+              }
             }
-            // }
           })}
         </MapView>
 

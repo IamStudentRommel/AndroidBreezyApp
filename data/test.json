@@ -195,10 +195,10 @@
     "category": "Break & Enter - Dwelling",
     "crime_count": "1",
     "resident_count": "1560",
-    "date": "2023-04-01T00:00:00.000",
-    "year": "2023",
-    "month": "APR",
-    "id": "2023-APR-ROSEDALE-Break & Enter - Dwelling",
+    "date": "2024-03-01T00:00:00.000",
+    "year": "2024",
+    "month": "MAR",
+    "id": "2024-MAR-ROSEDALE-Break & Enter - Dwelling",
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.07820713414625, 51.062686663226856]
@@ -225,6 +225,500 @@
     ":@computed_region_kxmf_bzkv": "265",
     ":@computed_region_p8tp_5dkv": "10",
     ":@computed_region_4b54_tmc4": "3",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "CRANSTON",
+    "category": "Break & Enter - Business",
+    "crime_count": "3",
+    "resident_count": "9500",
+    "date": "2020-09-01T00:00:00.000",
+    "year": "2020",
+    "month": "SEP",
+    "id": "2020-SEP-CRANSTON-Break & Enter - Business",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.988736, 50.889376]
+    },
+    ":@computed_region_kxmf_bzkv": "258",
+    ":@computed_region_p8tp_5dkv": "13",
+    ":@computed_region_4b54_tmc4": "6",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "NORTH",
+    "community_name": "EVANSTON",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "12715",
+    "date": "2021-06-01T00:00:00.000",
+    "year": "2021",
+    "month": "JUN",
+    "id": "2021-JUN-EVANSTON-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.125817, 51.174548]
+    },
+    ":@computed_region_kxmf_bzkv": "16",
+    ":@computed_region_p8tp_5dkv": "1",
+    ":@computed_region_4b54_tmc4": "11",
+    ":@computed_region_4a3i_ccfj": "4"
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "TARADALE",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "2",
+    "resident_count": "17528",
+    "date": "2022-02-01T00:00:00.000",
+    "year": "2022",
+    "month": "FEB",
+    "id": "2022-FEB-TARADALE-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.942186, 51.125839]
+    },
+    ":@computed_region_kxmf_bzkv": "227",
+    ":@computed_region_p8tp_5dkv": "1",
+    ":@computed_region_4b54_tmc4": "11",
+    ":@computed_region_4a3i_ccfj": "4"
+  },
+  {
+    "sector": "NORTH",
+    "community_name": "HIDDEN VALLEY",
+    "category": "Break & Enter - Residence",
+    "crime_count": "1",
+    "resident_count": "10542",
+    "date": "2023-11-01T00:00:00.000",
+    "year": "2023",
+    "month": "NOV",
+    "id": "2023-NOV-HIDDEN VALLEY-Break & Enter - Residence",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.105236, 51.157423]
+    },
+    ":@computed_region_kxmf_bzkv": "95",
+    ":@computed_region_p8tp_5dkv": "12",
+    ":@computed_region_4b54_tmc4": "13",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "ASPEN WOODS",
+    "category": "Break & Enter - Residence",
+    "crime_count": "2",
+    "resident_count": "7736",
+    "date": "2020-05-01T00:00:00.000",
+    "year": "2020",
+    "month": "MAY",
+    "id": "2020-MAY-ASPEN WOODS-Break & Enter - Residence",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.216575, 51.045048]
+    },
+    ":@computed_region_kxmf_bzkv": "103",
+    ":@computed_region_p8tp_5dkv": "2",
+    ":@computed_region_4b54_tmc4": "15",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "BELTLINE",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "5",
+    "resident_count": "26128",
+    "date": "2024-03-01T00:00:00.000",
+    "year": "2024",
+    "month": "MAR",
+    "id": "2024-MAR-BELTLINE-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.085371, 51.036469]
+    },
+    ":@computed_region_kxmf_bzkv": "258",
+    ":@computed_region_p8tp_5dkv": "13",
+    ":@computed_region_4b54_tmc4": "6",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "CORAL SPRINGS",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "5707",
+    "date": "2022-01-01T00:00:00.000",
+    "year": "2022",
+    "month": "JAN",
+    "id": "2022-JAN-CORAL SPRINGS-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.928045, 51.06365]
+    },
+    ":@computed_region_kxmf_bzkv": "97",
+    ":@computed_region_p8tp_5dkv": "12",
+    ":@computed_region_4b54_tmc4": "13",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "DISCOVERY RIDGE",
+    "category": "Theft OF Vehicle",
+    "crime_count": "3",
+    "resident_count": "6789",
+    "date": "2020-04-01T00:00:00.000",
+    "year": "2020",
+    "month": "APR",
+    "id": "2020-APR-DISCOVERY RIDGE-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.202282, 51.019749]
+    },
+    ":@computed_region_kxmf_bzkv": "148",
+    ":@computed_region_p8tp_5dkv": "11",
+    ":@computed_region_4b54_tmc4": "10",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "FALCONRIDGE",
+    "category": "Break & Enter - Business",
+    "crime_count": "2",
+    "resident_count": "10895",
+    "date": "2021-02-01T00:00:00.000",
+    "year": "2021",
+    "month": "FEB",
+    "id": "2021-FEB-FALCONRIDGE-Break & Enter - Business",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.978768, 51.107115]
+    },
+    ":@computed_region_kxmf_bzkv": "12",
+    ":@computed_region_p8tp_5dkv": "2",
+    ":@computed_region_4b54_tmc4": "16",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "NORTH",
+    "community_name": "HIDDEN VALLEY",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "4",
+    "resident_count": "10542",
+    "date": "2022-11-01T00:00:00.000",
+    "year": "2022",
+    "month": "NOV",
+    "id": "2022-NOV-HIDDEN VALLEY-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.105236, 51.157423]
+    },
+    ":@computed_region_kxmf_bzkv": "95",
+    ":@computed_region_p8tp_5dkv": "12",
+    ":@computed_region_4b54_tmc4": "13",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "LAKEVIEW",
+    "category": "Break & Enter - Residence",
+    "crime_count": "3",
+    "resident_count": "6542",
+    "date": "2020-12-01T00:00:00.000",
+    "year": "2020",
+    "month": "DEC",
+    "id": "2020-DEC-LAKEVIEW-Break & Enter - Residence",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.138941, 51.020639]
+    },
+    ":@computed_region_kxmf_bzkv": "217",
+    ":@computed_region_p8tp_5dkv": "7",
+    ":@computed_region_4b54_tmc4": "7",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "MAHOGANY",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "2",
+    "resident_count": "1377",
+    "date": "2023-03-01T00:00:00.000",
+    "year": "2023",
+    "month": "MAR",
+    "id": "2023-MAR-MAHOGANY-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.965177, 50.889539]
+    },
+    ":@computed_region_kxmf_bzkv": "260",
+    ":@computed_region_p8tp_5dkv": "13",
+    ":@computed_region_4b54_tmc4": "6",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "PINERIDGE",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "10593",
+    "date": "2021-09-01T00:00:00.000",
+    "year": "2021",
+    "month": "SEP",
+    "id": "2021-SEP-PINERIDGE-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.947347, 51.074971]
+    },
+    ":@computed_region_kxmf_bzkv": "157",
+    ":@computed_region_p8tp_5dkv": "10",
+    ":@computed_region_4b54_tmc4": "3",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "SPRINGBANK HILL",
+    "category": "Theft OF Vehicle",
+    "crime_count": "1",
+    "resident_count": "9100",
+    "date": "2022-04-01T00:00:00.000",
+    "year": "2022",
+    "month": "APR",
+    "id": "2022-APR-SPRINGBANK HILL-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.199944, 51.016135]
+    },
+    ":@computed_region_kxmf_bzkv": "146",
+    ":@computed_region_p8tp_5dkv": "11",
+    ":@computed_region_4b54_tmc4": "10",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "NORTH",
+    "community_name": "TUSCANY",
+    "category": "Break & Enter - Residence",
+    "crime_count": "1",
+    "resident_count": "13987",
+    "date": "2020-07-01T00:00:00.000",
+    "year": "2020",
+    "month": "JUL",
+    "id": "2020-JUL-TUSCANY-Break & Enter - Residence",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.228526, 51.126845]
+    },
+    ":@computed_region_kxmf_bzkv": "68",
+    ":@computed_region_p8tp_5dkv": "6",
+    ":@computed_region_4b54_tmc4": "16",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "WEST SPRINGS",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "2",
+    "resident_count": "10153",
+    "date": "2021-11-01T00:00:00.000",
+    "year": "2021",
+    "month": "NOV",
+    "id": "2021-NOV-WEST SPRINGS-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.206161, 51.057108]
+    },
+    ":@computed_region_kxmf_bzkv": "240",
+    ":@computed_region_p8tp_5dkv": "13",
+    ":@computed_region_4b54_tmc4": "6",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "AUBURN BAY",
+    "category": "Break & Enter - Business",
+    "crime_count": "3",
+    "resident_count": "8634",
+    "date": "2020-06-01T00:00:00.000",
+    "year": "2020",
+    "month": "JUN",
+    "id": "2020-JUN-AUBURN BAY-Break & Enter - Business",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.953728, 50.890767]
+    },
+    ":@computed_region_kxmf_bzkv": "243",
+    ":@computed_region_p8tp_5dkv": "13",
+    ":@computed_region_4b54_tmc4": "6",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "COPPERFIELD",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "7864",
+    "date": "2022-03-01T00:00:00.000",
+    "year": "2022",
+    "month": "MAR",
+    "id": "2022-MAR-COPPERFIELD-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.951326, 50.917496]
+    },
+    ":@computed_region_kxmf_bzkv": "249",
+    ":@computed_region_p8tp_5dkv": "13",
+    ":@computed_region_4b54_tmc4": "6",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "DOUGLASDALE/GLEN",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "1",
+    "resident_count": "11235",
+    "date": "2021-12-01T00:00:00.000",
+    "year": "2021",
+    "month": "DEC",
+    "id": "2021-DEC-DOUGLASDALE/GLEN-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.975268, 50.94215]
+    },
+    ":@computed_region_kxmf_bzkv": "96",
+    ":@computed_region_p8tp_5dkv": "11",
+    ":@computed_region_4b54_tmc4": "10",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "GARRISON GREEN",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "2582",
+    "date": "2023-10-01T00:00:00.000",
+    "year": "2023",
+    "month": "OCT",
+    "id": "2023-OCT-GARRISON GREEN-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.131438, 51.013712]
+    },
+    ":@computed_region_kxmf_bzkv": "161",
+    ":@computed_region_p8tp_5dkv": "7",
+    ":@computed_region_4b54_tmc4": "7",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "NORTH",
+    "community_name": "HARVEST HILLS",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "7892",
+    "date": "2022-08-01T00:00:00.000",
+    "year": "2022",
+    "month": "AUG",
+    "id": "2022-AUG-HARVEST HILLS-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.065174, 51.135924]
+    },
+    ":@computed_region_kxmf_bzkv": "47",
+    ":@computed_region_p8tp_5dkv": "8",
+    ":@computed_region_4b54_tmc4": "16",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "KILLARNEY/GLENGARRY",
+    "category": "Break & Enter - Residence",
+    "crime_count": "3",
+    "resident_count": "6698",
+    "date": "2020-08-01T00:00:00.000",
+    "year": "2020",
+    "month": "AUG",
+    "id": "2020-AUG-KILLARNEY/GLENGARRY-Break & Enter - Residence",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.130518, 51.025202]
+    },
+    ":@computed_region_kxmf_bzkv": "285",
+    ":@computed_region_p8tp_5dkv": "10",
+    ":@computed_region_4b54_tmc4": "3",
+    ":@computed_region_4a3i_ccfj": "2"
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "MAHOGANY",
+    "category": "Break & Enter - Residence",
+    "crime_count": "2",
+    "resident_count": "1377",
+    "date": "2021-07-01T00:00:00.000",
+    "year": "2021",
+    "month": "JUL",
+    "id": "2021-JUL-MAHOGANY-Break & Enter - Residence",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.965177, 50.889539]
+    },
+    ":@computed_region_kxmf_bzkv": "260",
+    ":@computed_region_p8tp_5dkv": "13",
+    ":@computed_region_4b54_tmc4": "6",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "NEW BRIGHTON",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "4",
+    "resident_count": "10090",
+    "date": "2020-03-01T00:00:00.000",
+    "year": "2020",
+    "month": "MAR",
+    "id": "2020-MAR-NEW BRIGHTON-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.96421, 50.915041]
+    },
+    ":@computed_region_kxmf_bzkv": "223",
+    ":@computed_region_p8tp_5dkv": "1",
+    ":@computed_region_4b54_tmc4": "11",
+    ":@computed_region_4a3i_ccfj": "4"
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "OGDEN",
+    "category": "Theft OF Vehicle",
+    "crime_count": "3",
+    "resident_count": "8228",
+    "date": "2023-09-01T00:00:00.000",
+    "year": "2023",
+    "month": "SEP",
+    "id": "2023-SEP-OGDEN-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.979308, 50.997498]
+    },
+    ":@computed_region_kxmf_bzkv": "283",
+    ":@computed_region_p8tp_5dkv": "12",
+    ":@computed_region_4b54_tmc4": "16",
+    ":@computed_region_4a3i_ccfj": "3"
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "PATTISON AREA",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "2134",
+    "date": "2022-06-01T00:00:00.000",
+    "year": "2022",
+    "month": "JUN",
+    "id": "2022-JUN-PATTISON AREA-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.105172, 51.00856]
+    },
+    ":@computed_region_kxmf_bzkv": "160",
+    ":@computed_region_p8tp_5dkv": "7",
+    ":@computed_region_4b54_tmc4": "7",
     ":@computed_region_4a3i_ccfj": "2"
   }
 ]
