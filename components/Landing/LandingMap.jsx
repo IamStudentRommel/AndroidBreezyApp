@@ -97,8 +97,8 @@ const LandingMap = () => {
       const response = await fetch(
         'https://breezy-app-be.vercel.app/api/recentcrimes',
       );
-      // const data = await response.json();
-      const data = Test;
+      const data = await response.json();
+      // const data = Test;
       setIncidents(data);
       // console.log(data);
     } catch (error) {
