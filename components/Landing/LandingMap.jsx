@@ -135,12 +135,11 @@ const LandingMap = ({username, email}) => {
   const fetchRecentIncidents = async () => {
     try {
       const response = await fetch(
-        'https://breezy-app-be.vercel.app/api/recentcrimes',
+        'https://breezy-app-be.vercel.app/api/recentcrimesv2',
       );
       const data = await response.json();
       // const data = Test;
       setIncidents(data);
-      // console.log(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -180,20 +179,19 @@ const LandingMap = ({username, email}) => {
               style={{width: 30, height: 30}}
             />
           </Marker>
-
-          {incidents.map(marker => {
-            if (marker.year === '2024') {
+          {incidents.length > 0 &&
+            incidents.map(marker => {
               try {
                 const coordinates = {
-                  latitude: marker.community_center_point.coordinates[1],
-                  longitude: marker.community_center_point.coordinates[0],
+                  latitude: marker.coordinates[1],
+                  longitude: marker.coordinates[0],
                 };
                 const desc = `${marker.date.split('T')[0]} ${marker.category}`;
                 return (
                   <Marker
-                    key={marker.id}
+                    key={marker.date}
                     coordinate={coordinates}
-                    title={marker.category}
+                    title={marker.sector}
                     description={desc}>
                     <Image
                       source={require('../../assets/zombie.png')}
@@ -204,8 +202,7 @@ const LandingMap = ({username, email}) => {
               } catch (error) {
                 return null;
               }
-            }
-          })}
+            })}
         </MapView>
 
         <TouchableOpacity

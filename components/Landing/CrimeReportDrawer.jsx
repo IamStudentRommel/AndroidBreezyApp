@@ -13,6 +13,8 @@ const CrimeReportDrawer = ({
   compass,
   handleCloseDrawer,
 }) => {
+  const [latNear, setLatNear] = useState(0.001);
+  const [LongNear, setLongNear] = useState(0.001);
   const [open, setOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState(null);
   const [value, setValue] = useState(null);
@@ -79,7 +81,10 @@ const CrimeReportDrawer = ({
       desc: description,
       images: [],
       date: getCurrentDateTime(),
-      coordinates: [initialLocation.longitude, initialLocation.latitude],
+      coordinates: [
+        initialLocation.longitude + LongNear,
+        initialLocation.latitude + latNear,
+      ],
     };
     // console.log(data);
     try {
@@ -99,6 +104,8 @@ const CrimeReportDrawer = ({
       console.log('Response:', responseData);
       alert('New crime successfully reported.');
       handleCancelPress();
+      setLatNear(latNear + 0.001);
+      setLongNear(LongNear + 0.001);
     } catch (error) {
       console.error('Error:', error);
     }
