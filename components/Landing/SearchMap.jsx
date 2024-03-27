@@ -4,7 +4,7 @@ import AppConfig from '../../app.json';
 
 const SearchMap = ({setInitialLocation, clearSearch}) => {
   const {myMapKey} = AppConfig;
-
+  // console.log(myMapKey);
   return (
     <View style={styles.searchBarContainer}>
       <GooglePlacesAutocomplete

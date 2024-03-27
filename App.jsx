@@ -107,7 +107,7 @@ function App() {
         />
         <Drawer.Screen
           name="Live Crime Monitoring"
-          component={LandingMap}
+          // component={LandingMap}
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
@@ -115,8 +115,9 @@ function App() {
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
-          }}
-        />
+          }}>
+          {props => <LandingMap {...props} username={username} email={email} />}
+        </Drawer.Screen>
         <Drawer.Screen
           name="About"
           component={React.memo(() => (

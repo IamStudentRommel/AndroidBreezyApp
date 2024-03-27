@@ -179,12 +179,15 @@ const Report = () => {
                       latitude: marker.community_center_point.coordinates[1],
                       longitude: marker.community_center_point.coordinates[0],
                     };
+                    const desc = `${marker.date.split('T')[0]} ${
+                      marker.category
+                    }`;
                     return (
                       <Marker
                         key={marker.id}
                         coordinate={coordinates}
-                        title={marker.category}
-                        description={marker.id}>
+                        title={marker.community_name}
+                        description={desc}>
                         <Image
                           source={require('../../assets/zombie.png')}
                           style={{width: 30, height: 30}}
@@ -200,44 +203,6 @@ const Report = () => {
           </View>
         )}
       </View>
-
-      {/* <ScrollView horizontal>
-        <LineChart
-          data={data}
-          width={(Dimensions.get('window').width * sector.length) / 5} // Adjust the width as needed
-          height={250}
-          //yAxisLabel={'$'}
-          chartConfig={{
-            backgroundColor: '#333333',
-            backgroundGradientFrom: '#333333',
-            backgroundGradientTo: '#003300',
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            formatYLabel: label => parseInt(label, 10).toString(),
-            propsForDots: {
-              r: '6',
-              strokeWidth: '2',
-              stroke: '#ffa726',
-            },
-          }}
-          style={{
-            borderRadius: 10,
-          }}
-          onDataPointClick={({value, getColor}) =>
-            showMessage({
-              message: 'Total no. of crime',
-              description: `${value}`,
-              backgroundColor: getColor(0.9),
-            })
-          }
-        />
-      </ScrollView>
-
-      <View style={styles.flashMessageContainer}>
-        <FlashMessage
-          duration={5000}
-          style={{backgroundColor: '#ffa726'}} // Change background color to orange
-        />
-      </View> */}
     </View>
   );
 };

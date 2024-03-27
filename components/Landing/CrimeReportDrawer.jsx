@@ -6,12 +6,18 @@ import BottomDrawer from 'react-native-animated-bottom-drawer';
 const CrimeReportDrawer = ({
   bottomDrawerRef,
   setIsDrawerOpen,
+  username,
+  email,
+  initialLocation,
   address,
+  compass,
   handleCloseDrawer,
 }) => {
   const [open, setOpen] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState(null);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([]);
+
   const [description, setDescription] = useState('');
 
   const fetchCrimeCategory = async () => {
@@ -32,21 +38,100 @@ const CrimeReportDrawer = ({
     }
   };
 
-  useEffect(() => {
-    fetchCrimeCategory();
-  }, []);
+  const handleValueChange = itemValue => {
+    setValue(itemValue);
+    try {
+      const selected = items.find(item => item.value === itemValue);
+      if (selected) {
+        setSelectedLabel(selected.label);
+      } else {
+        console.log('Selected item not found in items array.');
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
+  const handleDescChangeText = text => {
+    setDescription(text);
+  };
+
+  const handleSubmit = async () => {
+    // console.log(description.length);
+    if (selectedLabel === null) {
+      alert('Please select crime category.');
+      return;
+    }
+    if (username === 'Guest') {
+      alert('Please login first to report a crime.');
+      return;
+    }
+    if (description.length < 10) {
+      alert('Please provide more details about the crime.');
+      return;
+    }
+
+    const url = 'https://breezy-app-be.vercel.app//trans/addcrime';
+    const data = {
+      reporterInfo: [username, email],
+      sector: compass,
+      category: selectedLabel,
+      desc: description,
+      images: [],
+      date: getCurrentDateTime(),
+      coordinates: [initialLocation.longitude, initialLocation.latitude],
+    };
+    // console.log(data);
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await response.json();
+      console.log('Response:', responseData);
+      alert('New crime successfully reported.');
+      handleCancelPress();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const handleCancelPress = () => {
     handleCloseDrawer();
     clearFields();
   };
 
+  const getCurrentDateTime = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const hours = String(currentDate.getHours()).padStart(2, '0');
+    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+    const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+    const milliseconds = String(currentDate.getMilliseconds()).padStart(3, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
+  };
+
   const clearFields = () => {
     setOpen(false);
     setValue(null);
-    setItems([]);
     setDescription('');
+    setSelectedLabel(null);
   };
+
+  useEffect(() => {
+    fetchCrimeCategory();
+  }, []);
 
   return (
     <BottomDrawer
@@ -73,15 +158,17 @@ const CrimeReportDrawer = ({
           setValue={setValue}
           setItems={setItems}
           placeholder="Crime Category"
+          onChangeValue={handleValueChange}
         />
         <TextInput
           style={[styles.drawerInput, {height: 100}]}
           placeholder="Enter description"
           multiline={true}
           numberOfLines={2}
+          onChangeText={handleDescChangeText}
         />
         <View style={styles.drawerBtn}>
-          <Button title="Submit" color="blue" />
+          <Button title="Submit" color="blue" onPress={handleSubmit} />
         </View>
         <View style={styles.drawerBtn}>
           <Button title="Cancel" onPress={handleCancelPress} color="#e60000" />

@@ -14,10 +14,12 @@ import mapCustomStyle from '../../data/mapCustomStyle.json';
 import CustomDrawerButtom from './CrimeReportDrawer';
 import SearchMap from './SearchMap';
 
-const LandingMap = () => {
+const LandingMap = ({username, email}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const bottomDrawerRef = useRef(null);
+
+  // console.log(logDisplay);
 
   const handleOpenDrawer = () => {
     setIsDrawerOpen(true);
@@ -33,6 +35,7 @@ const LandingMap = () => {
     setClearSearch(prevState => !prevState);
   };
   //Drawer part end
+  const [compass, setCompass] = useState(null);
   const [address, setAddress] = useState(null);
   const [incidents, setIncidents] = useState([]);
   const [initialLocation, setInitialLocation] = useState({
@@ -49,6 +52,37 @@ const LandingMap = () => {
     } catch (err) {
       console.error(err);
       return false;
+    }
+  };
+
+  const getDirection = (latitude, longitude) => {
+    const centerLat = 51.0486;
+    const centerLng = -114.0708;
+
+    if (latitude > centerLat) {
+      if (longitude > centerLng) {
+        return 'North East';
+      } else if (longitude < centerLng) {
+        return 'North West';
+      } else {
+        return 'North';
+      }
+    } else if (latitude < centerLat) {
+      if (longitude > centerLng) {
+        return 'South East';
+      } else if (longitude < centerLng) {
+        return 'South West';
+      } else {
+        return 'South';
+      }
+    } else {
+      if (longitude > centerLng) {
+        return 'East';
+      } else if (longitude < centerLng) {
+        return 'West';
+      } else {
+        return 'Centre';
+      }
     }
   };
 
@@ -75,10 +109,16 @@ const LandingMap = () => {
 
         if (addressResult && addressResult.length > 0) {
           setAddress(formatAddress(addressResult[0]));
+
+          // console.log(addressResult);
+
+          // const direction = getDirection(51.118811, -114.043859);
+          const direction = getDirection(coords.latitude, coords.longitude);
+          setCompass(direction);
         } else {
           setAddress(null);
+          setCompass(null);
         }
-        // console.log(address);
       } catch (error) {
         setIsLoading(false);
         console.error('Error getting location:', error);
@@ -110,6 +150,7 @@ const LandingMap = () => {
   const reCenter = () => {
     getLocation();
     mapRef.current?.animateToRegion(initialLocation, 1000);
+    console.log(compass);
   };
 
   useEffect(() => {
@@ -147,12 +188,13 @@ const LandingMap = () => {
                   latitude: marker.community_center_point.coordinates[1],
                   longitude: marker.community_center_point.coordinates[0],
                 };
+                const desc = `${marker.date.split('T')[0]} ${marker.category}`;
                 return (
                   <Marker
                     key={marker.id}
                     coordinate={coordinates}
                     title={marker.category}
-                    description={marker.id}>
+                    description={desc}>
                     <Image
                       source={require('../../assets/zombie.png')}
                       style={{width: 30, height: 30}}
@@ -192,7 +234,11 @@ const LandingMap = () => {
       <CustomDrawerButtom
         bottomDrawerRef={bottomDrawerRef}
         setIsDrawerOpen={setIsDrawerOpen}
+        username={username}
+        email={email}
+        initialLocation={initialLocation}
         address={address}
+        compass={compass}
         handleCloseDrawer={handleCloseDrawer}
       />
     </View>
