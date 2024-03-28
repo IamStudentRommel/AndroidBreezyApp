@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import Login from './components/LoginV2/Login';
 import Report from './components/Dashboard/Dashboard';
 import LandingMap from './components/Landing/LandingMap';

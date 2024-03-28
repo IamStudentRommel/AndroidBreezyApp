@@ -10,6 +10,9 @@ const SearchMap = ({setInitialLocation, clearSearch}) => {
       <GooglePlacesAutocomplete
         placeholder="Search"
         onPress={(data, details = null) => {
+          console.log('fuck press!');
+          console.log('Selected Place:', data);
+          console.log('Selected Place Details:', details);
           if (details) {
             const placeId = details.place_id;
             fetch(

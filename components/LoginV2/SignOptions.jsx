@@ -25,7 +25,7 @@ const SignOptions = () => {
 
   const test = async () => {
     // console.log('hey');
-    Alert('Function not yet ready');
+    alert('Function not yet ready');
   };
   return (
     <View style={styles.signInContainer}>

@@ -46,23 +46,6 @@ const Report = () => {
     reCenter();
   };
 
-  // const getSectorVal = async () => {
-  //   try {
-  //     const querySnapshot = await getDocs(collection(db, 'sector_tbl'));
-  //     const newSecData = querySnapshot.docs.map(doc => doc.data().Sector);
-  //     const newSecCountData = querySnapshot.docs.map(doc => doc.data().Count);
-  //     const uniqueSectors = [...new Set(newSecData)]; // Filter out duplicate sector values and update the state
-  //     const uniqueSectorsCount = [...new Set(newSecCountData)];
-  //     setSector(uniqueSectors);
-  //     setSectorCount(uniqueSectorsCount);
-  //     setInitLoading(false);
-  //     // console.log(sector);
-  //     // console.log(sectorCount);
-  //   } catch (e) {
-  //     console.error('Error pulling data: ', e);
-  //   }
-  // };
-
   const fetchData = async selectedYear => {
     try {
       const response = await fetch(
@@ -94,10 +77,6 @@ const Report = () => {
       console.error('Error fetching API data:', error);
     }
   };
-
-  // useEffect(() => {
-  //   getSectorVal();
-  // }, []);
 
   useEffect(() => {
     fetchData(selectedYear);

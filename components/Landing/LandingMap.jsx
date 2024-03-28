@@ -140,6 +140,7 @@ const LandingMap = ({username, email}) => {
       const data = await response.json();
       // const data = Test;
       setIncidents(data);
+      // console.log(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -147,15 +148,19 @@ const LandingMap = ({username, email}) => {
 
   const mapRef = useRef(null);
   const reCenter = () => {
+    console.log('reCenter');
     getLocation();
     mapRef.current?.animateToRegion(initialLocation, 1000);
-    console.log(compass);
+    // console.log(compass);
   };
 
   useEffect(() => {
     fetchRecentIncidents();
-    getLocation();
   }, [incidents]);
+
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   const renderLoadingIndicator = () => (
     <View style={[StyleSheet.absoluteFill, styles.loadingIndicator]}>
@@ -181,6 +186,7 @@ const LandingMap = ({username, email}) => {
           </Marker>
           {incidents.length > 0 &&
             incidents.map(marker => {
+              // console.log(incidents);
               try {
                 const coordinates = {
                   latitude: marker.coordinates[1],
@@ -189,7 +195,7 @@ const LandingMap = ({username, email}) => {
                 const desc = `${marker.date.split('T')[0]} ${marker.category}`;
                 return (
                   <Marker
-                    key={marker.date}
+                    key={marker.coordinates[1]}
                     coordinate={coordinates}
                     title={marker.sector}
                     description={desc}>
