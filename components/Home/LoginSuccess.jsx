@@ -1,13 +1,8 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import Banner from './Banner';
+import TrendCrime from '../../data/homeCrimeData';
 
-const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
-  const images = [
-    require('../../assets/z.jpg'),
-    require('../../assets/logo.png'),
-    require('../../assets/angel.png'),
-    require('../../assets/angel.png'),
-  ];
+const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   const capitalizeFirstLetter = str => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
@@ -16,31 +11,18 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
     <View style={styles.container}>
       <View>
         <View style={styles.inlineContainer}>
-          <Text style={styles.userInfo}>
+          {/* <Text style={styles.userInfo}>
             Welcome, {capitalizeFirstLetter(firebaseFname)},{' '}
             {capitalizeFirstLetter(firebaseLname)}
-          </Text>
+          </Text> */}
+          <Text style={styles.headline}>Crimes Headline</Text>
+
           {/* <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
             <Text style={styles.logoutText}>Logout</Text>
           </TouchableOpacity> */}
         </View>
       </View>
-      <Banner text="Recent Crime Footages" images={images} />
-      <Text style={styles.detailsText}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac quam
-        non lectus condimentum mollis vel id mi. Nulla facilisi. Sed sed
-        interdum velit. Duis tristique libero sed eros viverra, euismod auctor
-        dui tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Fusce ac quam non lectus condimentum mollis vel id mi. Nulla facilisi.
-        Sed sed interdum velit. Duis tristique libero sed eros viverra, euismod
-        auctor dui tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing
-        elit. Fusce ac quam non lectus condimentum mollis vel id mi. Nulla
-        facilisi. Sed sed interdum velit. Duis tristique libero sed eros
-        viverra, euismod auctor dui tincidunt. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Fusce ac quam non lectus condimentum mollis
-        vel id mi. Nulla facilisi. Sed sed interdum velit. Duis tristique libero
-        sed eros viverra, euismod auctor dui tincidunt.
-      </Text>
+      <Banner data={TrendCrime} />
     </View>
   );
 };
@@ -49,26 +31,25 @@ const styles = StyleSheet.create({
   container: {
     // backgroundColor: '#00001a',
   },
+  headline: {
+    color: 'red',
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 20,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 5,
+  },
   inlineContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // backgroundColor: 'black',
     alignItems: 'center',
     marginTop: 15,
-    marginBottom: 30,
+    marginBottom: 10,
     paddingHorizontal: 20,
   },
   userInfo: {
     fontSize: 19,
     fontStyle: 'italic',
-  },
-  logoutButton: {
-    backgroundColor: '#FF5733',
-    padding: 10,
-    borderRadius: 5,
-  },
-  logoutText: {
-    color: '#fff',
-    fontWeight: 'bold',
   },
 });
 
