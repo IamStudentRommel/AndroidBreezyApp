@@ -49,7 +49,7 @@ function App() {
       drawerContentOptions={{
         activeTintColor: '#F2FDFF', // Change the color when the item is active
         itemStyle: {marginVertical: 5},
-        inactiveTintColor: '#ffffff', // Change the color when the item is inactive
+        inactiveTintColor: '#F2FDFF', // Change the color when the item is inactive
       }}>
       <Drawer.Navigator
         // initialRouteName="Live Crime Monitoring"

@@ -121,7 +121,7 @@ const Report = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Overall Crime Count</Text>
       <Filter options={options} onSelect={handleOptionSelect} />
-      <LineChart
+      <PieChart
         data={piedata}
         width={Dimensions.get('window').width}
         height={220}
@@ -199,8 +199,8 @@ const styles = StyleSheet.create({
     right: 0,
     height: Dimensions.get('window').height / 2,
     flex: 1,
-    borderWidth: 3,
-    borderRadius: 10,
+    borderWidth: 0.5,
+    borderRadius: 5,
     overflow: 'hidden',
   },
   map: {

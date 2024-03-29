@@ -146,19 +146,19 @@ const CrimeReportDrawer = ({
       openOnMount={false}
       startUp={false}
       onChangeVisibility={visible => setIsDrawerOpen(visible)}
-      customStyles={{ container: { backgroundColor:'#292928'}}}>
+      customStyles={{ container: { backgroundColor:'#f2fdff'}}}>
       <View style={styles.contentContainer}>
-        <Text style={{marginBottom: 20, fontSize: 22, fontWeight: 'bold', color: '#ffffff'}}>
-          Report Crime
+        <Text style={{marginBottom: 20, fontSize: 22, fontWeight: 'bold', color: '#101935'}}>
+          Report a Crime
         </Text>
         <TextInput
-          style={[styles.drawerInput, {backgroundColor: '#f2f2f2'}]}
+          style={[styles.drawerInput, {backgroundColor: '#f2fdff'}]}
           placeholder="This will be your exact location"
           editable={false}
           value={address}
         />
         <DropDownPicker
-          style={styles.drawerInput}
+          style={[styles.drawerInput]}
           open={open}
           value={value}
           items={items}
@@ -167,9 +167,10 @@ const CrimeReportDrawer = ({
           setItems={setItems}
           placeholder="Crime Category"
           onChangeValue={handleValueChange}
+          dropDownContainerStyle={{backgroundColor: '#f2fdff', width: '90%', alignSelf: 'center'}}
         />
         <TextInput
-          style={[styles.drawerInput, {height: 100}]}
+          style={[styles.drawerInput, {height: 80}, {marginBottom: 20}]}
           placeholder="Enter description"
           multiline={true}
           numberOfLines={2}
@@ -178,13 +179,13 @@ const CrimeReportDrawer = ({
         <View style={styles.drawerBtn}>
           <Button
             title="Submit"
-            color="#D0BCFF"
+            color="#101935"
             onPress={handleSubmit}
-            titleStyle={{color: '#000000'}}
+            
           />
         </View>
         <View style={styles.drawerBtn}>
-          <Button title="Cancel" onPress={handleCancelPress} color="#46464F" />
+          <Button title="Cancel" onPress={handleCancelPress} color="gray" />
         </View>
       </View>
     </BottomDrawer>
@@ -195,23 +196,25 @@ const styles = StyleSheet.create({
   contentContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#292928',
+    backgroundColor: '#f2fdff',
   },
   drawerInput: {
-    borderWidth: 1,
-    borderColor: '#EEEEEE',
-    backgroundColor: '#EEEEEE',
+    borderWidth: 0.5,
+    borderColor: '#101935',
+    backgroundColor: '#f2fdff',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
     width: '90%',
     alignSelf: 'center',
   },
+  
   drawerBtn: {
-    width: '80%',
+    width: '90%',
     borderRadius: 100,
     overflow: 'hidden',
     marginBottom: 10,
+    
   },
 });
 

@@ -27,19 +27,19 @@ const LoadingComponent = () => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#000000',
+        backgroundColor: '#F2FDFF',
       }}>
       <Image
-        source={require('../../assets/crimehate1.png')}
+        source={require('../../assets/crimehate3.png')}
         style={{
           width: '70%',
           height: '70%',
           resizeMode: 'contain',
-          backgroundColor: '#000000',
+          backgroundColor: '#F2FDFF',
         }}
       />
       <ActivityIndicator size="large" color="#ffffff" />
-      <Text style={{color: '#ffffff', marginTop: 10}}>Loading...</Text>
+      <Text style={{color: '#101935', marginTop: 10}}>Loading...</Text>
     </View>
   );
 };

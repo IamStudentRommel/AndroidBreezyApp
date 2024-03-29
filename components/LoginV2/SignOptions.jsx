@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     padding: 10,
     borderRadius: 25,
+    width: '100%',
   },
 
   googleLogo: {
