@@ -8,9 +8,9 @@ const SearchMap = ({setInitialLocation, clearSearch}) => {
   return (
     <View style={styles.searchBarContainer}>
       <GooglePlacesAutocomplete
-        placeholder="Search"
+        placeholder="Search location"
         onPress={(data, details = null) => {
-          console.log('fuck press!');
+          console.log('press!');
           console.log('Selected Place:', data);
           console.log('Selected Place Details:', details);
           if (details) {
@@ -51,6 +51,7 @@ const SearchMap = ({setInitialLocation, clearSearch}) => {
           key: myMapKey,
           language: 'en',
         }}
+        
       />
     </View>
   );
@@ -65,7 +66,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
     backgroundColor: '#ffffff',
     elevation: 5,
-    borderRadius: 25,
+    borderRadius: 20,
+    width: '70%',
+    alignSelf: 'center',
   },
 });
 

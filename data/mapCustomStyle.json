@@ -1,5 +1,5 @@
 [
-  {"elementType": "geometry", "stylers": [{"color": "#242f3e"}]},
+  {"elementType": "geometry", "stylers": [{"color": "#333333"}]},
   {"elementType": "labels.text.fill", "stylers": [{"color": "#746855"}]},
   {"elementType": "labels.text.stroke", "stylers": [{"color": "#242f3e"}]},
   {
@@ -15,7 +15,7 @@
   {
     "featureType": "poi.park",
     "elementType": "geometry",
-    "stylers": [{"color": "#263c3f"}]
+    "stylers": [{"color": "#333333"}]
   },
   {
     "featureType": "poi.park",
@@ -25,32 +25,32 @@
   {
     "featureType": "road",
     "elementType": "geometry",
-    "stylers": [{"color": "#38414e"}]
+    "stylers": [{"color": "#282828"}]
   },
   {
     "featureType": "road",
     "elementType": "geometry.stroke",
-    "stylers": [{"color": "#212a37"}]
+    "stylers": [{"color": "#282828"}]
   },
   {
     "featureType": "road",
     "elementType": "labels.text.fill",
-    "stylers": [{"color": "#9ca5b3"}]
+    "stylers": [{"color": "#B1B1B1"}]
   },
   {
     "featureType": "road.highway",
     "elementType": "geometry",
-    "stylers": [{"color": "#746855"}]
+    "stylers": [{"color": "#282828"}]
   },
   {
     "featureType": "road.highway",
     "elementType": "geometry.stroke",
-    "stylers": [{"color": "#1f2835"}]
+    "stylers": [{"color": "#282828"}]
   },
   {
     "featureType": "road.highway",
     "elementType": "labels.text.fill",
-    "stylers": [{"color": "#f3d19c"}]
+    "stylers": [{"color": "#B1B1B1"}]
   },
   {
     "featureType": "transit",
@@ -65,7 +65,7 @@
   {
     "featureType": "water",
     "elementType": "geometry",
-    "stylers": [{"color": "#17263c"}]
+    "stylers": [{"color": "#333333"}]
   },
   {
     "featureType": "water",

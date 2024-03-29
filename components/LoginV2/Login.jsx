@@ -27,15 +27,15 @@ const LoadingComponent = () => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#00001a',
+        backgroundColor: '#000000',
       }}>
       <Image
-        source={require('../../assets/crimehate.png')}
+        source={require('../../assets/crimehate1.png')}
         style={{
-          width: '80%',
-          height: '80%',
+          width: '70%',
+          height: '70%',
           resizeMode: 'contain',
-          backgroundColor: '#00001a',
+          backgroundColor: '#000000',
         }}
       />
       <ActivityIndicator size="large" color="#ffffff" />
@@ -163,40 +163,41 @@ const Login = ({
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inner}>
               <Image
-                source={require('../../assets/crimehate.png')}
+                source={require('../../assets/crimehate3.png')}
                 style={styles.logo}
               />
-
-              <TextInput
-                placeholder="Email"
-                placeholderTextColor={'#ffffff'}
-                style={styles.textInput}
-                onChangeText={handleEmailChange}
-              />
-              <TextInput
-                placeholder="Password"
-                placeholderTextColor={'#ffffff'}
-                style={styles.textInput}
-                secureTextEntry
-                onChangeText={handlePwdChange}
-              />
-              <TouchableOpacity
-                style={styles.loginBtn}
-                onPress={handleValidateUser}>
-                <View style={styles.loginBtnContent}>
-                  <Text style={styles.loginBtnTitle}>LOGIN</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.textLink} onPress={test}>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  placeholder="Email"
+                  placeholderTextColor={'#101935'}
+                  style={styles.textInput}
+                  onChangeText={handleEmailChange}
+                />
+                <TextInput
+                  placeholder="Password"
+                  placeholderTextColor={'#101935'}
+                  style={styles.textInput}
+                  secureTextEntry
+                  onChangeText={handlePwdChange}
+                />
+              </View>
+              <TouchableOpacity onPress={test} style={styles.fpContainer}>
+                <Text style={styles.textLink}>
                   Forgot Password?
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.textLink} onPress={redirectReg}>
-                  Signup
-                </Text>
-              </TouchableOpacity>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={[styles.button, {backgroundColor: '#101935'}]}
+                  onPress={handleValidateUser}>
+                  <Text style={styles.loginBtnTitle}>Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.button, {backgroundColor: 'gray'}]}
+                  onPress={redirectReg}>
+                  <Text style={styles.loginBtnTitle}>Create Account</Text>
+                </TouchableOpacity>
+              </View>
               <SignOptions />
             </View>
           </TouchableWithoutFeedback>
@@ -209,49 +210,73 @@ const Login = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00001a',
+    backgroundColor: '#f2fdff',
   },
   inner: {
-    padding: 24,
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+
   logo: {
-    width: '100%',
-    height: '50%',
-    marginTop: -50,
+    width: 200,
+    height: 98,
+    marginBottom: 50,
+  },
+
+  inputContainer: {
+    marginBottom: 20,
   },
 
   textInput: {
     height: 40,
-    borderColor: '#ffffff',
+    borderColor: '#101935',
     borderBottomWidth: 1,
-    color: '#ffffff',
+    color: '#101935',
+    marginBottom: 10,
+    width: 300,
+    paddingHorizontal: 10,
   },
-  loginBtnTitle: {
-    color: '#ffffff',
+
+  fpContainer: {
+    width: '90%',
+    alignItems: 'flex-end',
+    marginBottom: 20,
+    marginRight: 70,
+  },
+
+  textLink: {
+    color: '#564787',
     fontSize: 15,
-    fontWeight: 'bold',
-    marginHorizontal: 20,
+    textAlign: 'right',
+    marginBottom: 10,
+    width: '90%',
   },
-  loginBtn: {
-    backgroundColor: 'blue',
-    borderRadius: 25,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    width: '100%',
+
+  loginBtnTitle: {
+    color: '#f2fdff',
+    fontSize: 15,
     alignSelf: 'center',
   },
-  loginBtnContent: {
-    flexDirection: 'row',
+  
+  button: {
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 5,
+    width: 300,
   },
-  textLink: {
-    color: '#3333ff',
-    fontSize: 15,
-    textAlign: 'center',
+  
+  buttonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    alignItems: 'center',
   },
+
+  
 });
 
 export default Login;

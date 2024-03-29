@@ -32,20 +32,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   button: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#f2fdff',
     padding: 5,
     margin: 3,
-    borderRadius: 5,
+    borderRadius: 15,
     minWidth: 50,
     alignItems: 'center',
+    borderWidth: 0.5,
   },
+
   selectedButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#9AD4D6',
   },
+
   buttonText: {
     color: '#000000',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
   },
 });

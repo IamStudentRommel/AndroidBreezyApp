@@ -145,9 +145,10 @@ const CrimeReportDrawer = ({
       ref={bottomDrawerRef}
       openOnMount={false}
       startUp={false}
-      onChangeVisibility={visible => setIsDrawerOpen(visible)}>
+      onChangeVisibility={visible => setIsDrawerOpen(visible)}
+      customStyles={{ container: { backgroundColor:'#292928'}}}>
       <View style={styles.contentContainer}>
-        <Text style={{marginBottom: 20, fontSize: 22, fontWeight: 'bold'}}>
+        <Text style={{marginBottom: 20, fontSize: 22, fontWeight: 'bold', color: '#ffffff'}}>
           Report Crime
         </Text>
         <TextInput
@@ -175,10 +176,15 @@ const CrimeReportDrawer = ({
           onChangeText={handleDescChangeText}
         />
         <View style={styles.drawerBtn}>
-          <Button title="Submit" color="blue" onPress={handleSubmit} />
+          <Button
+            title="Submit"
+            color="#D0BCFF"
+            onPress={handleSubmit}
+            titleStyle={{color: '#000000'}}
+          />
         </View>
         <View style={styles.drawerBtn}>
-          <Button title="Cancel" onPress={handleCancelPress} color="#e60000" />
+          <Button title="Cancel" onPress={handleCancelPress} color="#46464F" />
         </View>
       </View>
     </BottomDrawer>
@@ -189,14 +195,17 @@ const styles = StyleSheet.create({
   contentContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#292928',
   },
   drawerInput: {
     borderWidth: 1,
-    borderColor: '#333333',
+    borderColor: '#EEEEEE',
+    backgroundColor: '#EEEEEE',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
-    width: '100%',
+    width: '90%',
+    alignSelf: 'center',
   },
   drawerBtn: {
     width: '80%',

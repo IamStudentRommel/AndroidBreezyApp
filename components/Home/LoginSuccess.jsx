@@ -3,7 +3,7 @@ import Banner from './Banner';
 
 const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
   const images = [
-    require('../../assets/z.jpg'),
+    // require('../../assets/z.jpg'),
     require('../../assets/logo.png'),
     require('../../assets/angel.png'),
     require('../../assets/angel.png'),
@@ -17,7 +17,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
       <View>
         <View style={styles.inlineContainer}>
           <Text style={styles.userInfo}>
-            Welcome, {capitalizeFirstLetter(firebaseFname)},{' '}
+            Welcome, {capitalizeFirstLetter(firebaseFname)}{' '}
             {capitalizeFirstLetter(firebaseLname)}
           </Text>
           {/* <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
@@ -37,9 +37,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
         elit. Fusce ac quam non lectus condimentum mollis vel id mi. Nulla
         facilisi. Sed sed interdum velit. Duis tristique libero sed eros
         viverra, euismod auctor dui tincidunt. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Fusce ac quam non lectus condimentum mollis
-        vel id mi. Nulla facilisi. Sed sed interdum velit. Duis tristique libero
-        sed eros viverra, euismod auctor dui tincidunt.
+        consectetur adipiscing elit. 
       </Text>
     </View>
   );
@@ -47,7 +45,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: '#00001a',
+    backgroundColor: '#f2fdff',
   },
   inlineContainer: {
     flexDirection: 'row',
@@ -62,13 +60,18 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   logoutButton: {
-    backgroundColor: '#FF5733',
+    backgroundColor: '#f2fdff',
     padding: 10,
     borderRadius: 5,
   },
   logoutText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  detailsText: {
+    fontSize: 14,
+    marginHorizontal: 20,
+    marginBottom: 20,
   },
 });
 

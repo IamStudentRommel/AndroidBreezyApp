@@ -216,7 +216,7 @@ const LandingMap = ({username, email}) => {
           onPress={handleOpenDrawer}
           activeOpacity={0.7}>
           <Image
-            source={require('../../assets/plus.png')}
+            source={require('../../assets/reportButton.png')}
             style={styles.fabIcon}
           />
         </TouchableOpacity>
@@ -225,7 +225,7 @@ const LandingMap = ({username, email}) => {
           onPress={reCenter}
           activeOpacity={0.7}>
           <Image
-            source={require('../../assets/navigation.png')}
+            source={require('../../assets/Direction.png')}
             style={styles.fabIcon}
           />
         </TouchableOpacity>
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#e60000',
+    // backgroundColor: '#e60000',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#ffffff',
+    // backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 96,
@@ -285,8 +285,8 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   fabIcon: {
-    width: 24,
-    height: 24,
+    width: 56,
+    height: 56,
   },
   loadingIndicator: {
     justifyContent: 'center',
