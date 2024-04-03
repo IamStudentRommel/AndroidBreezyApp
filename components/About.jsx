@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
-    color: '#ffffff',
+    color: '#101935',
   },
 });
 

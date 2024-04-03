@@ -114,6 +114,7 @@ const CrimeReportDrawer = ({
   const handleCancelPress = () => {
     handleCloseDrawer();
     clearFields();
+    console.log(initialLocation);
   };
 
   const getCurrentDateTime = () => {

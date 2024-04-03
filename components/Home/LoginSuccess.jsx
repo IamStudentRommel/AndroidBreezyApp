@@ -8,17 +8,17 @@ import {
   Image,
   FlatList,
 } from 'react-native';
-import Banner from './Banner';
 import * as Location from 'expo-location';
 import {SwipeListView} from 'react-native-swipe-list-view';
 
-const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
+const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   const images = [
     // require('../../assets/z.jpg'),
     require('../../assets/logo.png'),
     require('../../assets/angel.png'),
     require('../../assets/angel.png'),
   ];
+
   const capitalizeFirstLetter = str => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
@@ -26,6 +26,15 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
   const [userLocation, setUserLocation] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [crimeFeed, setCrimeFeed] = useState([]);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   useEffect(() => {
     getLocation();
@@ -35,13 +44,22 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
 
   const getLocation = async () => {
     let {status} = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      console.error('Permission to access location was denied');
-      return;
-    }
+    // if (status !== 'granted') {
+    //   console.error('Permission to access location was denied');
+    //   return;
+    // }
+    console.log(status);
 
     let location = await Location.getCurrentPositionAsync({});
-    setUserLocation(location.coords);
+
+    console.log(location.coords.latitude, location.coords.longitude);
+
+    const addressResult = await Location.reverseGeocodeAsync({
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+    });
+    // console.log(addressResult[0].formattedAddress);
+    setUserLocation(addressResult[0].formattedAddress);
   };
 
   const fetchCrimeFeed = category => {
@@ -188,7 +206,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
         <Text style={styles.date}>{item.date}</Text>
       </View>
       <Text style={styles.description}>{item.description}</Text>
-      <Text style={styles.location}>Location: {item.location}</Text>
+      <Text style={styles.location}>{item.location}</Text>
     </View>
   );
 
@@ -200,27 +218,35 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
             Welcome, {capitalizeFirstLetter(firebaseFname)}{' '}
             {capitalizeFirstLetter(firebaseLname)}
           </Text>
-          {/* <Image
-            source={require('../../assets/pin.png')}
-            style={{width: 15, height: 15, marginRight: -10}}
-          />
-          {userLocation && (
-            <Text style={styles.locationText}>
-              {userLocation.latitude}, {userLocation.longitude}
+          <TouchableOpacity
+            onPressIn={handleMouseEnter}
+            onPressOut={handleMouseLeave}
+            activeOpacity={0.8}
+            style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Image
+              source={require('../../assets/pin.png')}
+              style={{width: 15, height: 15}}
+            />
+
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.locationText}>
+              {userLocation
+                ? userLocation.length > 20
+                  ? `${userLocation.slice(0, 20)}...`
+                  : userLocation
+                : '...'}
             </Text>
-          )} */}
-          {/* <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-            <Text style={styles.logoutText}>Logout</Text>
-          </TouchableOpacity> */}
-        </View>
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search..."
-            placeholderTextColor="#aaa"
-          />
+          </TouchableOpacity>
+          {isHovered && (
+            <View style={styles.tooltip}>
+              <Text style={styles.tooltipText}>{userLocation}</Text>
+            </View>
+          )}
         </View>
       </View>
+      
       <View style={styles.categoryContainer}>
         <FlatList
           data={categories}
@@ -229,7 +255,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
           horizontal={true}
         />
       </View>
-      
+
       <SwipeListView
         data={crimeFeed}
         renderItem={renderCrimeItem}
@@ -240,17 +266,6 @@ const LoginSuccess = ({firebaseFname, firebaseLname, handleLogout}) => {
         swipeToClosePercent={10} // Adjust the threshold for swipe to close
         swipeDirection={['down']} // Allow swiping only in the down direction
       />
-
-      {/* <Banner text="Recent Crime Footages" images={images} />
-      <Text style={styles.detailsText}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac quam
-        non lectus condimentum mollis vel id mi. Nulla facilisi. Sed sed
-        interdum velit. Duis tristique libero sed eros viverra, euismod auctor
-        dui tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Fusce ac quam non lectus condimentum mollis vel id mi. Nulla facilisi.
-        Sed sed interdum velit. Duis tristique libero sed eros viverra, euismod
-        auctor dui tincidunt. 
-      </Text> */}
     </View>
   );
 };
@@ -364,8 +379,6 @@ const styles = StyleSheet.create({
     color: '#101935',
     paddingHorizontal: 8,
     paddingVertical: 4,
-    // borderRadius: 5,
-    // fontWeight: 'bold',
   },
   date: {
     color: '#333',
@@ -376,6 +389,18 @@ const styles = StyleSheet.create({
   },
   location: {
     color: '#666',
+  },
+
+  tooltip: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    padding: 10,
+    borderRadius: 5,
+    top: '100%',
+    left: '30%', // Adjust as needed
+  },
+  tooltipText: {
+    color: 'white',
   },
 });
 
