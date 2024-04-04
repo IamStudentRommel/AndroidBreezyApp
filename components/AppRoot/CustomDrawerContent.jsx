@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    backgroundColor: '#000033',
+    backgroundColor: '#101935',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
@@ -86,15 +86,18 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   logoutButton: {
-    backgroundColor: '#ff0000',
+    // backgroundColor: '#ff0000',
+    borderColor: '#f2fdff',
+    borderWidth: 0.5,
     paddingVertical: 8,
     margin: 20,
     alignItems: 'center',
+    borderRadius: 10,
   },
   logoutText: {
     fontSize: 18,
     color: '#ffffff',
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   },
 });
 

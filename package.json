@@ -10,7 +10,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@expo/vector-icons": "^14.0.0",
     "@gorhom/bottom-sheet": "^4.6.0",
     "@react-native-community/geolocation": "^3.1.0",
     "@react-native-community/masked-view": "^0.1.11",
@@ -48,6 +47,8 @@
     "react-native-screens": "~3.29.0",
     "react-native-sheets-bottom": "^1.2.0",
     "react-native-svg": "^14.1.0",
+    "react-native-swipe-list-view": "^3.2.9",
+    "react-native-swiper": "^1.6.0",
     "react-native-vector-icons": "^10.0.3",
     "react-navigation": "^5.0.0",
     "rn-bottom-drawer": "^1.4.3"

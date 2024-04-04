@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 // import FlashMessage, {showMessage} from 'react-native-flash-message';
-import {PieChart} from 'react-native-chart-kit';
+import {PieChart, LineChart} from 'react-native-chart-kit';
 // import {db, collection, getDocs} from '../../firebase/conf';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
@@ -106,8 +106,8 @@ const Report = () => {
         name: sector,
         crimes: crimes,
         color: color,
-        legendFontColor: '#7F7F7F',
-        legendFontSize: 15,
+        legendFontColor: '#101935',
+        legendFontSize: 14,
       });
     }
   }
@@ -126,9 +126,9 @@ const Report = () => {
         width={Dimensions.get('window').width}
         height={220}
         chartConfig={{
-          backgroundGradientFrom: 'darkblue',
-          backgroundGradientTo: 'blue',
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          backgroundGradientFrom: '#FCEEB5',
+          backgroundGradientTo: '#FFDAC1',
+          color: (opacity = 1) => `rgba(255, 105, 180, ${opacity})`,
           formatLabel: (value, name) => `${name}: ${(value * 100).toFixed(2)}%`,
         }}
         accessor="crimes"
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 2,
-    backgroundColor: '#00001a',
+    backgroundColor: '#f2fdff',
   },
   mapContainer: {
     position: 'absolute',
@@ -199,22 +199,21 @@ const styles = StyleSheet.create({
     right: 0,
     height: Dimensions.get('window').height / 2,
     flex: 1,
-    // borderColor: '#ffffff',
-    borderWidth: 3,
-    borderRadius: 20,
+    borderWidth: 0.5,
+    borderRadius: 5,
     overflow: 'hidden',
   },
   map: {
     ...StyleSheet.absoluteFillObject,
   },
   title: {
-    marginTop: 5,
+    marginTop: 10,
     fontSize: 34,
     fontWeight: 'bold',
     marginBottom: 16,
     textAlign: 'center',
     marginBottom: 10,
-    color: '#ffffff',
+    color: '#101935',
   },
   flashMessageContainer: {
     position: 'absolute',

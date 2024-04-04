@@ -30,7 +30,7 @@ const LoadingComponent = () => {
         backgroundColor: '#00001a',
       }}>
       <Image
-        source={require('../../assets/crimehate.png')}
+        source={require('../../assets/crimehate1.png')}
         style={{
           width: '80%',
           height: '80%',
@@ -87,7 +87,6 @@ const Login = ({updateUsername, updateLogDisplay, updateLogFlag}) => {
   };
 
   const handleValidateUser = () => {
-    // validateUser('asshole', 'freak');
     validateUser(inputEmail, inputPwd);
     // console.log(inputEmail, inputPwd);
   };
@@ -154,7 +153,7 @@ const Login = ({updateUsername, updateLogDisplay, updateLogFlag}) => {
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inner}>
               <Image
-                source={require('../../assets/crimehate.png')}
+                source={require('../../assets/crimehate1.png')}
                 style={styles.logo}
               />
 
@@ -180,7 +179,7 @@ const Login = ({updateUsername, updateLogDisplay, updateLogFlag}) => {
               </TouchableOpacity>
               <TouchableOpacity style={styles.button}>
                 <Text style={styles.textLink} onPress={test}>
-                  Forgot Password?
+                  Forgot Password????
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.button}>
