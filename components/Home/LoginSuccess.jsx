@@ -13,6 +13,7 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [crimeFeed, setCrimeFeed] = useState([]);
+  const [displayFeed, SetDisplayFeed] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
   const [initialLocation, setInitialLocation] = useState({
     latitude: 51.05011,
@@ -21,6 +22,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
     longitudeDelta: 0.0091,
   });
   const [address, setAddress] = useState(null);
+  const [categories, setCategories] = useState([]);
 
   const capitalizeFirstLetter = str => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -36,6 +38,11 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
 
   useEffect(() => {
     getLocation();
+    fetchCrimeCategories();
+    fetchRecentCrimes();
+  }, []);
+
+  useEffect(() => {
     // Simulating fetching crime feed for the selected category
     fetchCrimeFeed(selectedCategory);
   }, [selectedCategory]);
@@ -52,7 +59,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
 
   const getLocation = async () => {
     const hasPermission = await requestLocationPermission();
-    console.log(hasPermission);
+
     if (hasPermission) {
       try {
         const {coords} = await Location.getCurrentPositionAsync({
@@ -83,125 +90,47 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
     }
   };
 
-  const fetchCrimeFeed = category => {
-    // Simulated crime feed data based on category (replace with actual fetching logic)
-    let feedData = [];
-    if (category === 'All') {
-      // Fetch data for all categories
-      const allCategories = [
-        'Commercial Robbery',
-        'Theft FROM Vehicle',
-        'Theft OF Vehicle',
-      ];
-      allCategories.forEach(cat => {
-        // Fetch data for each category and concatenate to feedData
-        let dataForCategory = [];
-        if (cat === 'Commercial Robbery') {
-          dataForCategory = [
-            {
-              date: '2024-03-28',
-              category: cat,
-              description: 'Shop robbery in downtown',
-              location: 'Downtown',
-            },
-            {
-              date: '2024-03-25',
-              category: cat,
-              description: 'Robbery at convenience store',
-              location: 'Main Street',
-            },
-          ];
-        } else if (cat === 'Theft FROM Vehicle') {
-          dataForCategory = [
-            {
-              date: '2024-03-27',
-              category: cat,
-              description: 'Theft from parked vehicles',
-              location: 'Parking Lot',
-            },
-            {
-              date: '2024-03-24',
-              category: cat,
-              description: 'Car break-ins reported',
-              location: 'Residential Area',
-            },
-          ];
-        } else if (cat === 'Theft OF Vehicle') {
-          dataForCategory = [
-            {
-              date: '2024-03-26',
-              category: cat,
-              description: 'Car stolen from parking lot',
-              location: 'Parking Lot',
-            },
-            {
-              date: '2024-03-23',
-              category: cat,
-              description: 'Vehicle theft reported',
-              location: 'Street',
-            },
-          ];
-        }
-        feedData = feedData.concat(dataForCategory);
-      });
-    } else {
-      // Fetch data for the selected category
-      if (category === 'Commercial Robbery') {
-        feedData = [
-          {
-            date: '2024-03-28',
-            category: category,
-            description: 'Shop robbery in downtown',
-            location: 'Downtown',
-          },
-          {
-            date: '2024-03-25',
-            category: category,
-            description: 'Robbery at convenience store',
-            location: 'Main Street',
-          },
-        ];
-      } else if (category === 'Theft FROM Vehicle') {
-        feedData = [
-          {
-            date: '2024-03-27',
-            category: category,
-            description: 'Theft from parked vehicles',
-            location: 'Parking Lot',
-          },
-          {
-            date: '2024-03-24',
-            category: category,
-            description: 'Car break-ins reported',
-            location: 'Residential Area',
-          },
-        ];
-      } else if (category === 'Theft OF Vehicle') {
-        feedData = [
-          {
-            date: '2024-03-26',
-            category: category,
-            description: 'Car stolen from parking lot',
-            location: 'Parking Lot',
-          },
-          {
-            date: '2024-03-23',
-            category: category,
-            description: 'Vehicle theft reported',
-            location: 'Street',
-          },
-        ];
-      }
-    }
-    setCrimeFeed(feedData);
+  const formatAddress = addressObj => {
+    const {street, city, region, country} = addressObj;
+    return `${street}, ${city}, ${region}, ${country}`;
   };
 
-  const categories = [
-    'All',
-    'Commercial Robbery',
-    'Theft FROM Vehicle',
-    'Theft OF Vehicle',
-  ];
+  const fetchCrimeCategories = async () => {
+    try {
+      const response = await fetch(
+        'https://breezy-app-be.vercel.app/api/crimecategories',
+      );
+      const data = await response.json();
+      // console.log(Object.keys(data));
+      setCategories(['All', ...Object.keys(data)].sort());
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const fetchRecentCrimes = async () => {
+    try {
+      const response = await fetch(
+        'https://breezy-app-be.vercel.app/api/recentcrimesv2',
+      );
+      const data = await response.json();
+      setCrimeFeed(data);
+      SetDisplayFeed(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const fetchCrimeFeed = category => {
+    console.log(category);
+    // console.log(crimeFeed);
+    const feed =
+      category === 'All'
+        ? crimeFeed
+        : crimeFeed.filter(entry => entry.category === category);
+    console.log(feed);
+    SetDisplayFeed(feed);
+  };
 
   const renderCategory = ({item}) => (
     <TouchableOpacity
@@ -224,9 +153,9 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
     <View style={styles.crimeItem}>
       <View style={styles.crimeItemHeader}>
         <Text style={styles.categoryTag}>{item.category}</Text>
-        <Text style={styles.date}>{item.date}</Text>
+        <Text style={styles.date}>{item.date.split('T')[0]}</Text>
       </View>
-      <Text style={styles.description}>{item.description}</Text>
+      <Text style={styles.description}>{item.desc}</Text>
       <Text style={styles.location}>{item.location}</Text>
     </View>
   );
@@ -254,8 +183,8 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
               ellipsizeMode="tail"
               style={styles.locationText}>
               {address
-                ? address.length > 20
-                  ? `${address.slice(0, 20)}...`
+                ? address.length > 60
+                  ? `${address.slice(0, 60)}...`
                   : address
                 : '...'}
             </Text>
@@ -278,7 +207,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
       </View>
 
       <SwipeListView
-        data={crimeFeed}
+        data={displayFeed}
         renderItem={renderCrimeItem}
         keyExtractor={(item, index) => index.toString()}
         disableRightSwipe={true} // Disable swiping from right to left
@@ -295,15 +224,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2fdff',
   },
-  headline: {
-    color: 'red',
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginTop: 20,
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 5,
-  },
+
   inlineContainer: {
     // backgroundColor: 'black',
     alignItems: 'center',
@@ -315,41 +236,27 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#1D4275',
   },
-  searchContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 15,
-    paddingHorizontal: 20,
-  },
-  searchInput: {
-    flex: 1,
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    paddingHorizontal: 40,
-    marginRight: 10,
-    backgroundColor: '#fff',
-  },
+  // searchContainer: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   marginBottom: 15,
+  //   paddingHorizontal: 20,
+  // },
+  // searchInput: {
+  //   flex: 1,
+  //   height: 40,
+  //   borderWidth: 1,
+  //   borderColor: '#ccc',
+  //   borderRadius: 5,
+  //   paddingHorizontal: 40,
+  //   marginRight: 10,
+  //   backgroundColor: '#fff',
+  // },
 
   userInfo: {
     fontSize: 19,
     fontStyle: 'italic',
-  },
-  logoutButton: {
-    backgroundColor: '#f2fdff',
-    padding: 10,
-    borderRadius: 5,
-  },
-  logoutText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  detailsText: {
-    fontSize: 14,
-    marginHorizontal: 20,
-    marginBottom: 20,
   },
   swiper: {
     height: 50, // Adjust the height of the swiper as needed
