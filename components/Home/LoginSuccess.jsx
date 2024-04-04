@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  TextInput,
   Image,
   FlatList,
 } from 'react-native';
@@ -12,21 +11,20 @@ import * as Location from 'expo-location';
 import {SwipeListView} from 'react-native-swipe-list-view';
 
 const LoginSuccess = ({firebaseFname, firebaseLname}) => {
-  const images = [
-    // require('../../assets/z.jpg'),
-    require('../../assets/logo.png'),
-    require('../../assets/angel.png'),
-    require('../../assets/angel.png'),
-  ];
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [crimeFeed, setCrimeFeed] = useState([]);
+  const [isHovered, setIsHovered] = useState(false);
+  const [initialLocation, setInitialLocation] = useState({
+    latitude: 51.05011,
+    longitude: -114.08529,
+    latitudeDelta: 0.0022,
+    longitudeDelta: 0.0091,
+  });
+  const [address, setAddress] = useState(null);
 
   const capitalizeFirstLetter = str => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
-
-  const [userLocation, setUserLocation] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [crimeFeed, setCrimeFeed] = useState([]);
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -42,24 +40,47 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
     fetchCrimeFeed(selectedCategory);
   }, [selectedCategory]);
 
+  const requestLocationPermission = async () => {
+    try {
+      const {status} = await Location.requestForegroundPermissionsAsync();
+      return status === 'granted';
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  };
+
   const getLocation = async () => {
-    let {status} = await Location.requestForegroundPermissionsAsync();
-    // if (status !== 'granted') {
-    //   console.error('Permission to access location was denied');
-    //   return;
-    // }
-    console.log(status);
+    const hasPermission = await requestLocationPermission();
+    console.log(hasPermission);
+    if (hasPermission) {
+      try {
+        const {coords} = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.High,
+        });
+        setInitialLocation({
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        });
 
-    let location = await Location.getCurrentPositionAsync({});
+        // Perform reverse geocoding to get the address
+        const addressResult = await Location.reverseGeocodeAsync({
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+        });
 
-    console.log(location.coords.latitude, location.coords.longitude);
-
-    const addressResult = await Location.reverseGeocodeAsync({
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-    });
-    // console.log(addressResult[0].formattedAddress);
-    setUserLocation(addressResult[0].formattedAddress);
+        if (addressResult && addressResult.length > 0) {
+          setAddress(formatAddress(addressResult[0]));
+        } else {
+          setAddress(null);
+        }
+      } catch (error) {
+        console.error('Error getting location:', error);
+        // console.log(null);
+      }
+    }
   };
 
   const fetchCrimeFeed = category => {
@@ -232,16 +253,16 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
               numberOfLines={1}
               ellipsizeMode="tail"
               style={styles.locationText}>
-              {userLocation
-                ? userLocation.length > 20
-                  ? `${userLocation.slice(0, 20)}...`
-                  : userLocation
+              {address
+                ? address.length > 20
+                  ? `${address.slice(0, 20)}...`
+                  : address
                 : '...'}
             </Text>
           </TouchableOpacity>
           {isHovered && (
             <View style={styles.tooltip}>
-              <Text style={styles.tooltipText}>{userLocation}</Text>
+              <Text style={styles.tooltipText}>{address}</Text>
             </View>
           )}
         </View>
