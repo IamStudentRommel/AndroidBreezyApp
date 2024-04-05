@@ -110,9 +110,7 @@ const LandingMap = ({username, email}) => {
         if (addressResult && addressResult.length > 0) {
           setAddress(formatAddress(addressResult[0]));
 
-          // console.log(addressResult);
-
-          // const direction = getDirection(51.118811, -114.043859);
+          
           const direction = getDirection(coords.latitude, coords.longitude);
           setCompass(direction);
         } else {

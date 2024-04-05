@@ -44,15 +44,10 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
 
   const getLocation = async () => {
     let {status} = await Location.requestForegroundPermissionsAsync();
-    // if (status !== 'granted') {
-    //   console.error('Permission to access location was denied');
-    //   return;
-    // }
-    console.log(status);
 
     let location = await Location.getCurrentPositionAsync({});
 
-    console.log(location.coords.latitude, location.coords.longitude);
+    // console.log(location.coords.latitude, location.coords.longitude);
 
     const addressResult = await Location.reverseGeocodeAsync({
       latitude: location.coords.latitude,
@@ -256,16 +251,13 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
         />
       </View>
 
-      <SwipeListView
-        data={crimeFeed}
-        renderItem={renderCrimeItem}
-        keyExtractor={(item, index) => index.toString()}
-        disableRightSwipe={true} // Disable swiping from right to left
-        recalculateHiddenLayout={true}
-        swipeToOpenPercent={10} // Adjust the threshold for swipe to open
-        swipeToClosePercent={10} // Adjust the threshold for swipe to close
-        swipeDirection={['down']} // Allow swiping only in the down direction
-      />
+      <FlatList
+          data={crimeFeed}
+          renderItem={renderCrimeItem}
+          keyExtractor={(item, index) => index.toString()}
+          horizontal={false}
+          contentContainerStyle={{ flexGrow: 1 }}
+        />
     </View>
   );
 };
@@ -273,6 +265,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2fdff',
+    flex: 1,
   },
   inlineContainer: {
     flexDirection: 'row',
@@ -322,9 +315,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 20,
   },
-  swiper: {
-    height: 50, // Adjust the height of the swiper as needed
-  },
+  
   slide: {
     flex: 1,
     justifyContent: 'center',
