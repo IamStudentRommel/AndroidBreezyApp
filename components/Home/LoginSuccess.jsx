@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import * as Location from 'expo-location';
 import {SwipeListView} from 'react-native-swipe-list-view';
+import AppConfig from '../../app.json';
 
 const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -23,6 +24,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   });
   const [address, setAddress] = useState(null);
   const [categories, setCategories] = useState([]);
+  const {be} = AppConfig;
 
   const capitalizeFirstLetter = str => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -97,9 +99,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
 
   const fetchCrimeCategories = async () => {
     try {
-      const response = await fetch(
-        'https://breezy-app-be.vercel.app/api/crimecategories',
-      );
+      const response = await fetch(`${be}/api/crimecategories`);
       const data = await response.json();
       // console.log(Object.keys(data));
       setCategories(['All', ...Object.keys(data)].sort());
@@ -110,9 +110,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
 
   const fetchRecentCrimes = async () => {
     try {
-      const response = await fetch(
-        'https://breezy-app-be.vercel.app/api/recentcrimesv2',
-      );
+      const response = await fetch(`${be}/api/recentcrimesv2`);
       const data = await response.json();
       setCrimeFeed(data);
       SetDisplayFeed(data);

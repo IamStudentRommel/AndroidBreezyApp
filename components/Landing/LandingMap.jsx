@@ -12,11 +12,13 @@ import * as Location from 'expo-location';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import CustomDrawerButtom from './CrimeReportDrawer';
 import SearchMap from './SearchMap';
+import AppConfig from '../../app.json';
 
 const LandingMap = ({username, email}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const bottomDrawerRef = useRef(null);
+  const {be} = AppConfig;
 
   // console.log(logDisplay);
 
@@ -133,9 +135,7 @@ const LandingMap = ({username, email}) => {
 
   const fetchRecentIncidents = async () => {
     try {
-      const response = await fetch(
-        'https://breezy-app-be.vercel.app/api/recentcrimesv2',
-      );
+      const response = await fetch(`${be}/api/recentcrimesv2`);
       const data = await response.json();
       // const data = Test;
       setIncidents(data);

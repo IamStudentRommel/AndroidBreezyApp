@@ -9,11 +9,13 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
+import AppConfig from '../app.json';
 
 const About = ({username, email}) => {
   const [feedback, setFeedback] = useState('');
   const [sending, setSending] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
+  const {be} = AppConfig;
 
   const capitalizeFirstLetter = str => {
     return str
@@ -41,7 +43,7 @@ const About = ({username, email}) => {
       setShowAnimation(true);
       setSending(true);
       const response = await fetch(
-        `https://breezy-app-be.vercel.app/api/send-email?from=${email}&subject=${subject}&text=${text}`,
+        `${be}/api/send-email?from=${email}&subject=${subject}&text=${text}`,
       );
       // console.log(response);
 
@@ -50,7 +52,7 @@ const About = ({username, email}) => {
           'Thank you for reaching us, your feedback was successfully sent!',
         );
       } else {
-        alert('Failed to send feedback');
+        alert('Failed to send feedback check api send-email');
       }
       setFeedback('');
       setSending(false);
@@ -66,7 +68,15 @@ const About = ({username, email}) => {
     <KeyboardAvoidingView style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>CrimeH8ers</Text>
-        <Text style={{textAlign:'center', marginBottom:20, fontStyle:'italic', color: '#546787'}}>Stay Aware, Stay Safe: Your Guardian Against Crime</Text>
+        <Text
+          style={{
+            textAlign: 'center',
+            marginBottom: 20,
+            fontStyle: 'italic',
+            color: '#546787',
+          }}>
+          Stay Aware, Stay Safe: Your Guardian Against Crime
+        </Text>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Overview</Text>
           <Text style={styles.textContent}>

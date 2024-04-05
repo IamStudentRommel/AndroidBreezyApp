@@ -1,11 +1,9 @@
 import {View, StyleSheet} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import AppConfig from '../../app.json';
-import {collection} from '../../firebase/conf';
 
 const SearchMap = ({setInitialLocation, clearSearch}) => {
   const {myMapKey} = AppConfig;
-  // console.log(collection);
   // console.log(myMapKey);
   return (
     <View style={styles.searchBarContainer}>
