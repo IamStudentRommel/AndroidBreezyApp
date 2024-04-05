@@ -1,10 +1,10 @@
 {
+  "myMapKey": "AIzaSyBT5TojBqi632zBlXjXrcxhS1xoMXXjZRU",
   "name": "main",
   "displayName": "BreezyApp",
   "expo": {
     "android": {
       "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
-    },
-    "myMapKey": "AIzaSyBT5TojBqi632zBlXjXrcxhS1xoMXXjZRU"
+    }
   }
 }

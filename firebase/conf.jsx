@@ -9,12 +9,12 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCZxmQxvDZ5Ug3LDXYjSO6UcZ080PsJbcA',
-  authDomain: 'crime-justice-dir.firebaseapp.com',
+  apiKey: process.env.PUBLIC_API_KEY,
+  authDomain: process.env.PUBLIC_AUTH_DOMAIN,
   projectId: 'crime-justice-dir',
-  storageBucket: 'crime-justice-dir.appspot.com',
+  storageBucket: process.env.PUBLIC_STORAGE_BUCKET,
   messagingSenderId: '651067344773',
-  appId: '1:651067344773:web:e35016e47e5dc363cfa6ec',
+  appId: process.env.PUBLIC_APP_ID,
   measurementId: 'G-QSSYMLJTPK',
 };
 

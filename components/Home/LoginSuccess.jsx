@@ -128,7 +128,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
       category === 'All'
         ? crimeFeed
         : crimeFeed.filter(entry => entry.category === category);
-    console.log(feed);
+    // console.log(feed);
     SetDisplayFeed(feed);
   };
 
