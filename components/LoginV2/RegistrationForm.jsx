@@ -2,20 +2,11 @@ import React, {useState} from 'react';
 import {
   View,
   TextInput,
-  Button,
   StyleSheet,
   Text,
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {
-  db,
-  collection,
-  getDocs,
-  query,
-  where,
-  addDoc,
-} from '../../firebase/conf';
 import AppConfig from '../../app.json';
 
 const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
@@ -66,24 +57,37 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
         alert('Error: This user is already registered in the system');
         return;
       } else {
+        const url = `${be}/api/adduser`;
+        const data = {
+          email: email,
+          pwd: password,
+          fname: capitalizeFirstLetter(fname),
+          lname: capitalizeFirstLetter(lname),
+          role: 1,
+          status: true,
+        };
         try {
-          await addDoc(collection(db, 'users'), {
-            email: email,
-            pwd: password,
-            fname: capitalizeFirstLetter(fname),
-            lname: capitalizeFirstLetter(lname),
-            role: 1,
-            status: true,
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
           });
-          alert('New user successfully registered!');
-          setEmail('');
-          setPassword('');
-          setFname('');
-          setLname('');
-          setShowRegistrationForm(false);
-          updateLogDisplay('Login');
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          } else {
+            alert('New user successfully registered!');
+            setEmail('');
+            setPassword('');
+            setFname('');
+            setLname('');
+            setShowRegistrationForm(false);
+            updateLogDisplay('Login');
+          }
         } catch (error) {
-          console.error('Error adding document: ', error);
+          console.error('Error adding user: ', error);
           alert('Error: Failed to register user. Please try again later.');
         }
       }
