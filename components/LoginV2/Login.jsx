@@ -14,11 +14,10 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-// import 'expo-dev-client';
-import {db, collection, getDocs, query, where} from '../../firebase/conf';
 import LoginSuccess from '../Home/LoginSuccess';
 import RegistrationForm from './RegistrationForm';
 import SignOptions from './SignOptions';
+import AppConfig from '../../app.json';
 
 const LoadingComponent = () => {
   return (
@@ -61,37 +60,33 @@ const Login = ({
   const [firebaseFname, setFirebaseFname] = useState('');
   const [firebaseLname, setFirebaseLname] = useState('');
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const {be} = AppConfig;
 
   const validateUser = async (email, pwd) => {
     try {
-      const q = query(collection(db, 'users'), where('email', '==', email));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        const userDoc = querySnapshot.docs[0];
-        const userData = userDoc.data();
-        if (userData.pwd === pwd) {
-          // console.log(userData.email);
-          updateLogEmail(userData.email);
-          updateUsername(`${userData.fname} ${userData.lname}`);
-          updateLogDisplay('Home');
-          setFirebaseFname(userData.fname);
-          setFirebaseLname(userData.lname);
-          updateLogFlag(true);
-          Alert.alert(`Welcome, ${userData.fname} ${userData.lname}`);
-          setInputEmail('');
-        } else {
-          updateUsername(user);
-          updateLogDisplay('Login');
-          Alert.alert(`User not found`);
-        }
+      const response = await fetch(
+        `${be}/api/validateuser?email=${email}&pwd=${pwd}`,
+      );
+      const data = await response.json();
+      if (Object.keys(data).length > 1) {
+        updateLogEmail(data.email);
+        updateUsername(`${data.fname} ${data.lname}`);
+        updateLogDisplay('Home');
+        setFirebaseFname(data.fname);
+        setFirebaseLname(data.lname);
+        updateLogFlag(true);
+        Alert.alert(`Welcome, ${data.fname} ${data.lname}`);
+        setInputEmail('');
       } else {
         updateUsername(user);
         updateLogDisplay('Login');
         Alert.alert(`User not found`);
       }
-    } catch (e) {
-      console.error('Error validating user: ', e);
+    } catch (error) {
+      updateUsername(user);
+      updateLogDisplay('Login');
+      console.error('Error fetching data: api/validateuser', error);
+      Alert.alert('Error fetching data api/validateuser:', error);
     }
   };
 
@@ -182,9 +177,7 @@ const Login = ({
                 />
               </View>
               <TouchableOpacity onPress={test} style={styles.fpContainer}>
-                <Text style={styles.textLink}>
-                  Forgot Password?
-                </Text>
+                <Text style={styles.textLink}>Forgot Password?</Text>
               </TouchableOpacity>
               <View style={styles.buttonContainer}>
                 <TouchableOpacity
@@ -258,7 +251,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: 'center',
   },
-  
+
   button: {
     borderRadius: 10,
     paddingVertical: 10,
@@ -268,15 +261,13 @@ const styles = StyleSheet.create({
     margin: 5,
     width: 300,
   },
-  
+
   buttonContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     marginBottom: 20,
     alignItems: 'center',
   },
-
-  
 });
 
 export default Login;

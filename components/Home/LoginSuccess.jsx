@@ -4,29 +4,31 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  TextInput,
   Image,
   FlatList,
 } from 'react-native';
 import * as Location from 'expo-location';
 import {SwipeListView} from 'react-native-swipe-list-view';
+import AppConfig from '../../app.json';
 
 const LoginSuccess = ({firebaseFname, firebaseLname}) => {
-  const images = [
-    // require('../../assets/z.jpg'),
-    require('../../assets/logo.png'),
-    require('../../assets/angel.png'),
-    require('../../assets/angel.png'),
-  ];
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [crimeFeed, setCrimeFeed] = useState([]);
+  const [displayFeed, SetDisplayFeed] = useState([]);
+  const [isHovered, setIsHovered] = useState(false);
+  const [initialLocation, setInitialLocation] = useState({
+    latitude: 51.05011,
+    longitude: -114.08529,
+    latitudeDelta: 0.0022,
+    longitudeDelta: 0.0091,
+  });
+  const [address, setAddress] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const {be} = AppConfig;
 
   const capitalizeFirstLetter = str => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
-
-  const [userLocation, setUserLocation] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [crimeFeed, setCrimeFeed] = useState([]);
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -38,144 +40,103 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
 
   useEffect(() => {
     getLocation();
+    fetchCrimeCategories();
+    fetchRecentCrimes();
+  }, []);
+
+  useEffect(() => {
     // Simulating fetching crime feed for the selected category
     fetchCrimeFeed(selectedCategory);
   }, [selectedCategory]);
 
+  const requestLocationPermission = async () => {
+    try {
+      const {status} = await Location.requestForegroundPermissionsAsync();
+      return status === 'granted';
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  };
+
   const getLocation = async () => {
+<<<<<<< HEAD
     let {status} = await Location.requestForegroundPermissionsAsync();
+=======
+    const hasPermission = await requestLocationPermission();
+>>>>>>> main
 
-    let location = await Location.getCurrentPositionAsync({});
+    if (hasPermission) {
+      try {
+        const {coords} = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.High,
+        });
+        setInitialLocation({
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        });
 
+<<<<<<< HEAD
     // console.log(location.coords.latitude, location.coords.longitude);
+=======
+        // Perform reverse geocoding to get the address
+        const addressResult = await Location.reverseGeocodeAsync({
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+        });
+>>>>>>> main
 
-    const addressResult = await Location.reverseGeocodeAsync({
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-    });
-    // console.log(addressResult[0].formattedAddress);
-    setUserLocation(addressResult[0].formattedAddress);
+        if (addressResult && addressResult.length > 0) {
+          setAddress(formatAddress(addressResult[0]));
+        } else {
+          setAddress(null);
+        }
+      } catch (error) {
+        console.error('Error getting location:', error);
+        // console.log(null);
+      }
+    }
+  };
+
+  const formatAddress = addressObj => {
+    const {street, city, region, country} = addressObj;
+    return `${street}, ${city}, ${region}, ${country}`;
+  };
+
+  const fetchCrimeCategories = async () => {
+    try {
+      const response = await fetch(`${be}/api/crimecategories`);
+      const data = await response.json();
+      // console.log(Object.keys(data));
+      setCategories(['All', ...Object.keys(data)].sort());
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const fetchRecentCrimes = async () => {
+    try {
+      const response = await fetch(`${be}/api/recentcrimesv2`);
+      const data = await response.json();
+      setCrimeFeed(data);
+      SetDisplayFeed(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   const fetchCrimeFeed = category => {
-    // Simulated crime feed data based on category (replace with actual fetching logic)
-    let feedData = [];
-    if (category === 'All') {
-      // Fetch data for all categories
-      const allCategories = [
-        'Commercial Robbery',
-        'Theft FROM Vehicle',
-        'Theft OF Vehicle',
-      ];
-      allCategories.forEach(cat => {
-        // Fetch data for each category and concatenate to feedData
-        let dataForCategory = [];
-        if (cat === 'Commercial Robbery') {
-          dataForCategory = [
-            {
-              date: '2024-03-28',
-              category: cat,
-              description: 'Shop robbery in downtown',
-              location: 'Downtown',
-            },
-            {
-              date: '2024-03-25',
-              category: cat,
-              description: 'Robbery at convenience store',
-              location: 'Main Street',
-            },
-          ];
-        } else if (cat === 'Theft FROM Vehicle') {
-          dataForCategory = [
-            {
-              date: '2024-03-27',
-              category: cat,
-              description: 'Theft from parked vehicles',
-              location: 'Parking Lot',
-            },
-            {
-              date: '2024-03-24',
-              category: cat,
-              description: 'Car break-ins reported',
-              location: 'Residential Area',
-            },
-          ];
-        } else if (cat === 'Theft OF Vehicle') {
-          dataForCategory = [
-            {
-              date: '2024-03-26',
-              category: cat,
-              description: 'Car stolen from parking lot',
-              location: 'Parking Lot',
-            },
-            {
-              date: '2024-03-23',
-              category: cat,
-              description: 'Vehicle theft reported',
-              location: 'Street',
-            },
-          ];
-        }
-        feedData = feedData.concat(dataForCategory);
-      });
-    } else {
-      // Fetch data for the selected category
-      if (category === 'Commercial Robbery') {
-        feedData = [
-          {
-            date: '2024-03-28',
-            category: category,
-            description: 'Shop robbery in downtown',
-            location: 'Downtown',
-          },
-          {
-            date: '2024-03-25',
-            category: category,
-            description: 'Robbery at convenience store',
-            location: 'Main Street',
-          },
-        ];
-      } else if (category === 'Theft FROM Vehicle') {
-        feedData = [
-          {
-            date: '2024-03-27',
-            category: category,
-            description: 'Theft from parked vehicles',
-            location: 'Parking Lot',
-          },
-          {
-            date: '2024-03-24',
-            category: category,
-            description: 'Car break-ins reported',
-            location: 'Residential Area',
-          },
-        ];
-      } else if (category === 'Theft OF Vehicle') {
-        feedData = [
-          {
-            date: '2024-03-26',
-            category: category,
-            description: 'Car stolen from parking lot',
-            location: 'Parking Lot',
-          },
-          {
-            date: '2024-03-23',
-            category: category,
-            description: 'Vehicle theft reported',
-            location: 'Street',
-          },
-        ];
-      }
-    }
-    setCrimeFeed(feedData);
+    console.log(category);
+    // console.log(crimeFeed);
+    const feed =
+      category === 'All'
+        ? crimeFeed
+        : crimeFeed.filter(entry => entry.category === category);
+    // console.log(feed);
+    SetDisplayFeed(feed);
   };
-
-  const categories = [
-    'All',
-    'Commercial Robbery',
-    'Theft FROM Vehicle',
-    'Theft OF Vehicle',
-  ];
 
   const renderCategory = ({item}) => (
     <TouchableOpacity
@@ -198,9 +159,9 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
     <View style={styles.crimeItem}>
       <View style={styles.crimeItemHeader}>
         <Text style={styles.categoryTag}>{item.category}</Text>
-        <Text style={styles.date}>{item.date}</Text>
+        <Text style={styles.date}>{item.date.split('T')[0]}</Text>
       </View>
-      <Text style={styles.description}>{item.description}</Text>
+      <Text style={styles.description}>{item.desc}</Text>
       <Text style={styles.location}>{item.location}</Text>
     </View>
   );
@@ -227,21 +188,21 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
               numberOfLines={1}
               ellipsizeMode="tail"
               style={styles.locationText}>
-              {userLocation
-                ? userLocation.length > 20
-                  ? `${userLocation.slice(0, 20)}...`
-                  : userLocation
+              {address
+                ? address.length > 60
+                  ? `${address.slice(0, 60)}...`
+                  : address
                 : '...'}
             </Text>
           </TouchableOpacity>
           {isHovered && (
             <View style={styles.tooltip}>
-              <Text style={styles.tooltipText}>{userLocation}</Text>
+              <Text style={styles.tooltipText}>{address}</Text>
             </View>
           )}
         </View>
       </View>
-      
+
       <View style={styles.categoryContainer}>
         <FlatList
           data={categories}
@@ -251,6 +212,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
         />
       </View>
 
+<<<<<<< HEAD
       <FlatList
           data={crimeFeed}
           renderItem={renderCrimeItem}
@@ -258,6 +220,18 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
           horizontal={false}
           contentContainerStyle={{ flexGrow: 1 }}
         />
+=======
+      <SwipeListView
+        data={displayFeed}
+        renderItem={renderCrimeItem}
+        keyExtractor={(item, index) => index.toString()}
+        disableRightSwipe={true} // Disable swiping from right to left
+        recalculateHiddenLayout={true}
+        swipeToOpenPercent={10} // Adjust the threshold for swipe to open
+        swipeToClosePercent={10} // Adjust the threshold for swipe to close
+        swipeDirection={['down']} // Allow swiping only in the down direction
+      />
+>>>>>>> main
     </View>
   );
 };
@@ -267,40 +241,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2fdff',
     flex: 1,
   },
+
   inlineContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // backgroundColor: 'black',
     alignItems: 'center',
     marginTop: 15,
-    marginBottom: 30,
+    marginBottom: 10,
     paddingHorizontal: 20,
   },
   locationText: {
     fontSize: 12,
     color: '#1D4275',
   },
-  searchContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 15,
-    paddingHorizontal: 20,
-  },
-  searchInput: {
-    flex: 1,
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    paddingHorizontal: 40,
-    marginRight: 10,
-    backgroundColor: '#fff',
-  },
+  // searchContainer: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   marginBottom: 15,
+  //   paddingHorizontal: 20,
+  // },
+  // searchInput: {
+  //   flex: 1,
+  //   height: 40,
+  //   borderWidth: 1,
+  //   borderColor: '#ccc',
+  //   borderRadius: 5,
+  //   paddingHorizontal: 40,
+  //   marginRight: 10,
+  //   backgroundColor: '#fff',
+  // },
 
   userInfo: {
     fontSize: 19,
     fontStyle: 'italic',
   },
+<<<<<<< HEAD
   logoutButton: {
     backgroundColor: '#f2fdff',
     padding: 10,
@@ -316,6 +291,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   
+=======
+  swiper: {
+    height: 50, // Adjust the height of the swiper as needed
+  },
+>>>>>>> main
   slide: {
     flex: 1,
     justifyContent: 'center',

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import BottomDrawer from 'react-native-animated-bottom-drawer';
+import AppConfig from '../../app.json';
 
 const CrimeReportDrawer = ({
   bottomDrawerRef,
@@ -19,14 +20,12 @@ const CrimeReportDrawer = ({
   const [selectedLabel, setSelectedLabel] = useState(null);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([]);
-
   const [description, setDescription] = useState('');
+  const {be} = AppConfig;
 
   const fetchCrimeCategory = async () => {
     try {
-      const response = await fetch(
-        'https://breezy-app-be.vercel.app/api/crimecategories',
-      );
+      const response = await fetch(`${be}/api/crimecategories`);
       const data = await response.json();
       const newDataArray = Object.entries(data).map(([label, value]) => ({
         label,
@@ -73,7 +72,7 @@ const CrimeReportDrawer = ({
       return;
     }
 
-    const url = 'https://breezy-app-be.vercel.app//trans/addcrime';
+    const url = `${be}/trans/addcrime`;
     const data = {
       reporterInfo: [username, email],
       sector: compass,
@@ -147,9 +146,15 @@ const CrimeReportDrawer = ({
       openOnMount={false}
       startUp={false}
       onChangeVisibility={visible => setIsDrawerOpen(visible)}
-      customStyles={{ container: { backgroundColor:'#f2fdff'}}}>
+      customStyles={{container: {backgroundColor: '#f2fdff'}}}>
       <View style={styles.contentContainer}>
-        <Text style={{marginBottom: 20, fontSize: 22, fontWeight: 'bold', color: '#101935'}}>
+        <Text
+          style={{
+            marginBottom: 20,
+            fontSize: 22,
+            fontWeight: 'bold',
+            color: '#101935',
+          }}>
           Report a Crime
         </Text>
         <TextInput
@@ -168,7 +173,11 @@ const CrimeReportDrawer = ({
           setItems={setItems}
           placeholder="Crime Category"
           onChangeValue={handleValueChange}
-          dropDownContainerStyle={{backgroundColor: '#f2fdff', width: '90%', alignSelf: 'center'}}
+          dropDownContainerStyle={{
+            backgroundColor: '#f2fdff',
+            width: '90%',
+            alignSelf: 'center',
+          }}
         />
         <TextInput
           style={[styles.drawerInput, {height: 80}, {marginBottom: 20}]}
@@ -178,12 +187,7 @@ const CrimeReportDrawer = ({
           onChangeText={handleDescChangeText}
         />
         <View style={styles.drawerBtn}>
-          <Button
-            title="Submit"
-            color="#101935"
-            onPress={handleSubmit}
-            
-          />
+          <Button title="Submit" color="#101935" onPress={handleSubmit} />
         </View>
         <View style={styles.drawerBtn}>
           <Button title="Cancel" onPress={handleCancelPress} color="gray" />
@@ -209,13 +213,12 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
   },
-  
+
   drawerBtn: {
     width: '90%',
     borderRadius: 100,
     overflow: 'hidden',
     marginBottom: 10,
-    
   },
 });
 

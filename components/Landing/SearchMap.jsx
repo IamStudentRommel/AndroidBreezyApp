@@ -51,7 +51,6 @@ const SearchMap = ({setInitialLocation, clearSearch}) => {
           key: myMapKey,
           language: 'en',
         }}
-        
       />
     </View>
   );
