@@ -9,11 +9,13 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
+import AppConfig from '../app.json';
 
 const About = ({username, email}) => {
   const [feedback, setFeedback] = useState('');
   const [sending, setSending] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
+  const {be} = AppConfig;
 
   const capitalizeFirstLetter = str => {
     return str
@@ -41,7 +43,7 @@ const About = ({username, email}) => {
       setShowAnimation(true);
       setSending(true);
       const response = await fetch(
-        `https://breezy-app-be.vercel.app/api/send-email?from=${email}&subject=${subject}&text=${text}`,
+        `${be}/api/send-email?from=${email}&subject=${subject}&text=${text}`,
       );
       // console.log(response);
 
@@ -50,7 +52,7 @@ const About = ({username, email}) => {
           'Thank you for reaching us, your feedback was successfully sent!',
         );
       } else {
-        alert('Failed to send feedback');
+        alert('Failed to send feedback check api send-email');
       }
       setFeedback('');
       setSending(false);
@@ -65,7 +67,16 @@ const About = ({username, email}) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Amazing Crime App</Text>
+        <Text style={styles.title}>CrimeH8ers</Text>
+        <Text
+          style={{
+            textAlign: 'center',
+            marginBottom: 20,
+            fontStyle: 'italic',
+            color: '#546787',
+          }}>
+          Stay Aware, Stay Safe: Your Guardian Against Crime
+        </Text>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Overview</Text>
           <Text style={styles.textContent}>
@@ -84,7 +95,7 @@ const About = ({username, email}) => {
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>App Version</Text>
-          <Text style={styles.textContent}>1.6.9</Text>
+          <Text style={styles.textContent}>1.7.0</Text>
         </View>
         <View style={styles.feedbackSection}>
           <Text style={styles.sectionTitle}>Contact Us for Feedback</Text>
@@ -96,12 +107,12 @@ const About = ({username, email}) => {
             onChangeText={text => setFeedback(text)}
           />
           {showAnimation ? (
-            <ActivityIndicator size="large" color="blue" />
+            <ActivityIndicator size="large" color="#101935" />
           ) : (
             <Button
               title="Submit Feedback"
               onPress={handleFeedbackSubmit}
-              color="blue"
+              color="#101935"
               disabled={sending || showAnimation}
             />
           )}
@@ -115,32 +126,32 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: '#00001a',
+    backgroundColor: '#F2FDFF',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 5,
     textAlign: 'center',
-    color: '#ffffff',
+    color: '#101935',
   },
   section: {
     marginBottom: 20,
   },
   textContent: {
-    color: '#ffffff',
+    color: '#564787',
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#ffffff',
+    color: '#101935',
   },
   feedbackSection: {
     width: '100%',
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 10,
     marginTop: 10,
     color: '#ffffff',
@@ -152,7 +163,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
-    color: '#ffffff',
+    color: '#101935',
   },
 });
 

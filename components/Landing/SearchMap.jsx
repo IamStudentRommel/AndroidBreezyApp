@@ -4,12 +4,15 @@ import AppConfig from '../../app.json';
 
 const SearchMap = ({setInitialLocation, clearSearch}) => {
   const {myMapKey} = AppConfig;
-
+  // console.log(myMapKey);
   return (
     <View style={styles.searchBarContainer}>
       <GooglePlacesAutocomplete
-        placeholder="Search"
+        placeholder="Search location"
         onPress={(data, details = null) => {
+          console.log('press!');
+          console.log('Selected Place:', data);
+          console.log('Selected Place Details:', details);
           if (details) {
             const placeId = details.place_id;
             fetch(
@@ -62,7 +65,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
     backgroundColor: '#ffffff',
     elevation: 5,
-    borderRadius: 25,
+    borderRadius: 20,
+    width: '70%',
+    alignSelf: 'center',
   },
 });
 

@@ -9,15 +9,18 @@ import {
 } from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import * as Location from 'expo-location';
-import Test from '../../data/test.json';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import CustomDrawerButtom from './CrimeReportDrawer';
 import SearchMap from './SearchMap';
+import AppConfig from '../../app.json';
 
-const LandingMap = () => {
+const LandingMap = ({username, email}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const bottomDrawerRef = useRef(null);
+  const {be} = AppConfig;
+
+  // console.log(logDisplay);
 
   const handleOpenDrawer = () => {
     setIsDrawerOpen(true);
@@ -33,6 +36,7 @@ const LandingMap = () => {
     setClearSearch(prevState => !prevState);
   };
   //Drawer part end
+  const [compass, setCompass] = useState(null);
   const [address, setAddress] = useState(null);
   const [incidents, setIncidents] = useState([]);
   const [initialLocation, setInitialLocation] = useState({
@@ -49,6 +53,37 @@ const LandingMap = () => {
     } catch (err) {
       console.error(err);
       return false;
+    }
+  };
+
+  const getDirection = (latitude, longitude) => {
+    const centerLat = 51.0486;
+    const centerLng = -114.0708;
+
+    if (latitude > centerLat) {
+      if (longitude > centerLng) {
+        return 'North East';
+      } else if (longitude < centerLng) {
+        return 'North West';
+      } else {
+        return 'North';
+      }
+    } else if (latitude < centerLat) {
+      if (longitude > centerLng) {
+        return 'South East';
+      } else if (longitude < centerLng) {
+        return 'South West';
+      } else {
+        return 'South';
+      }
+    } else {
+      if (longitude > centerLng) {
+        return 'East';
+      } else if (longitude < centerLng) {
+        return 'West';
+      } else {
+        return 'Centre';
+      }
     }
   };
 
@@ -75,10 +110,16 @@ const LandingMap = () => {
 
         if (addressResult && addressResult.length > 0) {
           setAddress(formatAddress(addressResult[0]));
+
+          // console.log(addressResult);
+
+          // const direction = getDirection(51.118811, -114.043859);
+          const direction = getDirection(coords.latitude, coords.longitude);
+          setCompass(direction);
         } else {
           setAddress(null);
+          setCompass(null);
         }
-        // console.log(address);
       } catch (error) {
         setIsLoading(false);
         console.error('Error getting location:', error);
@@ -94,9 +135,7 @@ const LandingMap = () => {
 
   const fetchRecentIncidents = async () => {
     try {
-      const response = await fetch(
-        'https://breezy-app-be.vercel.app/api/recentcrimes',
-      );
+      const response = await fetch(`${be}/api/recentcrimesv2`);
       const data = await response.json();
       // const data = Test;
       setIncidents(data);
@@ -108,14 +147,19 @@ const LandingMap = () => {
 
   const mapRef = useRef(null);
   const reCenter = () => {
+    console.log('reCenter');
     getLocation();
     mapRef.current?.animateToRegion(initialLocation, 1000);
+    // console.log(compass);
   };
 
   useEffect(() => {
     fetchRecentIncidents();
-    getLocation();
   }, [incidents]);
+
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   const renderLoadingIndicator = () => (
     <View style={[StyleSheet.absoluteFill, styles.loadingIndicator]}>
@@ -139,20 +183,21 @@ const LandingMap = () => {
               style={{width: 30, height: 30}}
             />
           </Marker>
-
-          {incidents.map(marker => {
-            if (marker.year === '2024') {
+          {incidents.length > 0 &&
+            incidents.map(marker => {
+              // console.log(incidents);
               try {
                 const coordinates = {
-                  latitude: marker.community_center_point.coordinates[1],
-                  longitude: marker.community_center_point.coordinates[0],
+                  latitude: marker.coordinates[1],
+                  longitude: marker.coordinates[0],
                 };
+                const desc = `${marker.date.split('T')[0]} ${marker.category}`;
                 return (
                   <Marker
-                    key={marker.id}
+                    key={marker.coordinates[1]}
                     coordinate={coordinates}
-                    title={marker.category}
-                    description={marker.id}>
+                    title={marker.sector}
+                    description={desc}>
                     <Image
                       source={require('../../assets/zombie.png')}
                       style={{width: 30, height: 30}}
@@ -162,8 +207,7 @@ const LandingMap = () => {
               } catch (error) {
                 return null;
               }
-            }
-          })}
+            })}
         </MapView>
 
         <TouchableOpacity
@@ -171,7 +215,7 @@ const LandingMap = () => {
           onPress={handleOpenDrawer}
           activeOpacity={0.7}>
           <Image
-            source={require('../../assets/plus.png')}
+            source={require('../../assets/reportButton.png')}
             style={styles.fabIcon}
           />
         </TouchableOpacity>
@@ -180,7 +224,7 @@ const LandingMap = () => {
           onPress={reCenter}
           activeOpacity={0.7}>
           <Image
-            source={require('../../assets/navigation.png')}
+            source={require('../../assets/Direction.png')}
             style={styles.fabIcon}
           />
         </TouchableOpacity>
@@ -192,7 +236,11 @@ const LandingMap = () => {
       <CustomDrawerButtom
         bottomDrawerRef={bottomDrawerRef}
         setIsDrawerOpen={setIsDrawerOpen}
+        username={username}
+        email={email}
+        initialLocation={initialLocation}
         address={address}
+        compass={compass}
         handleCloseDrawer={handleCloseDrawer}
       />
     </View>
@@ -216,7 +264,6 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#e60000',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
@@ -228,7 +275,6 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 96,
@@ -236,8 +282,8 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   fabIcon: {
-    width: 24,
-    height: 24,
+    width: 56,
+    height: 56,
   },
   loadingIndicator: {
     justifyContent: 'center',

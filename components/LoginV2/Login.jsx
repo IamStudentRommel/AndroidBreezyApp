@@ -14,11 +14,10 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-// import 'expo-dev-client';
-import {db, collection, getDocs, query, where} from '../../firebase/conf';
 import LoginSuccess from '../Home/LoginSuccess';
 import RegistrationForm from './RegistrationForm';
 import SignOptions from './SignOptions';
+import AppConfig from '../../app.json';
 
 const LoadingComponent = () => {
   return (
@@ -27,19 +26,19 @@ const LoadingComponent = () => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#00001a',
+        backgroundColor: '#F2FDFF',
       }}>
       <Image
-        source={require('../../assets/crimehate.png')}
+        source={require('../../assets/crimehate3.png')}
         style={{
-          width: '80%',
-          height: '80%',
+          width: '70%',
+          height: '70%',
           resizeMode: 'contain',
-          backgroundColor: '#00001a',
+          backgroundColor: '#F2FDFF',
         }}
       />
       <ActivityIndicator size="large" color="#ffffff" />
-      <Text style={{color: '#ffffff', marginTop: 10}}>Loading...</Text>
+      <Text style={{color: '#101935', marginTop: 10}}>Loading...</Text>
     </View>
   );
 };
@@ -61,37 +60,33 @@ const Login = ({
   const [firebaseFname, setFirebaseFname] = useState('');
   const [firebaseLname, setFirebaseLname] = useState('');
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const {be} = AppConfig;
 
   const validateUser = async (email, pwd) => {
     try {
-      const q = query(collection(db, 'users'), where('email', '==', email));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        const userDoc = querySnapshot.docs[0];
-        const userData = userDoc.data();
-        if (userData.pwd === pwd) {
-          // console.log(userData.email);
-          updateLogEmail(userData.email);
-          updateUsername(`${userData.fname} ${userData.lname}`);
-          updateLogDisplay('Home');
-          setFirebaseFname(userData.fname);
-          setFirebaseLname(userData.lname);
-          updateLogFlag(true);
-          Alert.alert(`Welcome, ${userData.fname} ${userData.lname}`);
-          setInputEmail('');
-        } else {
-          updateUsername(user);
-          updateLogDisplay('Login');
-          Alert.alert(`User not found`);
-        }
+      const response = await fetch(
+        `${be}/api/validateuser?email=${email}&pwd=${pwd}`,
+      );
+      const data = await response.json();
+      if (Object.keys(data).length > 1) {
+        updateLogEmail(data.email);
+        updateUsername(`${data.fname} ${data.lname}`);
+        updateLogDisplay('Home');
+        setFirebaseFname(data.fname);
+        setFirebaseLname(data.lname);
+        updateLogFlag(true);
+        Alert.alert(`Welcome, ${data.fname} ${data.lname}`);
+        setInputEmail('');
       } else {
         updateUsername(user);
         updateLogDisplay('Login');
         Alert.alert(`User not found`);
       }
-    } catch (e) {
-      console.error('Error validating user: ', e);
+    } catch (error) {
+      updateUsername(user);
+      updateLogDisplay('Login');
+      console.error('Error fetching data: api/validateuser', error);
+      Alert.alert('Error fetching data api/validateuser:', error);
     }
   };
 
@@ -163,40 +158,39 @@ const Login = ({
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inner}>
               <Image
-                source={require('../../assets/crimehate.png')}
+                source={require('../../assets/crimehate3.png')}
                 style={styles.logo}
               />
-
-              <TextInput
-                placeholder="Email"
-                placeholderTextColor={'#ffffff'}
-                style={styles.textInput}
-                onChangeText={handleEmailChange}
-              />
-              <TextInput
-                placeholder="Password"
-                placeholderTextColor={'#ffffff'}
-                style={styles.textInput}
-                secureTextEntry
-                onChangeText={handlePwdChange}
-              />
-              <TouchableOpacity
-                style={styles.loginBtn}
-                onPress={handleValidateUser}>
-                <View style={styles.loginBtnContent}>
-                  <Text style={styles.loginBtnTitle}>LOGIN</Text>
-                </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  placeholder="Email"
+                  placeholderTextColor={'#101935'}
+                  style={styles.textInput}
+                  onChangeText={handleEmailChange}
+                />
+                <TextInput
+                  placeholder="Password"
+                  placeholderTextColor={'#101935'}
+                  style={styles.textInput}
+                  secureTextEntry
+                  onChangeText={handlePwdChange}
+                />
+              </View>
+              <TouchableOpacity onPress={test} style={styles.fpContainer}>
+                <Text style={styles.textLink}>Forgot Password?</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.textLink} onPress={test}>
-                  Forgot Password?
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.textLink} onPress={redirectReg}>
-                  Signup
-                </Text>
-              </TouchableOpacity>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={[styles.button, {backgroundColor: '#101935'}]}
+                  onPress={handleValidateUser}>
+                  <Text style={styles.loginBtnTitle}>Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.button, {backgroundColor: 'gray'}]}
+                  onPress={redirectReg}>
+                  <Text style={styles.loginBtnTitle}>Create Account</Text>
+                </TouchableOpacity>
+              </View>
               <SignOptions />
             </View>
           </TouchableWithoutFeedback>
@@ -209,48 +203,70 @@ const Login = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00001a',
+    backgroundColor: '#f2fdff',
   },
   inner: {
-    padding: 24,
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+
   logo: {
-    width: '100%',
-    height: '50%',
-    marginTop: -50,
+    width: 200,
+    height: 98,
+    marginBottom: 50,
+  },
+
+  inputContainer: {
+    marginBottom: 20,
   },
 
   textInput: {
     height: 40,
-    borderColor: '#ffffff',
+    borderColor: '#101935',
     borderBottomWidth: 1,
-    color: '#ffffff',
+    color: '#101935',
+    marginBottom: 10,
+    width: 300,
+    paddingHorizontal: 10,
   },
-  loginBtnTitle: {
-    color: '#ffffff',
+
+  fpContainer: {
+    width: '90%',
+    alignItems: 'flex-end',
+    marginBottom: 20,
+    marginRight: 70,
+  },
+
+  textLink: {
+    color: '#564787',
     fontSize: 15,
-    fontWeight: 'bold',
-    marginHorizontal: 20,
+    textAlign: 'right',
+    marginBottom: 10,
+    width: '90%',
   },
-  loginBtn: {
-    backgroundColor: 'blue',
-    borderRadius: 25,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    width: '100%',
+
+  loginBtnTitle: {
+    color: '#f2fdff',
+    fontSize: 15,
     alignSelf: 'center',
   },
-  loginBtnContent: {
-    flexDirection: 'row',
+
+  button: {
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 5,
+    width: 300,
   },
-  textLink: {
-    color: '#3333ff',
-    fontSize: 15,
-    textAlign: 'center',
+
+  buttonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    alignItems: 'center',
   },
 });
 

@@ -25,7 +25,7 @@ const SignOptions = () => {
 
   const test = async () => {
     // console.log('hey');
-    Alert('Function not yet ready');
+    alert('Function not yet ready');
   };
   return (
     <View style={styles.signInContainer}>
@@ -103,37 +103,45 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    color: '#ffffff',
+    color: '#101935',
     fontSize: 15,
     fontWeight: 'bold',
     marginHorizontal: 20,
   },
+
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#101935',
   },
 
   button: {
-    backgroundColor: 'blue',
     borderRadius: 25,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    width: '60%',
+    width: '80%',
     alignSelf: 'center',
   },
+
   buttonContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    borderColor: '#101935',
+    borderWidth: 0.5,
+    padding: 10,
+    borderRadius: 25,
+    width: '100%',
   },
+
   googleLogo: {
     width: 24,
     height: 24,
     marginRight: 10,
   },
+
   buttonText: {
-    color: 'white',
+    color: '#101935',
     fontSize: 16,
     fontWeight: 'bold',
   },
