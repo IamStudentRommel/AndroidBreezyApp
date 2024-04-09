@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 // import FlashMessage, {showMessage} from 'react-native-flash-message';
 import {PieChart, LineChart} from 'react-native-chart-kit';
-// import {db, collection, getDocs} from '../../firebase/conf';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import ClusteredMapView from 'react-native-map-clustering';

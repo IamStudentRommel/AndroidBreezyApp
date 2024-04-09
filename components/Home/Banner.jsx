@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-const Banner = ({text, images}) => {
+const Banner = ({data}) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleScroll = event => {
@@ -19,37 +19,41 @@ const Banner = ({text, images}) => {
 
   const renderItem = ({item}) => (
     <View style={styles.imageContainer}>
-      <Image source={item} style={styles.image} resizeMode="contain" />
+      <Image source={item.image} style={styles.image} resizeMode="contain" />
     </View>
   );
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={images}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onScroll={handleScroll}
-        snapToInterval={Dimensions.get('window').width}
-        snapToAlignment={'start'}
-        decelerationRate={'fast'}
-      />
+  const renderText = () => {
+    if (data.length > 0) {
+      return <Text style={styles.crimeContent}>{data[activeIndex].text}</Text>;
+    }
+    return null;
+  };
 
-      <View style={styles.dotsContainer}>
-        {images.map((_, index) => (
-          <View
-            key={index}
-            style={[styles.dot, index === activeIndex && styles.activeDot]}
-          />
-        ))}
+  return (
+    <>
+      <View style={styles.container}>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onScroll={handleScroll}
+          snapToInterval={Dimensions.get('window').width}
+          snapToAlignment={'start'}
+          decelerationRate={'fast'}
+        />
+
+        <View style={styles.dotsContainer}>
+          {data.map((_, index) => (
+            <View key={index} />
+          ))}
+        </View>
       </View>
-      <View>
-        <Text style={styles.text}>{text}</Text>
-      </View>
-    </View>
+      <View>{renderText()}</View>
+    </>
   );
 };
 
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: '45%',
+    height: '55%',
     width: '96%',
     marginLeft: '2%',
     marginRight: '3%',
@@ -65,28 +69,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 15,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
+    shadowOffset: {width: 0, height: 3},
     shadowOpacity: 0.27,
     shadowRadius: 4.65,
     elevation: 6,
-    // backgroundColor: '#000033',
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#ffffff',
   },
   imageContainer: {
     width: Dimensions.get('window').width,
     height: '100%',
+
+    alignItems: 'center',
   },
   image: {
-    marginTop: 30,
+    margin: 5,
     width: '100%',
     height: '100%',
+  },
+  crimeContent: {
+    marginTop: 10,
+    textAlign: 'center',
   },
   dotsContainer: {
     flexDirection: 'row',
