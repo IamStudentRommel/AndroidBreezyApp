@@ -1,6 +1,6 @@
 {
   "be": "https://breezy-app-be.vercel.app/",
-  "myMapKey": "AIzaSyBT5TojBqi632zBlXjXrcxhS1xoMXXjZRU",
+  "myMapKey": "",
   "name": "main",
   "displayName": "BreezyApp",
   "expo": {
