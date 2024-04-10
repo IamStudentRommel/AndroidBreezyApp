@@ -1,8 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import BottomDrawer from 'react-native-animated-bottom-drawer';
 import AppConfig from '../../app.json';
+// import ImagePicker from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker';
 
 const CrimeReportDrawer = ({
   bottomDrawerRef,
@@ -21,6 +31,8 @@ const CrimeReportDrawer = ({
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([]);
   const [description, setDescription] = useState('');
+  const [imageSource, setImageSource] = useState(null);
+  const [crimeID, setCrimeID] = useState(null);
   const {be} = AppConfig;
 
   const fetchCrimeCategory = async () => {
@@ -57,6 +69,17 @@ const CrimeReportDrawer = ({
     setDescription(text);
   };
 
+  const generateRandomUniqueId = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let uniqueId = '';
+
+    for (let i = 0; i < 7; i++) {
+      uniqueId += characters.charAt(
+        Math.floor(Math.random() * characters.length),
+      );
+    }
+  };
+
   const handleSubmit = async () => {
     // console.log(description.length);
     if (selectedLabel === null) {
@@ -71,9 +94,10 @@ const CrimeReportDrawer = ({
       alert('Please provide more details about the crime.');
       return;
     }
-
+    setCrimeID(generateRandomUniqueId);
     const url = `${be}/trans/addcrime`;
     const data = {
+      id: crimeID,
       reporterInfo: [username, email],
       sector: compass,
       category: selectedLabel,
@@ -136,6 +160,26 @@ const CrimeReportDrawer = ({
     setSelectedLabel(null);
   };
 
+  const selectImage = async () => {
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      if (!result.cancelled) {
+        setImageSource(result.assets[0].uri);
+        console.log(imageSource);
+      }
+      // setImageSource(result.assets[0].uri.trim());
+      // console.log(imageSource);
+    } catch {
+      console.log('cancelled');
+    }
+  };
+
   useEffect(() => {
     fetchCrimeCategory();
   }, []);
@@ -146,7 +190,12 @@ const CrimeReportDrawer = ({
       openOnMount={false}
       startUp={false}
       onChangeVisibility={visible => setIsDrawerOpen(visible)}
-      customStyles={{container: {backgroundColor: '#f2fdff'}}}>
+      customStyles={{
+        container: {
+          backgroundColor: '#f2fdff',
+          height: '115%', // Set the height to 80% of the screen
+        },
+      }}>
       <View style={styles.contentContainer}>
         <Text
           style={{
@@ -163,6 +212,33 @@ const CrimeReportDrawer = ({
           editable={false}
           value={address}
         />
+        <View style={styles.imageContainer}>
+          {/* {console.log(imageSource)} */}
+          {imageSource ? (
+            <Image
+              source={{
+                uri: imageSource,
+              }}
+              style={{width: 150, height: 150}}
+              resizeMode="cover"
+            />
+          ) : (
+            <View style={styles.previewPlaceholder}>
+              <Text style={styles.previewText}>
+                No Image Selected (Optional only)
+              </Text>
+            </View>
+          )}
+
+          <TouchableOpacity
+            style={styles.selectImageButton}
+            onPress={selectImage}>
+            <Image
+              source={require('../../assets/photo.png')}
+              style={{width: 20, height: 20, tintColor: '#fff'}}
+            />
+          </TouchableOpacity>
+        </View>
         <DropDownPicker
           style={[styles.drawerInput]}
           open={open}
@@ -179,6 +255,7 @@ const CrimeReportDrawer = ({
             alignSelf: 'center',
           }}
         />
+
         <TextInput
           style={[styles.drawerInput, {height: 80}, {marginBottom: 20}]}
           placeholder="Enter description"
@@ -213,12 +290,47 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
   },
-
   drawerBtn: {
     width: '90%',
     borderRadius: 100,
     overflow: 'hidden',
     marginBottom: 10,
+  },
+
+  imageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  previewImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  previewPlaceholder: {
+    width: 150,
+    height: 150,
+    borderRadius: 5,
+    marginRight: 10,
+    // backgroundColor: '#f2f2f2',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  previewText: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#888',
+  },
+  selectImageButton: {
+    backgroundColor: '#007bff',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  selectImageText: {
+    color: '#fff',
+    fontSize: 16,
   },
 });
 
