@@ -173,8 +173,6 @@ const CrimeReportDrawer = ({
         setImageSource(result.assets[0].uri);
         console.log(imageSource);
       }
-      // setImageSource(result.assets[0].uri.trim());
-      // console.log(imageSource);
     } catch {
       console.log('cancelled');
     }
@@ -204,7 +202,7 @@ const CrimeReportDrawer = ({
             fontWeight: 'bold',
             color: '#101935',
           }}>
-          Report a Crime
+          Report Crime
         </Text>
         <TextInput
           style={[styles.drawerInput, {backgroundColor: '#f2fdff'}]}
@@ -212,8 +210,19 @@ const CrimeReportDrawer = ({
           editable={false}
           value={address}
         />
+
         <View style={styles.imageContainer}>
           {/* {console.log(imageSource)} */}
+          {imageSource ? (
+            <TouchableOpacity
+              style={styles.removeButton}
+              onPress={() => setImageSource(null)}>
+              <Image
+                source={require('../../assets/cross.png')}
+                style={{width: 24, height: 24}}
+              />
+            </TouchableOpacity>
+          ) : null}
           {imageSource ? (
             <Image
               source={{
@@ -239,6 +248,7 @@ const CrimeReportDrawer = ({
             />
           </TouchableOpacity>
         </View>
+
         <DropDownPicker
           style={[styles.drawerInput]}
           open={open}
@@ -281,10 +291,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2fdff',
   },
   drawerInput: {
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderColor: '#101935',
     backgroundColor: '#f2fdff',
-    borderRadius: 5,
+    borderRadius: 10,
     padding: 10,
     marginBottom: 10,
     width: '90%',
@@ -298,9 +308,17 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
+    position: 'relative',
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+  },
+  removeButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 1,
+    marginRight: '8%',
   },
   previewImage: {
     width: 100,
@@ -313,7 +331,7 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 5,
     marginRight: 10,
-    // backgroundColor: '#f2f2f2',
+    backgroundColor: '#f2f2f2', // Add a background color for the placeholder
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -327,6 +345,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
+    marginLeft: 10,
   },
   selectImageText: {
     color: '#fff',
