@@ -94,7 +94,7 @@ const CrimeReportDrawer = ({
       alert('Please provide more details about the crime.');
       return;
     }
-    setCrimeID(generateRandomUniqueId);
+    setCrimeID(generateRandomUniqueId());
     const url = `${be}/trans/addcrime`;
     const data = {
       id: crimeID,

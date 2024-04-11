@@ -6,21 +6,32 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Button,
 } from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import * as Location from 'expo-location';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import CustomDrawerButtom from './CrimeReportDrawer';
 import SearchMap from './SearchMap';
+import CrimeModal from './PopModal';
 import AppConfig from '../../app.json';
 
 const LandingMap = ({username, email}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [crimeDetails, setCrimeDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const bottomDrawerRef = useRef(null);
   const {be} = AppConfig;
 
-  // console.log(logDisplay);
+  const selectCrime = data => {
+    setCrimeDetails(data);
+    toggleModal();
+  };
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
 
   const handleOpenDrawer = () => {
     setIsDrawerOpen(true);
@@ -192,11 +203,13 @@ const LandingMap = ({username, email}) => {
                   longitude: marker.coordinates[0],
                 };
                 const desc = `${marker.date.split('T')[0]} ${marker.category}`;
+                const crimeInfo = `${marker.id}|||${marker.date}|||${marker.desc}|||${marker.category}|||${marker.reporterInfo}`;
                 return (
                   <Marker
                     key={marker.coordinates[1]}
                     coordinate={coordinates}
                     title={marker.sector}
+                    onPress={() => selectCrime(crimeInfo)} // Pass crime details as argument
                     description={desc}>
                     <Image
                       source={require('../../assets/zombie.png')}
@@ -228,6 +241,7 @@ const LandingMap = ({username, email}) => {
             style={styles.fabIcon}
           />
         </TouchableOpacity>
+        {/* <Button title="Open Modal" onPress={toggleModal} /> */}
 
         {/* SearchBar */}
         <SearchMap setInitialLocation={setInitialLocation} />
@@ -242,6 +256,11 @@ const LandingMap = ({username, email}) => {
         address={address}
         compass={compass}
         handleCloseDrawer={handleCloseDrawer}
+      />
+      <CrimeModal
+        modalVisible={modalVisible}
+        toggleModal={toggleModal}
+        crimeDetails={crimeDetails}
       />
     </View>
   );
