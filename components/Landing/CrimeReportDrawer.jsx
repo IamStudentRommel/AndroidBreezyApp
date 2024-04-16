@@ -33,6 +33,7 @@ const CrimeReportDrawer = ({
   const [description, setDescription] = useState('');
   const [imageSource, setImageSource] = useState(null);
   const [crimeID, setCrimeID] = useState(null);
+  const [imgFileName, setImgFileName] = useState('');
   const {be} = AppConfig;
 
   const fetchCrimeCategory = async () => {
@@ -78,10 +79,11 @@ const CrimeReportDrawer = ({
         Math.floor(Math.random() * characters.length),
       );
     }
+    return uniqueId;
   };
 
   const handleSubmit = async () => {
-    // console.log(description.length);
+    // console.log(generateRandomUniqueId());
     if (selectedLabel === null) {
       alert('Please select crime category.');
       return;
@@ -102,7 +104,7 @@ const CrimeReportDrawer = ({
       sector: compass,
       category: selectedLabel,
       desc: description,
-      images: [],
+      images: [imgFileName],
       date: getCurrentDateTime(),
       coordinates: [
         initialLocation.longitude + LongNear,
@@ -171,7 +173,10 @@ const CrimeReportDrawer = ({
 
       if (!result.cancelled) {
         setImageSource(result.assets[0].uri);
-        console.log(imageSource);
+        const fullPath = result.assets[0].uri.split('/');
+        const exactFile = fullPath[fullPath.length - 1];
+        console.log(exactFile);
+        setImgFileName(exactFile);
       }
     } catch {
       console.log('cancelled');

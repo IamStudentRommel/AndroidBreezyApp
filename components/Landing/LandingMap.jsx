@@ -9,6 +9,7 @@ import {
   Button,
 } from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import ClusteredMapView from 'react-native-map-clustering';
 import * as Location from 'expo-location';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import CustomDrawerButtom from './CrimeReportDrawer';
@@ -182,7 +183,7 @@ const LandingMap = ({username, email}) => {
   return (
     <View style={styles.container}>
       <View style={styles.mapContainer}>
-        <MapView
+        <ClusteredMapView
           ref={mapRef}
           style={styles.map}
           provider={PROVIDER_GOOGLE}
@@ -221,7 +222,7 @@ const LandingMap = ({username, email}) => {
                 return null;
               }
             })}
-        </MapView>
+        </ClusteredMapView>
 
         <TouchableOpacity
           style={styles.fab}

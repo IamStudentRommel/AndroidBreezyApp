@@ -6,7 +6,7 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
     if (!crimeDetails) return null;
     const [id, datetime, details, category, reporter] =
       crimeDetails.split('|||');
-    const isDateMatch = datetime.split('T')[0].split('.')[0] === '2024-04-11';
+    const isDateMatch = datetime.split('T')[0].split('.')[0] === '2024-04-16';
 
     return (
       <View style={styles.detailsContainer}>
