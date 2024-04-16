@@ -53,7 +53,7 @@ const SearchMap = ({setInitialLocation}) => {
         placeholder="Search location"
         onPress={handlePlaceSelected}
         query={{
-          key: 'AIzaSyBwT5NQwXBdsuGkTsJdcd8hnYhAXt4zkCc',
+          key: 'xyz',
           language: 'en',
           region: 'CA',
         }}
