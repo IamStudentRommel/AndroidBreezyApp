@@ -98,7 +98,7 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           {renderCrimeDetails()}
-          <Button title="OK" onPress={toggleModal} />
+          <Button title="OK" onPress={toggleModal} color="#101935" />
         </View>
       </View>
     </Modal>
@@ -149,8 +149,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
   },
 });
 
