@@ -83,7 +83,7 @@ const CrimeReportDrawer = ({
   };
 
   const handleSubmit = async () => {
-    // console.log(generateRandomUniqueId());
+    console.log(generateRandomUniqueId());
     if (selectedLabel === null) {
       alert('Please select crime category.');
       return;
@@ -97,9 +97,10 @@ const CrimeReportDrawer = ({
       return;
     }
     setCrimeID(generateRandomUniqueId());
-    const url = `${be}/trans/addcrime`;
+    console.log(generateRandomUniqueId());
+    const url = `${be}trans/addcrime`;
     const data = {
-      id: crimeID,
+      id: generateRandomUniqueId(),
       reporterInfo: [username, email],
       sector: compass,
       category: selectedLabel,
@@ -120,19 +121,40 @@ const CrimeReportDrawer = ({
         },
         body: JSON.stringify(data),
       });
-
       if (!response.ok) {
         throw new Error('Network response was not ok');
-      }
+      } else {
+        const responseData = await response.json();
+        console.log('Response:', responseData);
+        alert('New crime successfully reported.');
+        handleCancelPress();
+        setLatNear(latNear + 0.001);
+        setLongNear(LongNear + 0.001);
 
-      const responseData = await response.json();
-      console.log('Response:', responseData);
-      alert('New crime successfully reported.');
-      handleCancelPress();
-      setLatNear(latNear + 0.001);
-      setLongNear(LongNear + 0.001);
+        // Create a new FormData object to upload images
+        const formData = new FormData();
+        formData.append('image', {
+          uri: imageSource,
+          name: imgFileName,
+          type: 'image/jpg',
+        });
+        console.log(formData);
+        const url = `${be}trans/upload`;
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            body: formData,
+          });
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+        } catch (error) {
+          console.error('Error uploading image:', error);
+        }
+      }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error post data:', error);
     }
   };
 
@@ -175,7 +197,6 @@ const CrimeReportDrawer = ({
         setImageSource(result.assets[0].uri);
         const fullPath = result.assets[0].uri.split('/');
         const exactFile = fullPath[fullPath.length - 1];
-        console.log(exactFile);
         setImgFileName(exactFile);
       }
     } catch {

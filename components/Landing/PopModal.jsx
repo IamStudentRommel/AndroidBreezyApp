@@ -1,12 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+
 import {Modal, Button, View, Text, Image, StyleSheet} from 'react-native';
+import AppConfig from '../../app.json';
 
 const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
+  const [imgSrc, setImgSrc] = useState(null);
+  const {be} = AppConfig;
+  const fetchCrimeImg = async images => {
+    try {
+      const response = await fetch(`${be}trans/images/${images}`);
+      const data = await response.json();
+      setImgSrc(data['imageUrl']);
+      // console.log(data);
+    } catch (error) {
+      // console.error('Error fetching images:', error);
+      setImgSrc(null);
+    }
+  };
+
+  useEffect(() => {
+    if (crimeDetails) {
+      const [id, datetime, details, category, reporter, images] =
+        crimeDetails.split('|||');
+      fetchCrimeImg(images);
+    }
+  }, [crimeDetails]);
+
   const renderCrimeDetails = () => {
     if (!crimeDetails) return null;
-    const [id, datetime, details, category, reporter] =
+    const [id, datetime, details, category, reporter, images] =
       crimeDetails.split('|||');
-    const isDateMatch = datetime.split('T')[0].split('.')[0] === '2024-04-16';
 
     return (
       <View style={styles.detailsContainer}>
@@ -43,10 +66,21 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
           {details}
         </Text>
 
-        {isDateMatch && (
+        {/* <View style={styles.imageContainer}>
+          <Image
+            source={{
+              uri: imgSrc,
+            }}
+            style={styles.image}
+          />
+        </View> */}
+
+        {imgSrc && (
           <View style={styles.imageContainer}>
             <Image
-              source={require('../../assets/robbery.jpg')}
+              source={{
+                uri: imgSrc,
+              }}
               style={styles.image}
             />
           </View>

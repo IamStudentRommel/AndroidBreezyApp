@@ -204,7 +204,7 @@ const LandingMap = ({username, email}) => {
                   longitude: marker.coordinates[0],
                 };
                 const desc = `${marker.date.split('T')[0]} ${marker.category}`;
-                const crimeInfo = `${marker.id}|||${marker.date}|||${marker.desc}|||${marker.category}|||${marker.reporterInfo}`;
+                const crimeInfo = `${marker.id}|||${marker.date}|||${marker.desc}|||${marker.category}|||${marker.reporterInfo}|||${marker.images}`;
                 return (
                   <Marker
                     key={marker.coordinates[1]}
