@@ -1,8 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import BottomDrawer from 'react-native-animated-bottom-drawer';
 import AppConfig from '../../app.json';
+// import ImagePicker from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker';
 
 const CrimeReportDrawer = ({
   bottomDrawerRef,
@@ -21,6 +31,9 @@ const CrimeReportDrawer = ({
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([]);
   const [description, setDescription] = useState('');
+  const [imageSource, setImageSource] = useState(null);
+  const [crimeID, setCrimeID] = useState(null);
+  const [imgFileName, setImgFileName] = useState('');
   const {be} = AppConfig;
 
   const fetchCrimeCategory = async () => {
@@ -57,8 +70,20 @@ const CrimeReportDrawer = ({
     setDescription(text);
   };
 
+  const generateRandomUniqueId = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let uniqueId = '';
+
+    for (let i = 0; i < 7; i++) {
+      uniqueId += characters.charAt(
+        Math.floor(Math.random() * characters.length),
+      );
+    }
+    return uniqueId;
+  };
+
   const handleSubmit = async () => {
-    // console.log(description.length);
+    console.log(generateRandomUniqueId());
     if (selectedLabel === null) {
       alert('Please select crime category.');
       return;
@@ -71,14 +96,16 @@ const CrimeReportDrawer = ({
       alert('Please provide more details about the crime.');
       return;
     }
-
-    const url = `${be}/trans/addcrime`;
+    setCrimeID(generateRandomUniqueId());
+    console.log(generateRandomUniqueId());
+    const url = `${be}trans/addcrime`;
     const data = {
+      id: generateRandomUniqueId(),
       reporterInfo: [username, email],
       sector: compass,
       category: selectedLabel,
       desc: description,
-      images: [],
+      images: [imgFileName],
       date: getCurrentDateTime(),
       coordinates: [
         initialLocation.longitude + LongNear,
@@ -94,19 +121,40 @@ const CrimeReportDrawer = ({
         },
         body: JSON.stringify(data),
       });
-
       if (!response.ok) {
         throw new Error('Network response was not ok');
-      }
+      } else {
+        const responseData = await response.json();
+        console.log('Response:', responseData);
+        alert('New crime successfully reported.');
+        handleCancelPress();
+        setLatNear(latNear + 0.001);
+        setLongNear(LongNear + 0.001);
 
-      const responseData = await response.json();
-      console.log('Response:', responseData);
-      alert('New crime successfully reported.');
-      handleCancelPress();
-      setLatNear(latNear + 0.001);
-      setLongNear(LongNear + 0.001);
+        // Create a new FormData object to upload images
+        const formData = new FormData();
+        formData.append('image', {
+          uri: imageSource,
+          name: imgFileName,
+          type: 'image/jpg',
+        });
+        console.log(formData);
+        const url = `${be}trans/upload`;
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            body: formData,
+          });
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+        } catch (error) {
+          console.error('Error uploading image:', error);
+        }
+      }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error post data:', error);
     }
   };
 
@@ -136,6 +184,26 @@ const CrimeReportDrawer = ({
     setSelectedLabel(null);
   };
 
+  const selectImage = async () => {
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      if (!result.cancelled) {
+        setImageSource(result.assets[0].uri);
+        const fullPath = result.assets[0].uri.split('/');
+        const exactFile = fullPath[fullPath.length - 1];
+        setImgFileName(exactFile);
+      }
+    } catch {
+      console.log('cancelled');
+    }
+  };
+
   useEffect(() => {
     fetchCrimeCategory();
   }, []);
@@ -146,7 +214,12 @@ const CrimeReportDrawer = ({
       openOnMount={false}
       startUp={false}
       onChangeVisibility={visible => setIsDrawerOpen(visible)}
-      customStyles={{container: {backgroundColor: '#f2fdff'}}}>
+      customStyles={{
+        container: {
+          backgroundColor: '#f2fdff',
+          height: '115%', // Set the height to 80% of the screen
+        },
+      }}>
       <View style={styles.contentContainer}>
         <Text
           style={{
@@ -155,7 +228,7 @@ const CrimeReportDrawer = ({
             fontWeight: 'bold',
             color: '#101935',
           }}>
-          Report a Crime
+          Report Crime
         </Text>
         <TextInput
           style={[styles.drawerInput, {backgroundColor: '#f2fdff'}]}
@@ -163,6 +236,45 @@ const CrimeReportDrawer = ({
           editable={false}
           value={address}
         />
+
+        <View style={styles.imageContainer}>
+          {/* {console.log(imageSource)} */}
+          {imageSource ? (
+            <TouchableOpacity
+              style={styles.removeButton}
+              onPress={() => setImageSource(null)}>
+              <Image
+                source={require('../../assets/cross.png')}
+                style={{width: 24, height: 24}}
+              />
+            </TouchableOpacity>
+          ) : null}
+          {imageSource ? (
+            <Image
+              source={{
+                uri: imageSource,
+              }}
+              style={{width: 150, height: 150}}
+              resizeMode="cover"
+            />
+          ) : (
+            <View style={styles.previewPlaceholder}>
+              <Text style={styles.previewText}>
+                No Image Selected (Optional only)
+              </Text>
+            </View>
+          )}
+
+          <TouchableOpacity
+            style={styles.selectImageButton}
+            onPress={selectImage}>
+            <Image
+              source={require('../../assets/photo.png')}
+              style={{width: 20, height: 20, tintColor: '#fff'}}
+            />
+          </TouchableOpacity>
+        </View>
+
         <DropDownPicker
           style={[styles.drawerInput]}
           open={open}
@@ -179,6 +291,7 @@ const CrimeReportDrawer = ({
             alignSelf: 'center',
           }}
         />
+
         <TextInput
           style={[styles.drawerInput, {height: 80}, {marginBottom: 20}]}
           placeholder="Enter description"
@@ -204,21 +317,65 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2fdff',
   },
   drawerInput: {
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderColor: '#101935',
     backgroundColor: '#f2fdff',
-    borderRadius: 5,
+    borderRadius: 10,
     padding: 10,
     marginBottom: 10,
     width: '90%',
     alignSelf: 'center',
   },
-
   drawerBtn: {
     width: '90%',
     borderRadius: 100,
     overflow: 'hidden',
     marginBottom: 10,
+  },
+
+  imageContainer: {
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  removeButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 1,
+    marginRight: '8%',
+  },
+  previewImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  previewPlaceholder: {
+    width: 150,
+    height: 150,
+    borderRadius: 5,
+    marginRight: 10,
+    backgroundColor: '#f2f2f2', // Add a background color for the placeholder
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  previewText: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#888',
+  },
+  selectImageButton: {
+    backgroundColor: '#007bff',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginLeft: 10,
+  },
+  selectImageText: {
+    color: '#fff',
+    fontSize: 16,
   },
 });
 
