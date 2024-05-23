@@ -69,3 +69,8 @@ app
 
 # testing
 /coverage
+
+# Expo
+.expo
+dist/
+web-build/

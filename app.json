@@ -5,7 +5,20 @@
   "displayName": "BreezyApp",
   "expo": {
     "android": {
-      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"],
+      "package": "com.ommel0622.breezyapp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "54faaa51-1d47-42b2-9dd5-e080b728a75b"
+      }
+    },
+    "owner": "ommel0622",
+    "slug": "crimeapp",
+    "splash": {
+      "image": "./assets/bird.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     }
   }
 }
