@@ -38,7 +38,7 @@ function App() {
     colors: {
       ...DefaultTheme.colors,
       primary: '#9AD4D6',
-      card: '#101935',
+      card: '#1E1E1E',
       text: '#F2FDFF',
     },
   };
@@ -57,7 +57,7 @@ function App() {
         screenOptions={{
           headerTintColor: '#F2FDFF',
           headerStyle: {
-            backgroundColor: '#101935',
+            backgroundColor: '#1E1E1E',
           },
         }}
         drawerContent={props => (

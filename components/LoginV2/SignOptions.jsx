@@ -31,7 +31,7 @@ const SignOptions = () => {
     <View style={styles.signInContainer}>
       <View style={styles.titleContainer}>
         <View style={styles.line}></View>
-        <Text style={styles.title}>Or connect with</Text>
+        <Text style={styles.title}>or</Text>
         <View style={styles.line}></View>
       </View>
 
@@ -52,25 +52,6 @@ const SignOptions = () => {
             <Text style={styles.buttonText}>Sign in with Google</Text>
           </View>
         </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.signInButton}>
-          <Image
-            source={require('../../assets/facebook.png')}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.signInButton}>
-          <Image
-            source={require('../../assets/instagram.png')}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.signInButton} onPress={handleGoogle}>
-          <Image
-            source={require('../../assets/google.png')}
-            onpre
-            style={styles.icon}
-          />
-        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -80,30 +61,14 @@ const styles = StyleSheet.create({
   signInContainer: {
     padding: 5,
   },
-  // signInText: {
-  //   color: '#ffffff',
-  //   textAlign: 'center',
-  // },
-  // signInOptions: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'center',
-  // },
-  // signInButton: {
-  //   marginVertical: 10,
-  // },
-  // icon: {
-  //   width: 35,
-  //   height: 35,
-  //   margin: 10,
-  //   marginBottom: -10,
-  // },
+
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom:5,
   },
   title: {
-    color: '#101935',
+    color: '#FFFFFF',
     fontSize: 15,
     fontWeight: 'bold',
     marginHorizontal: 20,
@@ -111,8 +76,8 @@ const styles = StyleSheet.create({
 
   line: {
     flex: 1,
-    height: 1,
-    backgroundColor: '#101935',
+    height: 2,
+    backgroundColor: '#FFFFFF',
   },
 
   button: {
@@ -127,23 +92,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: '#101935',
-    borderWidth: 0.5,
-    padding: 10,
+    backgroundColor: '#000000',
+    padding: 13,
     borderRadius: 25,
     width: '100%',
   },
 
   googleLogo: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
+    width: 19,
+    height: 19,
+    marginRight: 15,
   },
 
   buttonText: {
-    color: '#101935',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '600',
   },
 });
 
