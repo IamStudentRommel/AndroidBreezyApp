@@ -158,7 +158,7 @@ const Login = ({
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inner}>
               <Image
-                source={require('../../assets/LogoCapstone1.png')}
+                source={require('../../assets/Group136.png')}
                 style={styles.logo}
               />
               <View style={styles.inputContainer}>
@@ -176,9 +176,18 @@ const Login = ({
                   onChangeText={handlePwdChange}
                 />
               </View>
+              
+              <View style={styles.passwordContainer}>
+                <TouchableOpacity style={styles.checkBox}>
+                </TouchableOpacity>
+              <Text style={styles.option}>Remember me</Text>
               <TouchableOpacity onPress={test} style={styles.fpContainer}>
                 <Text style={styles.textLink}>Forgot Password?</Text>
               </TouchableOpacity>
+              </View>
+
+
+
               <View style={styles.buttonContainer}>
                 <TouchableOpacity
                   style={[styles.button, {backgroundColor: '#C20000'}]}
@@ -186,14 +195,18 @@ const Login = ({
                   <Text style={styles.loginBtnTitle}>Log In</Text>
                 </TouchableOpacity>
               </View>
+              
               <SignOptions />
-              <View style={styles.SignUpContainer}>
+
+              <View style={styles.signUpContainer}>
                 <Text style={{color: '#9B9B9B'}}>Don't have an account?</Text>
                 <TouchableOpacity onPress={redirectReg}>
                   <Text style={styles.SignUpText}>Sign Up</Text>
                   <View style={styles.underline} />
                 </TouchableOpacity>
               </View>
+
+              {/* <Image source={require('../../assets/Group136.png')} style={styles.topRightImage} /> */}
             </View>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -211,16 +224,46 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
   },
 
   logo: {
-    width: 210,
-    height: 130,
-    marginBottom: 50,
+    position: 'absolute',
+    top: 1, // Adjust as needed
+    right: 1, // Adjust as needed
+    height: 290,
+    width: 320,
+    
+  },
+  inputContainer: {
+    paddingTop: 280,
+  },
+  
+
+ 
+
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '50%', // Adjust as needed
+    marginRight: 30
+  },
+  textLink: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    marginRight: 25,
+    
+  },
+  option: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    paddingBottom: 18,
+    marginLeft: 10,
   },
 
   
-  SignUpContainer: {
+  signUpContainer: {
     flexDirection: 'row', // Ensure text and button are in a row
     alignItems: 'center', // Align items vertically in the center
     fontWeight: '800',
@@ -249,6 +292,7 @@ const styles = StyleSheet.create({
     width: 300,
     color: '#101935',
     fontWeight: 'bold',
+
     
   },
 
@@ -259,12 +303,6 @@ const styles = StyleSheet.create({
     marginRight: 70,
   },
 
-  textLink: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    textAlign: 'right',
-    width: '90%',
-  },
 
   loginBtnTitle: {
     color: '#FFFFFF',
@@ -287,7 +325,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 10,
     alignItems: 'center',
   },
 });

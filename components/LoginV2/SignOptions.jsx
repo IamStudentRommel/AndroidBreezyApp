@@ -28,6 +28,7 @@ const SignOptions = () => {
     alert('Function not yet ready');
   };
   return (
+    
     <View style={styles.signInContainer}>
       <View style={styles.titleContainer}>
         <View style={styles.line}></View>
