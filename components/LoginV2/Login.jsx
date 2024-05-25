@@ -231,8 +231,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 1, // Adjust as needed
     right: 1, // Adjust as needed
-    height: 290,
-    width: 320,
+    height: 280,
+    width: 310,
     
   },
   inputContainer: {
