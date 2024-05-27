@@ -213,7 +213,7 @@ const LandingMap = ({username, email}) => {
                     onPress={() => selectCrime(crimeInfo)} // Pass crime details as argument
                     description={desc}>
                     <Image
-                      source={require('../../assets/zombie.png')}
+                      source={require('../../assets/Crime.png')}
                       style={{width: 30, height: 30}}
                     />
                   </Marker>

@@ -216,27 +216,45 @@ const CrimeReportDrawer = ({
       onChangeVisibility={visible => setIsDrawerOpen(visible)}
       customStyles={{
         container: {
-          backgroundColor: '#f2fdff',
-          height: '115%', // Set the height to 80% of the screen
+          height: '120%', // Set the height to 80% of the screen
         },
       }}>
       <View style={styles.contentContainer}>
+         <Image
+            source={require('../../assets/ReportCrimeLogo.png')}
+            style={{width: '23%', height: '10%', bottom:20}}
+            />
+          <Text
+          style={{
+            textAlign: 'center',
+            marginBottom: 3,
+            fontStyle: 'italic',
+            color: '#101935',
+            bottom: 13,
+          }}>
+          Stay Aware, Stay Safe: Your Guardian Against Crime
+        </Text>
         <Text
           style={{
             marginBottom: 20,
-            fontSize: 22,
+            fontSize: 24,
             fontWeight: 'bold',
             color: '#101935',
           }}>
           Report Crime
         </Text>
+      <View style={styles.locationContainer}>
+        <Image 
+          source={require('../../assets/Location.png')}
+          style={[styles.image, {bottom: 15, marginRight: 6    }]}
+        />
         <TextInput
-          style={[styles.drawerInput, {backgroundColor: '#f2fdff'}]}
+          style={[styles.location, { color: '#C20000', fontWeight: '500', bottom: 15 }]}
           placeholder="This will be your exact location"
           editable={false}
           value={address}
         />
-
+      </View>
         <View style={styles.imageContainer}>
           {/* {console.log(imageSource)} */}
           {imageSource ? (
@@ -270,7 +288,7 @@ const CrimeReportDrawer = ({
             onPress={selectImage}>
             <Image
               source={require('../../assets/photo.png')}
-              style={{width: 20, height: 20, tintColor: '#fff'}}
+              style={{width: 25, height: 25, tintColor: '#fff'}}
             />
           </TouchableOpacity>
         </View>
@@ -285,8 +303,9 @@ const CrimeReportDrawer = ({
           setItems={setItems}
           placeholder="Crime Category"
           onChangeValue={handleValueChange}
+          textStyle={{ color: '#808080' }}
           dropDownContainerStyle={{
-            backgroundColor: '#f2fdff',
+            backgroundColor: '#FFFFFF',
             width: '90%',
             alignSelf: 'center',
           }}
@@ -299,11 +318,16 @@ const CrimeReportDrawer = ({
           numberOfLines={2}
           onChangeText={handleDescChangeText}
         />
+        
         <View style={styles.drawerBtn}>
-          <Button title="Submit" color="#101935" onPress={handleSubmit} />
+          <TouchableOpacity style={[styles.button, styles.submitButton]} onPress={handleSubmit}>
+            <Text style={[styles.buttonText, styles.submitButtonText]}>Submit</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.drawerBtn}>
-          <Button title="Cancel" onPress={handleCancelPress} color="gray" />
+          <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={handleCancelPress}>
+            <Text style={[styles.buttonText, styles.cancelButtonText]}>Cancel</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </BottomDrawer>
@@ -314,20 +338,20 @@ const styles = StyleSheet.create({
   contentContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f2fdff',
+    backgroundColor: '#FFFFFF',
   },
   drawerInput: {
-    borderWidth: 1,
-    borderColor: '#101935',
-    backgroundColor: '#f2fdff',
+    borderWidth: 1.3,
+    borderColor: '#bfbfbf',
+    backgroundColor: '#FFFFFF',
     borderRadius: 10,
     padding: 10,
     marginBottom: 10,
-    width: '90%',
+    width: '75%',
     alignSelf: 'center',
   },
   drawerBtn: {
-    width: '90%',
+    width: '75%',
     borderRadius: 100,
     overflow: 'hidden',
     marginBottom: 10,
@@ -353,30 +377,60 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   previewPlaceholder: {
-    width: 150,
-    height: 150,
+    width: 140,
+    height: 120,
     borderRadius: 5,
-    marginRight: 10,
-    backgroundColor: '#f2f2f2', // Add a background color for the placeholder
+    marginRight: 30,
+    backgroundColor: '#EEEEEE', // Add a background color for the placeholder
     justifyContent: 'center',
     alignItems: 'center',
   },
   previewText: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 14,
     color: '#888',
   },
   selectImageButton: {
-    backgroundColor: '#007bff',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    marginLeft: 10,
+    backgroundColor: '#C20000',
+    paddingVertical: 15,
+    paddingHorizontal: 18,
+    borderRadius: 13,
+ 
   },
   selectImageText: {
     color: '#fff',
     fontSize: 16,
   },
+  locationContainer:  {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+
+  button: {
+    height: 45, // Increase the height of the button
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5, // Optional: Add border radius for rounded corners
+  },
+  buttonText: {
+    fontSize: 16, // Adjust the font size
+    fontWeight: 'bold', // Make the text bold
+  },
+  submitButton: {
+    backgroundColor: '#C20000', // Submit button color
+  },
+  submitButtonText: {
+    color: '#fff', // Text color for submit button
+  },
+  cancelButton: {
+    backgroundColor: 'gray', // Cancel button color
+  },
+  cancelButtonText: {
+    color: '#fff', // Text color for cancel button
+  },
+
 });
 
 export default CrimeReportDrawer;
