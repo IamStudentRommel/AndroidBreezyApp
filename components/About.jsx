@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   Button,
+  Image,
   KeyboardAvoidingView,
   StyleSheet,
   ActivityIndicator,
@@ -67,13 +68,16 @@ const About = ({username, email}) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>CrimeH8ers</Text>
+      <Image
+          source={require('../assets/AboutLogo.png')} // Adjust the path to your logo image
+          style={styles.logo}
+        />
         <Text
           style={{
             textAlign: 'center',
             marginBottom: 20,
             fontStyle: 'italic',
-            color: '#546787',
+            color: '#FFFFFF',
           }}>
           Stay Aware, Stay Safe: Your Guardian Against Crime
         </Text>
@@ -89,15 +93,17 @@ const About = ({username, email}) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Developers</Text>
           <Text style={styles.textContent}>Aivee Mae Madrelejos</Text>
+          <Text style={styles.textContent}>Jacob Jingco</Text>
+          <Text style={styles.textContent}>Jhomer Clemente</Text>
           <Text style={styles.textContent}>Ko Kawaguchi</Text>
           <Text style={styles.textContent}>Romeo Costillas</Text>
-          <Text style={styles.textContent}>SyntaxMel</Text>
+          <Text style={styles.textContent}>Rommel Hipos</Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>App Version</Text>
           <Text style={styles.textContent}>1.7.0</Text>
         </View>
-        <View style={styles.feedbackSection}>
+        {/* <View style={styles.feedbackSection}>
           <Text style={styles.sectionTitle}>Contact Us for Feedback</Text>
           <TextInput
             style={styles.feedbackInput}
@@ -116,7 +122,7 @@ const About = ({username, email}) => {
               disabled={sending || showAnimation}
             />
           )}
-        </View>
+        </View> */}
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -126,10 +132,18 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: '#F2FDFF',
+    backgroundColor: '#1E1E1E',
   },
+
+  logo: {
+    alignSelf: 'center',
+    height: 90,
+    width: 150,
+    marginBottom: 10,
+  },
+
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 5,
     textAlign: 'center',
@@ -137,15 +151,19 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 20,
+    alignItems: 'center',
   },
   textContent: {
-    color: '#564787',
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 16,
+    
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#101935',
+    marginBottom: 20,
+    color: '#FFFFFF',
   },
   feedbackSection: {
     width: '100%',

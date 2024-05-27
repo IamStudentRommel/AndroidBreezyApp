@@ -5,6 +5,7 @@ import {
   TextInput,
   StyleSheet,
   Image,
+  ImageBackground,
   Platform,
   TouchableWithoutFeedback,
   Button,
@@ -21,25 +22,19 @@ import AppConfig from '../../app.json';
 
 const LoadingComponent = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F2FDFF',
-      }}>
-      <Image
-        source={require('../../assets/LogoCapstone1.png')}
-        style={{
-          width: '70%',
-          height: '70%',
-          resizeMode: 'contain',
-          backgroundColor: '#F2FDFF',
-        }}
-      />
-      <ActivityIndicator size="large" color="#ffffff" />
-      <Text style={{color: '#101935', marginTop: 10}}>Loading...</Text>
-    </View>
+    <ImageBackground
+      source={require('../../assets/IntroBackground.png')}
+      style={styles.background}
+    >
+      <View style={styles.overlay}>
+        <Image
+          source={require('../../assets/IntroLogo.png')}
+          style={styles.logo}
+        />
+        <ActivityIndicator size="large" color="#ffffff" />
+        <Text style={styles.loadingText}>L O A D I N G . . .</Text>
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -159,7 +154,7 @@ const Login = ({
             <View style={styles.inner}>
               <Image
                 source={require('../../assets/Group136.png')}
-                style={styles.logo}
+                style={styles.loginLogo}
               />
               <View style={styles.inputContainer}>
                 <TextInput
@@ -216,6 +211,29 @@ const Login = ({
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)', // Transparent black
+    width: '100%',
+    height: '100%',
+  },
+  logo: {
+    resizeMode: 'contain',
+  },
+  loadingText: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+
   container: {
     flex: 1,
     backgroundColor: '#1E1E1E',
@@ -227,7 +245,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
 
-  logo: {
+  loginLogo: {
     position: 'absolute',
     top: 1, // Adjust as needed
     right: 1, // Adjust as needed

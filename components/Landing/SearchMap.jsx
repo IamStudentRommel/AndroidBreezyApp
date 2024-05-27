@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 const SearchMap = ({setInitialLocation}) => {
@@ -57,6 +57,7 @@ const SearchMap = ({setInitialLocation}) => {
           language: 'en',
           region: 'CA',
         }}
+        
       />
     </View>
   );
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: '70%',
     alignSelf: 'center',
+    
   },
 });
 

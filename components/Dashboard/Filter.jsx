@@ -19,7 +19,14 @@ const Filter = ({options, onSelect}) => {
             selectedOption === option ? styles.selectedButton : null,
           ]}
           onPress={() => handleOptionSelect(option)}>
-          <Text style={styles.buttonText}>{option}</Text>
+          <Text
+            style={[
+              styles.buttonText,
+              selectedOption === option ? styles.selectedButtonText : null,
+            ]}
+          >
+            {option}
+          </Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -44,7 +51,11 @@ const styles = StyleSheet.create({
   },
 
   selectedButton: {
-    backgroundColor: '#9AD4D6',
+    backgroundColor: '#960303',
+  },
+
+  selectedButtonText: {
+    color: '#FFFFFF',
   },
 
   buttonText: {
