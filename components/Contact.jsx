@@ -68,42 +68,7 @@ const About = ({username, email}) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
-        <Image
-          source={require('../assets/AboutLogo.png')} // Adjust the path to your logo image
-          style={styles.logo}
-        />
-        <Text
-          style={{
-            textAlign: 'center',
-            marginBottom: 20,
-            fontStyle: 'italic',
-            color: '#FFFFFF',
-          }}>
-          Stay Aware, Stay Safe: Your Guardian Against Crime
-        </Text>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Overview</Text>
-          <Text style={styles.textContent}>
-            This app is all about crime monitoring using map functionality. The
-            app allows users to view and report crimes in their area, as well as
-            provide relevant information about crime statistics and safety
-            measures.
-          </Text>
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Developers</Text>
-          <Text style={styles.textContent}>Aivee Mae Madrelejos</Text>
-          <Text style={styles.textContent}>Jacob Jingco</Text>
-          <Text style={styles.textContent}>Jhomer Clemente</Text>
-          <Text style={styles.textContent}>Ko Kawaguchi</Text>
-          <Text style={styles.textContent}>Romeo Costillas</Text>
-          <Text style={styles.textContent}>Rommel Hipos</Text>
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>App Version</Text>
-          <Text style={styles.textContent}>1.7.0</Text>
-        </View>
-        {/* <View style={styles.feedbackSection}>
+        <View style={styles.feedbackSection}>
           <Text style={styles.sectionTitle}>Contact Us for Feedback</Text>
           <TextInput
             style={styles.feedbackInput}
@@ -122,7 +87,7 @@ const About = ({username, email}) => {
               disabled={sending || showAnimation}
             />
           )}
-        </View> */}
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );

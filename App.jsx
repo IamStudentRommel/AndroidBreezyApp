@@ -3,6 +3,7 @@ import Login from './components/LoginV2/Login';
 import Report from './components/Dashboard/Dashboard';
 import LandingMap from './components/Landing/LandingMap';
 import About from './components/About';
+import Contact from './components/Contact';
 // import Test from './components/Test';
 import CustomDrawerContent from './components/AppRoot/CustomDrawerContent';
 
@@ -73,7 +74,7 @@ function App() {
           name="Login"
           options={{
             drawerLabel: logDisplay,
-            title: "",
+            title: '',
 
             drawerIcon: ({tintColor}) => (
               <Image
@@ -118,6 +119,20 @@ function App() {
           }}>
           {props => <LandingMap {...props} username={username} email={email} />}
         </Drawer.Screen>
+        <Drawer.Screen
+          name="Contact Us"
+          component={React.memo(() => (
+            <Contact username={username} email={email} />
+          ))}
+          options={{
+            drawerIcon: ({tintColor}) => (
+              <Image
+                source={require('./assets/about1.png')}
+                style={{width: 24, height: 24, tintColor: tintColor}}
+              />
+            ),
+          }}
+        />
         <Drawer.Screen
           name="About"
           component={React.memo(() => (
