@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    backgroundColor: '#101935',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: 'gray',

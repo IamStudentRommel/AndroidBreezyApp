@@ -118,7 +118,7 @@ const Login = ({
   };
 
   const redirectReg = () => {
-    updateLogDisplay('');
+    // updateLogDisplay('');
     setShowRegistrationForm(true);
   };
 
@@ -172,14 +172,10 @@ const Login = ({
                 />
               </View>
               
-              <View style={styles.passwordContainer}>
-                <TouchableOpacity style={styles.checkBox}>
-                </TouchableOpacity>
-              <Text style={styles.option}>Remember me</Text>
+           
               <TouchableOpacity onPress={test} style={styles.fpContainer}>
                 <Text style={styles.textLink}>Forgot Password?</Text>
               </TouchableOpacity>
-              </View>
 
 
 
@@ -260,18 +256,13 @@ const styles = StyleSheet.create({
 
  
 
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '50%', // Adjust as needed
-    marginRight: 30
-  },
+ 
   textLink: {
     color: '#FFFFFF',
     fontSize: 13,
-    marginRight: 25,
-    
+    textAlign: 'right',
+    right: 15,
+    width: '90%',
   },
   option: {
     color: '#FFFFFF',

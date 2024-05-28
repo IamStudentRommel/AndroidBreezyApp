@@ -73,7 +73,7 @@ function App() {
           name="Login"
           options={{
             drawerLabel: logDisplay,
-            title: logDisplay,
+            title: "",
 
             drawerIcon: ({tintColor}) => (
               <Image
