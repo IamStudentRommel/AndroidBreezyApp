@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom:5,
+    top: '-10%'
   },
   title: {
     color: '#FFFFFF',
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     padding: 13,
     borderRadius: 25,
     width: '100%',
+    top: '-17%'
   },
 
   googleLogo: {

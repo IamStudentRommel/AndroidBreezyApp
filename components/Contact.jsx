@@ -68,6 +68,7 @@ const Contact = ({username, email}) => {
   };
   return (
     <KeyboardAvoidingView style={styles.container}>
+       <ScrollView contentContainerStyle={styles.container}>
       <Image
           source={require('../assets/AboutLogo.png')} // Adjust the path to your logo image
           style={styles.logo}
@@ -114,7 +115,7 @@ const Contact = ({username, email}) => {
           )}
           </View>
         </View>
-
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -161,8 +162,9 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   feedbackSection: {
+    alignSelf: 'center',
     height: '55%',
-    width: '100%',
+    width: '110%',
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 15,
