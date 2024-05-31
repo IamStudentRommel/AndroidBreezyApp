@@ -13,6 +13,7 @@ import BottomDrawer from 'react-native-animated-bottom-drawer';
 import AppConfig from '../../app.json';
 // import ImagePicker from 'react-native-image-picker';
 import * as ImagePicker from 'expo-image-picker';
+import LoginModal from './PopLogin';
 
 const CrimeReportDrawer = ({
   bottomDrawerRef,
@@ -34,7 +35,13 @@ const CrimeReportDrawer = ({
   const [imageSource, setImageSource] = useState(null);
   const [crimeID, setCrimeID] = useState(null);
   const [imgFileName, setImgFileName] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+
   const {be} = AppConfig;
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
 
   const fetchCrimeCategory = async () => {
     try {
@@ -84,12 +91,13 @@ const CrimeReportDrawer = ({
 
   const handleSubmit = async () => {
     console.log(generateRandomUniqueId());
-    if (selectedLabel === null) {
-      alert('Please select crime category.');
+    if (username === 'Guest') {
+      // alert('Please login first to report a crime.');
+      toggleModal();
       return;
     }
-    if (username === 'Guest') {
-      alert('Please login first to report a crime.');
+    if (selectedLabel === null) {
+      alert('Please select crime category.');
       return;
     }
     if (description.length < 10) {
@@ -141,16 +149,18 @@ const CrimeReportDrawer = ({
         console.log(formData);
         const url = `${be}trans/upload`;
 
-        try {
-          const response = await fetch(url, {
-            method: 'POST',
-            body: formData,
-          });
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
+        if (imgFileName.length > 1) {
+          try {
+            const response = await fetch(url, {
+              method: 'POST',
+              body: formData,
+            });
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+          } catch (error) {
+            console.error('Error uploading image:', error);
           }
-        } catch (error) {
-          console.error('Error uploading image:', error);
         }
       }
     } catch (error) {
@@ -220,11 +230,11 @@ const CrimeReportDrawer = ({
         },
       }}>
       <View style={styles.contentContainer}>
-         <Image
-            source={require('../../assets/ReportCrimeLogo.png')}
-            style={{width: '23%', height: '10%', bottom:20}}
-            />
-          <Text
+        <Image
+          source={require('../../assets/ReportCrimeLogo.png')}
+          style={{width: '23%', height: '10%', bottom: 20}}
+        />
+        <Text
           style={{
             textAlign: 'center',
             marginBottom: 3,
@@ -243,18 +253,24 @@ const CrimeReportDrawer = ({
           }}>
           Report Crime
         </Text>
-      <View style={styles.locationContainer}>
-        <Image 
-          source={require('../../assets/Location.png')}
-          style={[styles.image, {bottom: 15, marginRight: 6, height: 16.5, width: 16   }]}
-        />
-        <TextInput
-          style={[styles.location, { color: '#C20000', fontWeight: '500', bottom: 15 }]}
-          placeholder="This will be your exact location"
-          editable={false}
-          value={address}
-        />
-      </View>
+        <View style={styles.locationContainer}>
+          <Image
+            source={require('../../assets/Location.png')}
+            style={[
+              styles.image,
+              {bottom: 15, marginRight: 6, height: 16.5, width: 16},
+            ]}
+          />
+          <TextInput
+            style={[
+              styles.location,
+              {color: '#C20000', fontWeight: '500', bottom: 15},
+            ]}
+            placeholder="This will be your exact location"
+            editable={false}
+            value={address}
+          />
+        </View>
         <View style={styles.imageContainer}>
           {/* {console.log(imageSource)} */}
           {imageSource ? (
@@ -303,7 +319,7 @@ const CrimeReportDrawer = ({
           setItems={setItems}
           placeholder="Crime Category"
           onChangeValue={handleValueChange}
-          textStyle={{ color: '#808080' }}
+          textStyle={{color: '#808080'}}
           dropDownContainerStyle={{
             backgroundColor: '#FFFFFF',
             width: '90%',
@@ -319,17 +335,26 @@ const CrimeReportDrawer = ({
           numberOfLines={2}
           onChangeText={handleDescChangeText}
         />
-        
+
         <View style={styles.drawerBtn}>
-          <TouchableOpacity style={[styles.button, styles.submitButton]} onPress={handleSubmit}>
-            <Text style={[styles.buttonText, styles.submitButtonText]}>Submit</Text>
+          <TouchableOpacity
+            style={[styles.button, styles.submitButton]}
+            onPress={handleSubmit}>
+            <Text style={[styles.buttonText, styles.submitButtonText]}>
+              Submit
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.drawerBtn}>
-          <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={handleCancelPress}>
-            <Text style={[styles.buttonText, styles.cancelButtonText]}>Cancel</Text>
+          <TouchableOpacity
+            style={[styles.button, styles.cancelButton]}
+            onPress={handleCancelPress}>
+            <Text style={[styles.buttonText, styles.cancelButtonText]}>
+              Cancel
+            </Text>
           </TouchableOpacity>
         </View>
+        <LoginModal modalVisible={modalVisible} toggleModal={toggleModal} handleCancelPress={handleCancelPress} />
       </View>
     </BottomDrawer>
   );
@@ -399,18 +424,16 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 18,
     borderRadius: 13,
- 
   },
   selectImageText: {
     color: '#fff',
     fontSize: 16,
   },
-  locationContainer:  {
+  locationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-
 
   button: {
     height: 45, // Increase the height of the button
@@ -434,7 +457,6 @@ const styles = StyleSheet.create({
   cancelButtonText: {
     color: '#fff', // Text color for cancel button
   },
-
 });
 
 export default CrimeReportDrawer;
