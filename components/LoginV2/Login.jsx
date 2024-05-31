@@ -21,23 +21,23 @@ import RegistrationForm from './RegistrationForm';
 import SignOptions from './SignOptions';
 import AppConfig from '../../app.json';
 
-const LoadingComponent = () => {
-  return (
-    <ImageBackground
-      source={require('../../assets/IntroBackground.png')}
-      style={styles.background}
-    >
-      <View style={styles.overlay}>
-        <Image
-          source={require('../../assets/IntroLogo.png')}
-          style={styles.logo}
-        />
-        <ActivityIndicator size="large" color="#ffffff" />
-        <Text style={styles.loadingText}>L O A D I N G . . .</Text>
-      </View>
-    </ImageBackground>
-  );
-};
+// const LoadingComponent = () => {
+//   return (
+//     <ImageBackground
+//       source={require('../../assets/IntroBackground.png')}
+//       style={styles.background}
+//     >
+//       <View style={styles.overlay}>
+//         <Image
+//           source={require('../../assets/IntroLogo.png')}
+//           style={styles.logo}
+//         />
+//         <ActivityIndicator size="large" color="#ffffff" />
+//         <Text style={styles.loadingText}>L O A D I N G . . .</Text>
+//       </View>
+//     </ImageBackground>
+//   );
+// };
 
 const Login = ({
   updateLogEmail,
@@ -145,62 +145,61 @@ const Login = ({
 
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <LoadingComponent />
-      ) : (
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.container}>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <ScrollView contentContainerStyle={styles.scrollContainer}>
-              
-              <View style={styles.inner}>
+      ) : ( */}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <View style={styles.inner}>
               <Image
-                  source={require('../../assets/Imagebackground.png')} // Replace with your image path
-                  style={styles.topRightImage}
+                source={require('../../assets/Imagebackground.png')} // Replace with your image path
+                style={styles.topRightImage}
+              />
+              <Image
+                source={require('../../assets/LoginLogo.png')}
+                style={styles.loginLogo}
+              />
+              <View style={styles.inputContainer}>
+                <TextInput
+                  placeholder="Email"
+                  placeholderTextColor={'#101935'}
+                  style={styles.textInput}
+                  onChangeText={handleEmailChange}
                 />
-                <Image
-                  source={require('../../assets/LoginLogo.png')}
-                  style={styles.loginLogo}
+                <TextInput
+                  placeholder="Password"
+                  placeholderTextColor={'#101935'}
+                  style={styles.textInput}
+                  secureTextEntry
+                  onChangeText={handlePwdChange}
                 />
-                <View style={styles.inputContainer}>
-                  <TextInput
-                    placeholder="Email"
-                    placeholderTextColor={'#101935'}
-                    style={styles.textInput}
-                    onChangeText={handleEmailChange}
-                  />
-                  <TextInput
-                    placeholder="Password"
-                    placeholderTextColor={'#101935'}
-                    style={styles.textInput}
-                    secureTextEntry
-                    onChangeText={handlePwdChange}
-                  />
-                </View>
-                <TouchableOpacity onPress={test} style={styles.fpContainer}>
-                  <Text style={styles.textLink}>Forgot Password?</Text>
-                </TouchableOpacity>
-                <View style={styles.buttonContainer}>
-                  <TouchableOpacity
-                    style={[styles.button, { backgroundColor: '#C20000' }]}
-                    onPress={handleValidateUser}>
-                    <Text style={styles.loginBtnTitle}>Log In</Text>
-                  </TouchableOpacity>
-                </View>
-                <SignOptions />
-                <View style={styles.signUpContainer}>
-                  <Text style={{ color: '#9B9B9B' }}>Don't have an account?</Text>
-                  <TouchableOpacity onPress={redirectReg}>
-                    <Text style={styles.SignUpText}>Sign Up</Text>
-                    <View style={styles.underline} />
-                  </TouchableOpacity>
-                </View>
               </View>
-            </ScrollView>
-          </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
-      )}
+              <TouchableOpacity onPress={test} style={styles.fpContainer}>
+                <Text style={styles.textLink}>Forgot Password?</Text>
+              </TouchableOpacity>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={[styles.button, {backgroundColor: '#C20000'}]}
+                  onPress={handleValidateUser}>
+                  <Text style={styles.loginBtnTitle}>Log In</Text>
+                </TouchableOpacity>
+              </View>
+              <SignOptions />
+              <View style={styles.signUpContainer}>
+                <Text style={{color: '#9B9B9B'}}>Don't have an account?</Text>
+                <TouchableOpacity onPress={redirectReg}>
+                  <Text style={styles.SignUpText}>Sign Up</Text>
+                  <View style={styles.underline} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+      {/* )} */}
     </>
   );
 };
@@ -226,7 +225,6 @@ const styles = StyleSheet.create({
     width: 220,
     height: 140,
     top: '-21%',
-
   },
   loadingText: {
     color: '#ffffff',
