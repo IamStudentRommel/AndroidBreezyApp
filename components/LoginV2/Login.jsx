@@ -118,7 +118,7 @@ const Login = ({
   };
 
   const redirectReg = () => {
-    // updateLogDisplay('');
+    updateLogDisplay('');
     setShowRegistrationForm(true);
   };
 
@@ -151,9 +151,10 @@ const Login = ({
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            
             <View style={styles.inner}>
-              <Image
-                source={require('../../assets/Group136.png')}
+               <Image
+                source={require('../../assets/LoginLogo.png')}
                 style={styles.loginLogo}
               />
               <View style={styles.inputContainer}>
@@ -171,14 +172,9 @@ const Login = ({
                   onChangeText={handlePwdChange}
                 />
               </View>
-              
-           
               <TouchableOpacity onPress={test} style={styles.fpContainer}>
                 <Text style={styles.textLink}>Forgot Password?</Text>
               </TouchableOpacity>
-
-
-
               <View style={styles.buttonContainer}>
                 <TouchableOpacity
                   style={[styles.button, {backgroundColor: '#C20000'}]}
@@ -186,18 +182,14 @@ const Login = ({
                   <Text style={styles.loginBtnTitle}>Log In</Text>
                 </TouchableOpacity>
               </View>
-              
-              <SignOptions />
-
+                <SignOptions />
               <View style={styles.signUpContainer}>
-                <Text style={{color: '#9B9B9B'}}>Don't have an account?</Text>
-                <TouchableOpacity onPress={redirectReg}>
-                  <Text style={styles.SignUpText}>Sign Up</Text>
-                  <View style={styles.underline} />
-                </TouchableOpacity>
-              </View>
-
-              {/* <Image source={require('../../assets/Group136.png')} style={styles.topRightImage} /> */}
+                    <Text style={{color: '#9B9B9B'}}>Don't have an account?</Text>
+                    <TouchableOpacity onPress={redirectReg}>
+                      <Text style={styles.SignUpText}>Sign Up</Text>
+                      <View style={styles.underline} />
+                    </TouchableOpacity>
+                  </View>
             </View>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -220,98 +212,59 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+
   logo: {
     resizeMode: 'contain',
   },
+  
   loadingText: {
     color: '#ffffff',
     fontSize: 18,
     fontWeight: 'bold',
   },
-
-
+  
   container: {
     flex: 1,
     backgroundColor: '#1E1E1E',
   },
+
   inner: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
+    marginTop: 50,
   },
 
-  loginLogo: {
-    position: 'absolute',
-    top: 1, // Adjust as needed
-    right: 1, // Adjust as needed
-    height: 280,
-    width: 310,
-    
-  },
+ 
   inputContainer: {
-    paddingTop: 280,
+    marginTop: '25%',
   },
-  
-
- 
-
- 
-  textLink: {
-    color: '#FFFFFF',
-    fontSize: 13,
-    textAlign: 'right',
-    right: 15,
-    width: '90%',
-  },
-  option: {
-    color: '#FFFFFF',
-    fontSize: 13,
-    paddingBottom: 18,
-    marginLeft: 10,
-  },
-
-  
-  signUpContainer: {
-    flexDirection: 'row', // Ensure text and button are in a row
-    alignItems: 'center', // Align items vertically in the center
-    fontWeight: '800',
-  },
-  SignUpText: {
-    color: '#C20000',
-    fontWeight: 'bold', // Make the text bold to differentiate as a button
-    marginLeft: 5, // Adjust margin as needed
-  },
-  underline: {
-    height: 2, // Height of the underline
-    width: 50,
-    backgroundColor: '#C20000', // Color of the underline
-    marginTop: 2,
-    marginLeft: 5, // Space between the text and underline
-  },
-
-  
 
   textInput: {
     height: 50,
-    backgroundColor: '#FFFFFF', 
-    borderRadius: 30, 
+    backgroundColor: '#FFFFFF',
+    borderRadius: 30,
     paddingHorizontal: 20,
     marginBottom: 15,
     width: 300,
     color: '#101935',
     fontWeight: 'bold',
-
-    
   },
 
   fpContainer: {
     width: '90%',
     alignItems: 'flex-end',
-    marginBottom: 18,
+    marginBottom: 20,
     marginRight: 70,
   },
 
+  textLink: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    textAlign: 'right',
+    right: 10,
+    width: '90%',
+  },
 
   loginBtnTitle: {
     color: '#FFFFFF',
@@ -322,11 +275,7 @@ const styles = StyleSheet.create({
 
   button: {
     borderRadius: 30,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    alignItems: 'center',
     justifyContent: 'center',
-    margin: 5,
     width: 300,
     height: 50,
   },
@@ -334,8 +283,28 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginBottom: 20,
     alignItems: 'center',
+  },
+
+  signUpContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    fontWeight: '800',
+  },
+
+  SignUpText: {
+    color: '#C20000',
+    fontWeight: 'bold',
+    marginLeft: 5,
+  },
+
+  underline: {
+    height: 2,
+    width: 50,
+    backgroundColor: '#C20000',
+    marginTop: 2,
+    marginLeft: 5,
   },
 });
 

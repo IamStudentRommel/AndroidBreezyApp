@@ -78,8 +78,8 @@ function App() {
 
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/home.png')}
-                style={{width: 24, height: 24, tintColor: tintColor}}
+                source={require('./assets/LoginIcon.png')}
+                style={{width: 24, height: 24, tintColor: tintColor,}}
               />
             ),
           }}>
@@ -100,7 +100,7 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/db.png')}
+                source={require('./assets/DashboardIcon.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
@@ -112,7 +112,7 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/mapIcon.png')}
+                source={require('./assets/LiveIcon.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
@@ -127,7 +127,7 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/about1.png')}
+                source={require('./assets/ContactIcon.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
@@ -141,7 +141,7 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/about1.png')}
+                source={require('./assets/AboutIcon.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),

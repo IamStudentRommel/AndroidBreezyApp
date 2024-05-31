@@ -9,10 +9,11 @@ import {
   KeyboardAvoidingView,
   StyleSheet,
   ActivityIndicator,
+  TouchableOpacity
 } from 'react-native';
 import AppConfig from '../app.json';
 
-const About = ({username, email}) => {
+const Contact = ({username, email}) => {
   const [feedback, setFeedback] = useState('');
   const [sending, setSending] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
@@ -67,12 +68,35 @@ const About = ({username, email}) => {
   };
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <Image
+          source={require('../assets/AboutLogo.png')} // Adjust the path to your logo image
+          style={styles.logo}
+        />
+        <Text
+          style={{
+            textAlign: 'center',
+            marginBottom: 10,
+            fontSize: 13,
+            fontStyle: 'italic',
+            color: '#FFFFFF',
+          }}>
+          Stay Aware, Stay Safe: Your Guardian Against Crime
+        </Text>
+
+        <View style={styles.section}>
+          <Text style={styles.title}>Let's get in touch.</Text>
+          <Text style={styles.textContent}>
+            How we can help you?</Text>
+        </View>
+      
         <View style={styles.feedbackSection}>
-          <Text style={styles.sectionTitle}>Contact Us for Feedback</Text>
+          <View style={styles.feedbackTitle}>
+          <Text style={styles.sectionTitle}>Send us a message!</Text>
+          <Text style={{color: '#000000', fontWeight:'bold', fontSize: 21, marginBottom: 15}}>Message</Text>
+          
           <TextInput
             style={styles.feedbackInput}
-            placeholder="Enter your feedback"
+            placeholder="Enter your message here"
             multiline
             value={feedback}
             onChangeText={text => setFeedback(text)}
@@ -80,15 +104,17 @@ const About = ({username, email}) => {
           {showAnimation ? (
             <ActivityIndicator size="large" color="#101935" />
           ) : (
-            <Button
-              title="Submit Feedback"
-              onPress={handleFeedbackSubmit}
-              color="#101935"
-              disabled={sending || showAnimation}
-            />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleFeedbackSubmit}>
+              <Text style={styles.btnSubmit}>
+                Submit
+              </Text>
+            </TouchableOpacity>
           )}
+          </View>
         </View>
-      </ScrollView>
+
     </KeyboardAvoidingView>
   );
 };
@@ -102,17 +128,19 @@ const styles = StyleSheet.create({
 
   logo: {
     alignSelf: 'center',
-    height: 90,
-    width: 150,
+    height: 80,
+    width: 130,
+    marginTop: 15,
     marginBottom: 10,
   },
 
   title: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
+    marginTop: 15,
     marginBottom: 5,
     textAlign: 'center',
-    color: '#101935',
+    color: '#FFFFFF',
   },
   section: {
     marginBottom: 20,
@@ -121,32 +149,67 @@ const styles = StyleSheet.create({
   textContent: {
     color: '#FFFFFF',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 17,
+    fontWeight: '400',
+    marginTop: 5,
   },
   sectionTitle: {
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#FFFFFF',
+    marginTop: 10,
+    marginBottom: 17,
+    color: '#000000',
   },
   feedbackSection: {
+    height: '55%',
     width: '100%',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 15,
+    padding: 10,
+    marginTop: 10,
+    color: '#ffffff',
+    backgroundColor: '#FFFFFF',
+  },
+  feedbackInput: {
+    height: '50%',
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 10,
     padding: 10,
-    marginTop: 10,
-    color: '#ffffff',
+    marginBottom: 10, 
+    color: '#000000',
+    textAlignVertical: 'top', // Align text to the top
+    textAlign: 'left', // Align text to the left
+    fontSize: 17,
   },
-  feedbackInput: {
-    height: 100,
+  contactInput: {
+    height: 50,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 10,
     padding: 10,
     marginBottom: 10,
-    color: '#101935',
+    color: '#000000',
+  },
+  placeholder: {
+    fontWeight: 'bold',
+  },
+  feedbackTitle: {
+    margin: 10,
+  },
+  button: {
+    backgroundColor: '#C20000',
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  btnSubmit: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
-export default About;
+export default Contact;

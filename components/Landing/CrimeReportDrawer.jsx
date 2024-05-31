@@ -246,7 +246,7 @@ const CrimeReportDrawer = ({
       <View style={styles.locationContainer}>
         <Image 
           source={require('../../assets/Location.png')}
-          style={[styles.image, {bottom: 15, marginRight: 6    }]}
+          style={[styles.image, {bottom: 15, marginRight: 6, height: 16.5, width: 16   }]}
         />
         <TextInput
           style={[styles.location, { color: '#C20000', fontWeight: '500', bottom: 15 }]}
@@ -308,6 +308,7 @@ const CrimeReportDrawer = ({
             backgroundColor: '#FFFFFF',
             width: '90%',
             alignSelf: 'center',
+            fontSize: 16,
           }}
         />
 
@@ -349,6 +350,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '75%',
     alignSelf: 'center',
+    textAlignVertical: 'top', // Align text to the top
+    textAlign: 'left',
+    fontSize: 15,
   },
   drawerBtn: {
     width: '75%',
