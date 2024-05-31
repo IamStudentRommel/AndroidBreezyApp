@@ -53,8 +53,8 @@ function App() {
         inactiveTintColor: '#F2FDFF', // Change the color when the item is inactive
       }}>
       <Drawer.Navigator
-        // initialRouteName="Live Crime Monitoring"
-        initialRouteName="Login"
+        initialRouteName="Live Crime Monitoring"
+        // initialRouteName="Login"
         screenOptions={{
           headerTintColor: '#F2FDFF',
           headerStyle: {
