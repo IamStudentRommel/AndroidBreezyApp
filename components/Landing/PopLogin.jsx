@@ -18,19 +18,18 @@ const CrimeModal = ({modalVisible, toggleModal, handleCancelPress}) => {
       onRequestClose={toggleModal}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <Text style={styles.shit}>Please login first to report crime</Text>
+          <Text style={styles.shit}>Oops!</Text>
+          <Text style={styles.message}>You need to login first.</Text>
           <View style={styles.underline} />
+          <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={handleLoginRedirect}>
-            <Text>Click here to Login</Text>
+            <Text style={[styles.buttonText,{marginLeft: 50, marginTop: 5,}]}>Login</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.button, styles.cancelButton]}
-            onPress={toggleModal}>
-            <Text style={[styles.buttonText, styles.cancelButtonText]}>
-              Cancel
-            </Text>
+          <View style={styles.verticalLine} />
+          <TouchableOpacity onPress={toggleModal}>
+          <Text style={[styles.buttonText,{marginRight: 50}]}>Cancel</Text>
           </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -46,13 +45,13 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10,
+    borderRadius: 20,
     width: '80%',
+    height: '21%',
   },
-  button: {
-    height: 35, // Increase the height of the button
-    justifyContent: 'center',
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     borderRadius: 25,
     marginTop: 10,
@@ -60,6 +59,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16, // Adjust the font size
     fontWeight: 'bold', // Make the text bold
+    color: '#C20000', // Text color
+
   },
   cancelButton: {
     backgroundColor: 'gray', // Cancel button color
@@ -68,18 +69,31 @@ const styles = StyleSheet.create({
     color: '#fff', // Text color for cancel button
   },
   shit: {
-    color: '#C20000',
+    color: '#000000',
     fontWeight: 'bold',
-    marginLeft: 5,
+    fontSize: 20,
+    padding: 20,
+    alignSelf: 'center',
+  },
+  message:{
+    paddingLeft: 20,
+    fontSize: 17,
+    alignSelf: 'center',
   },
 
   underline: {
-    height: 2,
-    width: 'auto',
-    backgroundColor: '#C20000',
-    marginTop: 2,
-    marginLeft: 5,
-    marginBottom: 25,
+    height: 1,
+    backgroundColor: '#000000',
+    marginTop: 25,
+  },
+
+  verticalLine: {
+    alignSelf: 'center',
+    width: 1,
+    backgroundColor: '#000000',
+    bottom: '-1%',
+    height: '200%',
+    marginHorizontal: 10,
   },
 });
 

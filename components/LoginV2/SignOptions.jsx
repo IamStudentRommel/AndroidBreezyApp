@@ -62,11 +62,9 @@ const styles = StyleSheet.create({
   signInContainer: {
     padding: 5,
   },
-
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    top: '-10%'
   },
   title: {
     color: '#FFFFFF',
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
     padding: 13,
     borderRadius: 25,
     width: '100%',
-    top: '-17%'
+    marginTop: 10,
   },
 
   googleLogo: {
