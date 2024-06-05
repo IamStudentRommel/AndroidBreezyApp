@@ -105,9 +105,17 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/crimehate3.png')}
+        source={require('../../assets/LoginLogo.png')}
         style={styles.logo}
       />
+      <Text
+          style={{
+            textAlign: 'center',
+            fontStyle: 'italic',
+            color: '#FFFFFF',
+          }}>
+          Stay Aware, Stay Safe: Your Guardian Against Crime
+        </Text>
       <Text style={styles.title}>Welcome!</Text>
       <TextInput
         style={styles.input}
@@ -141,7 +149,7 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
       />
 
       <TouchableOpacity
-        style={[styles.button, {backgroundColor: '#101935'}]}
+        style={[styles.button, {backgroundColor: '#C20000'}]}
         onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
@@ -167,38 +175,38 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     paddingHorizontal: 16,
-    backgroundColor: '#F2FDFF',
+    backgroundColor: '#1E1E1E',
   },
   logo: {
-    width: 200,
-    height: 98,
+    width: 165,
+    height: 100,
     marginBottom: 10,
     marginTop: 50,
     alignSelf: 'center',
   },
   title: {
-    marginTop: 50,
+    marginTop: 30,
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 16,
     textAlign: 'center',
     marginBottom: 30,
-    color: '#101935',
+    color: '#FFFFFF',
   },
   input: {
-    color: '#101935',
-    height: 40,
+    color: '#000000',
+    height: 50,
     width: '93%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 20,
     marginBottom: 16,
     paddingHorizontal: 10,
     alignSelf: 'center',
+    backgroundColor: '#FFFFFF',
   },
 
   button: {
-    borderRadius: 10,
+    borderRadius: 20,
+    height: 50,
     paddingVertical: 10,
     paddingHorizontal: 10,
     alignItems: 'center',
@@ -206,8 +214,9 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   buttonText: {
-    color: '#f2fdff',
+    color: '#FFFFFF',
     fontSize: 15,
+    fontWeight: 'bold',
   },
 });
 

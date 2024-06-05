@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
+  Image,
 } from '@react-navigation/drawer';
 import {useNavigation} from '@react-navigation/native';
 
@@ -52,7 +53,8 @@ const CustomDrawerContent = ({
 
       {username !== 'Guest' && (
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-          <Text style={styles.logoutText}>Logout</Text>
+          
+          <Text style={styles.logoutText}>Log out</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -64,7 +66,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    backgroundColor: '#101935',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
@@ -86,13 +87,14 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   logoutButton: {
-    // backgroundColor: '#ff0000',
-    borderColor: '#f2fdff',
+    backgroundColor: '#C20000',
     borderWidth: 0.5,
     paddingVertical: 8,
     margin: 20,
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 20,
+    height: 45,
+    marginTop: 10,
   },
   logoutText: {
     fontSize: 18,

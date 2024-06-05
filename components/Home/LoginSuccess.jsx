@@ -163,17 +163,16 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
       <View>
         <View style={styles.inlineContainer}>
           <Text style={styles.userInfo}>
-            Welcome, {capitalizeFirstLetter(firebaseFname)}{' '}
-            {capitalizeFirstLetter(firebaseLname)}
+            Hi, {capitalizeFirstLetter(firebaseFname)}!
           </Text>
           <TouchableOpacity
             onPressIn={handleMouseEnter}
             onPressOut={handleMouseLeave}
             activeOpacity={0.8}
-            style={{flexDirection: 'row', alignItems: 'center'}}>
+            style={{flexDirection: 'row', alignItems: 'center', fontWeight: '600', marginBottom: 15,}}>
             <Image
-              source={require('../../assets/pin.png')}
-              style={{width: 15, height: 15}}
+              source={require('../../assets/Location.png')}
+              style={{width: 15, height: 15, marginRight: 5}}
             />
 
             <Text
@@ -220,7 +219,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f2fdff',
+    backgroundColor: '#1E1E1E',
   },
 
   inlineContainer: {
@@ -232,7 +231,7 @@ const styles = StyleSheet.create({
   },
   locationText: {
     fontSize: 12,
-    color: '#1D4275',
+    color: '#FFFFFF',
   },
   // searchContainer: {
   //   flexDirection: 'row',
@@ -253,8 +252,10 @@ const styles = StyleSheet.create({
   // },
 
   userInfo: {
-    fontSize: 19,
-    fontStyle: 'italic',
+    fontSize: 40,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    marginBottom: 5,
   },
   swiper: {
     height: 50, // Adjust the height of the swiper as needed
@@ -279,11 +280,11 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
   },
   categoryButtonText: {
-    color: '#101935',
+    color: '#000000',
     fontWeight: 'bold',
   },
   selectedCategoryButton: {
-    backgroundColor: '#564787',
+    backgroundColor: '#C20000',
   },
   selectedCategoryButtonText: {
     color: '#f2fdff',
@@ -309,8 +310,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   categoryTag: {
-    backgroundColor: '#DBCBD8',
-    color: '#101935',
+    fontWeight: 'bold',
+    color: '#C20000',
+    fontSize: 17,
     paddingHorizontal: 8,
     paddingVertical: 4,
   },
@@ -320,6 +322,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     marginBottom: 5,
+    marginLeft: 10,
   },
   location: {
     color: '#666',
