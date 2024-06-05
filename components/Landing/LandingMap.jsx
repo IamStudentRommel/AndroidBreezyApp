@@ -6,21 +6,35 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Button,
+  ImageBackground,
 } from 'react-native';
+
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import ClusteredMapView from 'react-native-map-clustering';
 import * as Location from 'expo-location';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import CustomDrawerButtom from './CrimeReportDrawer';
 import SearchMap from './SearchMap';
+import CrimeModal from './PopModal';
 import AppConfig from '../../app.json';
 
 const LandingMap = ({username, email}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [crimeDetails, setCrimeDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const bottomDrawerRef = useRef(null);
   const {be} = AppConfig;
 
-  // console.log(logDisplay);
+  const selectCrime = data => {
+    setCrimeDetails(data);
+    toggleModal();
+  };
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
 
   const handleOpenDrawer = () => {
     setIsDrawerOpen(true);
@@ -160,16 +174,28 @@ const LandingMap = ({username, email}) => {
   }, []);
 
   const renderLoadingIndicator = () => (
-    <View style={[StyleSheet.absoluteFill, styles.loadingIndicator]}>
-      <ActivityIndicator size="large" color="#0000ff" />
-      <Text style={styles.loadingText}>Checking your location</Text>
-    </View>
+    // <View style={[StyleSheet.absoluteFill, styles.loadingIndicator]}>
+    //   <ActivityIndicator size="large" color="#0000ff" />
+    //   <Text style={styles.loadingText}>Checking your location</Text>
+    // </View>
+    <ImageBackground
+      source={require('../../assets/IntroBackground.png')}
+      style={styles.background}>
+      <View style={styles.overlay}>
+        <Image
+          source={require('../../assets/IntroLogo.png')}
+          style={styles.logo}
+        />
+        <ActivityIndicator size="large" color="#ffffff" />
+        <Text style={styles.loadingText}>L O A D I N G . . .</Text>
+      </View>
+    </ImageBackground>
   );
 
   return (
     <View style={styles.container}>
       <View style={styles.mapContainer}>
-        <MapView
+        <ClusteredMapView
           ref={mapRef}
           style={styles.map}
           provider={PROVIDER_GOOGLE}
@@ -190,14 +216,16 @@ const LandingMap = ({username, email}) => {
                   longitude: marker.coordinates[0],
                 };
                 const desc = `${marker.date.split('T')[0]} ${marker.category}`;
+                const crimeInfo = `${marker.id}|||${marker.date}|||${marker.desc}|||${marker.category}|||${marker.reporterInfo}|||${marker.images}`;
                 return (
                   <Marker
                     key={marker.coordinates[1]}
                     coordinate={coordinates}
                     title={marker.sector}
+                    onPress={() => selectCrime(crimeInfo)} // Pass crime details as argument
                     description={desc}>
                     <Image
-                      source={require('../../assets/zombie.png')}
+                      source={require('../../assets/Crime.png')}
                       style={{width: 30, height: 30}}
                     />
                   </Marker>
@@ -206,7 +234,7 @@ const LandingMap = ({username, email}) => {
                 return null;
               }
             })}
-        </MapView>
+        </ClusteredMapView>
 
         <TouchableOpacity
           style={styles.fab}
@@ -226,6 +254,7 @@ const LandingMap = ({username, email}) => {
             style={styles.fabIcon}
           />
         </TouchableOpacity>
+        {/* <Button title="Open Modal" onPress={toggleModal} /> */}
 
         {/* SearchBar */}
         <SearchMap setInitialLocation={setInitialLocation} />
@@ -241,11 +270,38 @@ const LandingMap = ({username, email}) => {
         compass={compass}
         handleCloseDrawer={handleCloseDrawer}
       />
+      <CrimeModal
+        modalVisible={modalVisible}
+        toggleModal={toggleModal}
+        crimeDetails={crimeDetails}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)', // Transparent black
+    width: '100%',
+    height: '100%',
+  },
+  loadingText: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  logo: {
+    resizeMode: 'contain',
+  },
   container: {
     flex: 1,
   },
@@ -282,16 +338,6 @@ const styles = StyleSheet.create({
   fabIcon: {
     width: 56,
     height: 56,
-  },
-  loadingIndicator: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
-  },
-  loadingText: {
-    marginTop: 10,
-    fontSize: 16,
-    fontWeight: 'bold',
   },
 });
 
