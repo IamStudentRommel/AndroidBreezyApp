@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   TextInput,
@@ -14,6 +14,8 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
   const [password, setPassword] = useState('');
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
+  const [isAuth, SetAuth] = useState(false);
+  const [authCode, setAuthCode] = useState(0);
   const {be} = AppConfig;
 
   const capitalizeFirstLetter = str => {
@@ -43,7 +45,11 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
     return emailRegex.test(email);
   };
 
-  const handleRegister = async () => {
+  const generateRandomCode = () => {
+    return Math.floor(1000 + Math.random() * 9000).toString();
+  };
+
+  const handleAuth = async () => {
     if (!email || !password || !fname || !lname) {
       alert('Error: Please fill in all fields');
       return;
@@ -57,42 +63,23 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
         alert('Error: This user is already registered in the system');
         return;
       } else {
-        const url = `${be}/api/adduser`;
-        const data = {
-          email: email,
-          pwd: password,
-          fname: capitalizeFirstLetter(fname),
-          lname: capitalizeFirstLetter(lname),
-          role: 1,
-          status: true,
-        };
-        try {
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          });
-
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          } else {
-            alert('New user successfully registered!');
-            setEmail('');
-            setPassword('');
-            setFname('');
-            setLname('');
-            setShowRegistrationForm(false);
-            updateLogDisplay('Login');
-          }
-        } catch (error) {
-          console.error('Error adding user: ', error);
-          alert('Error: Failed to register user. Please try again later.');
+        // console.log(generateRandomCode());
+        const genCode = generateRandomCode();
+        const response = await fetch(
+          `${be}/api/send-email-verification?usermail=${email}&subject=Verification%20Code&content=${genCode}`,
+        );
+        // console.log(response);
+        if (response.ok) {
+          console.log('Verification sent!');
+          setAuthCode(genCode);
+        } else {
+          alert('Failed to send verification send-email-verification api');
         }
+        SetAuth(true);
       }
     }
   };
+
   const handleCancel = () => {
     setEmail('');
     setPassword('');
@@ -102,71 +89,167 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
     updateLogDisplay('Login');
   };
 
-  return (
-    <View style={styles.container}>
-      <Image
-        source={require('../../assets/LoginLogo.png')}
-        style={styles.logo}
-      />
-      <Text
-          style={{
-            textAlign: 'center',
-            fontStyle: 'italic',
-            color: '#FFFFFF',
-          }}>
-          Stay Aware, Stay Safe: Your Guardian Against Crime
-        </Text>
-      <Text style={styles.title}>Welcome!</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor={'#101935'}
-        value={email}
-        onChangeText={text => setEmail(text)}
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor={'#101935'}
-        value={password}
-        onChangeText={text => setPassword(text)}
-        secureTextEntry
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="First Name"
-        placeholderTextColor={'#101935'}
-        value={fname}
-        onChangeText={text => setFname(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Last Name"
-        placeholderTextColor={'#101935'}
-        value={lname}
-        onChangeText={text => setLname(text)}
-      />
+  const VerificationForm = () => {
+    const [code, setCode] = useState(['', '', '', '']);
+    const inputs = useRef([]);
 
-      <TouchableOpacity
-        style={[styles.button, {backgroundColor: '#C20000'}]}
-        onPress={handleRegister}>
-        <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.button, {backgroundColor: 'gray'}]}
-        onPress={handleCancel}>
-        <Text style={styles.buttonText}>Cancel</Text>
-      </TouchableOpacity>
-      {/* <View style={styles.button}>
-        <Button
-          title="Cancel"
-          onPress={handleCancel}
-          color="#393939"
-          style={{borderRadius: 50}}
-        />
-      </View> */}
-    </View>
+    const handleChange = async (text, index) => {
+      const newCode = [...code];
+      newCode[index] = text;
+      setCode(newCode);
+
+      // Move to next input if a digit is entered
+      if (text && index < code.length - 1) {
+        inputs.current[index + 1].focus();
+      }
+
+      if (newCode.join('').length > 3) {
+        const enteredCode = newCode.join('');
+        console.log(enteredCode);
+        console.log(authCode);
+        if (enteredCode === authCode) {
+          console.log('success');
+          const url = `${be}/api/adduser`;
+          const data = {
+            email: email,
+            pwd: password,
+            fname: capitalizeFirstLetter(fname),
+            lname: capitalizeFirstLetter(lname),
+            role: 1,
+            status: true,
+          };
+          try {
+            const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            } else {
+              alert('New user successfully registered!');
+              setEmail('');
+              setPassword('');
+              setFname('');
+              setLname('');
+              setShowRegistrationForm(false);
+              updateLogDisplay('Login');
+            }
+          } catch (error) {
+            console.error('Error adding user: ', error);
+            alert('Error: Failed to register user. Please try again later.');
+          }
+        } else {
+          console.log('failed');
+        }
+      }
+    };
+
+    const handleKeyPress = (e, index) => {
+      if (
+        e.nativeEvent.key === 'Backspace' &&
+        code[index] === '' &&
+        index > 0
+      ) {
+        inputs.current[index - 1].focus();
+      }
+    };
+    return (
+      <>
+        <View>
+          <Text style={styles.title}>Enter Verification Code</Text>
+          <View style={styles.codeContainer}>
+            {code.map((digit, index) => (
+              <TextInput
+                key={index}
+                style={[styles.input, styles.codeInput]}
+                keyboardType="numeric"
+                maxLength={1}
+                onChangeText={text => handleChange(text, index)}
+                onKeyPress={e => handleKeyPress(e, index)}
+                value={digit}
+                ref={input => (inputs.current[index] = input)}
+              />
+            ))}
+          </View>
+        </View>
+        <TouchableOpacity
+          style={[styles.button, {backgroundColor: 'gray'}]}
+          onPress={handleCancel}>
+          <Text style={styles.buttonText}>Cancel</Text>
+        </TouchableOpacity>
+      </>
+    );
+  };
+
+  return (
+    <>
+      {isAuth ? (
+        <View style={styles.container}>
+          <VerificationForm />
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <Image
+            source={require('../../assets/LoginLogo.png')}
+            style={styles.logo}
+          />
+          <Text
+            style={{
+              textAlign: 'center',
+              fontStyle: 'italic',
+              color: '#FFFFFF',
+            }}>
+            Stay Aware, Stay Safe: Your Guardian Against Crime
+          </Text>
+          <Text style={styles.title}>Welcome!</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor={'#101935'}
+            value={email}
+            onChangeText={text => setEmail(text)}
+            keyboardType="email-address"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor={'#101935'}
+            value={password}
+            onChangeText={text => setPassword(text)}
+            secureTextEntry
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="First Name"
+            placeholderTextColor={'#101935'}
+            value={fname}
+            onChangeText={text => setFname(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Last Name"
+            placeholderTextColor={'#101935'}
+            value={lname}
+            onChangeText={text => setLname(text)}
+          />
+
+          <TouchableOpacity
+            style={[styles.button, {backgroundColor: '#C20000'}]}
+            onPress={handleAuth}>
+            <Text style={styles.buttonText}>Register</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, {backgroundColor: 'gray'}]}
+            onPress={handleCancel}>
+            <Text style={styles.buttonText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </>
   );
 };
 
@@ -217,6 +300,22 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  codeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  codeInput: {
+    width: 50,
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 5,
+    textAlign: 'center',
+    marginHorizontal: 5, // This controls the space between the input boxes
+    fontSize: 18,
+    color: '#101935',
   },
 });
 

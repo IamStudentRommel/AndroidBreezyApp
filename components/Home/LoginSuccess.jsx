@@ -169,7 +169,12 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
             onPressIn={handleMouseEnter}
             onPressOut={handleMouseLeave}
             activeOpacity={0.8}
-            style={{flexDirection: 'row', alignItems: 'center', fontWeight: '600', marginBottom: 15,}}>
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              fontWeight: '600',
+              marginBottom: 15,
+            }}>
             <Image
               source={require('../../assets/Location.png')}
               style={{width: 15, height: 15, marginRight: 5}}
