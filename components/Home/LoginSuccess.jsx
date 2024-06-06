@@ -60,11 +60,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   };
 
   const getLocation = async () => {
-<<<<<<< HEAD
-    let {status} = await Location.requestForegroundPermissionsAsync();
-=======
     const hasPermission = await requestLocationPermission();
->>>>>>> main
 
     if (hasPermission) {
       try {
@@ -78,15 +74,11 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
           longitudeDelta: 0.0421,
         });
 
-<<<<<<< HEAD
-    // console.log(location.coords.latitude, location.coords.longitude);
-=======
         // Perform reverse geocoding to get the address
         const addressResult = await Location.reverseGeocodeAsync({
           latitude: coords.latitude,
           longitude: coords.longitude,
         });
->>>>>>> main
 
         if (addressResult && addressResult.length > 0) {
           setAddress(formatAddress(addressResult[0]));
@@ -211,15 +203,6 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
         />
       </View>
 
-<<<<<<< HEAD
-      <FlatList
-          data={crimeFeed}
-          renderItem={renderCrimeItem}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal={false}
-          contentContainerStyle={{ flexGrow: 1 }}
-        />
-=======
       <SwipeListView
         data={displayFeed}
         renderItem={renderCrimeItem}
@@ -230,7 +213,6 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
         swipeToClosePercent={10} // Adjust the threshold for swipe to close
         swipeDirection={['down']} // Allow swiping only in the down direction
       />
->>>>>>> main
     </View>
   );
 };
@@ -275,27 +257,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     marginBottom: 5,
   },
-<<<<<<< HEAD
-  logoutButton: {
-    backgroundColor: '#f2fdff',
-    padding: 10,
-    borderRadius: 5,
-  },
-  logoutText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  detailsText: {
-    fontSize: 14,
-    marginHorizontal: 20,
-    marginBottom: 20,
-  },
-  
-=======
   swiper: {
     height: 50, // Adjust the height of the swiper as needed
   },
->>>>>>> main
   slide: {
     flex: 1,
     justifyContent: 'center',

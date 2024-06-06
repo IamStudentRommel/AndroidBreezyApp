@@ -38,7 +38,7 @@ function App() {
   const testTheme = {
     colors: {
       ...DefaultTheme.colors,
-      primary: '#9AD4D6',
+      primary: '#FFFFFF',
       card: '#1E1E1E',
       text: '#F2FDFF',
     },
