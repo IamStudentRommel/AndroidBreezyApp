@@ -3,6 +3,7 @@ import Login from './components/LoginV2/Login';
 import Report from './components/Dashboard/Dashboard';
 import LandingMap from './components/Landing/LandingMap';
 import About from './components/About';
+import Contact from './components/Contact';
 // import Test from './components/Test';
 import CustomDrawerContent from './components/AppRoot/CustomDrawerContent';
 
@@ -38,7 +39,7 @@ function App() {
     colors: {
       ...DefaultTheme.colors,
       primary: '#9AD4D6',
-      card: '#101935',
+      card: '#1E1E1E',
       text: '#F2FDFF',
     },
   };
@@ -52,12 +53,12 @@ function App() {
         inactiveTintColor: '#F2FDFF', // Change the color when the item is inactive
       }}>
       <Drawer.Navigator
-        // initialRouteName="Live Crime Monitoring"
-        initialRouteName="Login"
+        initialRouteName="Live Crime Monitoring"
+        // initialRouteName="Login"
         screenOptions={{
           headerTintColor: '#F2FDFF',
           headerStyle: {
-            backgroundColor: '#101935',
+            backgroundColor: '#1E1E1E',
           },
         }}
         drawerContent={props => (
@@ -73,11 +74,11 @@ function App() {
           name="Login"
           options={{
             drawerLabel: logDisplay,
-            title: logDisplay,
+            title: '',
 
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/home.png')}
+                source={require('./assets/LoginIcon.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
@@ -99,7 +100,7 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/db.png')}
+                source={require('./assets/DashboardIcon.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
@@ -111,13 +112,27 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/mapIcon.png')}
+                source={require('./assets/LiveIcon.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
           }}>
           {props => <LandingMap {...props} username={username} email={email} />}
         </Drawer.Screen>
+        <Drawer.Screen
+          name="Contact Us"
+          component={React.memo(() => (
+            <Contact username={username} email={email} />
+          ))}
+          options={{
+            drawerIcon: ({tintColor}) => (
+              <Image
+                source={require('./assets/ContactIcon.png')}
+                style={{width: 24, height: 24, tintColor: tintColor}}
+              />
+            ),
+          }}
+        />
         <Drawer.Screen
           name="About"
           component={React.memo(() => (
@@ -126,7 +141,7 @@ function App() {
           options={{
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/about1.png')}
+                source={require('./assets/AboutIcon.png')}
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),

@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Button,
+  ImageBackground,
 } from 'react-native';
+
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import ClusteredMapView from 'react-native-map-clustering';
 import * as Location from 'expo-location';
@@ -174,10 +176,22 @@ const LandingMap = ({username, email}) => {
   }, []);
 
   const renderLoadingIndicator = () => (
-    <View style={[StyleSheet.absoluteFill, styles.loadingIndicator]}>
-      <ActivityIndicator size="large" color="#0000ff" />
-      <Text style={styles.loadingText}>Checking your location</Text>
-    </View>
+    // <View style={[StyleSheet.absoluteFill, styles.loadingIndicator]}>
+    //   <ActivityIndicator size="large" color="#0000ff" />
+    //   <Text style={styles.loadingText}>Checking your location</Text>
+    // </View>
+    <ImageBackground
+      source={require('../../assets/IntroBackground.png')}
+      style={styles.background}>
+      <View style={styles.overlay}>
+        <Image
+          source={require('../../assets/IntroLogo.png')}
+          style={styles.logo}
+        />
+        <ActivityIndicator size="large" color="#ffffff" />
+        <Text style={styles.loadingText}>L O A D I N G . . .</Text>
+      </View>
+    </ImageBackground>
   );
 
   return (
@@ -213,7 +227,7 @@ const LandingMap = ({username, email}) => {
                     onPress={() => selectCrime(crimeInfo)} // Pass crime details as argument
                     description={desc}>
                     <Image
-                      source={require('../../assets/zombie.png')}
+                      source={require('../../assets/Crime.png')}
                       style={{width: 30, height: 30}}
                     />
                   </Marker>
@@ -268,6 +282,28 @@ const LandingMap = ({username, email}) => {
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)', // Transparent black
+    width: '100%',
+    height: '100%',
+  },
+  loadingText: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  logo: {
+    resizeMode: 'contain',
+  },
   container: {
     flex: 1,
   },
@@ -304,16 +340,6 @@ const styles = StyleSheet.create({
   fabIcon: {
     width: 56,
     height: 56,
-  },
-  loadingIndicator: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
-  },
-  loadingText: {
-    marginTop: 10,
-    fontSize: 16,
-    fontWeight: 'bold',
   },
 });
 

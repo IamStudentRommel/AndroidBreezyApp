@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.6.0",
+    "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-native-community/geolocation": "^3.1.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^19.0.0",
@@ -38,7 +39,9 @@
     "react-native-chart-kit": "^6.12.0",
     "react-native-charts-wrapper": "^0.6.0",
     "react-native-dropdown-picker": "^5.4.6",
+    "react-native-elements": "^3.4.3",
     "react-native-flash-message": "^0.4.2",
+    "react-native-floating-label-input": "^1.4.3",
     "react-native-geolocation-service": "^5.3.1",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-google-places-autocomplete": "^2.5.5",

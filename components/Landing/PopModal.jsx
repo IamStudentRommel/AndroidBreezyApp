@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import {Modal, Button, View, Text, Image, StyleSheet} from 'react-native';
+import {Modal, View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import AppConfig from '../../app.json';
 
 const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
@@ -33,36 +33,41 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
 
     return (
       <View style={styles.detailsContainer}>
+        {imgSrc && (
+          <View style={styles.imageContainer}>
+            <Image
+              source={{
+                uri: imgSrc,
+              }}
+              style={styles.image}
+            />
+            <View style={styles.overlay} />
+            <View style={styles.detailRow}>
+              <Text style={styles.category}> {category.replace(' ', '\n')}</Text>
+            </View>
+          </View>
+        )}
+        
         <View style={styles.detailRow}>
-          <Text style={[styles.label, styles.bold]}>Date: </Text>
-          <Text style={[styles.value, styles.italic]}>
-            {datetime.split('T')[0].split('.')[0]}
-          </Text>
-        </View>
-
-        <View style={styles.detailRow}>
-          <Text style={[styles.label, styles.bold]}>Time: </Text>
-          <Text style={[styles.value, styles.italic]}>
-            {datetime.split('T')[1].split('.')[0]}
-          </Text>
-        </View>
-
-        <View style={styles.detailRow}>
-          <Text style={[styles.label, styles.bold]}>Category: </Text>
-          <Text style={[styles.value, styles.italic]}>{category}</Text>
-        </View>
-
-        <View style={styles.detailRow}>
-          <Text style={[styles.label, styles.bold]}>Reporter: </Text>
-          <Text style={[styles.value, styles.italic]}>
+          <Text style={[styles.report]}>Report by: </Text>
+          <Text style={styles.report}>
             {reporter.split(',')[0]}
           </Text>
         </View>
 
-        <View style={styles.detailRow}>
-          <Text style={[styles.label, styles.bold]}>Details: </Text>
+        <View style={styles.datetimeContainer}>
+          <Text style={styles.time}>
+            {datetime.split('T')[1].split('.')[0]}
+          </Text>
+          <Text style={styles.date}>
+            {datetime.split('T')[0].split('.')[0]}
+          </Text>
         </View>
-        <Text style={[styles.value, styles.italic, styles.detailsValue]}>
+
+        <View style={styles.detailsContainer}>
+          <Text style={styles.details}>Details: </Text>
+        </View>
+        <Text style={styles.detailsValue}>
           {details}
         </Text>
 
@@ -75,16 +80,7 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
           />
         </View> */}
 
-        {imgSrc && (
-          <View style={styles.imageContainer}>
-            <Image
-              source={{
-                uri: imgSrc,
-              }}
-              style={styles.image}
-            />
-          </View>
-        )}
+        
       </View>
     );
   };
@@ -98,7 +94,9 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           {renderCrimeDetails()}
-          <Button title="OK" onPress={toggleModal} color="#101935" />
+          <TouchableOpacity onPress={toggleModal} style={styles.button}>
+        <Text style={styles.buttonText}>OK</Text>
+      </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -115,42 +113,81 @@ const styles = StyleSheet.create({
   modalContent: {
     backgroundColor: '#fff',
     padding: 20,
-    borderRadius: 10,
-    width: '80%',
+    borderRadius: 20,
+    width: '90%',
   },
-  detailsContainer: {
-    marginBottom: 20,
+  imageContainer: {
+    position: 'relative',
+  },
+  image: {
+    width: 330,
+    height: 300,
+    borderRadius: 20,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)', // Adjust the alpha value for desired darkness
+    borderRadius: 20,
+    height: '99%',
+  },
+  category: {
+    fontWeight: 'bold',
+    fontSize: 25,
+    color: '#FFFFFF',
+    position: 'absolute',
+    bottom: 20, // Adjust as needed
+    left: 10, // Adjust as needed
+    textAlign: 'left',
+  },
+  report: {
+    fontSize: 14,
+
   },
   detailRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 5,
   },
-  label: {
-    fontSize: 16,
+  datetimeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
   },
-  value: {
-    fontSize: 16,
-    fontStyle: 'italic',
-    marginLeft: 5,
+  time:{
+    color: '#27272a',
+    fontWeight: '500',
+    fontSize: 12, 
   },
-  bold: {
+  date:{
+    color: '#27272a',
+    fontWeight: '500',
+    fontSize: 12,
+    marginRight: '60%',
+  },
+  details: {
+    fontSize: 15,
     fontWeight: 'bold',
-  },
-  italic: {
-    fontStyle: 'italic',
+    marginBottom: 10,
   },
   detailsValue: {
     marginLeft: 20,
-    fontStyle: 'italic',
+    fontSize: 15,
+    marginBottom: 20,
   },
-  imageContainer: {
-    alignItems: 'center',
-    marginTop: 10,
+  button: {
+    borderRadius: 20,
+
   },
-  image: {
-    width: 300,
-    height: 300,
+  button: {
+    backgroundColor: '#C20000',
+    padding: 10,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
 
