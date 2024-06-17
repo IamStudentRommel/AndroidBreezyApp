@@ -169,7 +169,8 @@ const LandingMap = ({username, email}) => {
 
   useEffect(() => {
     fetchRecentIncidents();
-  }, [incidents]);
+    console.log('x');
+  }, []);
 
   useEffect(() => {
     getLocation();
@@ -271,6 +272,7 @@ const LandingMap = ({username, email}) => {
         address={address}
         compass={compass}
         handleCloseDrawer={handleCloseDrawer}
+        fetchRecentIncidents={fetchRecentIncidents}
       />
       <CrimeModal
         modalVisible={modalVisible}

@@ -24,6 +24,7 @@ const CrimeReportDrawer = ({
   address,
   compass,
   handleCloseDrawer,
+  fetchRecentIncidents,
 }) => {
   const [latNear, setLatNear] = useState(0.001);
   const [LongNear, setLongNear] = useState(0.001);
@@ -135,6 +136,7 @@ const CrimeReportDrawer = ({
         const responseData = await response.json();
         console.log('Response:', responseData);
         alert('New crime successfully reported.');
+        fetchRecentIncidents();
         handleCancelPress();
         setLatNear(latNear + 0.001);
         setLongNear(LongNear + 0.001);
@@ -354,7 +356,11 @@ const CrimeReportDrawer = ({
             </Text>
           </TouchableOpacity>
         </View>
-        <LoginModal modalVisible={modalVisible} toggleModal={toggleModal} handleCancelPress={handleCancelPress} />
+        <LoginModal
+          modalVisible={modalVisible}
+          toggleModal={toggleModal}
+          handleCancelPress={handleCancelPress}
+        />
       </View>
     </BottomDrawer>
   );
