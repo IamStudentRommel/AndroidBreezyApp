@@ -116,10 +116,11 @@ const CrimeReportDrawer = ({
       desc: description,
       images: [imgFileName],
       date: getCurrentDateTime(),
-      coordinates: [
-        initialLocation.longitude + LongNear,
-        initialLocation.latitude + latNear,
-      ],
+      // coordinates: [
+      //   initialLocation.longitude + LongNear,
+      //   initialLocation.latitude + latNear,
+      // ],
+      coordinates: [initialLocation.longitude, initialLocation.latitude],
     };
     // console.log(data);
     try {
@@ -138,8 +139,10 @@ const CrimeReportDrawer = ({
         alert('New crime successfully reported.');
         fetchRecentIncidents();
         handleCancelPress();
-        setLatNear(latNear + 0.001);
-        setLongNear(LongNear + 0.001);
+        // setLatNear(latNear + 0.001);
+        // setLongNear(LongNear + 0.001);
+        setLatNear(latNear);
+        setLongNear(LongNear);
 
         // Create a new FormData object to upload images
         const formData = new FormData();
