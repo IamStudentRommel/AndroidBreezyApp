@@ -25,7 +25,7 @@ const Report = () => {
   const [sec, setSec] = useState({});
 
   const options = ['2020', '2021', '2022', '2023', '2024'];
-  const [selectedYear, setSelectedYear] = useState('2024');
+  const [selectedYear, setSelectedYear] = useState('2023');
 
   const [initialLocation, setInitialLocation] = useState({
     latitude: 51.05011,
