@@ -69,3 +69,7 @@ app
 
 # testing
 /coverage
+
+
+mapconf.json
+/mapconf.json
