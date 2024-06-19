@@ -24,7 +24,7 @@ const Report = () => {
   const [incidents, setIncidents] = useState([]);
   const [sec, setSec] = useState({});
 
-  const options = ['2020', '2021', '2022', '2023'];
+  const options = ['2020', '2021', '2022', '2023', '2024'];
   const [selectedYear, setSelectedYear] = useState('2023');
 
   const [initialLocation, setInitialLocation] = useState({
@@ -105,8 +105,9 @@ const Report = () => {
         name: sector,
         crimes: crimes,
         color: color,
-        legendFontColor: '#101935',
+        legendFontColor: '#FFFFFF',
         legendFontSize: 14,
+        fontWeight: 'bold',
       });
     }
   }
@@ -125,9 +126,9 @@ const Report = () => {
         width={Dimensions.get('window').width}
         height={220}
         chartConfig={{
-          backgroundGradientFrom: '#FCEEB5',
-          backgroundGradientTo: '#FFDAC1',
-          color: (opacity = 1) => `rgba(255, 105, 180, ${opacity})`,
+          backgroundGradientFrom: '#FF6347',
+          backgroundGradientTo: '#FF6347',
+          color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
           formatLabel: (value, name) => `${name}: ${(value * 100).toFixed(2)}%`,
         }}
         accessor="crimes"
@@ -167,7 +168,7 @@ const Report = () => {
                         title={marker.community_name}
                         description={desc}>
                         <Image
-                          source={require('../../assets/zombie.png')}
+                          source={require('../../assets/Crime.png')}
                           style={{width: 30, height: 30}}
                         />
                       </Marker>
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 2,
-    backgroundColor: '#f2fdff',
+    backgroundColor: '#1E1E1E',
   },
   mapContainer: {
     position: 'absolute',
@@ -207,12 +208,12 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 10,
-    fontSize: 34,
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 16,
     textAlign: 'center',
     marginBottom: 10,
-    color: '#101935',
+    color: '#FFFFFF',
   },
   flashMessageContainer: {
     position: 'absolute',

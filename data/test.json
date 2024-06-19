@@ -12,11 +12,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.20767498075155, 51.1325947114686]
-    },
-    ":@computed_region_kxmf_bzkv": "244",
-    ":@computed_region_p8tp_5dkv": "10",
-    ":@computed_region_4b54_tmc4": "3",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "CENTRE",
@@ -31,11 +27,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.11512839716917, 51.07421633024228]
-    },
-    ":@computed_region_kxmf_bzkv": "153",
-    ":@computed_region_p8tp_5dkv": "7",
-    ":@computed_region_4b54_tmc4": "7",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "EAST",
@@ -50,11 +42,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.99305400906283, 51.02256772250409]
-    },
-    ":@computed_region_kxmf_bzkv": "196",
-    ":@computed_region_p8tp_5dkv": "11",
-    ":@computed_region_4b54_tmc4": "10",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "CENTRE",
@@ -69,11 +57,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.05746990262463, 51.09485613506574]
-    },
-    ":@computed_region_kxmf_bzkv": "241",
-    ":@computed_region_p8tp_5dkv": "4",
-    ":@computed_region_4b54_tmc4": "2",
-    ":@computed_region_4a3i_ccfj": "4"
+    }
   },
   {
     "sector": "NORTHWEST",
@@ -88,11 +72,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.14668419231347, 51.14509283969437]
-    },
-    ":@computed_region_kxmf_bzkv": "286",
-    ":@computed_region_p8tp_5dkv": "10",
-    ":@computed_region_4b54_tmc4": "3",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "SOUTH",
@@ -107,11 +87,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.05133665127042, 50.939803390308995]
-    },
-    ":@computed_region_kxmf_bzkv": "267",
-    ":@computed_region_p8tp_5dkv": "13",
-    ":@computed_region_4b54_tmc4": "6",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "CENTRE",
@@ -126,11 +102,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.06808259035802, 51.03315775861924]
-    },
-    ":@computed_region_kxmf_bzkv": "297",
-    ":@computed_region_p8tp_5dkv": "5",
-    ":@computed_region_4b54_tmc4": "14",
-    ":@computed_region_4a3i_ccfj": "1"
+    }
   },
   {
     "sector": "SOUTH",
@@ -145,11 +117,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.11215889038719, 50.96676703111173]
-    },
-    ":@computed_region_kxmf_bzkv": "66",
-    ":@computed_region_p8tp_5dkv": "5",
-    ":@computed_region_4b54_tmc4": "8",
-    ":@computed_region_4a3i_ccfj": "1"
+    }
   },
   {
     "sector": "NORTHEAST",
@@ -164,11 +132,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.95750282716884, 51.170446168252354]
-    },
-    ":@computed_region_kxmf_bzkv": "3",
-    ":@computed_region_p8tp_5dkv": "1",
-    ":@computed_region_4b54_tmc4": "11",
-    ":@computed_region_4a3i_ccfj": "4"
+    }
   },
   {
     "sector": "CENTRE",
@@ -183,11 +147,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.07416183074736, 51.02487576913786]
-    },
-    ":@computed_region_kxmf_bzkv": "277",
-    ":@computed_region_p8tp_5dkv": "5",
-    ":@computed_region_4b54_tmc4": "10",
-    ":@computed_region_4a3i_ccfj": "1"
+    }
   },
   {
     "sector": "CENTRE",
@@ -202,11 +162,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.07820713414625, 51.062686663226856]
-    },
-    ":@computed_region_kxmf_bzkv": "219",
-    ":@computed_region_p8tp_5dkv": "7",
-    ":@computed_region_4b54_tmc4": "7",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "NORTH",
@@ -221,11 +177,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.14068609335015, 51.175616972779984]
-    },
-    ":@computed_region_kxmf_bzkv": "265",
-    ":@computed_region_p8tp_5dkv": "10",
-    ":@computed_region_4b54_tmc4": "3",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "SOUTHEAST",
@@ -240,11 +192,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.988736, 50.889376]
-    },
-    ":@computed_region_kxmf_bzkv": "258",
-    ":@computed_region_p8tp_5dkv": "13",
-    ":@computed_region_4b54_tmc4": "6",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "NORTH",
@@ -259,11 +207,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.125817, 51.174548]
-    },
-    ":@computed_region_kxmf_bzkv": "16",
-    ":@computed_region_p8tp_5dkv": "1",
-    ":@computed_region_4b54_tmc4": "11",
-    ":@computed_region_4a3i_ccfj": "4"
+    }
   },
   {
     "sector": "NORTHEAST",
@@ -278,11 +222,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.942186, 51.125839]
-    },
-    ":@computed_region_kxmf_bzkv": "227",
-    ":@computed_region_p8tp_5dkv": "1",
-    ":@computed_region_4b54_tmc4": "11",
-    ":@computed_region_4a3i_ccfj": "4"
+    }
   },
   {
     "sector": "NORTH",
@@ -297,11 +237,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.105236, 51.157423]
-    },
-    ":@computed_region_kxmf_bzkv": "95",
-    ":@computed_region_p8tp_5dkv": "12",
-    ":@computed_region_4b54_tmc4": "13",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "SOUTHWEST",
@@ -316,11 +252,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.216575, 51.045048]
-    },
-    ":@computed_region_kxmf_bzkv": "103",
-    ":@computed_region_p8tp_5dkv": "2",
-    ":@computed_region_4b54_tmc4": "15",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "SOUTHWEST",
@@ -335,11 +267,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.085371, 51.036469]
-    },
-    ":@computed_region_kxmf_bzkv": "258",
-    ":@computed_region_p8tp_5dkv": "13",
-    ":@computed_region_4b54_tmc4": "6",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "NORTHEAST",
@@ -354,11 +282,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.928045, 51.06365]
-    },
-    ":@computed_region_kxmf_bzkv": "97",
-    ":@computed_region_p8tp_5dkv": "12",
-    ":@computed_region_4b54_tmc4": "13",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "SOUTHWEST",
@@ -373,11 +297,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.202282, 51.019749]
-    },
-    ":@computed_region_kxmf_bzkv": "148",
-    ":@computed_region_p8tp_5dkv": "11",
-    ":@computed_region_4b54_tmc4": "10",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "NORTHEAST",
@@ -392,11 +312,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.978768, 51.107115]
-    },
-    ":@computed_region_kxmf_bzkv": "12",
-    ":@computed_region_p8tp_5dkv": "2",
-    ":@computed_region_4b54_tmc4": "16",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "NORTH",
@@ -411,11 +327,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.105236, 51.157423]
-    },
-    ":@computed_region_kxmf_bzkv": "95",
-    ":@computed_region_p8tp_5dkv": "12",
-    ":@computed_region_4b54_tmc4": "13",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "SOUTHWEST",
@@ -430,11 +342,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.138941, 51.020639]
-    },
-    ":@computed_region_kxmf_bzkv": "217",
-    ":@computed_region_p8tp_5dkv": "7",
-    ":@computed_region_4b54_tmc4": "7",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "SOUTHEAST",
@@ -449,11 +357,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.965177, 50.889539]
-    },
-    ":@computed_region_kxmf_bzkv": "260",
-    ":@computed_region_p8tp_5dkv": "13",
-    ":@computed_region_4b54_tmc4": "6",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "NORTHEAST",
@@ -468,11 +372,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.947347, 51.074971]
-    },
-    ":@computed_region_kxmf_bzkv": "157",
-    ":@computed_region_p8tp_5dkv": "10",
-    ":@computed_region_4b54_tmc4": "3",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "SOUTHWEST",
@@ -487,11 +387,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.199944, 51.016135]
-    },
-    ":@computed_region_kxmf_bzkv": "146",
-    ":@computed_region_p8tp_5dkv": "11",
-    ":@computed_region_4b54_tmc4": "10",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "NORTH",
@@ -506,11 +402,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.228526, 51.126845]
-    },
-    ":@computed_region_kxmf_bzkv": "68",
-    ":@computed_region_p8tp_5dkv": "6",
-    ":@computed_region_4b54_tmc4": "16",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "SOUTHWEST",
@@ -525,11 +417,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.206161, 51.057108]
-    },
-    ":@computed_region_kxmf_bzkv": "240",
-    ":@computed_region_p8tp_5dkv": "13",
-    ":@computed_region_4b54_tmc4": "6",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "SOUTHEAST",
@@ -544,11 +432,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.953728, 50.890767]
-    },
-    ":@computed_region_kxmf_bzkv": "243",
-    ":@computed_region_p8tp_5dkv": "13",
-    ":@computed_region_4b54_tmc4": "6",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "SOUTHEAST",
@@ -563,11 +447,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.951326, 50.917496]
-    },
-    ":@computed_region_kxmf_bzkv": "249",
-    ":@computed_region_p8tp_5dkv": "13",
-    ":@computed_region_4b54_tmc4": "6",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "SOUTHEAST",
@@ -582,11 +462,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.975268, 50.94215]
-    },
-    ":@computed_region_kxmf_bzkv": "96",
-    ":@computed_region_p8tp_5dkv": "11",
-    ":@computed_region_4b54_tmc4": "10",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "SOUTHWEST",
@@ -601,11 +477,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.131438, 51.013712]
-    },
-    ":@computed_region_kxmf_bzkv": "161",
-    ":@computed_region_p8tp_5dkv": "7",
-    ":@computed_region_4b54_tmc4": "7",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "NORTH",
@@ -620,11 +492,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.065174, 51.135924]
-    },
-    ":@computed_region_kxmf_bzkv": "47",
-    ":@computed_region_p8tp_5dkv": "8",
-    ":@computed_region_4b54_tmc4": "16",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "SOUTHWEST",
@@ -639,11 +507,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.130518, 51.025202]
-    },
-    ":@computed_region_kxmf_bzkv": "285",
-    ":@computed_region_p8tp_5dkv": "10",
-    ":@computed_region_4b54_tmc4": "3",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   },
   {
     "sector": "SOUTHEAST",
@@ -658,11 +522,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.965177, 50.889539]
-    },
-    ":@computed_region_kxmf_bzkv": "260",
-    ":@computed_region_p8tp_5dkv": "13",
-    ":@computed_region_4b54_tmc4": "6",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "SOUTHEAST",
@@ -677,11 +537,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.96421, 50.915041]
-    },
-    ":@computed_region_kxmf_bzkv": "223",
-    ":@computed_region_p8tp_5dkv": "1",
-    ":@computed_region_4b54_tmc4": "11",
-    ":@computed_region_4a3i_ccfj": "4"
+    }
   },
   {
     "sector": "SOUTHEAST",
@@ -696,11 +552,7 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-113.979308, 50.997498]
-    },
-    ":@computed_region_kxmf_bzkv": "283",
-    ":@computed_region_p8tp_5dkv": "12",
-    ":@computed_region_4b54_tmc4": "16",
-    ":@computed_region_4a3i_ccfj": "3"
+    }
   },
   {
     "sector": "SOUTHWEST",
@@ -715,10 +567,6 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.105172, 51.00856]
-    },
-    ":@computed_region_kxmf_bzkv": "160",
-    ":@computed_region_p8tp_5dkv": "7",
-    ":@computed_region_4b54_tmc4": "7",
-    ":@computed_region_4a3i_ccfj": "2"
+    }
   }
 ]

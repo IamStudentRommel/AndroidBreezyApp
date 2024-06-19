@@ -74,3 +74,6 @@ app
 .expo
 dist/
 web-build/
+
+mapconf.json
+/mapconf.json
