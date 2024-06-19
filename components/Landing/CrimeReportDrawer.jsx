@@ -24,6 +24,7 @@ const CrimeReportDrawer = ({
   address,
   compass,
   handleCloseDrawer,
+  fetchRecentIncidents,
 }) => {
   const [latNear, setLatNear] = useState(0.001);
   const [LongNear, setLongNear] = useState(0.001);
@@ -115,10 +116,11 @@ const CrimeReportDrawer = ({
       desc: description,
       images: [imgFileName],
       date: getCurrentDateTime(),
-      coordinates: [
-        initialLocation.longitude + LongNear,
-        initialLocation.latitude + latNear,
-      ],
+      // coordinates: [
+      //   initialLocation.longitude + LongNear,
+      //   initialLocation.latitude + latNear,
+      // ],
+      coordinates: [initialLocation.longitude, initialLocation.latitude],
     };
     // console.log(data);
     try {
@@ -135,9 +137,12 @@ const CrimeReportDrawer = ({
         const responseData = await response.json();
         console.log('Response:', responseData);
         alert('New crime successfully reported.');
+        fetchRecentIncidents();
         handleCancelPress();
-        setLatNear(latNear + 0.001);
-        setLongNear(LongNear + 0.001);
+        // setLatNear(latNear + 0.001);
+        // setLongNear(LongNear + 0.001);
+        setLatNear(latNear);
+        setLongNear(LongNear);
 
         // Create a new FormData object to upload images
         const formData = new FormData();
@@ -354,7 +359,11 @@ const CrimeReportDrawer = ({
             </Text>
           </TouchableOpacity>
         </View>
-        <LoginModal modalVisible={modalVisible} toggleModal={toggleModal} handleCancelPress={handleCancelPress} />
+        <LoginModal
+          modalVisible={modalVisible}
+          toggleModal={toggleModal}
+          handleCancelPress={handleCancelPress}
+        />
       </View>
     </BottomDrawer>
   );

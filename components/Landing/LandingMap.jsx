@@ -161,13 +161,14 @@ const LandingMap = ({username, email}) => {
   const reCenter = () => {
     console.log('reCenter');
     getLocation();
-    mapRef.current?.animateToRegion(initialLocation, 1000);
+    mapRef.current?.animateToRegion(initialLocation, 100);
     // console.log(compass);
   };
 
   useEffect(() => {
     fetchRecentIncidents();
-  }, [incidents]);
+    console.log('x');
+  }, []);
 
   useEffect(() => {
     getLocation();
@@ -219,7 +220,7 @@ const LandingMap = ({username, email}) => {
                 const crimeInfo = `${marker.id}|||${marker.date}|||${marker.desc}|||${marker.category}|||${marker.reporterInfo}|||${marker.images}`;
                 return (
                   <Marker
-                    key={marker.coordinates[1]}
+                    key={marker.id}
                     coordinate={coordinates}
                     title={marker.sector}
                     onPress={() => selectCrime(crimeInfo)} // Pass crime details as argument
@@ -231,6 +232,7 @@ const LandingMap = ({username, email}) => {
                   </Marker>
                 );
               } catch (error) {
+                console.log(error);
                 return null;
               }
             })}
@@ -269,6 +271,7 @@ const LandingMap = ({username, email}) => {
         address={address}
         compass={compass}
         handleCloseDrawer={handleCloseDrawer}
+        fetchRecentIncidents={fetchRecentIncidents}
       />
       <CrimeModal
         modalVisible={modalVisible}
