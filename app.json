@@ -15,7 +15,7 @@
     "owner": "ommel0622",
     "slug": "crimeapp",
     "splash": {
-      "image": "./assets/bird.png",
+      "image": "./assets/IntroBackground.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     }
