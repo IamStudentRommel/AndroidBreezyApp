@@ -41,7 +41,7 @@ const CustomDrawerContent = ({
           <View style={styles.avatarContainer}>
             <Text style={styles.avatarText}>{initials}</Text>
           </View>
-          <Text style={{fontSize: 18, marginBottom: 8, color: '#ffffff'}}>
+          <Text style={{fontSize: 18, marginBottom: 10, color: '#ffffff'}}>
             {capitalizeFirstLetter(username)}
           </Text>
         </View>

@@ -79,7 +79,7 @@ function App() {
             drawerIcon: ({tintColor}) => (
               <Image
                 source={require('./assets/LoginIcon.png')}
-                style={{width: 24, height: 24, tintColor: tintColor}}
+                style={{width: 24, height: 24, tintColor: tintColor,}}
               />
             ),
           }}>
