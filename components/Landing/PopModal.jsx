@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import {Modal, View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {Modal, Button, View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import AppConfig from '../../app.json';
 
 const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
@@ -42,12 +42,13 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
               style={styles.image}
             />
             <View style={styles.overlay} />
-            <View style={styles.detailRow}>
-              <Text style={styles.category}> {category.replace(' ', '\n')}</Text>
-            </View>
           </View>
         )}
-        
+
+        <View style={styles.detailRow}>
+          <Text style={styles.category}>{category}</Text>
+        </View>
+
         <View style={styles.detailRow}>
           <Text style={[styles.report]}>Report by: </Text>
           <Text style={styles.report}>
@@ -67,9 +68,11 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
         <View style={styles.detailsContainer}>
           <Text style={styles.details}>Details: </Text>
         </View>
-        <Text style={styles.detailsValue}>
+        <View style={styles.detailsText}>
+          <Text style={styles.detailsValue}>
           {details}
-        </Text>
+          </Text>
+        </View>
 
         {/* <View style={styles.imageContainer}>
           <Image
@@ -103,6 +106,7 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
   );
 };
 
+
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
@@ -115,33 +119,35 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     width: '90%',
+    height: 'auto',
   },
-  imageContainer: {
-    position: 'relative',
+  detailsContainer: {
+    marginBottom: 5,
   },
   image: {
-    width: 330,
-    height: 300,
+    width: '100%',
+    height: 250,
     borderRadius: 20,
+  },
+  imageContainer: {
+    alignItems: 'center',
+    marginTop: 10,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.6)', // Adjust the alpha value for desired darkness
     borderRadius: 20,
-    height: '99%',
+    height: '100%',
   },
   category: {
     fontWeight: 'bold',
     fontSize: 25,
-    color: '#FFFFFF',
-    position: 'absolute',
-    bottom: 20, // Adjust as needed
-    left: 10, // Adjust as needed
+    color: 'black',
     textAlign: 'left',
+    marginTop: 5,
   },
   report: {
     fontSize: 14,
-
   },
   detailRow: {
     flexDirection: 'row',
@@ -167,15 +173,18 @@ const styles = StyleSheet.create({
   details: {
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  detailsText: {
     marginBottom: 10,
   },
   detailsValue: {
     marginLeft: 20,
     fontSize: 15,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   button: {
     borderRadius: 20,
+    marginTop: 20,
 
   },
   button: {
@@ -189,6 +198,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  detailsValue: {
+    marginLeft: 10,
+  },
+  
 });
 
 export default CrimeModal;

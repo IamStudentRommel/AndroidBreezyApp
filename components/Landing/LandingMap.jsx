@@ -206,7 +206,7 @@ const LandingMap = ({username, email}) => {
           customMapStyle={mapCustomStyle}>
           <Marker coordinate={initialLocation} title="Your Initial Location">
             <Image
-              source={require('../../assets/angel.png')}
+              source={require('../../assets/YouIcon.png')}
               style={{width: 30, height: 30}}
             />
           </Marker>

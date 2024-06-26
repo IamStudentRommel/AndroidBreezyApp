@@ -20,6 +20,7 @@ import LoginSuccess from '../Home/LoginSuccess';
 import RegistrationForm from './RegistrationForm';
 import SignOptions from './SignOptions';
 import AppConfig from '../../app.json';
+import ForgotPassword from './ForgotPassword';
 
 // const LoadingComponent = () => {
 //   return (
@@ -56,6 +57,7 @@ const Login = ({
   const [firebaseFname, setFirebaseFname] = useState('');
   const [firebaseLname, setFirebaseLname] = useState('');
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const {be} = AppConfig;
 
   const validateUser = async (email, pwd) => {
@@ -123,6 +125,10 @@ const Login = ({
     setShowRegistrationForm(true);
   };
 
+  const forgotPass = () => {
+    setShowForgotPassword(true);
+  };
+
   // console.log(isLoggedIn);
   if (isLoggedIn) {
     return (
@@ -141,6 +147,15 @@ const Login = ({
         updateLogDisplay={updateLogDisplay}
       />
     );
+  }
+
+  if (showForgotPassword) {
+    return (
+      <ForgotPassword
+        setShowForgotPassword={setShowForgotPassword}
+        updateLogDisplay={updateLogDisplay}
+      />
+    )
   }
 
   return (
@@ -163,20 +178,20 @@ const Login = ({
               <View style={styles.inputContainer}>
                 <TextInput
                   placeholder="Email"
-                  placeholderTextColor={'#101935'}
+                  placeholderTextColor={'#8F8F8F'}
                   style={styles.textInput}
                   onChangeText={handleEmailChange}
                 />
                 <TextInput
                   placeholder="Password"
-                  placeholderTextColor={'#101935'}
+                  placeholderTextColor={'#8F8F8F'}
                   style={styles.textInput}
                   secureTextEntry
                   onChangeText={handlePwdChange}
                 />
               </View>
 
-              <TouchableOpacity onPress={test} style={styles.fpContainer}>
+              <TouchableOpacity onPress={forgotPass} style={styles.fpContainer}>
                 <Text style={styles.textLink}>Forgot Password?</Text>
               </TouchableOpacity>
 
