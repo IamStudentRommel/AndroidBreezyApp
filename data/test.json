@@ -30,7 +30,7 @@
     }
   },
   {
-    "sector": "EAST",
+    "sector": "NORTHEAST",
     "community_name": "DOVER",
     "category": "Theft OF Vehicle",
     "crime_count": "5",
@@ -75,7 +75,7 @@
     }
   },
   {
-    "sector": "SOUTH",
+    "sector": "SOUTHWEST",
     "community_name": "LAKE BONAVISTA",
     "category": "Theft OF Vehicle",
     "crime_count": "2",
@@ -105,7 +105,7 @@
     }
   },
   {
-    "sector": "SOUTH",
+    "sector": "SOUTHWEST",
     "community_name": "PALLISER",
     "category": "Theft FROM Vehicle",
     "crime_count": "1",
@@ -165,7 +165,7 @@
     }
   },
   {
-    "sector": "NORTH",
+    "sector": "NORTHWEST",
     "community_name": "SAGE HILL",
     "category": "Theft OF Vehicle",
     "crime_count": "1",
@@ -195,7 +195,7 @@
     }
   },
   {
-    "sector": "NORTH",
+    "sector": "NORTHWEST",
     "community_name": "EVANSTON",
     "category": "Assault (Non-domestic)",
     "crime_count": "1",
@@ -225,7 +225,7 @@
     }
   },
   {
-    "sector": "NORTH",
+    "sector": "NORTHWEST",
     "community_name": "HIDDEN VALLEY",
     "category": "Break & Enter - Residence",
     "crime_count": "1",
@@ -315,7 +315,7 @@
     }
   },
   {
-    "sector": "NORTH",
+    "sector": "NORTHWEST",
     "community_name": "HIDDEN VALLEY",
     "category": "Theft FROM Vehicle",
     "crime_count": "4",
@@ -390,7 +390,7 @@
     }
   },
   {
-    "sector": "NORTH",
+    "sector": "NORTHWEST",
     "community_name": "TUSCANY",
     "category": "Break & Enter - Residence",
     "crime_count": "1",
@@ -480,7 +480,7 @@
     }
   },
   {
-    "sector": "NORTH",
+    "sector": "NORTHWEST",
     "community_name": "HARVEST HILLS",
     "category": "Theft OF Vehicle",
     "crime_count": "2",
@@ -567,6 +567,1406 @@
     "community_center_point": {
       "type": "Point",
       "coordinates": [-114.105172, 51.00856]
+    }
+  },
+
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "MCKENZIE TOWNE",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "6",
+    "resident_count": "17411",
+    "date": "2020-05-01T00:00:00.000",
+    "year": "2020",
+    "month": "MAY",
+    "id": "2020-MAY-MCKENZIE TOWNE-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.957951, 50.918573]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "TARADALE",
+    "category": "Assault (Domestic)",
+    "crime_count": "5",
+    "resident_count": "17383",
+    "date": "2020-02-01T00:00:00.000",
+    "year": "2020",
+    "month": "FEB",
+    "id": "2020-FEB-TARADALE-Assault (Domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.957989, 51.127906]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "HIDDEN VALLEY",
+    "category": "Break and Enter - Residential",
+    "crime_count": "3",
+    "resident_count": "11798",
+    "date": "2020-06-01T00:00:00.000",
+    "year": "2020",
+    "month": "JUN",
+    "id": "2020-JUN-HIDDEN VALLEY-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.111304, 51.145331]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "ASPEN WOODS",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "8250",
+    "date": "2020-10-01T00:00:00.000",
+    "year": "2020",
+    "month": "OCT",
+    "id": "2020-OCT-ASPEN WOODS-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.206913, 51.035824]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "DOUGLASDALE",
+    "category": "Robbery - Personal",
+    "crime_count": "1",
+    "resident_count": "12234",
+    "date": "2020-01-01T00:00:00.000",
+    "year": "2020",
+    "month": "JAN",
+    "id": "2020-JAN-DOUGLASDALE-Robbery - Personal",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.995634, 50.939934]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "FALCONRIDGE",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "2",
+    "resident_count": "10313",
+    "date": "2020-09-01T00:00:00.000",
+    "year": "2020",
+    "month": "SEP",
+    "id": "2020-SEP-FALCONRIDGE-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.944578, 51.112876]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "BRIDGELAND",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "4",
+    "resident_count": "5481",
+    "date": "2020-08-01T00:00:00.000",
+    "year": "2020",
+    "month": "AUG",
+    "id": "2020-AUG-BRIDGELAND-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.051255, 51.052591]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "WEST SPRINGS",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "8984",
+    "date": "2020-04-01T00:00:00.000",
+    "year": "2020",
+    "month": "APR",
+    "id": "2020-APR-WEST SPRINGS-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.202634, 51.050073]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "RIVERBEND",
+    "category": "Robbery - Commercial",
+    "crime_count": "1",
+    "resident_count": "9642",
+    "date": "2020-07-01T00:00:00.000",
+    "year": "2020",
+    "month": "JUL",
+    "id": "2020-JUL-RIVERBEND-Robbery - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.000801, 50.973827]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "CASTLERIDGE",
+    "category": "Theft OF Vehicle",
+    "crime_count": "3",
+    "resident_count": "6802",
+    "date": "2020-12-01T00:00:00.000",
+    "year": "2020",
+    "month": "DEC",
+    "id": "2020-DEC-CASTLERIDGE-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.964982, 51.114548]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "ROCKY RIDGE",
+    "category": "Break and Enter - Residential",
+    "crime_count": "1",
+    "resident_count": "8037",
+    "date": "2020-03-01T00:00:00.000",
+    "year": "2020",
+    "month": "MAR",
+    "id": "2020-MAR-ROCKY RIDGE-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.240106, 51.141351]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "SIGNAL HILL",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "3",
+    "resident_count": "13879",
+    "date": "2020-05-01T00:00:00.000",
+    "year": "2020",
+    "month": "MAY",
+    "id": "2020-MAY-SIGNAL HILL-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.172257, 51.018547]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "MAHOGANY",
+    "category": "Robbery - Personal",
+    "crime_count": "1",
+    "resident_count": "8223",
+    "date": "2020-11-01T00:00:00.000",
+    "year": "2020",
+    "month": "NOV",
+    "id": "2020-NOV-MAHOGANY-Robbery - Personal",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.958775, 50.886475]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "MARLBOROUGH",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "4",
+    "resident_count": "8574",
+    "date": "2020-06-01T00:00:00.000",
+    "year": "2020",
+    "month": "JUN",
+    "id": "2020-JUN-MARLBOROUGH-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.966776, 51.058344]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "TUSCANY",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "19765",
+    "date": "2020-08-01T00:00:00.000",
+    "year": "2020",
+    "month": "AUG",
+    "id": "2020-AUG-TUSCANY-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.247959, 51.135495]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "LAKEVIEW",
+    "category": "Robbery - Commercial",
+    "crime_count": "1",
+    "resident_count": "5537",
+    "date": "2020-09-01T00:00:00.000",
+    "year": "2020",
+    "month": "SEP",
+    "id": "2020-SEP-LAKEVIEW-Robbery - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.134234, 50.995107]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "CRANSTON",
+    "category": "Break and Enter - Residential",
+    "crime_count": "3",
+    "resident_count": "15502",
+    "date": "2020-01-01T00:00:00.000",
+    "year": "2020",
+    "month": "JAN",
+    "id": "2020-JAN-CRANSTON-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.962813, 50.867763]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "SADDLE RIDGE",
+    "category": "Assault (Domestic)",
+    "crime_count": "6",
+    "resident_count": "18341",
+    "date": "2020-10-01T00:00:00.000",
+    "year": "2020",
+    "month": "OCT",
+    "id": "2020-OCT-SADDLE RIDGE-Assault (Domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.940475, 51.134171]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "RANCHLANDS",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "2",
+    "resident_count": "7773",
+    "date": "2020-03-01T00:00:00.000",
+    "year": "2020",
+    "month": "MAR",
+    "id": "2020-MAR-RANCHLANDS-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.158503, 51.111893]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "ALTADORE",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "1",
+    "resident_count": "9710",
+    "date": "2020-02-01T00:00:00.000",
+    "year": "2020",
+    "month": "FEB",
+    "id": "2020-FEB-ALTADORE-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.106932, 51.023636]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "WHITEHORN",
+    "category": "Theft OF Vehicle",
+    "crime_count": "4",
+    "resident_count": "11603",
+    "date": "2020-07-01T00:00:00.000",
+    "year": "2020",
+    "month": "JUL",
+    "id": "2020-JUL-WHITEHORN-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.958344, 51.103742]
+    }
+  },
+
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "AUBURN BAY",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "5",
+    "resident_count": "18989",
+    "date": "2021-05-01T00:00:00.000",
+    "year": "2021",
+    "month": "MAY",
+    "id": "2021-MAY-AUBURN BAY-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.959045, 50.879761]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "MONTEREY PARK",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "2",
+    "resident_count": "10572",
+    "date": "2021-03-01T00:00:00.000",
+    "year": "2021",
+    "month": "MAR",
+    "id": "2021-MAR-MONTEREY PARK-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.944871, 51.078921]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "EVANSTON",
+    "category": "Break and Enter - Residential",
+    "crime_count": "3",
+    "resident_count": "13489",
+    "date": "2021-01-01T00:00:00.000",
+    "year": "2021",
+    "month": "JAN",
+    "id": "2021-JAN-EVANSTON-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.116537, 51.177017]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "SOMERSET",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "8381",
+    "date": "2021-09-01T00:00:00.000",
+    "year": "2021",
+    "month": "SEP",
+    "id": "2021-SEP-SOMERSET-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.074045, 50.905218]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "COPPERFIELD",
+    "category": "Robbery - Commercial",
+    "crime_count": "1",
+    "resident_count": "7375",
+    "date": "2021-12-01T00:00:00.000",
+    "year": "2021",
+    "month": "DEC",
+    "id": "2021-DEC-COPPERFIELD-Robbery - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.935209, 50.914644]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "TEMPLE",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "3",
+    "resident_count": "11198",
+    "date": "2021-02-01T00:00:00.000",
+    "year": "2021",
+    "month": "FEB",
+    "id": "2021-FEB-TEMPLE-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.957201, 51.083472]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "WEST HILLHURST",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "4",
+    "resident_count": "6160",
+    "date": "2021-06-01T00:00:00.000",
+    "year": "2021",
+    "month": "JUN",
+    "id": "2021-JUN-WEST HILLHURST-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.101322, 51.054749]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "KILLARNEY",
+    "category": "Assault (Domestic)",
+    "crime_count": "2",
+    "resident_count": "9923",
+    "date": "2021-08-01T00:00:00.000",
+    "year": "2021",
+    "month": "AUG",
+    "id": "2021-AUG-KILLARNEY-Assault (Domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.115193, 51.034487]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "SETON",
+    "category": "Robbery - Personal",
+    "crime_count": "1",
+    "resident_count": "4729",
+    "date": "2021-04-01T00:00:00.000",
+    "year": "2021",
+    "month": "APR",
+    "id": "2021-APR-SETON-Robbery - Personal",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.960884, 50.868191]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "RUNDLE",
+    "category": "Theft OF Vehicle",
+    "crime_count": "3",
+    "resident_count": "10415",
+    "date": "2021-07-01T00:00:00.000",
+    "year": "2021",
+    "month": "JUL",
+    "id": "2021-JUL-RUNDLE-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.962712, 51.072967]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "CITÉ-DE-JARDIN",
+    "category": "Break and Enter - Residential",
+    "crime_count": "1",
+    "resident_count": "2892",
+    "date": "2021-03-01T00:00:00.000",
+    "year": "2021",
+    "month": "MAR",
+    "id": "2021-MAR-CITÉ-DE-JARDIN-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.108455, 51.053292]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "WOODBINE",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "2",
+    "resident_count": "9196",
+    "date": "2021-05-01T00:00:00.000",
+    "year": "2021",
+    "month": "MAY",
+    "id": "2021-MAY-WOODBINE-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.136045, 50.945711]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "NEW BRIGHTON",
+    "category": "Robbery - Commercial",
+    "crime_count": "1",
+    "resident_count": "11864",
+    "date": "2021-11-01T00:00:00.000",
+    "year": "2021",
+    "month": "NOV",
+    "id": "2021-NOV-NEW BRIGHTON-Robbery - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.952865, 50.913613]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "SADDLE RIDGE",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "2",
+    "resident_count": "18341",
+    "date": "2021-02-01T00:00:00.000",
+    "year": "2021",
+    "month": "FEB",
+    "id": "2021-FEB-SADDLE RIDGE-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.940475, 51.134171]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "SCENIC ACRES",
+    "category": "Theft OF Vehicle",
+    "crime_count": "1",
+    "resident_count": "8576",
+    "date": "2021-08-01T00:00:00.000",
+    "year": "2021",
+    "month": "AUG",
+    "id": "2021-AUG-SCENIC ACRES-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.205536, 51.124923]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "MOUNT ROYAL",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "1",
+    "resident_count": "2734",
+    "date": "2021-10-01T00:00:00.000",
+    "year": "2021",
+    "month": "OCT",
+    "id": "2021-OCT-MOUNT ROYAL-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.087562, 51.033845]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "MCKENZIE TOWNE",
+    "category": "Assault (Domestic)",
+    "crime_count": "4",
+    "resident_count": "17689",
+    "date": "2021-09-01T00:00:00.000",
+    "year": "2021",
+    "month": "SEP",
+    "id": "2021-SEP-MCKENZIE TOWNE-Assault (Domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.960705, 50.907853]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "CORAL SPRINGS",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "1",
+    "resident_count": "5839",
+    "date": "2021-11-01T00:00:00.000",
+    "year": "2021",
+    "month": "NOV",
+    "id": "2021-NOV-CORAL SPRINGS-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.951154, 51.111458]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "ARBOUR LAKE",
+    "category": "Robbery - Personal",
+    "crime_count": "2",
+    "resident_count": "10590",
+    "date": "2021-12-01T00:00:00.000",
+    "year": "2021",
+    "month": "DEC",
+    "id": "2021-DEC-ARBOUR LAKE-Robbery - Personal",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.205967, 51.140905]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "SIGNAL HILL",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "13767",
+    "date": "2021-07-01T00:00:00.000",
+    "year": "2021",
+    "month": "JUL",
+    "id": "2021-JUL-SIGNAL HILL-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.162821, 51.021104]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "MARLBOROUGH PARK",
+    "category": "Theft OF Vehicle",
+    "crime_count": "4",
+    "resident_count": "8473",
+    "date": "2021-01-01T00:00:00.000",
+    "year": "2021",
+    "month": "JAN",
+    "id": "2021-JAN-MARLBOROUGH PARK-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.959912, 51.070701]
+    }
+  },
+
+  {
+    "sector": "NORTHWEST",
+    "community_name": "HAWKWOOD",
+    "category": "Break and Enter - Residential",
+    "crime_count": "3",
+    "resident_count": "9340",
+    "date": "2022-04-01T00:00:00.000",
+    "year": "2022",
+    "month": "APR",
+    "id": "2022-APR-HAWKWOOD-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.189244, 51.139619]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "MAHOGANY",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "4",
+    "resident_count": "14321",
+    "date": "2022-06-01T00:00:00.000",
+    "year": "2022",
+    "month": "JUN",
+    "id": "2022-JUN-MAHOGANY-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.954719, 50.893749]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "TARADALE",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "3",
+    "resident_count": "18891",
+    "date": "2022-07-01T00:00:00.000",
+    "year": "2022",
+    "month": "JUL",
+    "id": "2022-JUL-TARADALE-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.945586, 51.125556]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "GLENBROOK",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "7315",
+    "date": "2022-02-01T00:00:00.000",
+    "year": "2022",
+    "month": "FEB",
+    "id": "2022-FEB-GLENBROOK-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.141489, 51.029228]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "CAPITOL HILL",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "1",
+    "resident_count": "4823",
+    "date": "2022-01-01T00:00:00.000",
+    "year": "2022",
+    "month": "JAN",
+    "id": "2022-JAN-CAPITOL HILL-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.084397, 51.067798]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "NEW BRIGHTON",
+    "category": "Robbery - Personal",
+    "crime_count": "1",
+    "resident_count": "11864",
+    "date": "2022-11-01T00:00:00.000",
+    "year": "2022",
+    "month": "NOV",
+    "id": "2022-NOV-NEW BRIGHTON-Robbery - Personal",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.952865, 50.913613]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "MARLBOROUGH",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "5",
+    "resident_count": "8910",
+    "date": "2022-05-01T00:00:00.000",
+    "year": "2022",
+    "month": "MAY",
+    "id": "2022-MAY-MARLBOROUGH-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.968221, 51.060895]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "EDGEMONT",
+    "category": "Break and Enter - Residential",
+    "crime_count": "3",
+    "resident_count": "15725",
+    "date": "2022-08-01T00:00:00.000",
+    "year": "2022",
+    "month": "AUG",
+    "id": "2022-AUG-EDGEMONT-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.158293, 51.129127]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "ROXBORO",
+    "category": "Theft OF Vehicle",
+    "crime_count": "1",
+    "resident_count": "401",
+    "date": "2022-03-01T00:00:00.000",
+    "year": "2022",
+    "month": "MAR",
+    "id": "2022-MAR-ROXBORO-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.063737, 51.035975]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "CASTLERIDGE",
+    "category": "Assault (Domestic)",
+    "crime_count": "4",
+    "resident_count": "6437",
+    "date": "2022-10-01T00:00:00.000",
+    "year": "2022",
+    "month": "OCT",
+    "id": "2022-OCT-CASTLERIDGE-Assault (Domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.958276, 51.107094]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "MONTGOMERY",
+    "category": "Robbery - Commercial",
+    "crime_count": "2",
+    "resident_count": "4097",
+    "date": "2022-09-01T00:00:00.000",
+    "year": "2022",
+    "month": "SEP",
+    "id": "2022-SEP-MONTGOMERY-Robbery - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.168698, 51.075339]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "LINCOLN PARK",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "2",
+    "resident_count": "3900",
+    "date": "2022-12-01T00:00:00.000",
+    "year": "2022",
+    "month": "DEC",
+    "id": "2022-DEC-LINCOLN PARK-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.138882, 51.007324]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "COPPERFIELD",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "1",
+    "resident_count": "7375",
+    "date": "2022-11-01T00:00:00.000",
+    "year": "2022",
+    "month": "NOV",
+    "id": "2022-NOV-COPPERFIELD-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.935209, 50.914644]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "PINERIDGE",
+    "category": "Theft OF Vehicle",
+    "crime_count": "3",
+    "resident_count": "9270",
+    "date": "2022-06-01T00:00:00.000",
+    "year": "2022",
+    "month": "JUN",
+    "id": "2022-JUN-PINERIDGE-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.966629, 51.079987]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "BOWNESS",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "2",
+    "resident_count": "11904",
+    "date": "2022-04-01T00:00:00.000",
+    "year": "2022",
+    "month": "APR",
+    "id": "2022-APR-BOWNESS-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.185827, 51.091749]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "RIVERBEND",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "3",
+    "resident_count": "9100",
+    "date": "2022-05-01T00:00:00.000",
+    "year": "2022",
+    "month": "MAY",
+    "id": "2022-MAY-RIVERBEND-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.017743, 50.981257]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "SADDLE RIDGE",
+    "category": "Break and Enter - Residential",
+    "crime_count": "3",
+    "resident_count": "17512",
+    "date": "2022-02-01T00:00:00.000",
+    "year": "2022",
+    "month": "FEB",
+    "id": "2022-FEB-SADDLE RIDGE-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.959799, 51.138775]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "DEER RUN",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "5625",
+    "date": "2022-08-01T00:00:00.000",
+    "year": "2022",
+    "month": "AUG",
+    "id": "2022-AUG-DEER RUN-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.010469, 50.932882]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "SAGE HILL",
+    "category": "Assault (Domestic)",
+    "crime_count": "1",
+    "resident_count": "6121",
+    "date": "2022-09-01T00:00:00.000",
+    "year": "2022",
+    "month": "SEP",
+    "id": "2022-SEP-SAGE HILL-Assault (Domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.167722, 51.180992]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "FOOTHILLS",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "2",
+    "resident_count": "2314",
+    "date": "2022-12-01T00:00:00.000",
+    "year": "2022",
+    "month": "DEC",
+    "id": "2022-DEC-FOOTHILLS-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.005664, 50.968243]
+    }
+  },
+
+  {
+    "sector": "NORTHEAST",
+    "community_name": "WHITEHORN",
+    "category": "Theft OF Vehicle",
+    "crime_count": "3",
+    "resident_count": "11345",
+    "date": "2023-01-01T00:00:00.000",
+    "year": "2023",
+    "month": "JAN",
+    "id": "2023-JAN-WHITEHORN-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.982342, 51.095401]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "WOODBINE",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "2",
+    "resident_count": "9051",
+    "date": "2023-02-01T00:00:00.000",
+    "year": "2023",
+    "month": "FEB",
+    "id": "2023-FEB-WOODBINE-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.121904, 50.946319]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "HIDDEN VALLEY",
+    "category": "Break and Enter - Residential",
+    "crime_count": "1",
+    "resident_count": "11144",
+    "date": "2023-03-01T00:00:00.000",
+    "year": "2023",
+    "month": "MAR",
+    "id": "2023-MAR-HIDDEN VALLEY-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.100318, 51.156168]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "CRANSTON",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "4",
+    "resident_count": "17821",
+    "date": "2023-04-01T00:00:00.000",
+    "year": "2023",
+    "month": "APR",
+    "id": "2023-APR-CRANSTON-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.960209, 50.866115]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "SADDLE RIDGE",
+    "category": "Assault (Domestic)",
+    "crime_count": "3",
+    "resident_count": "18212",
+    "date": "2023-05-01T00:00:00.000",
+    "year": "2023",
+    "month": "MAY",
+    "id": "2023-MAY-SADDLE RIDGE-Assault (Domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.957567, 51.141183]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "GLENDALE",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "2",
+    "resident_count": "2620",
+    "date": "2023-06-01T00:00:00.000",
+    "year": "2023",
+    "month": "JUN",
+    "id": "2023-JUN-GLENDALE-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.134615, 51.026772]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "TUSCANY",
+    "category": "Robbery - Personal",
+    "crime_count": "1",
+    "resident_count": "19380",
+    "date": "2023-07-01T00:00:00.000",
+    "year": "2023",
+    "month": "JUL",
+    "id": "2023-JUL-TUSCANY-Robbery - Personal",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.242515, 51.127575]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "ACADIA",
+    "category": "Theft OF Vehicle",
+    "crime_count": "5",
+    "resident_count": "10345",
+    "date": "2023-08-01T00:00:00.000",
+    "year": "2023",
+    "month": "AUG",
+    "id": "2023-AUG-ACADIA-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.069364, 50.960999]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "TEMPLE",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "2",
+    "resident_count": "10498",
+    "date": "2023-09-01T00:00:00.000",
+    "year": "2023",
+    "month": "SEP",
+    "id": "2023-SEP-TEMPLE-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.940079, 51.087288]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "OAKRIDGE",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "6050",
+    "date": "2023-10-01T00:00:00.000",
+    "year": "2023",
+    "month": "OCT",
+    "id": "2023-OCT-OAKRIDGE-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.122251, 50.961895]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "BRIDLEWOOD",
+    "category": "Break and Enter - Residential",
+    "crime_count": "3",
+    "resident_count": "12789",
+    "date": "2023-11-01T00:00:00.000",
+    "year": "2023",
+    "month": "NOV",
+    "id": "2023-NOV-BRIDLEWOOD-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.079893, 50.906073]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "ERIN WOODS",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "2",
+    "resident_count": "6849",
+    "date": "2023-12-01T00:00:00.000",
+    "year": "2023",
+    "month": "DEC",
+    "id": "2023-DEC-ERIN WOODS-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.978465, 51.012772]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "ROYAL OAK",
+    "category": "Assault (Domestic)",
+    "crime_count": "3",
+    "resident_count": "11321",
+    "date": "2023-01-01T00:00:00.000",
+    "year": "2023",
+    "month": "JAN",
+    "id": "2023-JAN-ROYAL OAK-Assault (Domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.230015, 51.150302]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "BANKVIEW",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "1",
+    "resident_count": "5135",
+    "date": "2023-03-01T00:00:00.000",
+    "year": "2023",
+    "month": "MAR",
+    "id": "2023-MAR-BANKVIEW-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.100318, 51.042439]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "RUNDLE",
+    "category": "Robbery - Commercial",
+    "crime_count": "2",
+    "resident_count": "10452",
+    "date": "2023-04-01T00:00:00.000",
+    "year": "2023",
+    "month": "APR",
+    "id": "2023-APR-RUNDLE-Robbery - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.963927, 51.074648]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "NEW BRIGHTON",
+    "category": "Theft OF Vehicle",
+    "crime_count": "3",
+    "resident_count": "10123",
+    "date": "2023-05-01T00:00:00.000",
+    "year": "2023",
+    "month": "MAY",
+    "id": "2023-MAY-NEW BRIGHTON-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.959462, 50.919048]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "KINCORA",
+    "category": "Break and Enter - Residential",
+    "crime_count": "2",
+    "resident_count": "5678",
+    "date": "2023-07-01T00:00:00.000",
+    "year": "2023",
+    "month": "JUL",
+    "id": "2023-JUL-KINCORA-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.148203, 51.160282]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "SPRINGBANK HILL",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "9473",
+    "date": "2023-08-01T00:00:00.000",
+    "year": "2023",
+    "month": "AUG",
+    "id": "2023-AUG-SPRINGBANK HILL-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.183312, 51.014839]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "TARADALE",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "4",
+    "resident_count": "19182",
+    "date": "2023-09-01T00:00:00.000",
+    "year": "2023",
+    "month": "SEP",
+    "id": "2023-SEP-TARADALE-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.937809, 51.138542]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "COPPERFIELD",
+    "category": "Break and Enter - Residential",
+    "crime_count": "2",
+    "resident_count": "9223",
+    "date": "2023-10-01T00:00:00.000",
+    "year": "2023",
+    "month": "OCT",
+    "id": "2023-OCT-COPPERFIELD-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.930235, 50.918219]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "HAWKWOOD",
+    "category": "Robbery - Personal",
+    "crime_count": "1",
+    "resident_count": "9834",
+    "date": "2023-12-01T00:00:00.000",
+    "year": "2023",
+    "month": "DEC",
+    "id": "2023-DEC-HAWKWOOD-Robbery - Personal",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.183528, 51.138349]
+    }
+  },
+
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "KILLARNEY/GLENGARRY",
+    "category": "Theft OF Vehicle",
+    "crime_count": "2",
+    "resident_count": "6489",
+    "date": "2024-01-01T00:00:00.000",
+    "year": "2024",
+    "month": "JAN",
+    "id": "2024-JAN-KILLARNEY/GLENGARRY-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.122616, 51.032177]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "MONTEREY PARK",
+    "category": "Break and Enter - Residential",
+    "crime_count": "3",
+    "resident_count": "10215",
+    "date": "2024-02-01T00:00:00.000",
+    "year": "2024",
+    "month": "FEB",
+    "id": "2024-FEB-MONTEREY PARK-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.943594, 51.086497]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "DOUGLASDALE",
+    "category": "Assault (Non-domestic)",
+    "crime_count": "1",
+    "resident_count": "12456",
+    "date": "2024-03-01T00:00:00.000",
+    "year": "2024",
+    "month": "MAR",
+    "id": "2024-MAR-DOUGLASDALE-Assault (Non-domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.993826, 50.939389]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "CAPITOL HILL",
+    "category": "Robbery - Commercial",
+    "crime_count": "1",
+    "resident_count": "4591",
+    "date": "2024-04-01T00:00:00.000",
+    "year": "2024",
+    "month": "APR",
+    "id": "2024-APR-CAPITOL HILL-Robbery - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.086872, 51.071604]
+    }
+  },
+  {
+    "sector": "SOUTHEAST",
+    "community_name": "AUBURN BAY",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "4",
+    "resident_count": "18437",
+    "date": "2024-05-01T00:00:00.000",
+    "year": "2024",
+    "month": "MAY",
+    "id": "2024-MAY-AUBURN BAY-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.958432, 50.882274]
+    }
+  },
+  {
+    "sector": "NORTHWEST",
+    "community_name": "PANORAMA HILLS",
+    "category": "Break and Enter - Commercial",
+    "crime_count": "2",
+    "resident_count": "25123",
+    "date": "2024-06-01T00:00:00.000",
+    "year": "2024",
+    "month": "JUN",
+    "id": "2024-JUN-PANORAMA HILLS-Break and Enter - Commercial",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.099473, 51.167374]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "HAYSBORO",
+    "category": "Theft OF Vehicle",
+    "crime_count": "3",
+    "resident_count": "7804",
+    "date": "2024-01-01T00:00:00.000",
+    "year": "2024",
+    "month": "JAN",
+    "id": "2024-JAN-HAYSBORO-Theft OF Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.085327, 50.979643]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "TEMPLE",
+    "category": "Assault (Domestic)",
+    "crime_count": "4",
+    "resident_count": "10498",
+    "date": "2024-03-01T00:00:00.000",
+    "year": "2024",
+    "month": "MAR",
+    "id": "2024-MAR-TEMPLE-Assault (Domestic)",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.940079, 51.087288]
+    }
+  },
+  {
+    "sector": "SOUTHWEST",
+    "community_name": "GARRISON WOODS",
+    "category": "Break and Enter - Residential",
+    "crime_count": "2",
+    "resident_count": "3156",
+    "date": "2024-04-01T00:00:00.000",
+    "year": "2024",
+    "month": "APR",
+    "id": "2024-APR-GARRISON WOODS-Break and Enter - Residential",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-114.102838, 51.022878]
+    }
+  },
+  {
+    "sector": "NORTHEAST",
+    "community_name": "MARTINDALE",
+    "category": "Theft FROM Vehicle",
+    "crime_count": "5",
+    "resident_count": "14285",
+    "date": "2024-06-01T00:00:00.000",
+    "year": "2024",
+    "month": "JUN",
+    "id": "2024-JUN-MARTINDALE-Theft FROM Vehicle",
+    "community_center_point": {
+      "type": "Point",
+      "coordinates": [-113.953178, 51.123983]
     }
   }
 ]
