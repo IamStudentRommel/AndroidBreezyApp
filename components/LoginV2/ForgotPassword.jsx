@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   TextInput,
@@ -11,9 +11,9 @@ import {
 } from 'react-native';
 import AppConfig from '../../app.json';
 
-const ForgotPassword = ({ setShowForgotPassword }) => {
+const ForgotPassword = ({setShowForgotPassword}) => {
   const [email, setEmail] = useState('');
-  const { be } = AppConfig;
+  const {be} = AppConfig;
 
   const handleSendEmail = async () => {
     if (!email) {
@@ -21,58 +21,69 @@ const ForgotPassword = ({ setShowForgotPassword }) => {
       return;
     }
 
-    try {
-      const response = await fetch(`${be}/api/forgotpassword`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
+    const response = await fetch(`${be}/api/usrforgotpwd?email=${email}`);
+    const data = await response.json();
+    console.log(data.result);
 
+    if (data.result === 'failed') {
+      alert(data.msg);
+    } else {
+      const secret = data.pwd;
+      const response = await fetch(
+        `${be}/api/send-email-forgotpwd?usermail=${email}&subject=Forgot%20Password&content=${secret}`,
+      );
+      // const data = await response.json();
+      // console.log(data.result);
       if (response.ok) {
-        Alert.alert('Success', 'A password reset email has been sent.');
+        alert('Your password successfully sent to your email!');
+        setEmail('');
         setShowForgotPassword(false);
       } else {
-        Alert.alert('Error', 'Failed to send password reset email.');
+        alert('Failed to send email, check api send-email-forgotpwd');
       }
-    } catch (error) {
-      console.error('Error sending password reset email:', error);
-      Alert.alert('Error', 'Failed to send password reset email.');
     }
   };
 
   return (
     <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-            <View style={styles.inner}>
-                <Image source={require('../../assets/Group136.png')} style={styles.logo}/>
-                    <View style={styles.forgotContainer}>
-                        <Text style={styles.title}>Forgot Password</Text>
-                        <Text style={{color: '#FFFFFF', marginBottom: 30, fontSize: 15, paddingHorizontal: 40, 
-                            textAlign: 'center'}}>
-                            Please enter your email address and
-                            we will send your password to your email.
-                        </Text>
-                            <TextInput
-                                style={styles.input}
-                                placeholder="Enter your email"
-                                placeholderTextColor={'#8F8F8F'}
-                                value={email}
-                                onChangeText={setEmail}
-                                keyboardType="email-address"
-                            />
-                            <TouchableOpacity style={styles.button} onPress={handleSendEmail}>
-                                <Text style={styles.buttonText}>Submit</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={[styles.button, styles.cancelButton]}
-                                onPress={() => setShowForgotPassword(false)}>
-                                <Text style={styles.buttonText}>Cancel</Text>
-                            </TouchableOpacity>
-                    </View>
-            </View>
-        </ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <View style={styles.inner}>
+          <Image
+            source={require('../../assets/Group136.png')}
+            style={styles.logo}
+          />
+          <View style={styles.forgotContainer}>
+            <Text style={styles.title}>Forgot Password</Text>
+            <Text
+              style={{
+                color: '#FFFFFF',
+                marginBottom: 30,
+                fontSize: 15,
+                paddingHorizontal: 40,
+                textAlign: 'center',
+              }}>
+              Please enter your email address and we will send your password to
+              your email.
+            </Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your email"
+              placeholderTextColor={'#8F8F8F'}
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+            />
+            <TouchableOpacity style={styles.button} onPress={handleSendEmail}>
+              <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, styles.cancelButton]}
+              onPress={() => setShowForgotPassword(false)}>
+              <Text style={styles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
