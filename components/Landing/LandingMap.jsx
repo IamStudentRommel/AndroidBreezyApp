@@ -207,7 +207,7 @@ const LandingMap = ({username, email}) => {
           <Marker coordinate={initialLocation} title="Your Initial Location">
             <Image
               source={require('../../assets/YouIcon.png')}
-              style={{width: 30, height: 30}}
+              style={{width: 29, height: 30}}
             />
           </Marker>
           {incidents.length > 0 &&
@@ -228,7 +228,7 @@ const LandingMap = ({username, email}) => {
                     onPress={() => selectCrime(crimeInfo)} // Pass crime details as argument
                     description={desc}>
                     <Image
-                      source={require('../../assets/Crime.png')}
+                      source={require('../../assets/Group 158.png')}
                       style={{width: 30, height: 30}}
                     />
                   </Marker>
