@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, ScrollView, TouchableOpacity, Image } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  KeyboardAvoidingView,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 
-const ChangePassword = ({ navigation }) => {
+const ChangePassword = ({setShowChangePassword}) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -13,14 +22,19 @@ const ChangePassword = ({ navigation }) => {
       // Optionally navigate back or to another screen
       navigation.goBack();
     } else {
-      alert("New password and confirm password do not match");
+      alert('New password and confirm password do not match');
     }
   };
 
-  const isButtonDisabled = 
-    currentPassword.trim() === '' || 
-    newPassword.trim() === '' || 
-    confirmPassword.trim() === '' || 
+  const handleBack = () => {
+    console.log('back');
+    setShowChangePassword(false);
+  };
+
+  const isButtonDisabled =
+    currentPassword.trim() === '' ||
+    newPassword.trim() === '' ||
+    confirmPassword.trim() === '' ||
     newPassword !== confirmPassword;
 
   // Debugging console logs
@@ -33,8 +47,11 @@ const ChangePassword = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Image source={require('../../assets/Backbutton.png')} style={styles.icon} />
+          <TouchableOpacity onPress={handleBack}>
+            <Image
+              source={require('../../assets/Backbutton.png')}
+              style={styles.icon}
+            />
           </TouchableOpacity>
           <Text style={styles.title}>Change Password</Text>
         </View>
@@ -48,7 +65,7 @@ const ChangePassword = ({ navigation }) => {
             value={currentPassword}
             onChangeText={setCurrentPassword}
           />
-          <Text style={[styles.label, { marginTop: 10 }]}>New Password</Text>
+          <Text style={[styles.label, {marginTop: 10}]}>New Password</Text>
           <TextInput
             style={styles.textInput}
             placeholder="New Password"
@@ -57,7 +74,7 @@ const ChangePassword = ({ navigation }) => {
             value={newPassword}
             onChangeText={setNewPassword}
           />
-          <Text style={[styles.label, { marginTop: 10 }]}>Confirm Password</Text>
+          <Text style={[styles.label, {marginTop: 10}]}>Confirm Password</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Confirm Password"
@@ -68,11 +85,13 @@ const ChangePassword = ({ navigation }) => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity 
-            onPress={handleSave} 
-            style={[styles.buttonSave, isButtonDisabled && styles.buttonDisabled]}
-            disabled={isButtonDisabled}
-          >
+          <TouchableOpacity
+            onPress={handleSave}
+            style={[
+              styles.buttonSave,
+              isButtonDisabled && styles.buttonDisabled,
+            ]}
+            disabled={isButtonDisabled}>
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>

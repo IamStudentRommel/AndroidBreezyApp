@@ -1,42 +1,35 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView, Image, TouchableOpacity, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  KeyboardAvoidingView,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import EditName from './EditName';
 import ChangeEmail from './ChangeEmail';
 import ChangePassword from './ChangePassword';
 
-const ManageAccount = () => {
+const ManageAccount = ({route}) => {
   const navigation = useNavigation();
   const [showEditName, setShowEditName] = useState(false);
   const [showChangeEmail, setShowChangeEmail] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
 
-
   if (showEditName) {
-    return (
-      <EditName
-        setShowEditNameForm={setShowEditName}
-   
-      />
-    );
+    return <EditName setShowEditName={setShowEditName} />;
   }
 
   if (showChangeEmail) {
-    return (
-      <ChangeEmail
-        setShowChangeEmailForm={setShowChangeEmail}
-   
-      />
-    );
+    return <ChangeEmail setShowChangeEmail={setShowChangeEmail} />;
   }
 
   if (showChangePassword) {
-    return (
-      <ChangePassword
-        setShowChangePasswordForm={setShowChangePassword}
-   
-      />
-    );
+    return <ChangePassword setShowChangePassword={setShowChangePassword} />;
   }
 
   const editName = () => {
@@ -60,12 +53,10 @@ const ManageAccount = () => {
       'Delete Confirmation',
       'Are you sure you want to delete your account?',
       [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Delete', onPress: () => confirmDelete() }
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'Delete', onPress: () => confirmDelete()},
       ],
-      { cancelable: false,
-        
-       }
+      {cancelable: false},
     );
   };
 
@@ -76,7 +67,7 @@ const ManageAccount = () => {
     navigation.navigate('Login'); // Replace with appropriate screen
   };
 
-  const generateInitials = (name) => {
+  const generateInitials = name => {
     if (!name) return '';
     return name
       .split(' ')
@@ -85,48 +76,71 @@ const ManageAccount = () => {
   };
 
   // Example user data (replace with actual data or state)
-  const username = 'John Doe'; // Replace with actual username or fetch from state
+  console.log(route.params[0]);
+  const z = 'John Doe'; // Replace with actual username or fetch from state
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-       <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.container}>
           <View style={styles.avatar}>
-          <View style={styles.logo}>
-            <Text style={styles.initial}>{generateInitials(username)}</Text>
-          </View>
+            <View style={styles.logo}>
+              <Text style={styles.initial}>
+                {generateInitials(route.params[0])}
+              </Text>
+            </View>
           </View>
           <View style={styles.manage}>
-          <TouchableOpacity style={styles.manageName} onPress={editName}>
-            <Image source={require('../../assets/Managename.png')} style={styles.icon}/>
-            <Text style={styles.text}>Name</Text>
-            <Image source={require('../../assets/Proceed.png')} style={styles.proceed}/>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.manageName} onPress={editName}>
+              <Image
+                source={require('../../assets/Managename.png')}
+                style={styles.icon}
+              />
+              <Text style={styles.text}>Name</Text>
+              <Image
+                source={require('../../assets/Proceed.png')}
+                style={styles.proceed}
+              />
+            </TouchableOpacity>
             <View style={styles.line}></View>
 
-       
-          <TouchableOpacity style={styles.manageEmail} onPress={changeEmail}>
-            <View style={styles.manageEmail}>
-              <Image source={require('../../assets/Manageemail.png')} style={styles.icon} />
-              <Text style={styles.text}>Email</Text>
-              <Image source={require('../../assets/Proceed.png')} style={{ left: 220, width: 15, height: 15, marginTop: 35,}}/>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.line}></View>
+            <TouchableOpacity style={styles.manageEmail} onPress={changeEmail}>
+              <View style={styles.manageEmail}>
+                <Image
+                  source={require('../../assets/Manageemail.png')}
+                  style={styles.icon}
+                />
+                <Text style={styles.text}>Email</Text>
+                <Image
+                  source={require('../../assets/Proceed.png')}
+                  style={{left: 220, width: 15, height: 15, marginTop: 35}}
+                />
+              </View>
+            </TouchableOpacity>
+            <View style={styles.line}></View>
 
-
-          <TouchableOpacity style={styles.managePassword} onPress={changePassword}>
-            <View style={styles.managePassword}>
-              <Image source={require('../../assets/Managepassword.png')} style={styles.icon} />
-              <Text style={styles.text}>Password</Text>
-              <Image source={require('../../assets/Proceed.png')} style={{ left: 180, width: 15, height: 15, marginTop: 35,}}/>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.line}></View>
+            <TouchableOpacity
+              style={styles.managePassword}
+              onPress={changePassword}>
+              <View style={styles.managePassword}>
+                <Image
+                  source={require('../../assets/Managepassword.png')}
+                  style={styles.icon}
+                />
+                <Text style={styles.text}>Password</Text>
+                <Image
+                  source={require('../../assets/Proceed.png')}
+                  style={{left: 180, width: 15, height: 15, marginTop: 35}}
+                />
+              </View>
+            </TouchableOpacity>
+            <View style={styles.line}></View>
           </View>
 
           <View style={styles.delete}>
-            <TouchableOpacity style={styles.delete} onPress={handleDeleteAccount}>
+            <TouchableOpacity
+              style={styles.delete}
+              onPress={handleDeleteAccount}>
               <Text style={styles.textDelete}>Delete Account</Text>
               <View style={styles.underline}></View>
             </TouchableOpacity>
@@ -142,7 +156,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 15,
     backgroundColor: '#1E1E1E',
-    
   },
   avatar: {
     alignItems: 'center',
@@ -157,9 +170,9 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
- 
+
   initial: {
-    fontSize: 60,
+    fontSize: 40,
     fontWeight: 'bold',
     marginBottom: 5,
     textAlign: 'center',

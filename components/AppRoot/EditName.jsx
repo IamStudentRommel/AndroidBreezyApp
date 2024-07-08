@@ -1,61 +1,76 @@
-import React, { useState } from 'react';
-import { View, 
-        Text, 
-        TextInput, 
-        StyleSheet, 
-        KeyboardAvoidingView, 
-        ScrollView, 
-        TouchableOpacity, 
-        Image } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  KeyboardAvoidingView,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 
-const EditName = ({ navigation }) => {
+const EditName = ({setShowEditName}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
   const handleSave = () => {
     // Handle save logic here
-    console.log('New name saved:', firstName, lastName);
+    console.log('asd');
     // Optionally navigate back or to another screen
-    navigation.goBack();
+    // navigation.navigate('Login');
+  };
+
+  const handleBack = () => {
+    console.log('back');
+    setShowEditName(false);
   };
 
   const isButtonDisabled = firstName.trim() === '' || lastName.trim() === '';
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-       <ScrollView contentContainerStyle={styles.container}>
-          <View style={styles.container}>
-            <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Image source={require('../../assets/Backbutton.png')} style={styles.icon} />
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={handleBack}>
+              <Image
+                source={require('../../assets/Backbutton.png')}
+                style={styles.icon}
+              />
             </TouchableOpacity>
-              <Text style={styles.title}>Edit Name</Text>
-            </View>
-            <View style={styles.editContainer}>
-              <Text style={styles.label}>First Name</Text>
-              <TextInput
+            <Text style={styles.title}>Edit Name</Text>
+          </View>
+          <View style={styles.editContainer}>
+            <Text style={styles.label}>First Name</Text>
+            <TextInput
               style={styles.textInput}
               placeholder="First Name"
               placeholderTextColor="#9E9E9E"
               value={firstName}
-              onChangeText={setFirstName}/>
-              <Text style={[styles.label, {marginTop: 10}]}>Last Name</Text>
+              onChangeText={setFirstName}
+            />
+            <Text style={[styles.label, {marginTop: 10}]}>Last Name</Text>
             <TextInput
               style={styles.textInput}
               placeholder="Last Name"
               placeholderTextColor="#9E9E9E"
               value={lastName}
-              onChangeText={setLastName}/>
-            </View>
-            <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={handleSave} 
-              style={[styles.buttonSave, isButtonDisabled && styles.buttonDisabled]}
-              disabled={isButtonDisabled}>
+              onChangeText={setLastName}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={handleSave}
+              style={[
+                styles.buttonSave,
+                isButtonDisabled && styles.buttonDisabled,
+              ]}>
               <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
           </View>
-          </View>
-        </ScrollView>
+        </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -63,7 +78,7 @@ const EditName = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding:10,
+    padding: 10,
     backgroundColor: '#1E1E1E',
   },
   header: {

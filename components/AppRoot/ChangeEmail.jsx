@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, ScrollView, TouchableOpacity, Image } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  KeyboardAvoidingView,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 
-const ChangeEmail = ({ navigation }) => {
+const ChangeEmail = ({setShowChangeEmail}) => {
   const [email, setEmail] = useState('');
 
   const handleSave = () => {
     // Handle save logic here
     console.log('New email saved:', email);
     // Optionally navigate back or to another screen
-    navigation.goBack();
+  };
+
+  const handleBack = () => {
+    console.log('back');
+    setShowChangeEmail(false);
   };
 
   const isButtonDisabled = email.trim() === '';
@@ -18,8 +31,11 @@ const ChangeEmail = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.container}>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Image source={require('../../assets/Backbutton.png')} style={styles.icon} />
+            <TouchableOpacity onPress={handleBack}>
+              <Image
+                source={require('../../assets/Backbutton.png')}
+                style={styles.icon}
+              />
             </TouchableOpacity>
             <Text style={styles.title}>Change Email</Text>
           </View>
@@ -34,11 +50,13 @@ const ChangeEmail = ({ navigation }) => {
             />
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity 
-              onPress={handleSave} 
-              style={[styles.buttonSave, isButtonDisabled && styles.buttonDisabled]}
-              disabled={isButtonDisabled}
-            >
+            <TouchableOpacity
+              onPress={handleSave}
+              style={[
+                styles.buttonSave,
+                isButtonDisabled && styles.buttonDisabled,
+              ]}
+              disabled={isButtonDisabled}>
               <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -57,13 +75,11 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
- 
   },
   title: {
     color: '#ffffff',
     fontSize: 20,
     fontWeight: '600',
- 
   },
   icon: {
     width: 25,

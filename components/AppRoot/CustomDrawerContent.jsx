@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-import { useNavigation } from '@react-navigation/native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+} from '@react-navigation/drawer';
+import {useNavigation} from '@react-navigation/native';
 
 const CustomDrawerContent = ({
   username,
+  email,
   updateUsername,
   updateLogDisplay,
   updateLogFlag,
@@ -32,7 +36,7 @@ const CustomDrawerContent = ({
   };
 
   const handleManageAccount = () => {
-    navigation.navigate('ManageAccount');
+    navigation.navigate('ManageAccount', [username, email]);
   };
 
   return (
@@ -43,12 +47,18 @@ const CustomDrawerContent = ({
             <Text style={styles.avatarText}>{initials}</Text>
           </View>
           <View>
-            <Text style={{ fontSize: 20, color: '#ffffff' }}>
+            <Text style={{fontSize: 20, color: '#ffffff'}}>
               {capitalizeFirstLetter(username)}
             </Text>
             {username !== 'Guest' && (
               <TouchableOpacity onPress={handleManageAccount}>
-                <Text style={{ fontSize: 13, fontWeight: '600', color: '#A9A9A9', marginTop: 3 }}>
+                <Text
+                  style={{
+                    fontSize: 13,
+                    fontWeight: '600',
+                    color: '#A9A9A9',
+                    marginTop: 3,
+                  }}>
                   Manage Account
                 </Text>
               </TouchableOpacity>
