@@ -49,12 +49,12 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
           <Text style={styles.category}>{category}</Text>
         </View>
 
-        <View style={styles.detailRow}>
+        {/* <View style={styles.detailRow}>
           <Text style={[styles.report]}>Report by: </Text>
           <Text style={styles.report}>
             {reporter.split(',')[0]}
           </Text>
-        </View>
+        </View> */}
 
         <View style={styles.datetimeContainer}>
           <Text style={styles.time}>

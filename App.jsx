@@ -6,7 +6,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 // import Test from './components/Test';
 import CustomDrawerContent from './components/AppRoot/CustomDrawerContent';
-
+import ManageAccount from './components/AppRoot/ManageAccount';
 import {Image} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
@@ -147,6 +147,8 @@ function App() {
             ),
           }}
         />
+
+        <Drawer.Screen name="ManageAccount" component={ManageAccount} />
 
         {/* <Drawer.Screen name="Test" component={Test} /> */}
       </Drawer.Navigator>
