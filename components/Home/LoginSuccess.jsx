@@ -9,9 +9,13 @@ import {
 } from 'react-native';
 import * as Location from 'expo-location';
 import {SwipeListView} from 'react-native-swipe-list-view';
+import {useFocusEffect} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import ToggleSwitch from 'toggle-switch-react-native';
 import AppConfig from '../../app.json';
 
-const LoginSuccess = ({firebaseFname, firebaseLname}) => {
+const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
+  const [isOn, setIsOn] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [crimeFeed, setCrimeFeed] = useState([]);
   const [displayFeed, SetDisplayFeed] = useState([]);
@@ -30,6 +34,12 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
+  const handleToggle = isOn => {
+    setIsOn(isOn);
+    // console.log(selectedCategory);
+    // fetchCrimeFeed(selectedCategory);
+  };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -37,6 +47,25 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+
+  const refreshPage = () => {
+    console.log('Page is refreshed');
+    fetchRecentCrimes();
+    // const navigation = useNavigation();
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{name: 'Dashboard'}],
+    // });
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      refreshPage();
+      return () => {
+        // Optional cleanup function
+      };
+    }, []),
+  );
 
   useEffect(() => {
     getLocation();
@@ -47,7 +76,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   useEffect(() => {
     // Simulating fetching crime feed for the selected category
     fetchCrimeFeed(selectedCategory);
-  }, [selectedCategory]);
+  }, [selectedCategory, isOn]);
 
   const requestLocationPermission = async () => {
     try {
@@ -120,14 +149,37 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   };
 
   const fetchCrimeFeed = category => {
-    console.log(category);
+    // console.log(isOn);
     // console.log(crimeFeed);
-    const feed =
-      category === 'All'
-        ? crimeFeed
-        : crimeFeed.filter(entry => entry.category === category);
-    // console.log(feed);
-    SetDisplayFeed(feed);
+    // const feed =
+    //   category === 'All'
+    //     ? crimeFeed
+    //     : crimeFeed.filter(entry => entry.category === category);
+    // console.log(crimeFeed.filter(entry => entry.category === category));
+
+    if (isOn) {
+      if (category === 'All') {
+        SetDisplayFeed(
+          crimeFeed.filter(entry => entry.reporterInfo[1] === firebaseEmail),
+        );
+      } else {
+        SetDisplayFeed(
+          crimeFeed.filter(
+            entry =>
+              entry.category === category &&
+              entry.reporterInfo[1] === firebaseEmail,
+          ),
+        );
+      }
+    } else {
+      if (category === 'All') {
+        SetDisplayFeed(crimeFeed);
+      } else {
+        SetDisplayFeed(crimeFeed.filter(entry => entry.category === category));
+      }
+    }
+
+    // SetDisplayFeed(feed);
   };
 
   const renderCategory = ({item}) => (
@@ -148,23 +200,41 @@ const LoginSuccess = ({firebaseFname, firebaseLname}) => {
   );
 
   const renderCrimeItem = ({item}) => (
-    <View style={styles.crimeItem}>
+    <View
+      style={[
+        item.reporterInfo[1] === firebaseEmail
+          ? styles.customItem
+          : styles.crimeItem,
+      ]}>
       <View style={styles.crimeItemHeader}>
         <Text style={styles.categoryTag}>{item.category}</Text>
         <Text style={styles.date}>{item.date.split('T')[0]}</Text>
       </View>
       <Text style={styles.description}>{item.desc}</Text>
-      <Text style={styles.location}>{item.location}</Text>
+      <Text style={styles.location}>Calgary - {item.sector}</Text>
     </View>
   );
 
   return (
     <View style={styles.container}>
       <View>
-        <View style={styles.inlineContainer}>
+        <View style={styles.header}>
           <Text style={styles.userInfo}>
             Hi, {capitalizeFirstLetter(firebaseFname)}!
           </Text>
+          <View style={styles.toggleSwitchContainer}>
+            <ToggleSwitch
+              isOn={isOn}
+              onColor="green"
+              offColor="grey"
+              label="My Reports"
+              labelStyle={styles.toggleLabelStyle}
+              size="medium"
+              onToggle={handleToggle}
+            />
+          </View>
+        </View>
+        <View style={styles.inlineContainer}>
           <TouchableOpacity
             onPressIn={handleMouseEnter}
             onPressOut={handleMouseLeave}
@@ -226,6 +296,20 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#1E1E1E',
   },
+  header: {
+    marginTop: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  toggleSwitchContainer: {
+    position: 'absolute',
+    right: 15,
+  },
+  toggleLabelStyle: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 15,
+  },
 
   inlineContainer: {
     // backgroundColor: 'black',
@@ -238,32 +322,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#FFFFFF',
   },
-  // searchContainer: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  //   marginBottom: 15,
-  //   paddingHorizontal: 20,
-  // },
-  // searchInput: {
-  //   flex: 1,
-  //   height: 40,
-  //   borderWidth: 1,
-  //   borderColor: '#ccc',
-  //   borderRadius: 5,
-  //   paddingHorizontal: 40,
-  //   marginRight: 10,
-  //   backgroundColor: '#fff',
-  // },
 
   userInfo: {
-    fontSize: 40,
+    fontSize: 20,
     fontWeight: '700',
     color: '#FFFFFF',
-    marginBottom: 5,
+    marginLeft: 12,
   },
   swiper: {
-    height: 50, // Adjust the height of the swiper as needed
+    height: 50,
   },
   slide: {
     flex: 1,
@@ -294,6 +361,22 @@ const styles = StyleSheet.create({
   selectedCategoryButtonText: {
     color: '#f2fdff',
   },
+
+  customItem: {
+    backgroundColor: '#02b319',
+    borderRadius: 10,
+    padding: 10,
+    margin: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
   crimeItem: {
     backgroundColor: '#fff',
     borderRadius: 10,
@@ -339,7 +422,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     top: '100%',
-    left: '30%', // Adjust as needed
+    left: '30%',
   },
   tooltipText: {
     color: 'white',
