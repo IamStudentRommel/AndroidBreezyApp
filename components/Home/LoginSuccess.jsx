@@ -12,9 +12,12 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 import {useFocusEffect} from '@react-navigation/native';
 import {useNavigation} from '@react-navigation/native';
 import ToggleSwitch from 'toggle-switch-react-native';
+import CrimeModal from './PopModal';
 import AppConfig from '../../app.json';
 
 const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [crimeData, setCrimeData] = useState([]);
   const [isOn, setIsOn] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [crimeFeed, setCrimeFeed] = useState([]);
@@ -32,6 +35,12 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
 
   const capitalizeFirstLetter = str => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
+  const toggleModal = data => {
+    setCrimeData(data);
+    setModalVisible(!modalVisible);
+    // console.log(data);
   };
 
   const handleToggle = isOn => {
@@ -199,20 +208,27 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
     </TouchableOpacity>
   );
 
+  const crimeDetails = item => {
+    item.reporterInfo[1] === firebaseEmail
+      ? toggleModal(item)
+      : console.log('unauthorize');
+  };
+
   const renderCrimeItem = ({item}) => (
-    <View
+    <TouchableOpacity
       style={[
         item.reporterInfo[1] === firebaseEmail
           ? styles.customItem
           : styles.crimeItem,
-      ]}>
+      ]}
+      onPress={() => crimeDetails(item)}>
       <View style={styles.crimeItemHeader}>
         <Text style={styles.categoryTag}>{item.category}</Text>
         <Text style={styles.date}>{item.date.split('T')[0]}</Text>
       </View>
       <Text style={styles.description}>{item.desc}</Text>
       <Text style={styles.location}>Calgary - {item.sector}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -287,6 +303,11 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
         swipeToOpenPercent={10} // Adjust the threshold for swipe to open
         swipeToClosePercent={10} // Adjust the threshold for swipe to close
         swipeDirection={['down']} // Allow swiping only in the down direction
+      />
+      <CrimeModal
+        modalVisible={modalVisible}
+        toggleModal={toggleModal}
+        crimeDetails={crimeData}
       />
     </View>
   );
