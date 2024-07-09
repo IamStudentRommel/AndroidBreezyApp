@@ -65,6 +65,7 @@ function App() {
           <CustomDrawerContent
             {...props}
             username={username}
+            email={email}
             updateUsername={updateUsername}
             updateLogDisplay={updateLogDisplay}
             updateLogFlag={updateLogFlag}
@@ -79,7 +80,7 @@ function App() {
             drawerIcon: ({tintColor}) => (
               <Image
                 source={require('./assets/LoginIcon.png')}
-                style={{width: 24, height: 24, tintColor: tintColor,}}
+                style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
           }}>
@@ -148,7 +149,7 @@ function App() {
           }}
         />
 
-<Drawer.Screen
+        <Drawer.Screen
           name="ManageAccount"
           component={ManageAccount}
           options={{drawerItemStyle: {display: 'none'}}}

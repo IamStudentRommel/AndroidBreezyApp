@@ -23,6 +23,16 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
+  function isValidPassword(password) {
+    const specialCharacterPattern = /[!@#$%^&*(),.?":{}|<>]/;
+    const uppercasePattern = /[A-Z]/;
+    return (
+      password.length > 5 &&
+      specialCharacterPattern.test(password) &&
+      uppercasePattern.test(password)
+    );
+  }
+
   const validateUser = async email => {
     // const q = query(collection(db, 'users'), where('email', '==', email));
     // const querySnapshot = await getDocs(q);
@@ -56,6 +66,11 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
       return;
     } else if (!isValidEmail(email)) {
       alert('Error: Invalid Email');
+      return;
+    } else if (!isValidPassword(password)) {
+      alert(
+        'Error: Password must be more than 5 characters long and include at least one special character and one uppercase letter',
+      );
       return;
     } else {
       const userExists = await validateUser(email);
@@ -161,44 +176,72 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
     return (
       <>
         <View>
-        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-          <View style={styles.inner}>
-            <Image source={require('../../assets/Group136.png')} style={styles.logo}/>
+          <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+            <View style={styles.inner}>
+              <Image
+                source={require('../../assets/Group136.png')}
+                style={styles.logo}
+              />
               <View style={styles.verificationContainer}>
                 <Text style={styles.titleVerification}>Verify Your Email</Text>
-                  <Text style={{color: '#FFFFFF', fontSize: 17, textAlign: 'center', marginBottom: 20}}>
-                    Thank you for registering an account with us!
-                  </Text>
-                  <Text style={{color: '#FFFFFF', fontSize: 17, textAlign: 'center', marginBottom: 25, paddingHorizontal: 30}}>
-                    To complete your registration, please enter the
-                    4-digit verification code we've sent to your
-                    email address.
-                  </Text>
-                  <View style={styles.codeContainer}>
-                    {code.map((digit, index) => (
-                      <TextInput
-                        key={index}
-                        style={[styles.input, styles.codeInput]}
-                        keyboardType="numeric"
-                        maxLength={1}
-                        onChangeText={text => handleChange(text, index)}
-                        onKeyPress={e => handleKeyPress(e, index)}
-                        value={digit}
-                        ref={input => (inputs.current[index] = input)}
-                      />
-                    ))}
-                  </View>
-                  <TouchableOpacity
-                    style={{backgroundColor: '#626262', width: 300, height: 50, 
-                      borderRadius: 30, alignItems: 'center', justifyContent: 'center',
-                      marginTop: 20}}
-                    onPress={handleCancel}>
-                    <Text style={{color: '#FFFFFF', fontSize: 15, fontWeight: 'bold'}}>Cancel</Text>
-                  </TouchableOpacity>
+                <Text
+                  style={{
+                    color: '#FFFFFF',
+                    fontSize: 17,
+                    textAlign: 'center',
+                    marginBottom: 20,
+                  }}>
+                  Thank you for registering an account with us!
+                </Text>
+                <Text
+                  style={{
+                    color: '#FFFFFF',
+                    fontSize: 17,
+                    textAlign: 'center',
+                    marginBottom: 25,
+                    paddingHorizontal: 30,
+                  }}>
+                  To complete your registration, please enter the 4-digit
+                  verification code we've sent to your email address.
+                </Text>
+                <View style={styles.codeContainer}>
+                  {code.map((digit, index) => (
+                    <TextInput
+                      key={index}
+                      style={[styles.input, styles.codeInput]}
+                      keyboardType="numeric"
+                      maxLength={1}
+                      onChangeText={text => handleChange(text, index)}
+                      onKeyPress={e => handleKeyPress(e, index)}
+                      value={digit}
+                      ref={input => (inputs.current[index] = input)}
+                    />
+                  ))}
                 </View>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#626262',
+                    width: 300,
+                    height: 50,
+                    borderRadius: 30,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: 20,
+                  }}
+                  onPress={handleCancel}>
+                  <Text
+                    style={{
+                      color: '#FFFFFF',
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                    }}>
+                    Cancel
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </ScrollView>
-        </View>            
+        </View>
       </>
     );
   };
@@ -211,62 +254,62 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
         </View>
       ) : (
         <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-          <View style={styles.inner}>
-            <Image
-              source={require('../../assets/Group137.png')}
-              style={styles.regLogo}
-            />
-            <View style={styles.inputContainer}>
-            <Text style={styles.title}>Welcome!</Text>
-              <Text style={styles.textContent}>
-                Create an account to start reporting incidents
-                and help us keep our neighborhood safe.
-              </Text>
-              <TextInput
-                style={styles.input}
-                placeholder="First Name"
-                placeholderTextColor={'#8F8F8F'}
-                value={fname}
-                onChangeText={text => setFname(text)}
+          <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+            <View style={styles.inner}>
+              <Image
+                source={require('../../assets/Group137.png')}
+                style={styles.regLogo}
               />
-              <TextInput
-                style={styles.input}
-                placeholder="Last Name"
-                placeholderTextColor={'#8F8F8F'}
-                value={lname}
-                onChangeText={text => setLname(text)}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Email"
-                placeholderTextColor={'#8F8F8F'}
-                value={email}
-                onChangeText={text => setEmail(text)}
-                keyboardType="email-address"
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Password"
-                placeholderTextColor={'#8F8F8F'}
-                value={password}
-                onChangeText={text => setPassword(text)}
-                secureTextEntry
-              />
-              <TouchableOpacity
-                style={[styles.button, {backgroundColor: '#C20000'}]}
-                onPress={handleAuth}>
-                <Text style={styles.buttonText}>Register</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.button, {backgroundColor: '#626262'}]}
-                onPress={handleCancel}>
-                <Text style={styles.buttonText}>Cancel</Text>
-              </TouchableOpacity>
+              <View style={styles.inputContainer}>
+                <Text style={styles.title}>Welcome!</Text>
+                <Text style={styles.textContent}>
+                  Create an account to start reporting incidents and help us
+                  keep our neighborhood safe.
+                </Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="First Name"
+                  placeholderTextColor={'#8F8F8F'}
+                  value={fname}
+                  onChangeText={text => setFname(text)}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Last Name"
+                  placeholderTextColor={'#8F8F8F'}
+                  value={lname}
+                  onChangeText={text => setLname(text)}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Email"
+                  placeholderTextColor={'#8F8F8F'}
+                  value={email}
+                  onChangeText={text => setEmail(text)}
+                  keyboardType="email-address"
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Password"
+                  placeholderTextColor={'#8F8F8F'}
+                  value={password}
+                  onChangeText={text => setPassword(text)}
+                  secureTextEntry
+                />
+                <TouchableOpacity
+                  style={[styles.button, {backgroundColor: '#C20000'}]}
+                  onPress={handleAuth}>
+                  <Text style={styles.buttonText}>Register</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.button, {backgroundColor: '#626262'}]}
+                  onPress={handleCancel}>
+                  <Text style={styles.buttonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      </View>
+          </ScrollView>
+        </View>
       )}
     </>
   );
@@ -279,7 +322,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 16,
     backgroundColor: '#1E1E1E',
   },
-   inner: {
+  inner: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -304,7 +347,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '70%',
-
   },
   codeContainer: {
     flexDirection: 'row',
@@ -372,7 +414,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
   },
-  
 });
 
 export default RegistrationForm;
