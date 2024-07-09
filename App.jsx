@@ -148,7 +148,11 @@ function App() {
           }}
         />
 
-        <Drawer.Screen name="ManageAccount" component={ManageAccount} />
+<Drawer.Screen
+          name="ManageAccount"
+          component={ManageAccount}
+          options={{drawerItemStyle: {display: 'none'}}}
+        />
 
         {/* <Drawer.Screen name="Test" component={Test} /> */}
       </Drawer.Navigator>

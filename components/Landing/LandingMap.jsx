@@ -229,7 +229,7 @@ const LandingMap = ({username, email}) => {
                     description={desc}>
                     <Image
                       source={require('../../assets/Group 158.png')}
-                      style={{width: 30, height: 30}}
+                      style={{width: 16, height: 30}}
                     />
                   </Marker>
                 );
