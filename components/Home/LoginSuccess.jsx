@@ -59,6 +59,8 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
 
   const refreshPage = () => {
     console.log('Page is refreshed');
+    setIsOn(false);
+    setSelectedCategory('All');
     fetchRecentCrimes();
     // const navigation = useNavigation();
     // navigation.reset({

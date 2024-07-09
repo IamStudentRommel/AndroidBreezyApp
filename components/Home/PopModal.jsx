@@ -1,15 +1,78 @@
 import React, {useState, useEffect} from 'react';
-
-import {Modal, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Modal,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
+import AppConfig from '../../app.json';
 
 const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
-  // useEffect(() => {
-  //   if (crimeDetails) {
-  //     const [id, datetime, details, category, reporter, images] =
-  //       crimeDetails.split('|||');
-  //     fetchCrimeImg(images);
-  //   }
-  // }, [crimeDetails]);
+  const [imgSrc, setImgSrc] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState('null');
+  const [value, setValue] = useState('');
+  const [items, setItems] = useState([]);
+  const [mapCat, setMapCat] = useState([]);
+  const {be} = AppConfig;
+
+  const fetchCrimeImg = async images => {
+    try {
+      const response = await fetch(`${be}trans/images/${images}`);
+      const data = await response.json();
+      setImgSrc(data['imageUrl']);
+      // console.log(data);
+    } catch (error) {
+      // console.error('Error fetching images:', error);
+      setImgSrc(null);
+    }
+  };
+
+  const fetchCrimeCategory = async () => {
+    try {
+      const response = await fetch(`${be}/api/crimecategories`);
+      const data = await response.json();
+      setMapCat(data);
+
+      const newDataArray = Object.entries(data).map(([label, value]) => ({
+        label,
+        value,
+      }));
+      newDataArray.sort((a, b) => a.label.localeCompare(b.label));
+      setItems(newDataArray);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleValueChange = itemValue => {
+    setValue(itemValue);
+    try {
+      const selected = items.find(item => item.value === itemValue);
+      if (selected) {
+        setSelectedLabel(selected.label);
+      } else {
+        console.log('Selected item not found in items array.');
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCrimeCategory();
+  }, []);
+
+  useEffect(() => {
+    if (crimeDetails.images) {
+      fetchCrimeImg(crimeDetails.images);
+    }
+    setValue(mapCat[crimeDetails.category]);
+  }, [crimeDetails]);
   // console.log(crimeDetails);
 
   return (
@@ -20,15 +83,36 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
       onRequestClose={toggleModal}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <View style={styles.detailsText}>
+          {/* <View style={styles.detailsText}>
             <Text style={styles.detailsValue}>{crimeDetails.id}</Text>
-          </View>
-          <View style={styles.detailsText}>
-            <Text style={styles.detailsValue}>{crimeDetails.category}</Text>
-          </View>
-          <View style={styles.detailsText}>
-            <Text style={styles.detailsValue}>{crimeDetails.desc}</Text>
-          </View>
+          </View> */}
+
+          <DropDownPicker
+            style={[styles.drawerInput]}
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            onChangeValue={handleValueChange}
+            placeholder="Crime Category"
+            textStyle={{color: '#808080'}}
+            dropDownContainerStyle={{
+              backgroundColor: '#FFFFFF',
+              width: '90%',
+              alignSelf: 'center',
+              fontSize: 16,
+            }}
+          />
+          <TextInput
+            style={[styles.drawerInput, {height: 80}, {marginBottom: 20}]}
+            placeholder="Enter description"
+            multiline={true}
+            numberOfLines={2}
+            defaultValue={crimeDetails.desc}
+          />
+
           <TouchableOpacity onPress={toggleModal} style={styles.button}>
             <Text style={styles.buttonText}>OK</Text>
           </TouchableOpacity>
@@ -52,9 +136,6 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 'auto',
   },
-  detailsContainer: {
-    marginBottom: 5,
-  },
   image: {
     width: '100%',
     height: 250,
@@ -64,12 +145,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)', // Adjust the alpha value for desired darkness
-    borderRadius: 20,
-    height: '100%',
-  },
+
   category: {
     fontWeight: 'bold',
     fontSize: 25,
@@ -77,46 +153,20 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginTop: 5,
   },
-  report: {
-    fontSize: 14,
-  },
-  detailRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 5,
-  },
-  datetimeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  time: {
-    color: '#27272a',
-    fontWeight: '500',
-    fontSize: 12,
-  },
-  date: {
-    color: '#27272a',
-    fontWeight: '500',
-    fontSize: 12,
-    marginRight: '60%',
-  },
-  details: {
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
-  detailsText: {
+  drawerInput: {
+    borderWidth: 1.3,
+    borderColor: '#bfbfbf',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    padding: 10,
     marginBottom: 10,
-  },
-  detailsValue: {
-    marginLeft: 20,
+    width: '75%',
+    alignSelf: 'center',
+    textAlignVertical: 'top', // Align text to the top
+    textAlign: 'left',
     fontSize: 15,
-    marginBottom: 30,
   },
-  button: {
-    borderRadius: 20,
-    marginTop: 20,
-  },
+
   button: {
     backgroundColor: '#C20000',
     padding: 10,
@@ -127,9 +177,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     textAlign: 'center',
-  },
-  detailsValue: {
-    marginLeft: 10,
   },
 });
 
