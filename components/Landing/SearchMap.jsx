@@ -41,7 +41,11 @@ const SearchMap = ({setInitialLocation}) => {
         placeholder="Search location"
         onPress={handlePlaceSelected}
         query={{
+<<<<<<< Updated upstream
           key: MapConfig.mapKey,
+=======
+          key: 'AIzaSyBPFEXJBakjXFjug70ivyEBu7O_TnO-duM',
+>>>>>>> Stashed changes
           language: 'en',
           components: 'country:ca:', // Restrict results to Canada
           location: '51.0447,-114.0719', // Calgary coordinates (latitude,longitude)
