@@ -62,7 +62,7 @@ const Login = ({
   const {be} = AppConfig;
 
   const validateUser = async (email, pwd) => {
-    console.log(`${be}/api/validateuser?email=${email}&pwd=${pwd}`);
+    // console.log(`${be}/api/validateuser?email=${email}&pwd=${pwd}`);
     try {
       const response = await fetch(
         `${be}/api/validateuser?email=${email}&pwd=${pwd}`,
