@@ -1,11 +1,11 @@
 {
   "be": "https://breezy-app-be.vercel.app/",
-  "myMapKey": "",
   "name": "main",
   "displayName": "BreezyApp",
   "expo": {
     "android": {
-      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
-    }
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"],
+      "package": "com.ommel0622.breezyapp"
+    }  
   }
 }

@@ -75,7 +75,7 @@ const About = ({username, email}) => {
         <Text
           style={{
             textAlign: 'center',
-            marginBottom: 20,
+            marginBottom: 30,
             fontStyle: 'italic',
             color: '#FFFFFF',
           }}>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10,
     color: '#FFFFFF',
   },
   feedbackSection: {

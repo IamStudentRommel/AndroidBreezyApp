@@ -69,3 +69,11 @@ app
 
 # testing
 /coverage
+
+# Expo
+.expo
+dist/
+web-build/
+
+mapconf.json
+/mapconf.json
