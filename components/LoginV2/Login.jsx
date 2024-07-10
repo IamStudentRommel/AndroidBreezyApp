@@ -81,7 +81,7 @@ const Login = ({
       } else {
         updateUsername(user);
         updateLogDisplay('Login');
-        Alert.alert(`User not found`);
+        Alert.alert(`Invalid email or password`);
       }
     } catch (error) {
       updateUsername(user);

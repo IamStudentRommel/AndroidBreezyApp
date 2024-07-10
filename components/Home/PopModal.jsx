@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Modal,
   View,
@@ -11,7 +11,7 @@ import {
 import DropDownPicker from 'react-native-dropdown-picker';
 import AppConfig from '../../app.json';
 
-const CrimeModal = ({ modalVisible, toggleModal, crimeDetails }) => {
+const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [open, setOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState('null');
@@ -19,9 +19,9 @@ const CrimeModal = ({ modalVisible, toggleModal, crimeDetails }) => {
   const [items, setItems] = useState([]);
   const [mapCat, setMapCat] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
-  const { be } = AppConfig;
+  const {be} = AppConfig;
 
-  const fetchCrimeImg = async (images) => {
+  const fetchCrimeImg = async images => {
     try {
       const response = await fetch(`${be}trans/images/${images}`);
       const data = await response.json();
@@ -48,10 +48,11 @@ const CrimeModal = ({ modalVisible, toggleModal, crimeDetails }) => {
     }
   };
 
-  const handleValueChange = (itemValue) => {
+  const handleValueChange = itemValue => {
     setValue(itemValue);
+    setIsEditable(false);
     try {
-      const selected = items.find((item) => item.value === itemValue);
+      const selected = items.find(item => item.value === itemValue);
       if (selected) {
         setSelectedLabel(selected.label);
       } else {
@@ -91,13 +92,13 @@ const CrimeModal = ({ modalVisible, toggleModal, crimeDetails }) => {
           <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
             <Image
               source={require('../../assets/Close.png')}
-              style={{ width: 13, height: 13 }}
+              style={{width: 13, height: 13}}
             />
           </TouchableOpacity>
           <DropDownPicker
             style={[
               styles.drawerInput,
-              { borderColor: isEditable ? '#000000' : '#bfbfbf' },
+              {borderColor: isEditable ? '#000000' : '#bfbfbf'},
             ]}
             open={open}
             value={value}
@@ -107,7 +108,7 @@ const CrimeModal = ({ modalVisible, toggleModal, crimeDetails }) => {
             setItems={setItems}
             onChangeValue={handleValueChange}
             placeholder="Crime Category"
-            textStyle={{ color: isEditable ? '#000000' : '#808080' }}
+            textStyle={{color: isEditable ? '#000000' : '#808080'}}
             dropDownContainerStyle={{
               backgroundColor: '#FFFFFF',
               width: '90%',
@@ -140,7 +141,7 @@ const CrimeModal = ({ modalVisible, toggleModal, crimeDetails }) => {
               }}>
               <Image
                 source={require('../../assets/deleteicon.png')}
-                style={{ width: 12, height: 12, marginRight: 5 }}
+                style={{width: 12, height: 12, marginRight: 5}}
               />
               <Text style={styles.buttonText}>Delete</Text>
             </TouchableOpacity>
@@ -148,10 +149,12 @@ const CrimeModal = ({ modalVisible, toggleModal, crimeDetails }) => {
               style={[styles.button, styles.editButton]}
               onPress={handleEditSave}>
               <Image
-                source={isEditable
-                  ? require('../../assets/saveicon.png')
-                  : require('../../assets/editicon.png')}
-                style={{ width: 12, height: 12, marginRight: 5 }}
+                source={
+                  isEditable
+                    ? require('../../assets/saveicon.png')
+                    : require('../../assets/editicon.png')
+                }
+                style={{width: 12, height: 12, marginRight: 5}}
               />
               <Text style={styles.buttonText}>
                 {isEditable ? 'Save' : 'Edit'}
@@ -200,7 +203,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 15,
-   
   },
   button: {
     padding: 10,
