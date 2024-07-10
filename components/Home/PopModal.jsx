@@ -1,33 +1,32 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Modal,
   View,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Image,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import AppConfig from '../../app.json';
 
-const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
+const CrimeModal = ({ modalVisible, toggleModal, crimeDetails }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [open, setOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState('null');
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(null);
   const [items, setItems] = useState([]);
   const [mapCat, setMapCat] = useState([]);
-  const {be} = AppConfig;
+  const [isEditable, setIsEditable] = useState(false);
+  const { be } = AppConfig;
 
-  const fetchCrimeImg = async images => {
+  const fetchCrimeImg = async (images) => {
     try {
       const response = await fetch(`${be}trans/images/${images}`);
       const data = await response.json();
       setImgSrc(data['imageUrl']);
-      // console.log(data);
     } catch (error) {
-      // console.error('Error fetching images:', error);
       setImgSrc(null);
     }
   };
@@ -49,10 +48,10 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
     }
   };
 
-  const handleValueChange = itemValue => {
+  const handleValueChange = (itemValue) => {
     setValue(itemValue);
     try {
-      const selected = items.find(item => item.value === itemValue);
+      const selected = items.find((item) => item.value === itemValue);
       if (selected) {
         setSelectedLabel(selected.label);
       } else {
@@ -71,9 +70,15 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
     if (crimeDetails.images) {
       fetchCrimeImg(crimeDetails.images);
     }
-    setValue(mapCat[crimeDetails.category]);
+    setValue(crimeDetails.category);
   }, [crimeDetails]);
-  // console.log(crimeDetails);
+
+  const handleEditSave = () => {
+    if (isEditable) {
+      // Add save functionality here
+    }
+    setIsEditable(!isEditable);
+  };
 
   return (
     <Modal
@@ -83,12 +88,17 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
       onRequestClose={toggleModal}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          {/* <View style={styles.detailsText}>
-            <Text style={styles.detailsValue}>{crimeDetails.id}</Text>
-          </View> */}
-
+          <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
+            <Image
+              source={require('../../assets/Close.png')}
+              style={{ width: 13, height: 13 }}
+            />
+          </TouchableOpacity>
           <DropDownPicker
-            style={[styles.drawerInput]}
+            style={[
+              styles.drawerInput,
+              { borderColor: isEditable ? '#000000' : '#bfbfbf' },
+            ]}
             open={open}
             value={value}
             items={items}
@@ -97,25 +107,57 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
             setItems={setItems}
             onChangeValue={handleValueChange}
             placeholder="Crime Category"
-            textStyle={{color: '#808080'}}
+            textStyle={{ color: isEditable ? '#000000' : '#808080' }}
             dropDownContainerStyle={{
               backgroundColor: '#FFFFFF',
               width: '90%',
               alignSelf: 'center',
               fontSize: 16,
             }}
+            disabled={!isEditable}
           />
           <TextInput
-            style={[styles.drawerInput, {height: 80}, {marginBottom: 20}]}
+            style={[
+              styles.drawerInput,
+              {
+                height: 130,
+                borderColor: isEditable ? '#000000' : '#bfbfbf',
+                color: isEditable ? '#000000' : '#808080',
+              },
+            ]}
             placeholder="Enter description"
             multiline={true}
             numberOfLines={2}
             defaultValue={crimeDetails.desc}
+            editable={isEditable}
           />
 
-          <TouchableOpacity onPress={toggleModal} style={styles.button}>
-            <Text style={styles.buttonText}>OK</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.button, styles.deleteButton]}
+              onPress={() => {
+                // Implement delete functionality
+              }}>
+              <Image
+                source={require('../../assets/deleteicon.png')}
+                style={{ width: 12, height: 12, marginRight: 5 }}
+              />
+              <Text style={styles.buttonText}>Delete</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, styles.editButton]}
+              onPress={handleEditSave}>
+              <Image
+                source={isEditable
+                  ? require('../../assets/saveicon.png')
+                  : require('../../assets/editicon.png')}
+                style={{ width: 12, height: 12, marginRight: 5 }}
+              />
+              <Text style={styles.buttonText}>
+                {isEditable ? 'Save' : 'Edit'}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -136,47 +178,51 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 'auto',
   },
-  image: {
-    width: '100%',
-    height: 250,
-    borderRadius: 20,
-  },
-  imageContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-  },
-
-  category: {
-    fontWeight: 'bold',
-    fontSize: 25,
-    color: 'black',
-    textAlign: 'left',
-    marginTop: 5,
+  closeButton: {
+    marginLeft: 'auto',
+    marginRight: 13,
+    marginBottom: 10,
   },
   drawerInput: {
-    borderWidth: 1.3,
-    borderColor: '#bfbfbf',
+    borderWidth: 1,
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
     padding: 10,
-    marginBottom: 10,
-    width: '75%',
+    marginBottom: 5,
+    marginTop: 10,
+    width: '95%',
     alignSelf: 'center',
-    textAlignVertical: 'top', // Align text to the top
+    textAlignVertical: 'top',
     textAlign: 'left',
     fontSize: 15,
   },
-
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+   
+  },
   button: {
-    backgroundColor: '#C20000',
     padding: 10,
     borderRadius: 10,
+    width: '25%',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
+  },
+  deleteButton: {
+    backgroundColor: '#C20000',
+    marginLeft: 8,
+  },
+  editButton: {
+    backgroundColor: '#007BFF',
+    marginRight: 8,
+    justifyContent: 'center',
   },
 });
 
