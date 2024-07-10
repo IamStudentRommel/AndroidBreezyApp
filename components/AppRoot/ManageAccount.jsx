@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    marginLeft: 5,
+    marginLeft: 10,
   },
   manageEmail: {
     position: 'relative',

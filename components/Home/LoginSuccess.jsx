@@ -225,11 +225,11 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
       ]}
       onPress={() => crimeDetails(item)}>
       <View style={styles.crimeItemHeader}>
-        <Text style={styles.categoryTag}>{item.category}</Text>
-        <Text style={styles.date}>{item.date.split('T')[0]}</Text>
+        <Text style={[styles.categoryTag, item.reporterInfo[1] === firebaseEmail && styles.customTextColor,]}>{item.category}</Text>
+        <Text style={[styles.date, item.reporterInfo[1] === firebaseEmail && styles.customTextColor,]}>{item.date.split('T')[0]}</Text>
       </View>
-      <Text style={styles.description}>{item.desc}</Text>
-      <Text style={styles.location}>Calgary - {item.sector}</Text>
+      <Text style={[styles.description, item.reporterInfo[1] === firebaseEmail && styles.customTextColor,]}>{item.desc}</Text>
+      <Text style={[styles.location, item.reporterInfo[1] === firebaseEmail && styles.customTextColor,]}>Calgary - {item.sector}</Text>
     </TouchableOpacity>
   );
 
@@ -243,7 +243,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
           <View style={styles.toggleSwitchContainer}>
             <ToggleSwitch
               isOn={isOn}
-              onColor="green"
+              onColor="#00FF19"
               offColor="grey"
               label="My Reports"
               labelStyle={styles.toggleLabelStyle}
@@ -333,6 +333,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 15,
   },
+  customTextColor: {
+    color: '#FFFFFF',
+  },
 
   inlineContainer: {
     // backgroundColor: 'black',
@@ -386,7 +389,7 @@ const styles = StyleSheet.create({
   },
 
   customItem: {
-    backgroundColor: '#02b319',
+    backgroundColor: '#C20000',
     borderRadius: 10,
     padding: 10,
     margin: 10,
@@ -437,6 +440,7 @@ const styles = StyleSheet.create({
   },
   location: {
     color: '#666',
+    marginLeft: 10,
   },
 
   tooltip: {

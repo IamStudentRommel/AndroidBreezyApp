@@ -50,7 +50,7 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
 
   const handleValueChange = itemValue => {
     setValue(itemValue);
-    setIsEditable(false);
+    // setIsEditable(false);
     try {
       const selected = items.find(item => item.value === itemValue);
       if (selected) {
@@ -71,10 +71,11 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
     if (crimeDetails.images) {
       fetchCrimeImg(crimeDetails.images);
     }
-    setValue(crimeDetails.category);
+    setValue(mapCat[crimeDetails.category]);
   }, [crimeDetails]);
 
   const handleEditSave = () => {
+    
     if (isEditable) {
       // Add save functionality here
     }
