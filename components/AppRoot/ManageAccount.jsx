@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 20,
     height: 20,
-    marginRight: 10,
+    marginRight: 11,
     marginTop: 33,
   },
   manageName: {
