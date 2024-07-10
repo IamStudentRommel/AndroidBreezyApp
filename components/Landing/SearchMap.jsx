@@ -8,18 +8,18 @@ import {
 } from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import MapConfig from '../../mapconf.json';
-
+ 
 const SearchMap = ({setInitialLocation}) => {
   const ref = useRef();
   const {be} = MapConfig;
-
+ 
   const handlePlaceSelected = async (data, details = null) => {
     if (details) {
       try {
         const {lat, lng} = details.geometry.location;
         console.log('Latitude:', lat);
         console.log('Longitude:', lng);
-
+ 
         setInitialLocation({
           latitude: lat,
           longitude: lng,
@@ -31,7 +31,7 @@ const SearchMap = ({setInitialLocation}) => {
       }
     }
   };
-
+ 
   return (
     <View style={styles.searchBarContainer}>
       <GooglePlacesAutocomplete
@@ -41,11 +41,7 @@ const SearchMap = ({setInitialLocation}) => {
         placeholder="Search location"
         onPress={handlePlaceSelected}
         query={{
-<<<<<<< Updated upstream
           key: MapConfig.mapKey,
-=======
-          key: 'AIzaSyBPFEXJBakjXFjug70ivyEBu7O_TnO-duM',
->>>>>>> Stashed changes
           language: 'en',
           components: 'country:ca:', // Restrict results to Canada
           location: '51.0447,-114.0719', // Calgary coordinates (latitude,longitude)
@@ -67,7 +63,7 @@ const SearchMap = ({setInitialLocation}) => {
     </View>
   );
 };
-
+ 
 const styles = StyleSheet.create({
   searchBarContainer: {
     flexDirection: 'row',
@@ -111,5 +107,5 @@ const styles = StyleSheet.create({
     width: 15,
   },
 });
-
+ 
 export default SearchMap;
