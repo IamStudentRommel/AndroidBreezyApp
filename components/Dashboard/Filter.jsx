@@ -23,8 +23,7 @@ const Filter = ({options, onSelect}) => {
             style={[
               styles.buttonText,
               selectedOption === option ? styles.selectedButtonText : null,
-            ]}
-          >
+            ]}>
             {option}
           </Text>
         </TouchableOpacity>

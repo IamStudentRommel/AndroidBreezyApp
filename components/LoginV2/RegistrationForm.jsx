@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  ScrollView,
 } from 'react-native';
 import AppConfig from '../../app.json';
 
@@ -160,27 +161,44 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
     return (
       <>
         <View>
-          <Text style={styles.title}>Enter Verification Code</Text>
-          <View style={styles.codeContainer}>
-            {code.map((digit, index) => (
-              <TextInput
-                key={index}
-                style={[styles.input, styles.codeInput]}
-                keyboardType="numeric"
-                maxLength={1}
-                onChangeText={text => handleChange(text, index)}
-                onKeyPress={e => handleKeyPress(e, index)}
-                value={digit}
-                ref={input => (inputs.current[index] = input)}
-              />
-            ))}
-          </View>
-        </View>
-        <TouchableOpacity
-          style={[styles.button, {backgroundColor: 'gray'}]}
-          onPress={handleCancel}>
-          <Text style={styles.buttonText}>Cancel</Text>
-        </TouchableOpacity>
+        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+          <View style={styles.inner}>
+            <Image source={require('../../assets/Group136.png')} style={styles.logo}/>
+              <View style={styles.verificationContainer}>
+                <Text style={styles.titleVerification}>Verify Your Email</Text>
+                  <Text style={{color: '#FFFFFF', fontSize: 17, textAlign: 'center', marginBottom: 20}}>
+                    Thank you for registering an account with us!
+                  </Text>
+                  <Text style={{color: '#FFFFFF', fontSize: 17, textAlign: 'center', marginBottom: 25, paddingHorizontal: 30}}>
+                    To complete your registration, please enter the
+                    4-digit verification code we've sent to your
+                    email address.
+                  </Text>
+                  <View style={styles.codeContainer}>
+                    {code.map((digit, index) => (
+                      <TextInput
+                        key={index}
+                        style={[styles.input, styles.codeInput]}
+                        keyboardType="numeric"
+                        maxLength={1}
+                        onChangeText={text => handleChange(text, index)}
+                        onKeyPress={e => handleKeyPress(e, index)}
+                        value={digit}
+                        ref={input => (inputs.current[index] = input)}
+                      />
+                    ))}
+                  </View>
+                  <TouchableOpacity
+                    style={{backgroundColor: '#626262', width: 300, height: 50, 
+                      borderRadius: 30, alignItems: 'center', justifyContent: 'center',
+                      marginTop: 20}}
+                    onPress={handleCancel}>
+                    <Text style={{color: '#FFFFFF', fontSize: 15, fontWeight: 'bold'}}>Cancel</Text>
+                  </TouchableOpacity>
+                </View>
+            </View>
+          </ScrollView>
+        </View>            
       </>
     );
   };
@@ -193,61 +211,62 @@ const RegistrationForm = ({setShowRegistrationForm, updateLogDisplay}) => {
         </View>
       ) : (
         <View style={styles.container}>
-          <Image
-            source={require('../../assets/LoginLogo.png')}
-            style={styles.logo}
-          />
-          <Text
-            style={{
-              textAlign: 'center',
-              fontStyle: 'italic',
-              color: '#FFFFFF',
-            }}>
-            Stay Aware, Stay Safe: Your Guardian Against Crime
-          </Text>
-          <Text style={styles.title}>Welcome!</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor={'#101935'}
-            value={email}
-            onChangeText={text => setEmail(text)}
-            keyboardType="email-address"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor={'#101935'}
-            value={password}
-            onChangeText={text => setPassword(text)}
-            secureTextEntry
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="First Name"
-            placeholderTextColor={'#101935'}
-            value={fname}
-            onChangeText={text => setFname(text)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Last Name"
-            placeholderTextColor={'#101935'}
-            value={lname}
-            onChangeText={text => setLname(text)}
-          />
-
-          <TouchableOpacity
-            style={[styles.button, {backgroundColor: '#C20000'}]}
-            onPress={handleAuth}>
-            <Text style={styles.buttonText}>Register</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, {backgroundColor: 'gray'}]}
-            onPress={handleCancel}>
-            <Text style={styles.buttonText}>Cancel</Text>
-          </TouchableOpacity>
-        </View>
+        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+          <View style={styles.inner}>
+            <Image
+              source={require('../../assets/Group137.png')}
+              style={styles.regLogo}
+            />
+            <View style={styles.inputContainer}>
+            <Text style={styles.title}>Welcome!</Text>
+              <Text style={styles.textContent}>
+                Create an account to start reporting incidents
+                and help us keep our neighborhood safe.
+              </Text>
+              <TextInput
+                style={styles.input}
+                placeholder="First Name"
+                placeholderTextColor={'#8F8F8F'}
+                value={fname}
+                onChangeText={text => setFname(text)}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Last Name"
+                placeholderTextColor={'#8F8F8F'}
+                value={lname}
+                onChangeText={text => setLname(text)}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                placeholderTextColor={'#8F8F8F'}
+                value={email}
+                onChangeText={text => setEmail(text)}
+                keyboardType="email-address"
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                placeholderTextColor={'#8F8F8F'}
+                value={password}
+                onChangeText={text => setPassword(text)}
+                secureTextEntry
+              />
+              <TouchableOpacity
+                style={[styles.button, {backgroundColor: '#C20000'}]}
+                onPress={handleAuth}>
+                <Text style={styles.buttonText}>Register</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.button, {backgroundColor: '#626262'}]}
+                onPress={handleCancel}>
+                <Text style={styles.buttonText}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
       )}
     </>
   );
@@ -257,49 +276,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: 'center',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     backgroundColor: '#1E1E1E',
   },
-  logo: {
-    width: 165,
-    height: 100,
-    marginBottom: 10,
-    marginTop: 50,
-    alignSelf: 'center',
+   inner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
   },
-  title: {
+  logo: {
+    position: 'absolute',
+    top: 1, // Adjust as needed
+    right: 1, // Adjust as needed
+    height: 280,
+    width: 310,
+  },
+  titleVerification: {
     marginTop: 30,
     fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 16,
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 10,
     color: '#FFFFFF',
   },
-  input: {
-    color: '#000000',
-    height: 50,
-    width: '93%',
-    borderRadius: 20,
-    marginBottom: 16,
-    paddingHorizontal: 10,
-    alignSelf: 'center',
-    backgroundColor: '#FFFFFF',
-  },
-
-  button: {
-    borderRadius: 20,
-    height: 50,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+  verificationContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 10,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontWeight: 'bold',
+    marginTop: '70%',
+
   },
   codeContainer: {
     flexDirection: 'row',
@@ -307,8 +312,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   codeInput: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 5,
@@ -317,6 +322,57 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#101935',
   },
+  inputContainer: {
+    marginTop: '50%',
+    alignItems: 'center',
+  },
+  regLogo: {
+    position: 'absolute',
+    top: 1, // Adjust as needed
+    right: 1, // Adjust as needed
+    height: 280,
+    width: 270,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 20,
+    textAlign: 'center',
+    marginBottom: 10,
+    color: '#FFFFFF',
+  },
+  textContent: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 15,
+    paddingHorizontal: 30,
+    marginBottom: 20,
+  },
+  input: {
+    height: 50,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 30,
+    paddingHorizontal: 20,
+    marginBottom: 15,
+    width: 320,
+    color: '#101935',
+    fontWeight: 'bold',
+  },
+  button: {
+    borderRadius: 30,
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+    width: 320,
+    height: 45,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  
 });
 
 export default RegistrationForm;
