@@ -6,7 +6,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 // import Test from './components/Test';
 import CustomDrawerContent from './components/AppRoot/CustomDrawerContent';
-
+import ManageAccount from './components/AppRoot/ManageAccount';
 import {Image} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
@@ -65,6 +65,7 @@ function App() {
           <CustomDrawerContent
             {...props}
             username={username}
+            email={email}
             updateUsername={updateUsername}
             updateLogDisplay={updateLogDisplay}
             updateLogFlag={updateLogFlag}
@@ -79,7 +80,7 @@ function App() {
             drawerIcon: ({tintColor}) => (
               <Image
                 source={require('./assets/LoginIcon.png')}
-                style={{width: 24, height: 24, tintColor: tintColor,}}
+                style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),
           }}>
@@ -146,6 +147,12 @@ function App() {
               />
             ),
           }}
+        />
+
+        <Drawer.Screen
+          name="ManageAccount"
+          component={ManageAccount}
+          options={{drawerItemStyle: {display: 'none'}}}
         />
 
         {/* <Drawer.Screen name="Test" component={Test} /> */}

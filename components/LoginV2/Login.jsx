@@ -56,11 +56,13 @@ const Login = ({
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [firebaseFname, setFirebaseFname] = useState('');
   const [firebaseLname, setFirebaseLname] = useState('');
+  const [firebaseEmail, setFirebaseEmail] = useState('');
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const {be} = AppConfig;
 
   const validateUser = async (email, pwd) => {
+    // console.log(`${be}/api/validateuser?email=${email}&pwd=${pwd}`);
     try {
       const response = await fetch(
         `${be}/api/validateuser?email=${email}&pwd=${pwd}`,
@@ -72,6 +74,7 @@ const Login = ({
         updateLogDisplay('Home');
         setFirebaseFname(data.fname);
         setFirebaseLname(data.lname);
+        setFirebaseEmail(data.email);
         updateLogFlag(true);
         Alert.alert(`Welcome, ${data.fname} ${data.lname}`);
         setInputEmail('');
@@ -135,6 +138,7 @@ const Login = ({
       <LoginSuccess
         firebaseFname={firebaseFname}
         firebaseLname={firebaseLname}
+        firebaseEmail={firebaseEmail}
         handleLogout={handleLogout}
       />
     );
@@ -155,7 +159,7 @@ const Login = ({
         setShowForgotPassword={setShowForgotPassword}
         updateLogDisplay={updateLogDisplay}
       />
-    )
+    );
   }
 
   return (
