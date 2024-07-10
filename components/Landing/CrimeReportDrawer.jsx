@@ -263,7 +263,7 @@ const CrimeReportDrawer = ({
             source={require('../../assets/Location.png')}
             style={[
               styles.image,
-              {bottom: 15, marginRight: 6, height: 16.5, width: 16},
+              {bottom: 15, marginRight: 6, height: 16.5, width: 17.5},
             ]}
           />
           <TextInput
