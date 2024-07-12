@@ -168,7 +168,7 @@ const Report = () => {
                         title={marker.community_name}
                         description={desc}>
                         <Image
-                          source={require('../../assets/Group 158.png')}
+                          source={require('../../assets/zombie.png')}
                           style={{width: 16, height: 30}}
                         />
                       </Marker>

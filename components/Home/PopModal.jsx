@@ -50,7 +50,6 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
 
   const handleValueChange = itemValue => {
     setValue(itemValue);
-    // setIsEditable(false);
     try {
       const selected = items.find(item => item.value === itemValue);
       if (selected) {
@@ -71,6 +70,7 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
     if (crimeDetails.images) {
       fetchCrimeImg(crimeDetails.images);
     }
+    setIsEditable(false)
     setValue(mapCat[crimeDetails.category]);
   }, [crimeDetails]);
 

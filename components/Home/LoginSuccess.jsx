@@ -229,7 +229,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
         <Text style={[styles.date, item.reporterInfo[1] === firebaseEmail && styles.customTextColor,]}>{item.date.split('T')[0]}</Text>
       </View>
       <Text style={[styles.description, item.reporterInfo[1] === firebaseEmail && styles.customTextColor,]}>{item.desc}</Text>
-      <Text style={[styles.location, item.reporterInfo[1] === firebaseEmail && styles.customTextColor,]}>Calgary - {item.sector}</Text>
+      <Text style={[styles.location, item.reporterInfo[1] === firebaseEmail && styles.locationTextColor,]}>Calgary - {item.sector}</Text>
     </TouchableOpacity>
   );
 
@@ -335,6 +335,10 @@ const styles = StyleSheet.create({
   },
   customTextColor: {
     color: '#FFFFFF',
+  },
+  locationTextColor: {
+    color: '#FFFFFF',
+    fontStyle: 'italic',
   },
 
   inlineContainer: {
