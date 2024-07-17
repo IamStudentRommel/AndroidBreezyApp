@@ -15,6 +15,8 @@ import {PieChart, LineChart} from 'react-native-chart-kit';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import ClusteredMapView from 'react-native-map-clustering';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Test from '../../data/test.json';
 
 const Report = () => {
@@ -34,6 +36,37 @@ const Report = () => {
     longitudeDelta: 0.3,
   });
   const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
+  const refreshPage = () => {
+    // console.log(selectedYear);
+    setLoading(true);
+    fetchData(selectedYear);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    console.log('Page is entered - Dashboard');
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // console.log(incidents);
+      refreshPage();
+      return () => {
+        // Optional cleanup function
+      };
+    }, []),
+  );
+
+  useEffect(() => {
+    const unsubscribeBlur = navigation.addListener('blur', () => {
+      setIncidents([]);
+      AsyncStorage.clear();
+      console.log('Page is leaving - Dashboard');
+      // Add any additional actions to perform when the page loses focus
+    });
+
+    return unsubscribeBlur;
+  }, [navigation]);
 
   const mapRef = useRef(null);
   const reCenter = () => {
@@ -52,7 +85,7 @@ const Report = () => {
       );
       // const jdata = await response.json();
       const jdata = Test;
-      console.log(selectedYear);
+      // console.log(selectedYear);
       const data = jdata.filter(entry => entry.year === selectedYear);
       setIncidents(data);
 
