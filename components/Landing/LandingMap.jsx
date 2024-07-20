@@ -169,7 +169,7 @@ const LandingMap = ({username, email}) => {
 
   useEffect(() => {
     fetchRecentIncidents();
-    console.log('x');
+    // console.log('landing');
   }, []);
 
   useEffect(() => {
@@ -228,7 +228,7 @@ const LandingMap = ({username, email}) => {
                     onPress={() => selectCrime(crimeInfo)} // Pass crime details as argument
                     description={desc}>
                     <Image
-                      source={require('../../assets/pin.png')}
+                      source={require('../../assets/zombie.png')}
                       style={{width: 38, height: 38}}
                     />
                   </Marker>
@@ -279,6 +279,8 @@ const LandingMap = ({username, email}) => {
         modalVisible={modalVisible}
         toggleModal={toggleModal}
         crimeDetails={crimeDetails}
+        currentEmail={email}
+        curretUser={username}
       />
     </View>
   );

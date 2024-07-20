@@ -1,10 +1,27 @@
 import React, {useState, useEffect} from 'react';
 
-import {Modal, Button, View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Modal,
+  Button,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import AppConfig from '../../app.json';
+import {act} from 'react-test-renderer';
 
-const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
+const CrimeModal = ({
+  modalVisible,
+  toggleModal,
+  crimeDetails,
+  currentEmail,
+  curretUser,
+}) => {
   const [imgSrc, setImgSrc] = useState(null);
+  const [action, setAction] = useState(null);
   const {be} = AppConfig;
   const fetchCrimeImg = async images => {
     try {
@@ -22,9 +39,57 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
     if (crimeDetails) {
       const [id, datetime, details, category, reporter, images] =
         crimeDetails.split('|||');
+      // console.log(currentEmail);
+      // console.log(reporter.split(',')[1]);
+
+      currentEmail === reporter.split(',')[1] && curretUser != 'Guest'
+        ? setAction(true)
+        : setAction(null);
+
       fetchCrimeImg(images);
+      // console.log(curretUser);
     }
-  }, [crimeDetails]);
+  }, [crimeDetails, curretUser]);
+
+  const RemoveCrime = () => {
+    Alert.alert(
+      'Delete Confirmation',
+      'Are you sure you want to remove this crime you reported?',
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'Delete', onPress: () => confirmDelete()},
+      ],
+      {cancelable: false},
+    );
+  };
+
+  const confirmDelete = async () => {
+    console.log('confirm');
+    // const url = `${be}trans/removecrime`;
+    // const data = {
+    //   collectionPath: '2024_03_crime',
+    //   documentId: 'AzBy96TdwCyCSpcb5lhK',
+    // };
+
+    // try {
+    //   const response = await fetch(url, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(data),
+    //   });
+    //   if (!response.ok) {
+    //     throw new Error('Network response was not ok');
+    //   } else {
+    //     const responseData = await response.json();
+    //     console.log('Response:', responseData);
+    //     alert('This reported crime successfully removed.');
+    //   }
+    // } catch (error) {
+    //   console.error('Error post data:', error);
+    // }
+  };
 
   const renderCrimeDetails = () => {
     if (!crimeDetails) return null;
@@ -33,6 +98,23 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
 
     return (
       <View style={styles.detailsContainer}>
+        {action && (
+          <View style={styles.iconContainer}>
+            <TouchableOpacity>
+              <Image
+                source={require('../../assets/pen.png')}
+                style={styles.icon}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={RemoveCrime}>
+              <Image
+                source={require('../../assets/bin.png')}
+                style={styles.icon}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+
         {imgSrc && (
           <View style={styles.imageContainer}>
             <Image
@@ -49,13 +131,6 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
           <Text style={styles.category}>{category}</Text>
         </View>
 
-        {/* <View style={styles.detailRow}>
-          <Text style={[styles.report]}>Report by: </Text>
-          <Text style={styles.report}>
-            {reporter.split(',')[0]}
-          </Text>
-        </View> */}
-
         <View style={styles.datetimeContainer}>
           <Text style={styles.time}>
             {datetime.split('T')[1].split('.')[0]}
@@ -69,21 +144,8 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
           <Text style={styles.details}>Details: </Text>
         </View>
         <View style={styles.detailsText}>
-          <Text style={styles.detailsValue}>
-          {details}
-          </Text>
+          <Text style={styles.detailsValue}>{details}</Text>
         </View>
-
-        {/* <View style={styles.imageContainer}>
-          <Image
-            source={{
-              uri: imgSrc,
-            }}
-            style={styles.image}
-          />
-        </View> */}
-
-        
       </View>
     );
   };
@@ -98,14 +160,13 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
         <View style={styles.modalContent}>
           {renderCrimeDetails()}
           <TouchableOpacity onPress={toggleModal} style={styles.button}>
-        <Text style={styles.buttonText}>OK</Text>
-      </TouchableOpacity>
+            <Text style={styles.buttonText}>OK</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
   );
 };
-
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -121,6 +182,19 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 'auto',
   },
+  iconContainer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 100,
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    marginLeft: 10,
+  },
   detailsContainer: {
     marginBottom: 5,
   },
@@ -131,7 +205,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 45,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
@@ -144,11 +218,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: 'black',
     textAlign: 'left',
-    marginTop: 5,
+    marginTop: 40,
   },
-  report: {
-    fontSize: 14,
-  },
+
   detailRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -159,12 +231,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 20,
   },
-  time:{
+  time: {
     color: '#27272a',
     fontWeight: '500',
-    fontSize: 12, 
+    fontSize: 12,
   },
-  date:{
+  date: {
     color: '#27272a',
     fontWeight: '500',
     fontSize: 12,
@@ -185,7 +257,6 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     marginTop: 20,
-
   },
   button: {
     backgroundColor: '#C20000',
@@ -201,7 +272,6 @@ const styles = StyleSheet.create({
   detailsValue: {
     marginLeft: 10,
   },
-  
 });
 
 export default CrimeModal;

@@ -50,13 +50,13 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
 
   const handleValueChange = itemValue => {
     setValue(itemValue);
-    setIsEditable(false);
+    // console.log(itemValue);
     try {
       const selected = items.find(item => item.value === itemValue);
       if (selected) {
         setSelectedLabel(selected.label);
       } else {
-        console.log('Selected item not found in items array.');
+        console.log('');
       }
     } catch (error) {
       console.error('Error:', error.message);
@@ -71,7 +71,10 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
     if (crimeDetails.images) {
       fetchCrimeImg(crimeDetails.images);
     }
-    setValue(crimeDetails.category);
+    setValue(mapCat[crimeDetails.category]);
+    setIsEditable(false);
+    // console.log('asd');
+    console.log(mapCat[crimeDetails.category]);
   }, [crimeDetails]);
 
   const handleEditSave = () => {
