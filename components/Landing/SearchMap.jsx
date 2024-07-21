@@ -7,11 +7,11 @@ import {
   Image,
 } from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import MapConfig from '../../mapconf.json';
+// import MapConfig from '../../mapconf.json';
 
 const SearchMap = ({setInitialLocation}) => {
   const ref = useRef();
-  const {be} = MapConfig;
+  // const {be} = MapConfig;
 
   const handlePlaceSelected = async (data, details = null) => {
     if (details) {
@@ -41,7 +41,7 @@ const SearchMap = ({setInitialLocation}) => {
         placeholder="Search location"
         onPress={handlePlaceSelected}
         query={{
-          key: MapConfig.mapKey,
+          key: 'abc',
           language: 'en',
           components: 'country:ca:', // Restrict results to Canada
           location: '51.0447,-114.0719', // Calgary coordinates (latitude,longitude)

@@ -57,7 +57,8 @@
     "react-native-vector-icons": "^10.0.3",
     "react-navigation": "^5.0.0",
     "rn-bottom-drawer": "^1.4.3",
-    "toggle-switch-react-native": "^3.3.0"
+    "toggle-switch-react-native": "^3.3.0",
+    "react-native-reanimated": "~3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

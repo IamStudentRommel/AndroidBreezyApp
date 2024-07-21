@@ -5,7 +5,12 @@
   "expo": {
     "android": {
       "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"],
-      "package": "com.ommel0622.breezyapp"
+      "package": "com.ommel0622.breezyapp",
+      "config": {
+        "googleMaps": {
+          "apiKey": "abc"
+        }
+      }
     },
     "extra": {
       "eas": {
@@ -18,6 +23,7 @@
       "image": "./assets/IntroBackground.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
-    }
+    },
+    "icon": "./assets/zombie.png"
   }
 }
