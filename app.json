@@ -8,7 +8,7 @@
       "package": "com.ommel0622.breezyapp",
       "config": {
         "googleMaps": {
-          "apiKey": "y"
+          "apiKey": "x"
         }
       }
     },
