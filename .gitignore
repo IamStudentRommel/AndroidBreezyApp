@@ -78,7 +78,5 @@ web-build/
 mapconf.json
 /mapconf.json
 
-
-app.json
-/app.json
+*.json
 
