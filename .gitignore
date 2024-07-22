@@ -41,7 +41,6 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-android/
 app
 
 
@@ -76,7 +75,7 @@ dist/
 web-build/
 
 mapconf.json
+/mapconf.json
 
 
-app.json
 
