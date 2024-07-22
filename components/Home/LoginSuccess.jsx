@@ -40,7 +40,6 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
   const toggleModal = data => {
     setCrimeData(data);
     setModalVisible(!modalVisible);
-    // console.log(data);
   };
 
   const handleToggle = isOn => {
@@ -150,10 +149,11 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
 
   const fetchRecentCrimes = async () => {
     try {
-      const response = await fetch(`${be}/api/recentcrimesv2`);
+      const response = await fetch(`${be}/api/recentcrimes`);
       const data = await response.json();
-      setCrimeFeed(data);
-      SetDisplayFeed(data);
+      setCrimeFeed(data.documents);
+      SetDisplayFeed(data.documents);
+      console.log('called fetchRecentCrimes');
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -167,7 +167,6 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
     //     ? crimeFeed
     //     : crimeFeed.filter(entry => entry.category === category);
     // console.log(crimeFeed.filter(entry => entry.category === category));
-
     if (isOn) {
       if (category === 'All') {
         SetDisplayFeed(
@@ -189,7 +188,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
         SetDisplayFeed(crimeFeed.filter(entry => entry.category === category));
       }
     }
-
+    // console.log(displayFeed);
     // SetDisplayFeed(feed);
   };
 
@@ -216,22 +215,26 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
       : console.log('unauthorize');
   };
 
-  const renderCrimeItem = ({item}) => (
-    <TouchableOpacity
-      style={[
-        item.reporterInfo[1] === firebaseEmail
-          ? styles.customItem
-          : styles.crimeItem,
-      ]}
-      onPress={() => crimeDetails(item)}>
-      <View style={styles.crimeItemHeader}>
-        <Text style={styles.categoryTag}>{item.category}</Text>
-        <Text style={styles.date}>{item.date.split('T')[0]}</Text>
-      </View>
-      <Text style={styles.description}>{item.desc}</Text>
-      <Text style={styles.location}>Calgary - {item.sector}</Text>
-    </TouchableOpacity>
-  );
+  const renderCrimeItem = ({item}) => {
+    // console.log(item.desc);
+
+    return (
+      <TouchableOpacity
+        style={[
+          item.reporterInfo[1] === firebaseEmail
+            ? styles.customItem
+            : styles.crimeItem,
+        ]}
+        onPress={() => crimeDetails(item)}>
+        <View style={styles.crimeItemHeader}>
+          <Text style={styles.categoryTag}>{item.category}</Text>
+          <Text style={styles.date}>{item.date.split('T')[0]}</Text>
+        </View>
+        <Text style={styles.description}>{item.desc}</Text>
+        <Text style={styles.location}>Calgary - {item.sector}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -309,6 +312,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
       <CrimeModal
         modalVisible={modalVisible}
         toggleModal={toggleModal}
+        fetchRecentCrimes={fetchRecentCrimes}
         crimeDetails={crimeData}
       />
     </View>

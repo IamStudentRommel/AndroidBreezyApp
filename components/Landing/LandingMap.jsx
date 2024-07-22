@@ -15,6 +15,7 @@ import ClusteredMapView from 'react-native-map-clustering';
 import * as Location from 'expo-location';
 import mapCustomStyle from '../../data/mapCustomStyle.json';
 import CustomDrawerButtom from './CrimeReportDrawer';
+import {useFocusEffect} from '@react-navigation/native';
 import SearchMap from './SearchMap';
 import CrimeModal from './PopModal';
 import AppConfig from '../../app.json';
@@ -149,11 +150,10 @@ const LandingMap = ({username, email}) => {
 
   const fetchRecentIncidents = async () => {
     try {
-      const response = await fetch(`${be}/api/recentcrimesv2`);
+      const response = await fetch(`${be}/api/recentcrimes`);
       const data = await response.json();
       // const data = Test;
       setIncidents(data);
-      // console.log(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -169,12 +169,26 @@ const LandingMap = ({username, email}) => {
 
   useEffect(() => {
     fetchRecentIncidents();
-    // console.log('landing');
   }, []);
 
   useEffect(() => {
     getLocation();
   }, []);
+
+  const refreshPage = () => {
+    console.log('Page is refreshed in landing');
+    fetchRecentIncidents();
+
+    // });
+  };
+  useFocusEffect(
+    React.useCallback(() => {
+      refreshPage();
+      return () => {
+        // Optional cleanup function
+      };
+    }, []),
+  );
 
   const renderLoadingIndicator = () => (
     // <View style={[StyleSheet.absoluteFill, styles.loadingIndicator]}>
@@ -210,16 +224,17 @@ const LandingMap = ({username, email}) => {
               style={{width: 32, height: 32}}
             />
           </Marker>
-          {incidents.length > 0 &&
-            incidents.map(marker => {
-              // console.log(incidents);
+          {incidents.documents &&
+            incidents.documents.length > 0 &&
+            incidents.documents.map((marker, index) => {
+              // console.log(marker.documentId);
               try {
                 const coordinates = {
                   latitude: marker.coordinates[1],
                   longitude: marker.coordinates[0],
                 };
                 const desc = `${marker.date.split('T')[0]} ${marker.category}`;
-                const crimeInfo = `${marker.id}|||${marker.date}|||${marker.desc}|||${marker.category}|||${marker.reporterInfo}|||${marker.images}`;
+                const crimeInfo = `${marker.id}|||${marker.date}|||${marker.desc}|||${marker.category}|||${marker.reporterInfo}|||${marker.images}|||${marker.documentId}`;
                 return (
                   <Marker
                     key={marker.id}
@@ -278,6 +293,7 @@ const LandingMap = ({username, email}) => {
       <CrimeModal
         modalVisible={modalVisible}
         toggleModal={toggleModal}
+        fetchRecentIncidents={fetchRecentIncidents}
         crimeDetails={crimeDetails}
         currentEmail={email}
         curretUser={username}

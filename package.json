@@ -24,6 +24,7 @@
     "dotenv": "^16.4.5",
     "expo": "~50.0.19",
     "expo-auth-session": "~5.4.0",
+    "expo-constants": "~15.4.6",
     "expo-dev-client": "~3.3.12",
     "expo-font": "^11.10.2",
     "expo-font-loader": "^1.1.0",
@@ -48,6 +49,7 @@
     "react-native-linear-gradient": "^2.8.3",
     "react-native-map-clustering": "^3.4.2",
     "react-native-maps": "1.10.0",
+    "react-native-reanimated": "~3.6.2",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
     "react-native-sheets-bottom": "^1.2.0",
@@ -57,8 +59,7 @@
     "react-native-vector-icons": "^10.0.3",
     "react-navigation": "^5.0.0",
     "rn-bottom-drawer": "^1.4.3",
-    "toggle-switch-react-native": "^3.3.0",
-    "react-native-reanimated": "~3.6.2"
+    "toggle-switch-react-native": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

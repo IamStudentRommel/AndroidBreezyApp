@@ -16,12 +16,15 @@ import {act} from 'react-test-renderer';
 const CrimeModal = ({
   modalVisible,
   toggleModal,
+  fetchRecentIncidents,
   crimeDetails,
   currentEmail,
   curretUser,
 }) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [action, setAction] = useState(null);
+  const [uqid, setuqid] = useState(null);
+  const [uqdate, setuqdate] = useState(null);
   const {be} = AppConfig;
   const fetchCrimeImg = async images => {
     try {
@@ -37,7 +40,7 @@ const CrimeModal = ({
 
   useEffect(() => {
     if (crimeDetails) {
-      const [id, datetime, details, category, reporter, images] =
+      const [id, datetime, details, category, reporter, images, documentId] =
         crimeDetails.split('|||');
       // console.log(currentEmail);
       // console.log(reporter.split(',')[1]);
@@ -47,9 +50,20 @@ const CrimeModal = ({
         : setAction(null);
 
       fetchCrimeImg(images);
-      // console.log(curretUser);
+      setuqid(documentId);
+      const date = new Date(datetime);
+      const formattedDate = `${date.getFullYear()}_${String(
+        date.getMonth() + 1,
+      ).padStart(2, '0')}_crime`;
+      setuqdate(formattedDate); // Output: 2024_07
     }
   }, [crimeDetails, curretUser]);
+
+  const UpdateCrime = () => {
+    Alert.alert(
+      'Sorry for the inconvenience; this feature is not yet implemented.',
+    );
+  };
 
   const RemoveCrime = () => {
     Alert.alert(
@@ -64,31 +78,34 @@ const CrimeModal = ({
   };
 
   const confirmDelete = async () => {
-    console.log('confirm');
-    // const url = `${be}trans/removecrime`;
-    // const data = {
-    //   collectionPath: '2024_03_crime',
-    //   documentId: 'AzBy96TdwCyCSpcb5lhK',
-    // };
+    // console.log(uqdate);
+    // console.log(uqid);
+    const url = `${be}trans/removecrime`;
+    const data = {
+      collectionPath: uqdate,
+      documentId: uqid,
+    };
 
-    // try {
-    //   const response = await fetch(url, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(data),
-    //   });
-    //   if (!response.ok) {
-    //     throw new Error('Network response was not ok');
-    //   } else {
-    //     const responseData = await response.json();
-    //     console.log('Response:', responseData);
-    //     alert('This reported crime successfully removed.');
-    //   }
-    // } catch (error) {
-    //   console.error('Error post data:', error);
-    // }
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      } else {
+        const responseData = await response.json();
+        console.log('Response:', responseData);
+        alert('This crime successfully removed.');
+        fetchRecentIncidents();
+        toggleModal();
+      }
+    } catch (error) {
+      console.error('Error post data:', error);
+    }
   };
 
   const renderCrimeDetails = () => {
@@ -100,7 +117,7 @@ const CrimeModal = ({
       <View style={styles.detailsContainer}>
         {action && (
           <View style={styles.iconContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={UpdateCrime}>
               <Image
                 source={require('../../assets/pen.png')}
                 style={styles.icon}

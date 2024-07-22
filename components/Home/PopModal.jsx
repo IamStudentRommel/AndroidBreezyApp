@@ -7,11 +7,17 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  Alert,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import AppConfig from '../../app.json';
 
-const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
+const CrimeModal = ({
+  modalVisible,
+  toggleModal,
+  fetchRecentCrimes,
+  crimeDetails,
+}) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [open, setOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState('null');
@@ -20,6 +26,11 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
   const [mapCat, setMapCat] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
   const {be} = AppConfig;
+
+  const desc =
+    crimeDetails && typeof crimeDetails.desc === 'string'
+      ? crimeDetails.desc
+      : '';
 
   const fetchCrimeImg = async images => {
     try {
@@ -68,13 +79,16 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
   }, []);
 
   useEffect(() => {
-    if (crimeDetails.images) {
-      fetchCrimeImg(crimeDetails.images);
+    try {
+      if (crimeDetails.images) {
+        fetchCrimeImg(crimeDetails.images);
+      }
+      setValue(mapCat[crimeDetails.category]);
+      setIsEditable(false);
+      // console.log(mapCat[crimeDetails.category]);
+    } catch {
+      console.log('nothing');
     }
-    setValue(mapCat[crimeDetails.category]);
-    setIsEditable(false);
-    // console.log('asd');
-    console.log(mapCat[crimeDetails.category]);
   }, [crimeDetails]);
 
   const handleEditSave = () => {
@@ -82,6 +96,55 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
       // Add save functionality here
     }
     setIsEditable(!isEditable);
+  };
+
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete Confirmation',
+      'Are you sure you want to remove this crime you reported?',
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'Delete', onPress: () => confirmDelete()},
+      ],
+      {cancelable: false},
+    );
+  };
+
+  const confirmDelete = async () => {
+    const date = new Date(crimeDetails.date);
+    const formattedDate = `${date.getFullYear()}_${String(
+      date.getMonth() + 1,
+    ).padStart(2, '0')}_crime`;
+
+    console.log(formattedDate); // Output: 2024_07
+    console.log(crimeDetails.documentId);
+
+    const url = `${be}trans/removecrime`;
+    const data = {
+      collectionPath: formattedDate,
+      documentId: crimeDetails.documentId,
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      } else {
+        const responseData = await response.json();
+        console.log('Response:', responseData);
+        alert('This crime successfully removed.');
+        fetchRecentCrimes();
+        toggleModal();
+      }
+    } catch (error) {
+      console.error('Error post data:', error);
+    }
   };
 
   return (
@@ -94,8 +157,8 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
         <View style={styles.modalContent}>
           <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
             <Image
-              source={require('../../assets/Close.png')}
-              style={{width: 13, height: 13}}
+              source={require('../../assets/close.png')}
+              style={{width: 35, height: 35}}
             />
           </TouchableOpacity>
           <DropDownPicker
@@ -132,16 +195,14 @@ const CrimeModal = ({modalVisible, toggleModal, crimeDetails}) => {
             placeholder="Enter description"
             multiline={true}
             numberOfLines={2}
-            defaultValue={crimeDetails.desc}
+            defaultValue={desc}
             editable={isEditable}
           />
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[styles.button, styles.deleteButton]}
-              onPress={() => {
-                // Implement delete functionality
-              }}>
+              onPress={handleDelete}>
               <Image
                 source={require('../../assets/deleteicon.png')}
                 style={{width: 12, height: 12, marginRight: 5}}
@@ -183,11 +244,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: '90%',
     height: 'auto',
+    backgroundColor: '#061333',
   },
   closeButton: {
     marginLeft: 'auto',
     marginRight: 13,
     marginBottom: 10,
+    width: '5%',
   },
   drawerInput: {
     borderWidth: 1,
