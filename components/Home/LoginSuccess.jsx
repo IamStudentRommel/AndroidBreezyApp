@@ -14,6 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import CrimeModal from './PopModal';
 import AppConfig from '../../app.json';
+import WelcomeAlert from '../LoginV2/WelcomeAlert';
 
 const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,6 +32,7 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
   });
   const [address, setAddress] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [showWelcomeAlert, setShowWelcomeAlert] = useState(true);
   const {be} = AppConfig;
 
   const capitalizeFirstLetter = str => {
@@ -311,6 +313,12 @@ const LoginSuccess = ({firebaseFname, firebaseLname, firebaseEmail}) => {
         toggleModal={toggleModal}
         crimeDetails={crimeData}
       />
+      {showWelcomeAlert && (
+        <WelcomeAlert
+        userName={`${capitalizeFirstLetter(firebaseFname)} ${capitalizeFirstLetter(firebaseLname)}`}
+        onClose={() => setShowWelcomeAlert(false)}
+        />
+      )}
     </View>
   );
 };

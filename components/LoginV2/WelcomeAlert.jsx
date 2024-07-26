@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 const WelcomeAlert = ({ userName, onClose }) => {
   return (
     <View style={styles.alertContainer}>
-    <Image source={require('../../assets/ReportCrimeLogo.png')}
+    <Image source={require('../../assets/AboutLogo.png')}
         style={styles.logo}
     />
       <Text style={styles.welcomeText}>Welcome to CrimeHe8ers</Text>
@@ -25,13 +25,13 @@ const WelcomeAlert = ({ userName, onClose }) => {
 const styles = StyleSheet.create({
   alertContainer: {
     padding: 10,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
     borderRadius: 30,
     margin: 20,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: 150, // Adjust as needed
+    top: 170, // Adjust as needed
     left: '2%', // Adjust as needed
     right: '2%', // Adjust as needed
     zIndex: 1000, // Ensure it is on top
@@ -42,13 +42,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   welcomeText: {
-    color: '#000000',
+    color: '#FFFFFF',
     fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 15,
   },
   userText: {
-    color: '#000000',
+    color: '#FFFFFF',
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 15,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     textAlign: 'center',
-    color: '#595959',
+    color: '#A0A0A0',
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 10,

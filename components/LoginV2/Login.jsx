@@ -76,7 +76,7 @@ const Login = ({
         setFirebaseLname(data.lname);
         setFirebaseEmail(data.email);
         updateLogFlag(true);
-        Alert.alert(`Welcome, ${data.fname} ${data.lname}`);
+        // Alert.alert(`Welcome, ${data.fname} ${data.lname}`);
         setInputEmail('');
       } else {
         updateUsername(user);
