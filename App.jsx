@@ -48,9 +48,9 @@ function App() {
     <NavigationContainer
       theme={testTheme}
       drawerContentOptions={{
-        activeTintColor: '#F2FDFF', // Change the color when the item is active
+        activeTintColor: '#F2FDFF',
         itemStyle: {marginVertical: 5},
-        inactiveTintColor: '#F2FDFF', // Change the color when the item is inactive
+        inactiveTintColor: '#F2FDFF',
       }}>
       <Drawer.Navigator
         initialRouteName="Live Crime Monitoring"
@@ -75,11 +75,14 @@ function App() {
           name="Login"
           options={{
             drawerLabel: logDisplay,
-            title: 'Home',
-
+            title: isLoggedIn ? 'Home' : 'Login',
             drawerIcon: ({tintColor}) => (
               <Image
-                source={require('./assets/LoginIcon.png')}
+                source={
+                  isLoggedIn
+                    ? require('./assets/HomeIcon.png')
+                    : require('./assets/LoginIcon.png')
+                }
                 style={{width: 24, height: 24, tintColor: tintColor}}
               />
             ),

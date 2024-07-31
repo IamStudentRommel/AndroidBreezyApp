@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {useNavigation} from '@react-navigation/native';
+import ThankYouAlert from './ThankYouAlert';
+
+
 
 const CustomDrawerContent = ({
   username,
@@ -14,6 +17,8 @@ const CustomDrawerContent = ({
   updateLogFlag,
   ...props
 }) => {
+  const [showThankYouAlert, setShowThankYouAlert] = useState(false);
+
   const initials = username
     .split(' ')
     .map(name => name.charAt(0).toUpperCase())
@@ -31,7 +36,7 @@ const CustomDrawerContent = ({
     updateLogFlag(false);
     updateUsername('Guest');
     updateLogDisplay('Login');
-    Alert.alert('You have successfully logged out.');
+    setShowThankYouAlert(true);
     navigation.navigate('Login');
   };
 
@@ -40,6 +45,7 @@ const CustomDrawerContent = ({
   };
 
   return (
+    <>
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>
         <View style={styles.headerContainer}>
@@ -76,6 +82,8 @@ const CustomDrawerContent = ({
         </TouchableOpacity>
       )}
     </View>
+    {showThankYouAlert && <ThankYouAlert onClose={() => setShowThankYouAlert(false)} />}
+    </>
   );
 };
 

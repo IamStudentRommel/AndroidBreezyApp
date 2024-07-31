@@ -11,12 +11,18 @@ import {
   ActivityIndicator,
   TouchableOpacity
 } from 'react-native';
+import PopLogin from './Landing/PopLogin';
+import PopInvalid from './PopAlert/PopInvalid';
+import PopThankYou from './PopAlert/PopThankYou';
 import AppConfig from '../app.json';
 
 const Contact = ({username, email}) => {
   const [feedback, setFeedback] = useState('');
   const [sending, setSending] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
+  const [showPopLogin, setShowPopLogin] = useState(false);
+  const [showPopInvalid, setShowPopInvalid] = useState(false);
+  const [showPopThankYou, setShowPopThankYou] = useState(false);
   const {be} = AppConfig;
 
   const capitalizeFirstLetter = str => {
@@ -35,11 +41,11 @@ const Contact = ({username, email}) => {
 
     try {
       if (username === 'Guest') {
-        alert('Please login first to make some feedback to the developers');
+        setShowPopLogin(true);
         return;
       }
       if (text.length < 10) {
-        alert('Please input a valid feedback (at least 10 characters)');
+        setShowPopInvalid(true);
         return;
       }
       setShowAnimation(true);
@@ -50,9 +56,8 @@ const Contact = ({username, email}) => {
       // console.log(response);
 
       if (response.ok) {
-        alert(
-          'Thank you for reaching us, your feedback was successfully sent!',
-        );
+          setShowPopThankYou(true);
+          
       } else {
         alert('Failed to send feedback check api send-email');
       }
@@ -116,6 +121,21 @@ const Contact = ({username, email}) => {
           </View>
         </View>
       </ScrollView>
+      <PopLogin
+        modalVisible={showPopLogin}
+        toggleModal={() => setShowPopLogin(false)}
+        handleCancelPress={() => setShowPopLogin(false)}
+      />
+      <PopInvalid
+        modalVisible={showPopInvalid}
+        toggleModal={() => setShowPopInvalid(false)}
+        handleCancelPress={() => setShowPopInvalid(false)}
+      />
+      <PopThankYou
+        modalVisible={showPopThankYou}
+        toggleModal={() => setShowPopThankYou(false)}
+        handleCancelPress={() => setShowPopThankYou(false)}
+      />
     </KeyboardAvoidingView>
   );
 };

@@ -22,6 +22,7 @@ import SignOptions from './SignOptions';
 import AppConfig from '../../app.json';
 import ForgotPassword from './ForgotPassword';
 
+
 // const LoadingComponent = () => {
 //   return (
 //     <ImageBackground
@@ -116,7 +117,6 @@ const Login = ({
     updateLogFlag(false);
     updateUsername(user);
     updateLogDisplay('Login');
-    Alert.alert('You have successfully logout.');
   };
 
   const test = () => {

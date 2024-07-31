@@ -3,15 +3,16 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const WelcomeAlert = ({ userName, onClose }) => {
   return (
+    <View style={styles.container}>
     <View style={styles.alertContainer}>
-    <Image source={require('../../assets/AboutLogo.png')}
+    <Image source={require('../../assets/ReportCrimeLogo.png')}
         style={styles.logo}
     />
-      <Text style={styles.welcomeText}>Welcome to CrimeHe8ers</Text>
+      <Text style={styles.welcomeText}>Welcome to CrimeH8ers</Text>
       <Text style={styles.userText}>{userName}</Text>
     <View style={styles.section}>
       <Text style={styles.bodyText}>
-        You have successfully logged in,
+        You have successfully logged in.
         Enjoy using the app!
       </Text>
     </View>
@@ -19,22 +20,28 @@ const WelcomeAlert = ({ userName, onClose }) => {
         <Text style={styles.closeButtonText}>Get Started</Text>
       </TouchableOpacity>
     </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    top: '-10%',
+  },
+
   alertContainer: {
     padding: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    backgroundColor: 'white',
     borderRadius: 30,
     margin: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute',
-    top: 170, // Adjust as needed
-    left: '2%', // Adjust as needed
-    right: '2%', // Adjust as needed
-    zIndex: 1000, // Ensure it is on top
   },
   logo: {
     width: 120,
@@ -42,14 +49,14 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   welcomeText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 15,
   },
   userText: {
-    color: '#FFFFFF',
-    fontSize: 22,
+    color: '#000000',
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 15,
   },
@@ -59,13 +66,13 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     textAlign: 'center',
-    color: '#A0A0A0',
-    fontSize: 14,
+    color: '#3F3F3F',
+    fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10,
   },
   closeButton: {
-    backgroundColor: '#C20000',
+    backgroundColor: '#960303',
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 60,
